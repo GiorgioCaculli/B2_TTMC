@@ -1,3 +1,3 @@
 # TTMC
 
-Projet Java
+## Jeu écrit en Java 11
