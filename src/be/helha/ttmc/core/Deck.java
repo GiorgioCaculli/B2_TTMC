@@ -56,4 +56,16 @@ public class Deck
         }
         return tmpCards;
     }
+
+    public String toString()
+    {
+	StringBuilder sb = new StringBuilder();
+	sb.append( String.format( "%s%s", "Deck", System.getProperty( "line.separator" ) ) );
+	for( BasicCard card : cards )
+	    {
+		sb.append( card );
+		sb.append( System.getProperty( "line.separator" ) );
+	    }
+	return sb.toString();
+    }
 }
