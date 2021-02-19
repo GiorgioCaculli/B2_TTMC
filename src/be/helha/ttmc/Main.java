@@ -1,41 +1,36 @@
 package be.helha.ttmc;
 
-import javafx.application.Application;
-import javafx.stage.Stage;
-import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-public class Main extends Application
+import be.helha.ttmc.ui.cli.Menu;
+
+public class Main
 {
-    private static final int WIDTH = 800;
-    private static final int HEIGHT = WIDTH / 4 * 3;
-
-    @Override
-    public void start(Stage primaryStage)
-    {
-        try
-        {
-            BorderPane root = new BorderPane();
-            Scene scene = new Scene( root, WIDTH, HEIGHT );
-            scene.getStylesheets().add( getClass().getResource( "application.css" ).toExternalForm() );
-            primaryStage.setMinHeight( HEIGHT );
-            primaryStage.setMaxHeight( HEIGHT );
-            primaryStage.setMaxWidth( WIDTH );
-            primaryStage.setMinWidth( WIDTH );
-            primaryStage.setResizable( false );
-            primaryStage.setScene( scene );
-            primaryStage.setTitle( "TTMC" );
-            primaryStage.show();
-        } catch( Exception e )
-        {
-            e.printStackTrace();
-        }
-    }
+    private static final Logger logger = Logger.getLogger( "Main Class Logger" );
 
     public static void main( String args[] )
     {
-        System.out.println( "TTMC par Giorgio Caculli LA196672, Guillaume Lambert LA198116, Tanguy Taminiau LA199566" );
-        
-		launch(args);
+	System.out.println( "TTMC by Giorgio Caculli LA196672, Guillaume Lambert LA198116, Tanguy Taminiau LA199566" );
+	logger.log( Level.INFO, "Launching main()" );
+	logger.setLevel( Level.WARNING );
+	for( String arg : args )
+	    {
+		switch( arg )
+		    {
+		    case "-d":
+			logger.setLevel( Level.INFO );
+			break;
+		    case "-nogui":
+
+			logger.log( Level.INFO, "Launching Menu()" );
+			new Menu( args );
+			break;
+		    default:
+			logger.log( Level.INFO, String.format( "Unrecognized argument: %s%s",
+							       arg, System.getProperty( "line.separator" ) ) );
+			break;
+		    }
+	    }
     }
 }

@@ -1,0 +1,120 @@
+<project name="TTMC" basedir="." default="run">
+  <property name="src_dir" value="src"/>
+  <property name="pkg_dir" value="be/helha/ttmc"/>
+  <property name="lib_dir" value="misc/libs"/>
+  <property name="doc_dir" value="doc"/>
+  <property name="build_dir" value="build"/>
+  <property name="test_dir" value="test"/>
+  <property name="pkg_name" value="be.helha.ttmc"/>
+  <property name="main_class" value="Main"/>
+  <property name="jar_file" value="B05.jar"/>
+
+  <property name="author" value="Caculli Giorgio LA196672 - Lambert Guillaume 198116 - Taminiau Tanguy LA199566"/>
+
+  <path id="project.class.path">
+    <pathelement location="${lib_dir}/gson-2.8.6.jar"/>
+    <pathelement location="${lib_dir}/opentest4j-1.2.0.jar"/>
+    <pathelement location="${lib_dir}/javafx-sdk-11.0.2/lib/javafx.base.jar"/>
+    <pathelement location="${lib_dir}/javafx-sdk-11.0.2/lib/javafx.controls.jar"/>
+    <pathelement location="${lib_dir}/javafx-sdk-11.0.2/lib/javafx.fxml.jar"/>
+    <pathelement location="${lib_dir}/javafx-sdk-11.0.2/lib/javafx.graphics.jar"/>
+    <pathelement location="${lib_dir}/javafx-sdk-11.0.2/lib/javafx.media.jar"/>
+    <pathelement location="${lib_dir}/javafx-sdk-11.0.2/lib/javafx.swing.jar"/>
+    <pathelement location="${lib_dir}/javafx-sdk-11.0.2/lib/javafx-swt.jar"/>
+    <pathelement location="${lib_dir}/javafx-sdk-11.0.2/lib/javafx.web.jar"/>
+    <pathelement location="${lib_dir}/junit-jupiter-5.7.0.jar"/>
+    <pathelement location="${lib_dir}/junit-jupiter-api-5.7.0.jar"/>
+    <pathelement location="${lib_dir}/junit-jupiter-engine-5.7.0.jar"/>
+    <pathelement location="${lib_dir}/junit-jupiter-migrationsupport-5.7.0.jar"/>
+    <pathelement location="${lib_dir}/junit-jupiter-params-5.7.0-all.jar"/>
+    <pathelement location="${lib_dir}/junit-platform-commons-1.7.0.jar"/>
+    <pathelement location="${lib_dir}/junit-platform-console-1.7.0-all.jar"/>
+    <pathelement location="${lib_dir}/junit-platform-console-standalone-1.7.0-all.jar"/>
+    <pathelement location="${lib_dir}/junit-platform-engine-1.7.0.jar"/>
+    <pathelement location="${lib_dir}/junit-platform-jfr-1.7.0.jar"/>
+    <pathelement location="${lib_dir}/junit-platform-launcher-1.7.0.jar"/>
+    <pathelement location="${lib_dir}/junit-platform-reporting-1.7.0.jar"/>
+    <pathelement location="${lib_dir}/junit-platform-runner-1.7.0.jar"/>
+    <pathelement location="${lib_dir}/junit-platform-suite-api-1.7.0.jar"/>
+    <pathelement location="${lib_dir}/junit-platform-testkit-1.7.0.jar"/>
+    <pathelement location="${lib_dir}/junit-vintage-engine-5.7.0.jar"/>
+    <pathelement path="${build_dir}"/>
+  </path>
+
+  <pathconvert targetos="unix" pathsep=" " property="project_class_path" refid="project.class.path"/>
+
+  <target name="help">
+  </target>
+
+  <target name="clean">
+    <delete dir="${doc_dir}"/>
+    <delete dir="${build_dir}"/>
+    <delete dir="${test_dir}"/>
+    <delete file="${jar_file}"/>
+  </target>
+
+  <target name="doc">
+    <delete dir="${doc_dir}"/>
+    <mkdir dir="${doc_dir}"/>
+    <javadoc sourcepath="${src_dir}" destdir="${doc_dir}" doctitle="${ant.project.name}"
+             author="true" use="true" version="true">
+      <classpath refid="project.class.path"/>
+      <bottom><![CDATA[<i>Copyright &#169; 2021 ${author}. All Rights Reserved.]]></bottom>
+    </javadoc>
+  </target>
+
+  <target name="build">
+    <delete dir="${build_dir}"/>
+    <mkdir dir="${build_dir}"/>
+    <copy todir="${build_dir}">
+      <fileset dir="${src_dir}">
+        <exclude name="**/*.java"/>
+      </fileset>
+    </copy>
+    <javac destdir="${build_dir}" srcdir="${src_dir}" sourcepath="${src_dir}"
+           includeantruntime="false" source="11" target="11" debug="true"
+           modulepath="${lib_dir}/javafx-sdk-11.0.2/lib">
+      <classpath refid="project.class.path"/>
+    </javac>
+  </target>
+
+  <target name="test" depends="build">
+    <delete dir="${test_dir}"/>
+    <mkdir dir="${test_dir}"/>
+    <junitlauncher printsummary="true" haltonfailure="true">
+      <classpath refid="project.class.path"/>
+      <testclasses outputdir="${test_dir}">
+        <fileset dir="${build_dir}">
+          <include name="**/*Test*.class"/>
+        </fileset>
+        <listener type="legacy-xml" sendsysout="true" sendsyserr="true"/>
+        <listener type="legacy-plain" sendsysout="true"/>
+      </testclasses>
+    </junitlauncher>
+  </target>
+
+  <target name="jar" depends="test">
+    <delete file="${jar_file}"/>
+    <jar destfile="${jar_file}">
+      <fileset dir="${build_dir}"/>
+      <manifest>
+        <attribute name="Built-By" value="${author}"/>
+        <attribute name="Class-Path" value="${project_class_path}"/>
+        <attribute name="Codebase" value="https://www.gitlab.com/tehc-lovers/ttmc"/>
+        <attribute name="Implementation-Title" value="${ant.project.title}"/>
+        <attribute name="Implementation-Vendor" value="${author}"/>
+        <attribute name="Implementation-Version" value="1.0"/>
+        <attribute name="Main-Class" value="${pkg_name}.${main_class}"/>
+        <attribute name="Permissions" value="sandbox"/>
+      </manifest>
+    </jar>
+  </target>
+
+  <target name="run" depends="jar">
+    <java classname="${pkg_name}.${main_class}" fork="true" modulepath="${lib_dir}/javafx-sdk-11.0.2/lib">
+      <classpath refid="project.class.path"/>
+      <jvmarg value="--add-modules"/>
+      <jvmarg value="ALL-MODULE-PATH"/>
+    </java>
+  </target>
+</project>
