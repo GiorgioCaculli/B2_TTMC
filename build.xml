@@ -57,7 +57,7 @@
     <delete dir="${doc_dir}"/>
     <mkdir dir="${doc_dir}"/>
     <javadoc sourcepath="${src_dir}" destdir="${doc_dir}" doctitle="${ant.project.name}"
-             author="true" use="true" version="true" packagenames="be.helha.ttmc.model.*">
+	     author="true" use="true" version="true" packagenames="be.helha.ttmc.model.*">
       <classpath refid="project.class.path"/>
       <bottom><![CDATA[<i>Copyright &#169; 2021 ${author}. All Rights Reserved.]]></bottom>
     </javadoc>
@@ -68,12 +68,12 @@
     <mkdir dir="${build_dir}"/>
     <copy todir="${build_dir}">
       <fileset dir="${src_dir}">
-        <exclude name="**/*.java"/>
+	<exclude name="**/*.java"/>
       </fileset>
     </copy>
     <javac destdir="${build_dir}" srcdir="${src_dir}" sourcepath="${src_dir}"
-           includeantruntime="false" source="11" target="11" debug="true"
-           modulepath="${lib_dir}/javafx-sdk-11.0.2/lib">
+	   includeantruntime="false" source="11" target="11" debug="true"
+	   modulepath="${lib_dir}/javafx-sdk-11.0.2/lib">
       <classpath refid="project.class.path"/>
     </javac>
   </target>
@@ -84,11 +84,11 @@
     <junitlauncher printsummary="true" haltonfailure="true">
       <classpath refid="project.class.path"/>
       <testclasses outputdir="${test_dir}">
-        <fileset dir="${build_dir}">
-          <include name="**/*Test*.class"/>
-        </fileset>
-        <listener type="legacy-xml" sendsysout="true" sendsyserr="true"/>
-        <listener type="legacy-plain" sendsysout="true"/>
+	<fileset dir="${build_dir}">
+	  <include name="**/*Test*.class"/>
+	</fileset>
+	<listener type="legacy-xml" sendsysout="true" sendsyserr="true"/>
+	<listener type="legacy-plain" sendsysout="true"/>
       </testclasses>
     </junitlauncher>
   </target>
@@ -106,14 +106,14 @@
 	</archives>
       </restrict>
       <manifest>
-        <attribute name="Built-By" value="${author}"/>
-        <attribute name="Class-Path" value="."/>
-        <attribute name="Codebase" value="https://www.gitlab.com/tehc-lovers/ttmc"/>
-        <attribute name="Implementation-Title" value="${ant.project.title}"/>
-        <attribute name="Implementation-Vendor" value="${author}"/>
-        <attribute name="Implementation-Version" value="1.0"/>
-        <attribute name="Main-Class" value="${pkg_name}.${main_class}"/>
-        <attribute name="Permissions" value="sandbox"/>
+	<attribute name="Built-By" value="${author}"/>
+	<attribute name="Class-Path" value="."/>
+	<attribute name="Codebase" value="https://www.gitlab.com/tehc-lovers/ttmc"/>
+	<attribute name="Implementation-Title" value="${ant.project.title}"/>
+	<attribute name="Implementation-Vendor" value="${author}"/>
+	<attribute name="Implementation-Version" value="1.0"/>
+	<attribute name="Main-Class" value="${pkg_name}.${main_class}"/>
+	<attribute name="Permissions" value="sandbox"/>
       </manifest>
     </jar>
   </target>
