@@ -1,4 +1,4 @@
-package be.helha.ttmc.core;
+package be.helha.ttmc.model;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -7,12 +7,26 @@ import be.helha.ttmc.exception.QuestionDoubleException;
 import be.helha.ttmc.exception.QuestionIncompatibleException;
 import be.helha.ttmc.exception.BasicCardOverMaxQuestionsException;
 
+/**
+ * Class for the BasicCard
+ *
+ * This class is meant to handle the most basic card that the player will be interacting with.
+ *
+ * @author Giorgio CACULLI LA196672, Guillaume LAMBERT LA198116, Tanguy TAMINIAU LA199566
+ * @version 1.0
+ */
 public class BasicCard
 {
     private String author, subject;
     private Theme theme;
     private List< Question > questions;
 
+    /**
+     * Constructor for the class BasicCard
+     *
+     * @param author The author of the card
+     * @param 
+     */
     public BasicCard( String author, Theme theme, String subject )
     {
 	this.author = author;

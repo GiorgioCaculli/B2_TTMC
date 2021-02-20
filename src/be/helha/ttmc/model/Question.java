@@ -1,4 +1,4 @@
-package be.helha.ttmc.core;
+package be.helha.ttmc.model;
 
 public class Question
 {

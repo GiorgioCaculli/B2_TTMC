@@ -1,4 +1,4 @@
-package be.helha.ttmc.core;
+package be.helha.ttmc.model;
 
 import java.util.List;
 import java.util.ArrayList;
