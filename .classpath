@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="lib" path="misc/libs/gson-2.8.6.jar"/>
 	<classpathentry kind="lib" path="misc/libs/javafx-sdk-11.0.2/lib/javafx-swt.jar"/>
 	<classpathentry kind="lib" path="misc/libs/javafx-sdk-11.0.2/lib/javafx.base.jar"/>
@@ -28,5 +32,6 @@
 	<classpathentry kind="lib" path="misc/libs/junit-platform-testkit-1.7.0.jar"/>
 	<classpathentry kind="lib" path="misc/libs/junit-vintage-engine-5.7.0.jar"/>
 	<classpathentry kind="lib" path="misc/libs/opentest4j-1.2.0.jar"/>
-	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JFX11"/>
+	<classpathentry kind="output" path="build"/>
 </classpath>

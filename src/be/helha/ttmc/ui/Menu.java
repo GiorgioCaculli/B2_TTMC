@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import be.helha.ttmc.core.*;
+import be.helha.ttmc.model.*;
 import be.helha.ttmc.ui.cli.MenuClient;
 
 public class Menu

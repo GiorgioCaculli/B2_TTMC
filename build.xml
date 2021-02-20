@@ -2,7 +2,7 @@
   <property name="src_dir" value="src"/>
   <property name="pkg_dir" value="be/helha/ttmc"/>
   <property name="lib_dir" value="misc/libs"/>
-  <property name="doc_dir" value="doc"/>
+  <property name="doc_dir" value="javadoc"/>
   <property name="build_dir" value="build"/>
   <property name="test_dir" value="test"/>
   <property name="pkg_name" value="be.helha.ttmc"/>
@@ -57,13 +57,13 @@
     <delete dir="${doc_dir}"/>
     <mkdir dir="${doc_dir}"/>
     <javadoc sourcepath="${src_dir}" destdir="${doc_dir}" doctitle="${ant.project.name}"
-             author="true" use="true" version="true">
+             author="true" use="true" version="true" packagenames="be.helha.ttmc.model.*">
       <classpath refid="project.class.path"/>
       <bottom><![CDATA[<i>Copyright &#169; 2021 ${author}. All Rights Reserved.]]></bottom>
     </javadoc>
   </target>
 
-  <target name="build">
+  <target name="build" depends="doc">
     <delete dir="${build_dir}"/>
     <mkdir dir="${build_dir}"/>
     <copy todir="${build_dir}">
@@ -97,9 +97,17 @@
     <delete file="${jar_file}"/>
     <jar destfile="${jar_file}">
       <fileset dir="${build_dir}"/>
+      <restrict>
+	<name name="**/*.class"/>
+	<archives>
+	  <zips>
+	    <fileset dir="${lib_dir}" includes="**/*.jar"/>
+	  </zips>
+	</archives>
+      </restrict>
       <manifest>
         <attribute name="Built-By" value="${author}"/>
-        <attribute name="Class-Path" value="${project_class_path}"/>
+        <attribute name="Class-Path" value="."/>
         <attribute name="Codebase" value="https://www.gitlab.com/tehc-lovers/ttmc"/>
         <attribute name="Implementation-Title" value="${ant.project.title}"/>
         <attribute name="Implementation-Vendor" value="${author}"/>
