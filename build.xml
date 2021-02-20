@@ -7,7 +7,7 @@
   <property name="test_dir" value="test"/>
   <property name="pkg_name" value="be.helha.ttmc"/>
   <property name="main_class" value="Main"/>
-  <property name="jar_file" value="B05.jar"/>
+  <property name="jar_file" value="groupeB05.jar"/>
 
   <property name="author" value="Caculli Giorgio LA196672 - Lambert Guillaume 198116 - Taminiau Tanguy LA199566"/>
 
