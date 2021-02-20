@@ -36,7 +36,8 @@ public class QuestionTests
     @Test
     public void testAssertEquals()
     {
-        Question q1 = new Question( "Giorgio Caculli", Theme.INFORMATICS, "Acronyms", "What does RAM stand for?", "Random Access Memory" );
+        Question q1 = new Question( "Giorgio Caculli", Theme.INFORMATICS, "Acronyms", "What does RAM stand for?",
+                "Random Access Memory" );
         Question q2 = q1.clone();
         assertEquals( q1, q2, "failure - strings are not equal" );
     }
