@@ -6,32 +6,8 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="misc/libs/gson-2.8.6.jar"/>
-	<classpathentry kind="lib" path="misc/libs/javafx-sdk-11.0.2/lib/javafx-swt.jar"/>
-	<classpathentry kind="lib" path="misc/libs/javafx-sdk-11.0.2/lib/javafx.base.jar"/>
-	<classpathentry kind="lib" path="misc/libs/javafx-sdk-11.0.2/lib/javafx.controls.jar"/>
-	<classpathentry kind="lib" path="misc/libs/javafx-sdk-11.0.2/lib/javafx.fxml.jar"/>
-	<classpathentry kind="lib" path="misc/libs/javafx-sdk-11.0.2/lib/javafx.graphics.jar"/>
-	<classpathentry kind="lib" path="misc/libs/javafx-sdk-11.0.2/lib/javafx.media.jar"/>
-	<classpathentry kind="lib" path="misc/libs/javafx-sdk-11.0.2/lib/javafx.swing.jar"/>
-	<classpathentry kind="lib" path="misc/libs/javafx-sdk-11.0.2/lib/javafx.web.jar"/>
-	<classpathentry kind="lib" path="misc/libs/junit-jupiter-5.7.0.jar"/>
-	<classpathentry kind="lib" path="misc/libs/junit-jupiter-api-5.7.0.jar"/>
-	<classpathentry kind="lib" path="misc/libs/junit-jupiter-engine-5.7.0.jar"/>
-	<classpathentry kind="lib" path="misc/libs/junit-jupiter-migrationsupport-5.7.0.jar"/>
-	<classpathentry kind="lib" path="misc/libs/junit-jupiter-params-5.7.0-all.jar"/>
-	<classpathentry kind="lib" path="misc/libs/junit-platform-commons-1.7.0.jar"/>
-	<classpathentry kind="lib" path="misc/libs/junit-platform-console-1.7.0-all.jar"/>
-	<classpathentry kind="lib" path="misc/libs/junit-platform-console-standalone-1.7.0-all.jar"/>
-	<classpathentry kind="lib" path="misc/libs/junit-platform-engine-1.7.0.jar"/>
-	<classpathentry kind="lib" path="misc/libs/junit-platform-jfr-1.7.0.jar"/>
-	<classpathentry kind="lib" path="misc/libs/junit-platform-launcher-1.7.0.jar"/>
-	<classpathentry kind="lib" path="misc/libs/junit-platform-reporting-1.7.0.jar"/>
-	<classpathentry kind="lib" path="misc/libs/junit-platform-runner-1.7.0.jar"/>
-	<classpathentry kind="lib" path="misc/libs/junit-platform-suite-api-1.7.0.jar"/>
-	<classpathentry kind="lib" path="misc/libs/junit-platform-testkit-1.7.0.jar"/>
-	<classpathentry kind="lib" path="misc/libs/junit-vintage-engine-5.7.0.jar"/>
-	<classpathentry kind="lib" path="misc/libs/opentest4j-1.2.0.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JFX11"/>
+	<classpathentry kind="lib" path="C:/Users/Tanguy/librairies/gson-2.8.6.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="output" path="build"/>
 </classpath>

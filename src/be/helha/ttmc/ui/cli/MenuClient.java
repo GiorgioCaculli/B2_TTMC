@@ -28,6 +28,26 @@ public class MenuClient
 
     private void baseMenu()
     {
-        String input = keyboardInput.next();
+        System.out.println("Hello and welcome on  TTMC\n------------------------");
+        System.out.println("\n\nFor play press 1, for manage cards press 2");
+        int rep = keyboardInput.nextInt();
+        while(rep<1 || rep>2) {
+        	System.out.println("please press 1 for playing or 2 for manage cards");
+        	rep = keyboardInput.nextInt();
+        }
+        //manque le switch et appel de méthode
     }
+    
+    private void manageMenu() {
+    	System.out.println("Manage menu\n------------");
+    	System.out.println("to add a new card press 1, to manage the cards press 2");
+    	int rep = keyboardInput.nextInt();
+    	while(rep<1 || rep>2) {
+        	System.out.println("please press 1 to add a new card or 2 to manage cards");
+        	rep = keyboardInput.nextInt();
+        }
+    	//manque le switch et appel de méthode
+    }
+    
 }
+

@@ -1,0 +1,39 @@
+{
+  "cards": [
+    {
+      "author": "Giorgio Caculli",
+      "subject": "Acronyms",
+      "theme": "INFORMATICS",
+      "questions": [
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Acronyms",
+          "challenge": "What does RAM stand for?",
+          "answer": "Random Access Memory",
+          "theme": "INFORMATICS"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Acronyms",
+          "challenge": "What does JAR stand for?",
+          "answer": "Java ARchive",
+          "theme": "INFORMATICS"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Acronyms",
+          "challenge": "What does WWW stand for?",
+          "answer": "World Wide Web",
+          "theme": "INFORMATICS"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Acronyms",
+          "challenge": "What does CPU stand for?",
+          "answer": "Central Processing Unit",
+          "theme": "INFORMATICS"
+        }
+      ]
+    }
+  ]
+}
