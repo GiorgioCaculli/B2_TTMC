@@ -28,9 +28,9 @@ public class DeckTests
     @BeforeAll
     static void initAll()
     {
-	d = new Deck();
-	c1 = new BasicCard( "Giorgio Caculli", Theme.INFORMATICS, "Acronyms" );
-	c2 = c1.clone();
+        d = new Deck();
+        c1 = new BasicCard( "Giorgio Caculli", Theme.INFORMATICS, "Acronyms" );
+        c2 = c1.clone();
     }
 
     @BeforeEach
@@ -47,7 +47,7 @@ public class DeckTests
     @Test
     public void testAddDoubles()
     {
-	assertFalse( () -> d.add( c2 ), "failure - the card was added" );
+        assertFalse( () -> d.add( c2 ), "failure - the card was added" );
     }
 
     @AfterEach
@@ -58,8 +58,8 @@ public class DeckTests
     @AfterAll
     static void tearDownAll()
     {
-	d = null;
-	c1 = null;
-	c2 = null;
+        d = null;
+        c1 = null;
+        c2 = null;
     }
 }

@@ -4,6 +4,6 @@ public class QuestionIncompatibleException extends Exception
 {
     public QuestionIncompatibleException()
     {
-	super( "The question is incompatible with the card" );
+        super( "The question is incompatible with the card" );
     }
 }

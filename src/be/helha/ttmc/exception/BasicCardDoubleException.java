@@ -4,6 +4,6 @@ public class BasicCardDoubleException extends Exception
 {
     public BasicCardDoubleException()
     {
-	super( "This basic card has already been added" );
+        super( "This basic card has already been added" );
     }
 }
