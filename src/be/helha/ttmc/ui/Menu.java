@@ -1,4 +1,4 @@
-package be.helha.ttmc.ui.cli;
+package be.helha.ttmc.ui;
 
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import be.helha.ttmc.core.*;
+import be.helha.ttmc.ui.cli.MenuClient;
 
 public class Menu
 {
@@ -18,12 +19,18 @@ public class Menu
     {
 	logger.log( Level.INFO, "Initializing Menu" );
 	logger.setLevel( Level.WARNING );
-	for( String arg : args )
+	for( int i = 0; i < args.length; i++ )
 	    {
-		switch( arg )
+		switch( args[i] )
 		    {
 		    case "-d":
 			logger.setLevel( Level.INFO );
+			break;
+		    case "-nogui":
+			new MenuClient( args );
+			break;
+		    default:
+			logger.log( Level.INFO, String.format( "Argument: %s - NOT RECOGNIZED!%s", args[i], System.getProperty( "line.separator" ) ) );
 			break;
 		    }
 	    }
@@ -36,13 +43,21 @@ public class Menu
 	Question q2 = new Question( "Giorgio Caculli", Theme.INFORMATICS, "Acronyms", "What does JAR stand for?", "Java ARchive" );
 	Question q3 = new Question( "Giorgio Caculli", Theme.INFORMATICS, "Acronyms", "What does WWW stand for?", "World Wide Web" );
 	Question q4 = new Question( "Giorgio Caculli", Theme.INFORMATICS, "Acronyms", "What does CPU stand for?", "Central Processing Unit" );
+	Question q5 = q1.clone();
+	Question q6 = new Question( "Giorgio Cacull", Theme.INFORMATICS, "Acronyms", "What does CPU stand for?", "Central Processing Unit" );
+	Question q7 = new Question( "Giorgio Caculli", Theme.IMPROBABLE, "Acronyms", "What does CPU stand for?", "Central Processing Unit" );
+	Question q8 = new Question( "Giorgio Caculli", Theme.INFORMATICS, "Acronym", "What does CPU stand for?", "Central Processing Unit" );
 
 	BasicCard bc1 = new BasicCard( "Giorgio Caculli", Theme.INFORMATICS, "Acronyms" );
 
 	bc1.add( q1 );
+	bc1.add( q5 );
+	bc1.add( q6 );
 	bc1.add( q2 );
 	bc1.add( q3 );
+	bc1.add( q7 );
 	bc1.add( q4 );
+	bc1.add( q8 );
 	
 	Deck d = new Deck();
 
@@ -50,10 +65,5 @@ public class Menu
 	
 	String jsonDeck = gson.toJson(d);
 	logger.log( Level.INFO, jsonDeck );
-    }
-
-    private void baseMenu()
-    {
-	String input = keyboardInput.next();
     }
 }

@@ -3,6 +3,10 @@ package be.helha.ttmc.core;
 import java.util.List;
 import java.util.ArrayList;
 
+import be.helha.ttmc.exception.QuestionDoubleException;
+import be.helha.ttmc.exception.QuestionIncompatibleException;
+import be.helha.ttmc.exception.BasicCardOverMaxQuestionsException;
+
 public class BasicCard
 {
     private String author, subject;
@@ -11,39 +15,57 @@ public class BasicCard
 
     public BasicCard( String author, Theme theme, String subject )
     {
-        this.author = author;
-        this.theme = theme;
-        this.subject = subject;
-        questions = new ArrayList< Question >();
+	this.author = author;
+	this.theme = theme;
+	this.subject = subject;
+	questions = new ArrayList< Question >();
     }
 
     public boolean add( Question q )
     {
-	if( q == null )
+	try
 	    {
+		if( q == null )
+		    {
+			throw new NullPointerException();
+		    }
+		if( questions.contains( q ) )
+		    {
+			throw new QuestionDoubleException();
+		    }
+		if( questions.size() == 4 )
+		    {
+			throw new BasicCardOverMaxQuestionsException();
+		    }
+		if( q.getTheme() != theme ||
+		    !q.getAuthor().equalsIgnoreCase( author ) ||
+		    !q.getSubject().equalsIgnoreCase( subject ) )
+		    {
+			throw new QuestionIncompatibleException();
+		    }
+		questions.add( q );
+	    }
+	catch( NullPointerException npe )
+	    {
+		npe.printStackTrace();
 		return false;
 	    }
-	if( questions.contains( q ) )
+	catch( QuestionDoubleException qde )
 	    {
+		qde.printStackTrace();
 		return false;
 	    }
-	if( questions.size() == 4 )
+	catch( QuestionIncompatibleException qie )
 	    {
+		qie.printStackTrace();
 		return false;
 	    }
-	if( q.getTheme() != theme )
+	catch( BasicCardOverMaxQuestionsException bcomqe )
 	    {
+		bcomqe.printStackTrace();
 		return false;
 	    }
-	if( !q.getAuthor().equalsIgnoreCase( author ) )
-	    {
-		return false;
-	    }
-	if( !q.getSubject().equalsIgnoreCase( subject ) )
-	    {
-		return false;
-	    }
-	return questions.add( q );
+	return true;
     }
 
     public boolean remove( Question q )
@@ -70,54 +92,54 @@ public class BasicCard
 
     public String toString()
     {
-        StringBuilder sb = new StringBuilder();
-        for( Question q : getQuestions() )
-            {
-                sb.append( q );
-                sb.append( System.getProperty( "line.separator" ) );
-            }
-        return String.format( "Author: %s - Theme: %s - Subject: %s - Questions: %s %s",
-                              getAuthor(), getTheme(), getSubject(), System.getProperty( "line.separator" ), sb.toString() );
+	StringBuilder sb = new StringBuilder();
+	for( Question q : getQuestions() )
+	    {
+		sb.append( q );
+		sb.append( System.getProperty( "line.separator" ) );
+	    }
+	return String.format( "Author: %s - Theme: %s - Subject: %s - Questions: %s %s",
+			      getAuthor(), getTheme(), getSubject(), System.getProperty( "line.separator" ), sb.toString() );
     }
 
     public BasicCard clone()
     {
-        return new BasicCard( getAuthor(), getTheme(), getSubject() );
+	return new BasicCard( getAuthor(), getTheme(), getSubject() );
     }
 
     public boolean equals( Object o )
     {
-        if( o instanceof BasicCard )
-            {
-                BasicCard tmpc = ( BasicCard ) o;
-                return getTheme() == tmpc.getTheme() &&
-                    getSubject().equalsIgnoreCase( tmpc.getSubject() );
-            }
-        return false;
+	if( o instanceof BasicCard )
+	    {
+		BasicCard tmpc = ( BasicCard ) o;
+		return getTheme() == tmpc.getTheme() &&
+		    getSubject().equalsIgnoreCase( tmpc.getSubject() );
+	    }
+	return false;
     }
 
     public String getAuthor()
     {
-        return author;
+	return author;
     }
 
     public Theme getTheme()
     {
-        return theme;
+	return theme;
     }
 
     public String getSubject()
     {
-        return subject;
+	return subject;
     }
 
     public List< Question > getQuestions()
     {
-        List< Question > tmp = new ArrayList< Question >();
-        for( Question q : questions )
-            {
-                tmp.add( q.clone() );
-            }
-        return tmp;
+	List< Question > tmp = new ArrayList< Question >();
+	for( Question q : questions )
+	    {
+		tmp.add( q.clone() );
+	    }
+	return tmp;
     }
 }
