@@ -33,15 +33,15 @@ public class BasicCard
 		    {
 			throw new QuestionDoubleException();
 		    }
-		if( questions.size() == 4 )
-		    {
-			throw new BasicCardOverMaxQuestionsException();
-		    }
 		if( q.getTheme() != theme ||
 		    !q.getAuthor().equalsIgnoreCase( author ) ||
 		    !q.getSubject().equalsIgnoreCase( subject ) )
 		    {
 			throw new QuestionIncompatibleException();
+		    }
+		if( questions.size() == 4 )
+		    {
+			throw new BasicCardOverMaxQuestionsException();
 		    }
 		questions.add( q );
 	    }

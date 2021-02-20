@@ -44,16 +44,16 @@ public class Menu
 	Question q3 = new Question( "Giorgio Caculli", Theme.INFORMATICS, "Acronyms", "What does WWW stand for?", "World Wide Web" );
 	Question q4 = new Question( "Giorgio Caculli", Theme.INFORMATICS, "Acronyms", "What does CPU stand for?", "Central Processing Unit" );
 	Question q5 = q1.clone();
-	Question q6 = new Question( "Giorgio Cacull", Theme.INFORMATICS, "Acronyms", "What does CPU stand for?", "Central Processing Unit" );
-	Question q7 = new Question( "Giorgio Caculli", Theme.IMPROBABLE, "Acronyms", "What does CPU stand for?", "Central Processing Unit" );
+	Question q6 = new Question( "Giorgio Cacull", Theme.INFORMATICS, "Acronyms", "What does GPU stand for?", "Graphics Processing Unit" );
+	Question q7 = new Question( "Giorgio Caculli", Theme.IMPROBABLE, "Acronyms", "What does IT stand for?", "Information Technology" );
 	Question q8 = new Question( "Giorgio Caculli", Theme.INFORMATICS, "Acronym", "What does CPU stand for?", "Central Processing Unit" );
 
 	BasicCard bc1 = new BasicCard( "Giorgio Caculli", Theme.INFORMATICS, "Acronyms" );
 
 	bc1.add( q1 );
 	bc1.add( q5 );
-	bc1.add( q6 );
 	bc1.add( q2 );
+	bc1.add( q6 );
 	bc1.add( q3 );
 	bc1.add( q7 );
 	bc1.add( q4 );
