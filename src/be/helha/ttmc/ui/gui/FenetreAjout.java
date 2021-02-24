@@ -3,18 +3,25 @@ package be.helha.ttmc.ui.gui;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import be.helha.ttmc.model.BasicCard;
+import be.helha.ttmc.model.Question;
 import be.helha.ttmc.model.Theme;
 
 public class FenetreAjout extends BorderPane{
@@ -62,6 +69,39 @@ public class FenetreAjout extends BorderPane{
 	public Button getButtonsOK() {
 		if(buttonsOK ==null) {
 			buttonsOK= new Button("Add");
+			buttonsOK.setOnAction(new EventHandler<ActionEvent>() {
+				
+				
+				public void handle(ActionEvent arg0) {
+					
+					//vérification que tous les champs soient remplis
+					if(getTxtAuthor().getText() != "" && getTxtSubject().getText() != "" ) {
+						
+						
+						int test=0;
+						for(int i=0;i<getMinChallenges();i++) {
+							if(getTextsfieldAns().get(i).getText() !="" && getTextsfieldCha().get(i).getText() !="") {
+								test++;
+							}
+						}
+						if(test ==getMinChallenges()) {
+							//ajout de la carte apres vérification 
+							BasicCard b=new BasicCard(getTxtAuthor().getText(), Theme.valueOf(getCb().getValue()), getTxtSubject().getText());
+							for(int i=0; i<getMinChallenges(); i++) {
+								Question q= new Question(getTxtAuthor().getText(), Theme.valueOf(getCb().getValue()), getTxtSubject().getText(), getTextsfieldCha().get(i).getText(), getTextsfieldAns().get(i).getText());
+								b.add(q);
+							}
+						}
+						else {
+							Alert alert= new Alert(AlertType.INFORMATION, "Au moins un champ est vide! Veuillez le remplir !");
+							alert.showAndWait();
+						}
+					}else {
+						Alert alert= new Alert(AlertType.INFORMATION, "Au moins un champ est vide! Veuillez le remplir !");
+						alert.showAndWait();}
+					
+					}
+				});
 		}
 		return buttonsOK;
 	}
@@ -69,6 +109,22 @@ public class FenetreAjout extends BorderPane{
 	public Button getButtonCancel() {
 		if(buttonCancel==null) {
 			buttonCancel=new Button("Cancel");
+			buttonCancel.setOnAction(new EventHandler<ActionEvent>() {
+				
+				@Override
+				public void handle(ActionEvent arg0) {
+					Alert alert= new Alert(AlertType.CONFIRMATION,"Voulez-vous videz les champs ?");
+					if(alert.showAndWait().get() == ButtonType.OK) {
+						getTxtAuthor().clear();
+						getTxtSubject().clear();
+						for(int i=0;i<getMinChallenges();i++) {
+							getTextsfieldAns().get(i).clear();
+							getTextsfieldCha().get(i).clear();
+						}
+					}
+					
+				}
+			});
 		}
 		return buttonCancel;
 	}
