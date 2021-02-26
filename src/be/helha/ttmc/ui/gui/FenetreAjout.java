@@ -88,14 +88,17 @@ public class FenetreAjout extends BorderPane{
 							//ajout de la carte apres vérification 
 							BasicCard b=new BasicCard(getTxtAuthor().getText(), Theme.valueOf(getCb().getValue()), getTxtSubject().getText());
 							for(int i=0; i<getMinChallenges(); i++) {
-								Question q= new Question(getTxtAuthor().getText(), Theme.valueOf(getCb().getValue()), getTxtSubject().getText(), getTextsfieldCha().get(i).getText(), getTextsfieldAns().get(i).getText());
+								Question q= new Question(getTxtAuthor().getText(), Theme.valueOf(getCb().getValue()), getTxtSubject().getText(),
+										getTextsfieldCha().get(i).getText(), getTextsfieldAns().get(i).getText());
 								b.add(q);
 							}
 						}
+						//affichage d'une fenetre d'information quand les champs ne sont pas complets
 						else {
 							Alert alert= new Alert(AlertType.INFORMATION, "Au moins un champ est vide! Veuillez le remplir !");
 							alert.showAndWait();
 						}
+						//affichage d'une fenetre d'information quand les champs ne sont pas complets
 					}else {
 						Alert alert= new Alert(AlertType.INFORMATION, "Au moins un champ est vide! Veuillez le remplir !");
 						alert.showAndWait();}
