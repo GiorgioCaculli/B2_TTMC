@@ -2,6 +2,7 @@
 .classpath
 .project
 .settings/
+deck.json
 
 # Compiled class file
 *.class
