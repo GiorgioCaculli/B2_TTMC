@@ -85,7 +85,29 @@ public class MainGui extends Application {
 			}
 		});
 		
+		ma.getBtnListe().setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent arg0) {
+				stage.setScene(ListeCartes());
+				
+			}
+		});
+		
+		ma.getBtnRetour().setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent arg0) {
+				stage.setScene(MenuPrinci());
+				
+			}
+		});
 		return new Scene(ma);
+	}
+	
+	public Scene ListeCartes() {
+		ListeCarte lc = new ListeCarte();
+		return new Scene(lc);
 	}
 	
 	public Scene JouerChoix() {
