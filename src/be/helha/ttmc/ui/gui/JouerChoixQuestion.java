@@ -30,6 +30,14 @@ public class JouerChoixQuestion extends BorderPane{
 		return choix;
 	}
 	
+	public void setLblTheme(String str) {
+		lblTheme.setText(str);
+	}
+	
+	public void setLblSujet(String str) {
+		lblSujet.setText(str);
+	}
+	
 	public Label getLblTheme() {
 		if(lblTheme == null) {
 			lblTheme = new Label("Theme");
