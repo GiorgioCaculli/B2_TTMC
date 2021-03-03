@@ -1,6 +1,4 @@
 !.gitignore
-.classpath
-.project
 .settings/
 deck.json
 
