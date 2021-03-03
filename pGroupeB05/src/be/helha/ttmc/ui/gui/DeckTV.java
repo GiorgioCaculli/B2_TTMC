@@ -22,6 +22,7 @@ public class DeckTV extends BorderPane{
 	public TreeItem<String> getDeck() {
 		if(deck ==null) {
 			deck=new TreeItem<String>("Deck");
+			deck.setExpanded(true);
 		}
 		return deck;
 	}
