@@ -40,7 +40,7 @@ public class DeckTV extends BorderPane{
 		if(theme == null) {
 			theme=new ArrayList<>();
 			for(Theme t: Theme.values()) {
-				TreeItem<String> d=new TreeItem<String>(t.values().toString());
+				TreeItem<String> d=new TreeItem<String>(t.toString());
 				theme.add(d);
 			}
 		}
