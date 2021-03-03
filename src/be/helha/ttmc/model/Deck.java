@@ -1,6 +1,7 @@
 package be.helha.ttmc.model;
 
 import java.util.List;
+import java.util.Random;
 import java.util.ArrayList;
 
 public class Deck
@@ -67,5 +68,11 @@ public class Deck
             sb.append( System.getProperty( "line.separator" ) );
         }
         return sb.toString();
+    }
+    
+    public BasicCard tirerCarte() {
+    	Random r= new Random();
+    	int num= r.nextInt(cards.size());
+    	return cards.get(num);
     }
 }
