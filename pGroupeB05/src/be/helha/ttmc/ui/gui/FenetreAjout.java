@@ -28,7 +28,7 @@ public class FenetreAjout extends BorderPane{
 	private List<Label> labelsCha;
 	private List<TextField> textsfieldCha;
 	private List<TextField> textsfieldAns;
-	private Button buttonsOK, buttonCancel;
+	private Button buttonsOK, buttonCancel, buttonReturn;
 	private Label lblTheme, lblAuthor, lblSubject;
 	private TextField txtAuthor, txtSubject;
 	private ComboBox<String> cb;
@@ -65,6 +65,13 @@ public class FenetreAjout extends BorderPane{
 		return textsfieldAns;
 	}
 	
+	public Button getButtonReturn() {
+		if(buttonReturn == null) {
+			buttonReturn = new Button("Return");
+		}
+		return buttonReturn;
+	}
+	
 	public Button getButtonsOK() {
 		if(buttonsOK ==null) {
 			buttonsOK= new Button("Add");
@@ -73,44 +80,44 @@ public class FenetreAjout extends BorderPane{
 				
 				public void handle(ActionEvent arg0) {
 					
-					//vérification que tous les champs soient remplis
-					if(getTxtAuthor().getText() != "" && getTxtSubject().getText() != "" ) {
-						
+					//verification que tous les champs soient remplis
+					if(!getTxtAuthor().getText().isEmpty() && !getTxtSubject().getText().isEmpty() ) {
 						
 						int test=0;
 						for(int i=0;i<getMinChallenges();i++) {
-							if(getTextsfieldAns().get(i).getText() !="" && getTextsfieldCha().get(i).getText() !="") {
+							if(!getTextsfieldAns().get(i).getText().isEmpty() && !getTextsfieldCha().get(i).getText().isEmpty()) {
 								test++;
 							}
 						}
-						if(test ==getMinChallenges()) {
-							//ajout de la carte apres vérification 
+						if(test == getMinChallenges()) {
+							//ajout de la carte apres verification 
 							BasicCard b=new BasicCard(getTxtAuthor().getText(), Theme.valueOf(getCb().getValue()), getTxtSubject().getText());
 							for(int i=0; i<getMinChallenges(); i++) {
 								Question q= new Question(getTxtAuthor().getText(), Theme.valueOf(getCb().getValue()), getTxtSubject().getText(),
 										getTextsfieldCha().get(i).getText(), getTextsfieldAns().get(i).getText());
-								b.add(q);
+								b.add(q);								
 							}
+							MainGui.ajoutCarteDeck(b);
+							System.out.println("ok");
+							return;
 						}
-						//affichage d'une fenetre d'information quand les champs ne sont pas complets
-						else {
-							Alert alert= new Alert(AlertType.INFORMATION, "Au moins un champ est vide! Veuillez le remplir !");
-							alert.showAndWait();
-						}
-						//affichage d'une fenetre d'information quand les champs ne sont pas complets
-					}else {
-						Alert alert= new Alert(AlertType.INFORMATION, "Au moins un champ est vide! Veuillez le remplir !");
-						alert.showAndWait();}
+						
+						
+					}//affichage d'une fenetre d'information quand les champs ne sont pas complets
 					
-					}
-				});
+						Alert alert= new Alert(AlertType.WARNING, "Au moins un champ est vide! Veuillez le remplir !");
+						alert.showAndWait();
+					
+					
+				}
+			});
 		}
 		return buttonsOK;
 	}
 
 	public Button getButtonCancel() {
 		if(buttonCancel==null) {
-			buttonCancel=new Button("Cancel");
+			buttonCancel=new Button("Clean");
 			buttonCancel.setOnAction(new EventHandler<ActionEvent>() {
 				
 				@Override
@@ -319,6 +326,7 @@ public class FenetreAjout extends BorderPane{
 		}
 		
 		//ajout des bouttons
+		grid.add(getButtonReturn(), 8, minChallenges+3);
 		grid.add(getButtonCancel(), 9, minChallenges+3);
 		grid.add(getButtonsOK(), 10, minChallenges+3);
 		GridPane.setHalignment(getButtonCancel(), HPos.CENTER);

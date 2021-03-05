@@ -54,8 +54,5 @@ public class MenuAjout extends BorderPane{
 		this.setCenter(tile);
 	}
 	
-	public Scene AjoutCarte() {
-		MenuAjout ma = new MenuAjout();
-		return new Scene(ma);
-	}
+	
 }

@@ -21,7 +21,7 @@ import javafx.scene.control.ButtonType;
 public class MainGui extends Application {
 	private Stage stage;
 	private int id;
-	private Deck d;
+	private static Deck d= new Deck();
 	private BasicCard bc;
 	@Override
 	public void start(Stage primaryStage) {
@@ -30,6 +30,10 @@ public class MainGui extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
+	}
+	
+	public static void ajoutCarteDeck(BasicCard bc) {
+		d.add(bc);
 	}
 
 	public Scene MenuPrinci() {
@@ -70,6 +74,16 @@ public class MainGui extends Application {
 	
 	public Scene AjoutCarte() {
 		FenetreAjout fa= new FenetreAjout();
+		fa.getButtonReturn().setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				stage.setScene(MenuGestion());
+				
+			}
+		});
+		
+	
 		
 		return new Scene(fa);
 	}
@@ -181,7 +195,7 @@ public class MainGui extends Application {
 	}
 	
 	public void GenererDeck() {
-		d= new Deck();
+		//bc=d.tirerCarte();
 		bc= new BasicCard("Guillaume", Theme.IMPROBABLE, "Test");
 		Question q1= new Question("Guillaume", Theme.IMPROBABLE, "Test", "Billy est-il débiles?1", "Oui");
 		Question q2= new Question("Guillaume", Theme.IMPROBABLE, "Test", "Billy est-il débiles?2", "non");
