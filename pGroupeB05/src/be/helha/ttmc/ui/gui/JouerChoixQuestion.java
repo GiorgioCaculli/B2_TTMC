@@ -64,6 +64,7 @@ public class JouerChoixQuestion extends BorderPane{
 		fp.setHgap(5);
 		fp.setPrefWrapLength(505);
 		fp.setStyle("-fx-background-color: DAE6F3;-fx-font-size: 25pt;");
+		fp.setAlignment(Pos.CENTER);
 		
 		for(Button b : getChoix()) {
 			fp.getChildren().add(b);

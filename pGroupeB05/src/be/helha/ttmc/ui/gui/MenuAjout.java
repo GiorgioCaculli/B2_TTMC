@@ -2,6 +2,7 @@ package be.helha.ttmc.ui.gui;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
@@ -49,9 +50,10 @@ public class MenuAjout extends BorderPane{
 		tile.setStyle("-fx-background-color: DAE6F3;"
 				+ "-fx-font-size: 15pt;");
 		tile.getChildren().addAll(getBtnAjout(), getBtnListe(),getBtnRetour());
-		
+		tile.setAlignment(Pos.CENTER);
 		
 		this.setCenter(tile);
+		
 	}
 	
 	

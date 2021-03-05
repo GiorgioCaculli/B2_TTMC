@@ -13,6 +13,10 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.scene.control.ButtonType;
 
 
@@ -21,13 +25,17 @@ import javafx.scene.control.ButtonType;
 public class MainGui extends Application {
 	private Stage stage;
 	private int id;
-	private static Deck d= new Deck();
+	private static Deck d;
 	private BasicCard bc;
 	@Override
 	public void start(Stage primaryStage) {
 		stage = primaryStage;
+		stage.setResizable(false);
+		stage.setHeight(750);
+		stage.setWidth(750);
 		Scene scene= MenuPrinci();
 		primaryStage.setScene(scene);
+		primaryStage.getIcons().add(new Image("be/helha/ttmc/assets/images/paw.png"));
 		primaryStage.show();
 		
 	}
@@ -121,6 +129,14 @@ public class MainGui extends Application {
 	
 	public Scene ListeCartes() {
 		ListeCarte lc = new ListeCarte();
+		lc.getBtnReturn().setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				stage.setScene(MenuGestion());
+				
+			}
+		});
 		return new Scene(lc);
 	}
 	
@@ -183,8 +199,24 @@ public class MainGui extends Application {
 			@Override
 			public void handle(ActionEvent arg0) {
 				if(jr.getTxtRep().getText().equalsIgnoreCase(bc.getQuestions().get(id).getAnswer())) {
-					System.out.println("ok");
+					Alert alert = new Alert(AlertType.INFORMATION, "Brava tu as réussi !");
+					alert.setTitle("Resultats");
+					String path="be/helha/ttmc/assets/images/banana.gif";
+					ImageView icon = new ImageView(path);
+					icon.setFitHeight(64);
+					icon.setFitWidth(64);
+					alert.getDialogPane().setGraphic(icon);
+					alert.setHeaderText(null);
+					alert.showAndWait();
 				}else {
+					Alert alert = new Alert(AlertType.INFORMATION, "Tu as raté tu es une merde!\nLa réponse était : "+bc.getQuestions().get(id).getAnswer());
+					alert.setTitle("Resultats");
+					ImageView icon = new ImageView("be/helha/ttmc/assets/images/sonicPleure.gif");
+					icon.setFitHeight(64);
+					icon.setFitWidth(64);
+					alert.getDialogPane().setGraphic(icon);
+					alert.setHeaderText(null);
+					alert.showAndWait();
 					System.out.println("nope");
 				}
 				stage.setScene(JouerChoix());
@@ -196,6 +228,7 @@ public class MainGui extends Application {
 	
 	public void GenererDeck() {
 		//bc=d.tirerCarte();
+		d=new Deck();
 		bc= new BasicCard("Guillaume", Theme.IMPROBABLE, "Test");
 		Question q1= new Question("Guillaume", Theme.IMPROBABLE, "Test", "Billy est-il débiles?1", "Oui");
 		Question q2= new Question("Guillaume", Theme.IMPROBABLE, "Test", "Billy est-il débiles?2", "non");
