@@ -27,6 +27,12 @@ public class MainGui extends Application {
 	private int id;
 	private static Deck d;
 	private BasicCard bc;
+	
+	public void setDeck( Deck d )
+	{
+	    this.d = d;
+	}
+	
 	@Override
 	public void start(Stage primaryStage) {
 		stage = primaryStage;
@@ -199,7 +205,7 @@ public class MainGui extends Application {
 			@Override
 			public void handle(ActionEvent arg0) {
 				if(jr.getTxtRep().getText().equalsIgnoreCase(bc.getQuestions().get(id).getAnswer())) {
-					Alert alert = new Alert(AlertType.INFORMATION, "Brava tu as réussi !");
+					Alert alert = new Alert(AlertType.INFORMATION, "Brava tu as rï¿½ussi !");
 					alert.setTitle("Resultats");
 					String path="be/helha/ttmc/assets/images/banana.gif";
 					ImageView icon = new ImageView(path);
@@ -209,7 +215,7 @@ public class MainGui extends Application {
 					alert.setHeaderText(null);
 					alert.showAndWait();
 				}else {
-					Alert alert = new Alert(AlertType.INFORMATION, "Tu as raté tu es une merde!\nLa réponse était : "+bc.getQuestions().get(id).getAnswer());
+					Alert alert = new Alert(AlertType.INFORMATION, "Tu as ratï¿½ tu es une merde!\nLa rï¿½ponse ï¿½tait : "+bc.getQuestions().get(id).getAnswer());
 					alert.setTitle("Resultats");
 					ImageView icon = new ImageView("be/helha/ttmc/assets/images/sonicPleure.gif");
 					icon.setFitHeight(64);
@@ -228,12 +234,12 @@ public class MainGui extends Application {
 	
 	public void GenererDeck() {
 		//bc=d.tirerCarte();
-		d=new Deck();
+		//d=new Deck();
 		bc= new BasicCard("Guillaume", Theme.IMPROBABLE, "Test");
-		Question q1= new Question("Guillaume", Theme.IMPROBABLE, "Test", "Billy est-il débiles?1", "Oui");
-		Question q2= new Question("Guillaume", Theme.IMPROBABLE, "Test", "Billy est-il débiles?2", "non");
-		Question q3= new Question("Guillaume", Theme.IMPROBABLE, "Test", "Billy est-il débiles?3", "Peut-etre");
-		Question q4= new Question("Guillaume", Theme.IMPROBABLE, "Test", "Billy est-il débiles?4", "surement");
+		Question q1= new Question("Guillaume", Theme.IMPROBABLE, "Test", "Billy est-il dï¿½biles?1", "Oui");
+		Question q2= new Question("Guillaume", Theme.IMPROBABLE, "Test", "Billy est-il dï¿½biles?2", "non");
+		Question q3= new Question("Guillaume", Theme.IMPROBABLE, "Test", "Billy est-il dï¿½biles?3", "Peut-etre");
+		Question q4= new Question("Guillaume", Theme.IMPROBABLE, "Test", "Billy est-il dï¿½biles?4", "surement");
 		bc.add(q1);
 		bc.add(q2);
 		bc.add(q3);
@@ -242,6 +248,5 @@ public class MainGui extends Application {
 	}
 	
 	public MainGui() {
-		
 	}
 }

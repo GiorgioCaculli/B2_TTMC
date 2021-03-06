@@ -12,6 +12,5 @@ public class Main
     {
         System.out.println( "TTMC by Giorgio Caculli LA196672, Guillaume Lambert LA198116, Tanguy Taminiau LA199566" );
         new Menu( args );
-        Application.launch(MainGui.class, args);
     }
 }

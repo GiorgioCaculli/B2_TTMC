@@ -1,12 +1,10 @@
 package be.helha.ttmc.ui;
 
 import java.io.File;
-import java.io.Reader;
 import java.io.Writer;
 import java.io.FileWriter;
 
 import java.nio.file.Path;
-import java.nio.charset.StandardCharsets;
 
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -17,6 +15,8 @@ import com.google.gson.GsonBuilder;
 
 import be.helha.ttmc.model.*;
 import be.helha.ttmc.ui.cli.MenuClient;
+import be.helha.ttmc.ui.gui.MainGui;
+import javafx.application.Application;
 
 public class Menu
 {
@@ -57,8 +57,7 @@ public class Menu
         {
             saveFile = new File( fileName );
             saveFile.createNewFile();
-        }
-        catch( Exception e )
+        }catch( Exception e )
         {
             e.printStackTrace();
         }
@@ -94,19 +93,16 @@ public class Menu
 
         d.add( bc1 );
 
-        /*
-         * Deck d = null; try( Reader r = Files.newBufferedReader( path,
-         * StandardCharsets.UTF_8 ) ) { d = gson.fromJson( reader ); } catch( Exception
-         * e ) { e.printStackTrace(); }
-         */
+        MainGui m = new MainGui();
+        m.setDeck( d );
+        Application.launch( m.getClass(), args );
 
         String jsonDeck = gson.toJson( d );
         logger.log( Level.INFO, jsonDeck );
         try( Writer w = new FileWriter( saveFile ) )
         {
             gson.toJson( d, w );
-        }
-        catch( Exception e )
+        }catch( Exception e )
         {
             e.printStackTrace();
         }
