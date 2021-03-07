@@ -4,8 +4,6 @@ package be.helha.ttmc.ui.gui;
 
 import be.helha.ttmc.model.BasicCard;
 import be.helha.ttmc.model.Deck;
-import be.helha.ttmc.model.Question;
-import be.helha.ttmc.model.Theme;
 import be.helha.ttmc.serialization.Serialization;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -16,8 +14,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.scene.control.ButtonType;
 
 
@@ -29,9 +25,9 @@ public class MainGui extends Application {
 	private static Deck d;
 	private BasicCard bc;
 	
-	public void setDeck( Deck d )
+	public void setDeck( Deck de )
 	{
-	    this.d = d;
+	    d = de;
 	}
 	
 	@Override

@@ -77,8 +77,4 @@ public class MenuPrincipal extends BorderPane{
 		this.setCenter(vb);
 	}
 	
-	public Scene MenuPrinci() {
-		
-		return new Scene(this);
-	}
 }

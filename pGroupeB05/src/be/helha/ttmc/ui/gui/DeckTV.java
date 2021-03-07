@@ -5,7 +5,6 @@ import java.util.List;
 
 import be.helha.ttmc.model.Theme;
 import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
