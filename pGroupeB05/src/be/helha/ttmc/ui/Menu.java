@@ -13,7 +13,6 @@ import com.google.gson.GsonBuilder;
 
 import be.helha.ttmc.model.*;
 import be.helha.ttmc.serialization.Serialization;
-import be.helha.ttmc.ui.cli.MenuClient;
 import be.helha.ttmc.ui.gui.MainGui;
 import javafx.application.Application;
 
@@ -33,9 +32,6 @@ public class Menu
                 case "-d":
                     logger.setLevel( Level.INFO );
                     break;
-                case "-nogui":
-                    new MenuClient( args );
-                    break;
                 default:
                     logger.log( Level.INFO, String.format( "Argument: %s - NOT RECOGNIZED!%s", args[ i ],
                             System.getProperty( "line.separator" ) ) );
@@ -51,14 +47,9 @@ public class Menu
         Gson gson = gb.create();
 
         logger.log( Level.INFO, "Reading JSON" );
-
  
         Deck d=Serialization.loadDeck();
         
-        
-        		
-
-
         MainGui m = new MainGui();
         m.setDeck( d );
         Application.launch( m.getClass(), args );
