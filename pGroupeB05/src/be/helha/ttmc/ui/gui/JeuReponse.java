@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.TextAlignment;
 
 public class JeuReponse extends BorderPane{
 	private Label lblTheme, lblSujet;
@@ -47,6 +48,8 @@ public class JeuReponse extends BorderPane{
 	public Label getLblQuestion() {
 		if(lblQuestion == null) {
 			lblQuestion = new Label("test");
+			lblQuestion.setTextAlignment(TextAlignment.CENTER);;
+			lblQuestion.setWrapText(true);
 		}
 		return lblQuestion;
 	}
