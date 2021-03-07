@@ -1,6 +1,5 @@
 !.gitignore
 .settings/
-deck.json
 
 # Compiled class file
 *.class

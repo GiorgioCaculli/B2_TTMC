@@ -96,10 +96,20 @@ public class FenetreAjout extends BorderPane{
 							for(int i=0; i<getMinChallenges(); i++) {
 								Question q= new Question(getTxtAuthor().getText(), Theme.valueOf(getCb().getValue()), getTxtSubject().getText(),
 										getTextsfieldCha().get(i).getText(), getTextsfieldAns().get(i).getText());
-								b.add(q);								
+								if(!b.add(q)) {
+									Alert alert = new Alert(AlertType.ERROR, "Une des questions des déjà présente sur la carte!");
+									alert.showAndWait();
+									break;	
+								}
+								
 							}
-							MainGui.ajoutCarteDeck(b);
-							System.out.println("ok");
+							if(!MainGui.ajoutCarteDeck(b)) {
+								
+								Alert alert= new Alert(AlertType.ERROR, "La carte est deja presente dans le deck!");
+								alert.showAndWait();;
+							}
+							Alert alert= new Alert(AlertType.INFORMATION,"La carte a bien ete rajoutee au deck!");
+							alert.showAndWait();
 							return;
 						}
 						

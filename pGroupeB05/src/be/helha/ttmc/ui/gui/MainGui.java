@@ -6,6 +6,7 @@ import be.helha.ttmc.model.BasicCard;
 import be.helha.ttmc.model.Deck;
 import be.helha.ttmc.model.Question;
 import be.helha.ttmc.model.Theme;
+import be.helha.ttmc.serialization.Serialization;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -46,8 +47,8 @@ public class MainGui extends Application {
 		
 	}
 	
-	public static void ajoutCarteDeck(BasicCard bc) {
-		d.add(bc);
+	public static boolean ajoutCarteDeck(BasicCard bc) {
+		return d.add(bc);
 	}
 
 	public Scene MenuPrinci() {
@@ -79,7 +80,11 @@ public class MainGui extends Application {
 			
 			@Override
 			public void handle(ActionEvent arg0) {
-				stage.setScene(JouerChoix());
+				if(d.getCards().size() == 0) {
+					Alert alert= new Alert(AlertType.ERROR, "Aucun deck de question trouvé!\n Veuillez ajouté des cartes depuis l'admin panel!");
+					alert.showAndWait();
+				}else
+					stage.setScene(JouerChoix());
 				
 			}
 		});
@@ -92,6 +97,7 @@ public class MainGui extends Application {
 			
 			@Override
 			public void handle(ActionEvent event) {
+				Serialization.saveGame(d);
 				stage.setScene(MenuGestion());
 				
 			}
@@ -148,7 +154,7 @@ public class MainGui extends Application {
 	
 	public Scene JouerChoix() {
 		JouerChoixQuestion jcq= new JouerChoixQuestion();
-		GenererDeck();
+		bc = GenererDeck();
 		
 		jcq.setLblTheme(bc.getTheme().toString());
 		jcq.setLblSujet(bc.getSubject());
@@ -205,9 +211,9 @@ public class MainGui extends Application {
 			@Override
 			public void handle(ActionEvent arg0) {
 				if(jr.getTxtRep().getText().equalsIgnoreCase(bc.getQuestions().get(id).getAnswer())) {
-					Alert alert = new Alert(AlertType.INFORMATION, "Brava tu as rï¿½ussi !");
+					Alert alert = new Alert(AlertType.INFORMATION, "Brava tu as reussi !");
 					alert.setTitle("Resultats");
-					String path="be/helha/ttmc/assets/images/banana.gif";
+					String path="/be/helha/ttmc/assets/images/banana.gif";
 					ImageView icon = new ImageView(path);
 					icon.setFitHeight(64);
 					icon.setFitWidth(64);
@@ -215,9 +221,9 @@ public class MainGui extends Application {
 					alert.setHeaderText(null);
 					alert.showAndWait();
 				}else {
-					Alert alert = new Alert(AlertType.INFORMATION, "Tu as ratï¿½ tu es une merde!\nLa rï¿½ponse ï¿½tait : "+bc.getQuestions().get(id).getAnswer());
+					Alert alert = new Alert(AlertType.INFORMATION, "Tu as rate tu es un billy!\nLa reponse etait : "+bc.getQuestions().get(id).getAnswer());
 					alert.setTitle("Resultats");
-					ImageView icon = new ImageView("be/helha/ttmc/assets/images/sonicPleure.gif");
+					ImageView icon = new ImageView("/be/helha/ttmc/assets/images/sonicPleure.gif");
 					icon.setFitHeight(64);
 					icon.setFitWidth(64);
 					alert.getDialogPane().setGraphic(icon);
@@ -232,19 +238,9 @@ public class MainGui extends Application {
 		return new Scene(jr);
 	}
 	
-	public void GenererDeck() {
-		//bc=d.tirerCarte();
-		//d=new Deck();
-		bc= new BasicCard("Guillaume", Theme.IMPROBABLE, "Test");
-		Question q1= new Question("Guillaume", Theme.IMPROBABLE, "Test", "Billy est-il dï¿½biles?1", "Oui");
-		Question q2= new Question("Guillaume", Theme.IMPROBABLE, "Test", "Billy est-il dï¿½biles?2", "non");
-		Question q3= new Question("Guillaume", Theme.IMPROBABLE, "Test", "Billy est-il dï¿½biles?3", "Peut-etre");
-		Question q4= new Question("Guillaume", Theme.IMPROBABLE, "Test", "Billy est-il dï¿½biles?4", "surement");
-		bc.add(q1);
-		bc.add(q2);
-		bc.add(q3);
-		bc.add(q4);
-		d.add(bc);
+	public BasicCard GenererDeck() {
+		bc=d.tirerCarte();
+		return bc;
 	}
 	
 	public MainGui() {

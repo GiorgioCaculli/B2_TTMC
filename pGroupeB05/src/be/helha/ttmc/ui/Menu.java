@@ -1,7 +1,10 @@
 package be.helha.ttmc.ui;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.Writer;
+import java.net.URL;
 import java.io.FileWriter;
 
 import java.nio.file.Path;
@@ -12,8 +15,11 @@ import java.util.logging.Logger;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
 
 import be.helha.ttmc.model.*;
+import be.helha.ttmc.serialization.Serialization;
 import be.helha.ttmc.ui.cli.MenuClient;
 import be.helha.ttmc.ui.gui.MainGui;
 import javafx.application.Application;
@@ -44,7 +50,7 @@ public class Menu
             }
         }
 
-        String fileName = "deck.json";
+        String fileName = "/be/helha/ttmc/assets/files/deck.json";
         Path path = new File( fileName ).toPath();
 
         GsonBuilder gb = new GsonBuilder();
@@ -52,46 +58,13 @@ public class Menu
         Gson gson = gb.create();
 
         logger.log( Level.INFO, "Reading JSON" );
-        File saveFile = null;
-        try
-        {
-            saveFile = new File( fileName );
-            saveFile.createNewFile();
-        }catch( Exception e )
-        {
-            e.printStackTrace();
-        }
 
-        Question q1 = new Question( "Giorgio Caculli", Theme.INFORMATICS, "Acronyms", "What does RAM stand for?",
-                "Random Access Memory" );
-        Question q2 = new Question( "Giorgio Caculli", Theme.INFORMATICS, "Acronyms", "What does JAR stand for?",
-                "Java ARchive" );
-        Question q3 = new Question( "Giorgio Caculli", Theme.INFORMATICS, "Acronyms", "What does WWW stand for?",
-                "World Wide Web" );
-        Question q4 = new Question( "Giorgio Caculli", Theme.INFORMATICS, "Acronyms", "What does CPU stand for?",
-                "Central Processing Unit" );
-        Question q5 = q1.clone();
-        Question q6 = new Question( "Giorgio Cacull", Theme.INFORMATICS, "Acronyms", "What does GPU stand for?",
-                "Graphics Processing Unit" );
-        Question q7 = new Question( "Giorgio Caculli", Theme.IMPROBABLE, "Acronyms", "What does IT stand for?",
-                "Information Technology" );
-        Question q8 = new Question( "Giorgio Caculli", Theme.INFORMATICS, "Acronym", "What does CPU stand for?",
-                "Central Processing Unit" );
+ 
+        Deck d=Serialization.loadDeck();
+        
+        
+        		
 
-        BasicCard bc1 = new BasicCard( "Giorgio Caculli", Theme.INFORMATICS, "Acronyms" );
-
-        bc1.add( q1 );
-        bc1.add( q5 );
-        bc1.add( q2 );
-        bc1.add( q6 );
-        bc1.add( q3 );
-        bc1.add( q7 );
-        bc1.add( q4 );
-        bc1.add( q8 );
-
-        Deck d = new Deck();
-
-        d.add( bc1 );
 
         MainGui m = new MainGui();
         m.setDeck( d );
@@ -99,12 +72,6 @@ public class Menu
 
         String jsonDeck = gson.toJson( d );
         logger.log( Level.INFO, jsonDeck );
-        try( Writer w = new FileWriter( saveFile ) )
-        {
-            gson.toJson( d, w );
-        }catch( Exception e )
-        {
-            e.printStackTrace();
-        }
+
     }
 }
