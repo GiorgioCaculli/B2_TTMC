@@ -234,12 +234,18 @@ public class MainGui extends Application
         jr.setLblQuestion( bc.getQuestions().get( id ).getChallenge() );
         jr.setLblTheme( bc.getTheme().toString() );
         jr.setLblSujet( bc.getSubject() );
+        jr.getAnimation().start();
+  /*      if(jr.getTime() == 0) {
+        	System.out.println("Test");
+        	jr.getBtnVal().fire();
+        }*/
         jr.getBtnVal().setOnAction( new EventHandler< ActionEvent >()
         {
 
             @Override
             public void handle( ActionEvent arg0 )
             {
+            	jr.getAnimation().stop();
                 if( jr.getTxtRep().getText().equalsIgnoreCase( bc.getQuestions().get( id ).getAnswer() ) )
                 {
                     Alert alert = new Alert( AlertType.INFORMATION, "Brava tu as reussi !" );
@@ -252,7 +258,7 @@ public class MainGui extends Application
                     score+= (id+1);
                     
                     alert.setHeaderText( null );
-                    alert.showAndWait();
+                    alert.show();
                 }else
                 {
                     Alert alert = new Alert( AlertType.INFORMATION, "La reponse etait : "
@@ -263,7 +269,7 @@ public class MainGui extends Application
                     icon.setFitWidth( 64 );
                     alert.getDialogPane().setGraphic( icon );
                     alert.setHeaderText( null );
-                    alert.showAndWait();
+                    alert.show();
                     System.out.println( "nope" );
                 }
                 stage.setScene( JouerChoix() );
