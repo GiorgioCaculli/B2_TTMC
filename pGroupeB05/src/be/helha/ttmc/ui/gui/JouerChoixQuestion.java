@@ -9,12 +9,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class JouerChoixQuestion extends BorderPane{
 
 	private Label lblTheme, lblSujet;
 	private List<Button> choix;
+	private Label score;
+	private Label lblScore;
 
 	public List<Button> getChoix() {
 		if(choix == null) {
@@ -36,6 +39,22 @@ public class JouerChoixQuestion extends BorderPane{
 	
 	public void setLblSujet(String str) {
 		lblSujet.setText(str);
+	}
+	
+	public Label getLblScore() {
+		if(lblScore==null)
+			lblScore= new Label("Score : ");
+		return lblScore;
+	}
+	
+	public Label getScore() {
+		if(score==null)
+			score= new Label("0");
+		return score;
+	}
+	
+	public void setScore(Integer newScore) {
+		score.setText(newScore.toString());
 	}
 	
 	public Label getLblTheme() {
@@ -74,10 +93,22 @@ public class JouerChoixQuestion extends BorderPane{
 		vb.setPadding(new Insets(20));
 		vb.setSpacing(10);
 		vb.getChildren().addAll(getLblTheme(), getLblSujet());
-		vb.setStyle("-fx-font-size: 25pt;");
+	//	vb.setStyle("-fx-font-size: 25pt;");
 		
+		
+		
+		HBox hb= new HBox();
+		hb.getChildren().addAll(getLblScore(), getScore());
+		hb.setSpacing(20);
+		hb.setPadding(new Insets(0,10,0,5));
+		hb.setAlignment(Pos.BASELINE_RIGHT);
+		
+		
+		VBox vb2= new VBox();
+		vb2.getChildren().addAll(vb, hb);
+		vb2.setStyle("-fx-font-size: 25pt;");
 		this.setCenter(fp);
-		this.setTop(vb);
+		this.setTop(vb2);
 	}
 	
 }

@@ -20,6 +20,8 @@ public class MainGui extends Application
     private int id;
     private static Deck d;
     private BasicCard bc;
+    private int score=0;
+
 
     public void setDeck( Deck de )
     {
@@ -174,6 +176,7 @@ public class MainGui extends Application
 
         jcq.setLblTheme( bc.getTheme().toString() );
         jcq.setLblSujet( bc.getSubject() );
+        jcq.setScore((Integer) score);
         // Click sur la question lvl 1
         jcq.getChoix().get( 0 ).setOnAction( new EventHandler< ActionEvent >()
         {
@@ -246,6 +249,8 @@ public class MainGui extends Application
                     icon.setFitHeight( 64 );
                     icon.setFitWidth( 64 );
                     alert.getDialogPane().setGraphic( icon );
+                    score+= (id+1);
+                    
                     alert.setHeaderText( null );
                     alert.showAndWait();
                 }else
