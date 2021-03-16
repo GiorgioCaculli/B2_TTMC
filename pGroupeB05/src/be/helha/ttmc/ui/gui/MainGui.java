@@ -1,5 +1,8 @@
 package be.helha.ttmc.ui.gui;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import be.helha.ttmc.model.Deck;
 import be.helha.ttmc.serialization.Serialization;
 import javafx.application.Application;
@@ -9,12 +12,15 @@ import javafx.scene.image.Image;
 
 public class MainGui extends Application
 {
+    private static final Logger logger = Logger.getLogger( "MainGui Class Logger" );
     private static final short WIDTH = 750;
     private static final short HEIGHT = WIDTH;
     @Override
     public void start( Stage primaryStage )
     {
+        logger.log( Level.INFO, "Reading Deck" );
         Deck d = Serialization.loadDeck();
+        logger.log( Level.INFO, String.format( "Number of cards in the deck: %d", d.getCards().size() ) );
         MainPane mp = new MainPane( d );
         mp.getChildren().get( 0 ).setVisible( true );
         Scene scene = new Scene( mp );

@@ -112,7 +112,7 @@ public class JouerChoixQuestion extends BorderPane
         vb.setSpacing( 10 );
         vb.getChildren().addAll( getLblTheme(), getLblSujet() );
         // vb.setStyle("-fx-font-size: 25pt;");
-
+        
         HBox hb = new HBox();
         hb.getChildren().addAll( getLblScore(), getScore() );
         hb.setSpacing( 20 );
@@ -356,18 +356,27 @@ public class JouerChoixQuestion extends BorderPane
         Alert alert = new Alert( AlertType.INFORMATION );
         alert.setTitle( "Resultats" );
         String path;
-        if ( getTxtRep().getText().equalsIgnoreCase( bc.getQuestions().get( getID() ).getAnswer() ) )
+        if( cardNb >= cards.size() )
         {
-            alert.setContentText( "Brava tu as reussi !" );
+            alert.setContentText( String.format( "All questions have been answered, you scored %d points. Thank you for playing!", newScore ) );
             path = "/be/helha/ttmc/assets/images/banana.gif";
-            newScore += ( getID() + 1 );
-            setScore( newScore );
+            getParent().getChildrenUnmodifiable().get( 1 ).setVisible( false );
+            getParent().getChildrenUnmodifiable().get( 0 ).setVisible( true );
         }
         else
         {
-            alert.setContentText( "La reponse etait : " + bc.getQuestions().get( getID() ).getAnswer() );
-            path = "/be/helha/ttmc/assets/images/sonicPleure.gif";
-            System.out.println( "nope" );
+            if ( getTxtRep().getText().equalsIgnoreCase( bc.getQuestions().get( getID() ).getAnswer() ) )
+            {
+                alert.setContentText( "Brava tu as reussi !" );
+                path = "/be/helha/ttmc/assets/images/banana.gif";
+                newScore += ( getID() + 1 );
+                setScore( newScore );
+            }
+            else
+            {
+                alert.setContentText( "La reponse etait : " + bc.getQuestions().get( getID() ).getAnswer() );
+                path = "/be/helha/ttmc/assets/images/sonicPleure.gif";
+            }
         }
         ImageView icon = new ImageView( path );
         icon.setFitHeight( 64 );
@@ -378,6 +387,7 @@ public class JouerChoixQuestion extends BorderPane
             alert.showAndWait();
         else if( o instanceof Long )
             alert.show();
-        initCardPane( cards, cardNb );
+        if( cardNb < cards.size() )
+            initCardPane( cards, cardNb );
     }
 }
