@@ -22,7 +22,7 @@ import be.helha.ttmc.model.Deck;
 public class Serialization {
 	private static GsonBuilder gb = new GsonBuilder();
     
-    private static Gson gson = gb.create();
+    private static Gson gson;
 	
 	public static void saveGame(Deck d) {
 		gb.setPrettyPrinting();
@@ -38,6 +38,8 @@ public class Serialization {
 		
 		try( Writer w = new FileWriter( json ) )
         {
+		    gb.setPrettyPrinting();
+		    gson = gb.create();
             gson.toJson( d, w );
         }catch( Exception e )
         {
@@ -49,6 +51,7 @@ public class Serialization {
 		String path = "deck.json";
 		Deck d= null;
 		try {
+		    gson = gb.create();
 			d = gson.fromJson(new FileReader(path), Deck.class);
 		} catch (JsonSyntaxException | JsonIOException | FileNotFoundException e) {
 			// TODO Auto-generated catch block

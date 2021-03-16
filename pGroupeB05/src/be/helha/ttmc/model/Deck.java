@@ -15,11 +15,11 @@ public class Deck
 
     public boolean add( BasicCard c )
     {
-        if( c == null )
+        if ( c == null )
         {
             return false;
         }
-        if( cards.contains( c ) )
+        if ( cards.contains( c ) )
         {
             return false;
         }
@@ -28,7 +28,7 @@ public class Deck
 
     public boolean remove( BasicCard c )
     {
-        if( c == null )
+        if ( c == null )
         {
             return false;
         }
@@ -37,11 +37,11 @@ public class Deck
 
     public boolean remove( int i )
     {
-        if( i < 1 && i > 24 )
+        if ( i < 1 && i > 24 )
         {
             return false;
         }
-        if( i > cards.size() )
+        if ( i > cards.size() )
         {
             return false;
         }
@@ -51,7 +51,7 @@ public class Deck
     public List< BasicCard > getCards()
     {
         List< BasicCard > tmpCards = new ArrayList<>();
-        for( BasicCard card : cards )
+        for ( BasicCard card : cards )
         {
             tmpCards.add( card.clone() );
         }
@@ -62,17 +62,11 @@ public class Deck
     {
         StringBuilder sb = new StringBuilder();
         sb.append( String.format( "%s%s", "Deck", System.getProperty( "line.separator" ) ) );
-        for( BasicCard card : cards )
+        for ( BasicCard card : cards )
         {
             sb.append( card );
             sb.append( System.getProperty( "line.separator" ) );
         }
         return sb.toString();
-    }
-    
-    public BasicCard tirerCarte() {
-    	Random r= new Random();
-    	int num= r.nextInt(cards.size());
-    	return cards.get(num);
     }
 }

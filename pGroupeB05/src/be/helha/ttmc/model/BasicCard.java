@@ -117,7 +117,12 @@ public class BasicCard
 
     public BasicCard clone()
     {
-        return new BasicCard( getAuthor(), getTheme(), getSubject() );
+        BasicCard tmpbc = new BasicCard( getAuthor(), getTheme(), getSubject() );
+        for( Question q : getQuestions() )
+        {
+            tmpbc.add( q.clone() );
+        }
+        return tmpbc;
     }
 
     public boolean equals( Object o )
