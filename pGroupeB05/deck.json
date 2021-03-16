@@ -559,6 +559,286 @@
           "theme": "SCHOOL"
         }
       ]
+    },
+    {
+      "author": "Giorgio Caculli",
+      "subject": "Military History",
+      "theme": "IMPROBABLE",
+      "questions": [
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Military History",
+          "challenge": "What is the acronym of the famous North Atlantic Treaty alliance?",
+          "answer": "NATO",
+          "theme": "IMPROBABLE"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Military History",
+          "challenge": "What is the cheapest but most reliable gun ever invented?",
+          "answer": "AK-47",
+          "theme": "IMPROBABLE"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Military History",
+          "challenge": "What is the name of the crisis that would have caused a Third World War if it wasn\u0027t averted?",
+          "answer": "Cuban Missile Crisis",
+          "theme": "IMPROBABLE"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Military History",
+          "challenge": "What is the name of the world\u0027s most useless aircraft carrier?",
+          "answer": "Shinano",
+          "theme": "IMPROBABLE"
+        }
+      ]
+    },
+    {
+      "author": "Giorgio Caculli",
+      "subject": "Unexpected Facts",
+      "theme": "IMPROBABLE",
+      "questions": [
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Unexpected Facts",
+          "challenge": "What company saved Apple from bankruptcy?",
+          "answer": "Microsoft",
+          "theme": "IMPROBABLE"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Unexpected Facts",
+          "challenge": "What did Hitler aspire to be before becoming the Chancellor of Nazi Germany?",
+          "answer": "Painter",
+          "theme": "IMPROBABLE"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Unexpected Facts",
+          "challenge": "What is the name of the actor whose kicks were so fast that the movie had to be slowed down in order to make them visible?",
+          "answer": "Bruce Lee",
+          "theme": "IMPROBABLE"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Unexpected Facts",
+          "challenge": "What is the name of the illicit activity that Mark Zuckerberg did in order to create Facemash before creating Facebook?",
+          "answer": "Privacy violation",
+          "theme": "IMPROBABLE"
+        }
+      ]
+    },
+    {
+      "author": "Giorgio Caculli",
+      "subject": "Linux",
+      "theme": "INFORMATICS",
+      "questions": [
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Linux",
+          "challenge": "What is the animal that represents Linux?",
+          "answer": "Penguin",
+          "theme": "INFORMATICS"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Linux",
+          "challenge": "What is the name of the creator of the Linux Kernel?",
+          "answer": "Linus Torvalds",
+          "theme": "INFORMATICS"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Linux",
+          "challenge": "What is the name of one of the most popular init systems in Linux?",
+          "answer": "Systemd",
+          "theme": "INFORMATICS"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Linux",
+          "challenge": "Let\u0027s assume a script is called \u0027\u0027script.sh\u0027\u0027, what command would render it executable?",
+          "answer": "chmod +x script.sh",
+          "theme": "INFORMATICS"
+        }
+      ]
+    },
+    {
+      "author": "Giorgio Caculli",
+      "subject": "Java Programming",
+      "theme": "INFORMATICS",
+      "questions": [
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Java Programming",
+          "challenge": "What keyword allows you to declare an integer in Java?",
+          "answer": "int",
+          "theme": "INFORMATICS"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Java Programming",
+          "challenge": "What keywords allow you to declare a private static constant in Java?",
+          "answer": "private static final",
+          "theme": "INFORMATICS"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Java Programming",
+          "challenge": "What would a public abstract class called Entity be declared like if it were to implement an interface called Clonable?",
+          "answer": "public abstract class Entity implements Clonable",
+          "theme": "INFORMATICS"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Java Programming",
+          "challenge": "What is an ArrayList containing strings declared like if you were to start with the List interface? (name it strings)",
+          "answer": "List\u003cString\u003e strings \u003d new ArrayList\u003c\u003e();",
+          "theme": "INFORMATICS"
+        }
+      ]
+    },
+    {
+      "author": "Giorgio Caculli",
+      "subject": "Sports",
+      "theme": "PLEASURE",
+      "questions": [
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Sports",
+          "challenge": "What\u0027s the name of the sport that primarily relies on punches?",
+          "answer": "Boxing",
+          "theme": "PLEASURE"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Sports",
+          "challenge": "What\u0027s the name of the martial art that primarily relies on kicks?",
+          "answer": "Taekwondo",
+          "theme": "PLEASURE"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Sports",
+          "challenge": "What is the name of the martial art that slaves use to practice while acting like they were dancing?",
+          "answer": "Capoeira",
+          "theme": "PLEASURE"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Sports",
+          "challenge": "In which martial art is \u0027\u0027Ippon Seoi Nage\u0027\u0027 the name of a move of?",
+          "answer": "Judo",
+          "theme": "PLEASURE"
+        }
+      ]
+    },
+    {
+      "author": "Giorgio Caculli",
+      "subject": "Languages",
+      "theme": "PLEASURE",
+      "questions": [
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Languages",
+          "challenge": "What language is the base of Italian, Spanish, French and Romanian?",
+          "answer": "Latin",
+          "theme": "PLEASURE"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Languages",
+          "challenge": "What is the writing system of the Russian language called?",
+          "answer": "Cyrillic",
+          "theme": "PLEASURE"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Languages",
+          "challenge": "Name the tree types of writing in the Japanese language in alphabetical order:",
+          "answer": "Hiragana Kanji Katakana",
+          "theme": "PLEASURE"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Languages",
+          "challenge": "A, E, I, O, U is the order of vowels in European languages, what is the order like in the Japanese language?",
+          "answer": "A, I, U, E, O",
+          "theme": "PLEASURE"
+        }
+      ]
+    },
+    {
+      "author": "Giorgio Caculli",
+      "subject": "Education System",
+      "theme": "SCHOOL",
+      "questions": [
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Education System",
+          "challenge": "What is the highest mark a student can get in the Belgian education system?",
+          "answer": "20",
+          "theme": "SCHOOL"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Education System",
+          "challenge": "What is the grading system like in the United States?",
+          "answer": "A B C D F",
+          "theme": "SCHOOL"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Education System",
+          "challenge": "What month does the school year start in Japan?",
+          "answer": "April",
+          "theme": "SCHOOL"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Education System",
+          "challenge": "Which is the oldest University in the world?",
+          "answer": "University of Bologna",
+          "theme": "SCHOOL"
+        }
+      ]
+    },
+    {
+      "author": "Giorgio Caculli",
+      "subject": "Tools",
+      "theme": "SCHOOL",
+      "questions": [
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Tools",
+          "challenge": "What is the name of the object that allows you to take erasable notes or simply draw?",
+          "answer": "Pencil",
+          "theme": "SCHOOL"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Tools",
+          "challenge": "What is the name of the object that allows you to sharpen your colored pencils?",
+          "answer": "Pencil sharpner",
+          "theme": "SCHOOL"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Tools",
+          "challenge": "What is the name of the metallic object that allows you to hold papers together?",
+          "answer": "Paper clip",
+          "theme": "SCHOOL"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Tools",
+          "challenge": "What is the name of the object that alloww you to punch holes on your sheet?",
+          "answer": "Hole punch",
+          "theme": "SCHOOL"
+        }
+      ]
     }
   ]
 }
