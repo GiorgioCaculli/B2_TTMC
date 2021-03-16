@@ -10,14 +10,14 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
-public class MenuPlay extends BorderPane
+public class MenuPlayBP extends BorderPane
 {
 
     private Button btnSolo, btnMulti, btnRetour;
     private Deck d;
     private StackPane choicePane = new StackPane();
 
-    public MenuPlay( Deck d )
+    public MenuPlayBP( Deck d )
     {
         this.d = d;
         VBox tile = new VBox();
@@ -54,7 +54,7 @@ public class MenuPlay extends BorderPane
                             choicePane.getChildren().remove( i );
                         }
                     }
-                    JouerChoixQuestion jcq = new JouerChoixQuestion( d );
+                    JouerChoixQuestionBP jcq = new JouerChoixQuestionBP( d );
                     jcq.setScore( 0 );
                     choicePane.getChildren().get( 0 ).setVisible( false );
                     choicePane.getChildren().add( jcq );

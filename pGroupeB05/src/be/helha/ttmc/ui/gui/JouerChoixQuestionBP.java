@@ -28,7 +28,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
 
-public class JouerChoixQuestion extends BorderPane
+public class JouerChoixQuestionBP extends BorderPane
 {
     private List< BasicCard > cards;
     private Label lblTheme, lblSujet;
@@ -56,7 +56,7 @@ public class JouerChoixQuestion extends BorderPane
     private int id;
     private int cardNb = 0;
 
-    public JouerChoixQuestion( Deck d )
+    public JouerChoixQuestionBP( Deck d )
     {
         this.d = d;
         cards = this.d.getCards();

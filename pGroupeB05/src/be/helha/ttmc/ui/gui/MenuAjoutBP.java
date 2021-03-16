@@ -9,13 +9,13 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
-public class MenuAjout extends BorderPane
+public class MenuAjoutBP extends BorderPane
 {
 
     private Button btnAjout, btnListe, btnRetour;
     private Deck d;
 
-    public MenuAjout( Deck d )
+    public MenuAjoutBP( Deck d )
     {
         this.d = d;
         VBox tile = new VBox();

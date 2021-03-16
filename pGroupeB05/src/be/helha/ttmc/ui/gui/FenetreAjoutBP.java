@@ -26,7 +26,7 @@ import be.helha.ttmc.model.Question;
 import be.helha.ttmc.model.Theme;
 import be.helha.ttmc.serialization.Serialization;
 
-public class FenetreAjout extends BorderPane
+public class FenetreAjoutBP extends BorderPane
 {
     private Label lblChal, lblAns;
     private List< Label > labelsCha;
@@ -39,7 +39,7 @@ public class FenetreAjout extends BorderPane
     private int minChallenges = 4;
     private Deck d;
 
-    public FenetreAjout( Deck d )
+    public FenetreAjoutBP( Deck d )
     {
         this.d = d;
         // creation de la partie sup�rieure de la fen�tre
@@ -338,7 +338,7 @@ public class FenetreAjout extends BorderPane
         return minChallenges;
     }
 
-    public FenetreAjout( int test )
+    public FenetreAjoutBP( int test )
     {
 
         setMinChallenges( test );

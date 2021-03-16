@@ -8,14 +8,14 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class ListeCarte extends BorderPane
+public class ListeCarteBP extends BorderPane
 {
-    private DeckTV tv;
-    private ListeCarteTableView ls;
+    private DeckTVBP tv;
+    private ListeCarteTableViewBP ls;
     private Button btnReturn;
     private Deck d;
 
-    public ListeCarte( Deck d )
+    public ListeCarteBP( Deck d )
     {
         this.d = d;
         HBox hb = new HBox();
@@ -46,17 +46,17 @@ public class ListeCarte extends BorderPane
         return btnReturn;
     }
 
-    public DeckTV getTv()
+    public DeckTVBP getTv()
     {
         if ( tv == null )
-            tv = new DeckTV();
+            tv = new DeckTVBP();
         return tv;
     }
 
-    public ListeCarteTableView getLs()
+    public ListeCarteTableViewBP getLs()
     {
         if ( ls == null )
-            ls = new ListeCarteTableView();
+            ls = new ListeCarteTableViewBP();
         return ls;
     }
 

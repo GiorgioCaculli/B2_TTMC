@@ -11,7 +11,7 @@ import javafx.scene.control.TreeTableView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
 
-public class DeckTV extends BorderPane{
+public class DeckTVBP extends BorderPane{
 	private TreeItem<String> deck;
 	private List<TreeItem<String>> theme;
 	private List<TreeItem<String>> author;
@@ -68,7 +68,7 @@ public class DeckTV extends BorderPane{
 		return getDeck();
 	}
 	
-	public DeckTV() {
+	public DeckTVBP() {
 		TreeTableView<String> tv=new TreeTableView<String>(creaHierachie());
 		tv.setPrefWidth(250);
 		tv.getColumns().add(getCol());

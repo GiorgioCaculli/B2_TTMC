@@ -14,7 +14,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class MenuPrincipal extends BorderPane
+public class MenuPrincipalBP extends BorderPane
 {
 
     private Button btnJouer, btnParametres, btnQuitter, btnGerer;
@@ -22,7 +22,7 @@ public class MenuPrincipal extends BorderPane
     private int larg = 175, lon = 175;
     private Deck d;
 
-    public MenuPrincipal( Deck d )
+    public MenuPrincipalBP( Deck d )
     {
         this.d = d;
         VBox vb = new VBox();

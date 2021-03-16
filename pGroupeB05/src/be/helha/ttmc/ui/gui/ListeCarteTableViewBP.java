@@ -7,7 +7,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 
-public class ListeCarteTableView extends BorderPane{
+public class ListeCarteTableViewBP extends BorderPane{
 	private TableView<String> table;
 	private List<TableColumn> cols;
 	
@@ -25,7 +25,7 @@ public class ListeCarteTableView extends BorderPane{
 		return cols;
 	}
 	
-	public ListeCarteTableView() {
+	public ListeCarteTableViewBP() {
 		TableView<String> tb= new TableView<String>();
 		tb.getColumns().addAll(getCols().get(0));
 		setCenter(tb);
