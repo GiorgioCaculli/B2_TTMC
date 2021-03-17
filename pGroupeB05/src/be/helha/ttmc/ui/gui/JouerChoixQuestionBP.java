@@ -6,6 +6,7 @@ import java.util.List;
 
 import be.helha.ttmc.model.BasicCard;
 import be.helha.ttmc.model.Deck;
+import be.helha.ttmc.model.Theme;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -71,12 +72,25 @@ public class JouerChoixQuestionBP extends BorderPane
         HBox vbTime = new HBox();
         vbTime.setPadding( new Insets( 5 ) );
         vbTime.setAlignment( Pos.CENTER );
-        vbTime.setStyle( "-fx-background-color: DAE6F3;-fx-font-size: 25pt;" );
+        //vbTime.setStyle( "-fx-background-color: DAE6F3;-fx-font-size: 25pt;" );
+        for( Theme t : Theme.values() )
+        {
+            if( bc.getTheme() == t )
+            {
+                vbTime.setStyle( String.format( "-fx-background-color: %s;-fx-font-size: 25pt;", t.backgroundColor().get( bc.getTheme() ) ) );
+            }
+        }
         vbTime.getChildren().addAll( getSabIm(), getLblTime() );
 
         VBox vb = new VBox();
         vb.setPadding( new Insets( 20 ) );
-        vb.setStyle( "-fx-background-color: DAE6F3;-fx-font-size: 25pt;" );
+        for( Theme t : Theme.values() )
+        {
+            if( bc.getTheme() == t )
+            {
+                vb.setStyle( String.format( "-fx-background-color: %s;-fx-font-size: 25pt;", t.backgroundColor().get( bc.getTheme() ) ) );
+            }
+        }
         vb.setAlignment( Pos.CENTER );
         vb.getChildren().addAll( vbTime, getLblQuestion(), getTxtRep(), getBtnVal() );
         getTxtRep().setText( "" );
@@ -96,8 +110,14 @@ public class JouerChoixQuestionBP extends BorderPane
         fp.setVgap( 5 );
         fp.setHgap( 5 );
         fp.setPrefWrapLength( 505 );
-        fp.setStyle( "-fx-background-color: DAE6F3;-fx-font-size: 25pt;" );
         fp.setAlignment( Pos.CENTER );
+        for( Theme t : Theme.values() )
+        {
+            if( bc.getTheme() == t )
+            {
+                fp.setStyle( String.format( "-fx-background-color: %s;-fx-font-size: 25pt;", t.backgroundColor().get( bc.getTheme() ) ) );
+            }
+        }
 
         for ( Button b : getChoix() )
         {
