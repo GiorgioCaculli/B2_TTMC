@@ -21,7 +21,7 @@ public class MainPaneSP extends StackPane
         getChildren().get( 0 ).setVisible( true );
         try
         {
-            musics = new MusicGestion( "assets/musics/CreativeDestruction.mp3" );
+            musics = new MusicGestion( "assets/musics/CreativeDestruction.wav" );
             musics.start();
         }
         catch ( Exception e )
