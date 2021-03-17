@@ -19,8 +19,15 @@ public class MainGui extends Application
     @Override
     public void start( Stage primaryStage )
     {
-    	musics= new MusicGestion("../../assets/musics/CreativeDestruction.mp3");
-    	musics.start();
+        try
+        {
+            musics= new MusicGestion("../../assets/musics/CreativeDestruction.mp3");
+            musics.start();
+        }
+        catch( Exception e )
+        {
+            e.printStackTrace();
+        }
         logger.log( Level.INFO, "Reading Deck" );
         Deck d = Serialization.loadDeck();
         logger.log( Level.INFO, String.format( "Number of cards in the deck: %d", d.getCards().size() ) );
