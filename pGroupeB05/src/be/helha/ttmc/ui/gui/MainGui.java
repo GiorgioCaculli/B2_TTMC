@@ -15,19 +15,10 @@ public class MainGui extends Application
     private static final Logger logger = Logger.getLogger( "MainGui Class Logger" );
     private static final short WIDTH = 750;
     private static final short HEIGHT = WIDTH;
-    private static MusicGestion musics;
+
     @Override
     public void start( Stage primaryStage )
     {
-        try
-        {
-            musics= new MusicGestion("../../assets/musics/CreativeDestruction.mp3");
-            musics.start();
-        }
-        catch( Exception e )
-        {
-            e.printStackTrace();
-        }
         logger.log( Level.INFO, "Reading Deck" );
         Deck d = Serialization.loadDeck();
         logger.log( Level.INFO, String.format( "Number of cards in the deck: %d", d.getCards().size() ) );
