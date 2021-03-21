@@ -128,12 +128,15 @@ public class MenuPrincipalBP extends BorderPane
             btnGerer.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
             btnGerer.setOnAction( new EventHandler< ActionEvent >()
             {
-
+            	
                 @Override
                 public void handle( ActionEvent arg0 )
                 {
-                    getParent().getChildrenUnmodifiable().get( 0 ).setVisible( false );
-                    getParent().getChildrenUnmodifiable().get( 2 ).setVisible( true );
+                	AlerteLogin alert= new AlerteLogin();
+                	if(alert.getResultat() ) {
+	                    getParent().getChildrenUnmodifiable().get( 0 ).setVisible( false );
+	                    getParent().getChildrenUnmodifiable().get( 2 ).setVisible( true );
+                	}
                 }
             } );
         }
