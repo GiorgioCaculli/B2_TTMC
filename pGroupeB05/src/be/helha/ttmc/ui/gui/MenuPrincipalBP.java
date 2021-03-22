@@ -145,8 +145,8 @@ public class MenuPrincipalBP extends BorderPane
                         path = "/be/helha/ttmc/assets/images/hackerman.gif";
                         Image img = new Image( path );
                         ImageView icon = new ImageView( img );
-                        icon.setFitHeight( img.getHeight() / 4 );
-                        icon.setFitWidth( img.getWidth() / 4 );
+                        icon.setFitHeight( img.getHeight() / 3 );
+                        icon.setFitWidth( img.getWidth() / 3 );
                         granted.getDialogPane().setGraphic( icon );
                         granted.setHeaderText( null );
                         DialogPane grantedPane = granted.getDialogPane();
@@ -155,6 +155,25 @@ public class MenuPrincipalBP extends BorderPane
                         granted.showAndWait();
                         getParent().getChildrenUnmodifiable().get( 0 ).setVisible( false );
                         getParent().getChildrenUnmodifiable().get( 2 ).setVisible( true );
+                    }
+                    else
+                    {
+
+                        Alert denied = new Alert( AlertType.INFORMATION );
+                        denied.setTitle( "ACCESS DENIED" );
+                        String path;
+                        denied.setContentText( "ACCESS DENIED" );
+                        path = "/be/helha/ttmc/assets/images/anonymous.png";
+                        Image img = new Image( path );
+                        ImageView icon = new ImageView( img );
+                        icon.setFitHeight( img.getHeight() / 3 );
+                        icon.setFitWidth( img.getWidth() / 3 );
+                        denied.getDialogPane().setGraphic( icon );
+                        denied.setHeaderText( null );
+                        DialogPane deniedPane = denied.getDialogPane();
+                        deniedPane.getStylesheets().add( Main.class.getResource( "assets/stylesheets/alert_denied_stylesheet.css" ).toExternalForm() );
+                        deniedPane.getStyleClass().add( "denied" );
+                        denied.showAndWait();
                     }
                 }
             } );
