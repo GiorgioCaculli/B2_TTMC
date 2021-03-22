@@ -1,5 +1,6 @@
 package be.helha.ttmc.ui.gui;
 
+import be.helha.ttmc.Main;
 import be.helha.ttmc.model.Deck;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -149,7 +150,7 @@ public class MenuPrincipalBP extends BorderPane
                         granted.getDialogPane().setGraphic( icon );
                         granted.setHeaderText( null );
                         DialogPane grantedPane = granted.getDialogPane();
-                        grantedPane.getStylesheets().add( getClass().getResource( "../../assets/stylesheets/alert_granted_stylesheet.css" ).toExternalForm() );
+                        grantedPane.getStylesheets().add( Main.class.getResource( "assets/stylesheets/alert_granted_stylesheet.css" ).toExternalForm() );
                         grantedPane.getStyleClass().add( "granted" );
                         granted.showAndWait();
                         getParent().getChildrenUnmodifiable().get( 0 ).setVisible( false );

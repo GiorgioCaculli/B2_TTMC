@@ -2,6 +2,7 @@ package be.helha.ttmc.ui.gui;
 
 import java.util.Optional;
 
+import be.helha.ttmc.Main;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -27,11 +28,11 @@ public class AlerteLogin extends Alert{
 		dialog.setTitle("Login Dialog");
 		dialog.setHeaderText("Admin access :");
 		
-		ImageView im= new ImageView(this.getClass().getResource("../../assets/images/cadenas.png").toString());
+		ImageView im= new ImageView(Main.class.getResource("assets/images/cadenas.png").toString());
 		im.setFitWidth(50);im.setFitHeight(50);
 		
 		Stage stage= (Stage) dialog.getDialogPane().getScene().getWindow();
-		stage.getIcons().add(new Image(this.getClass().getResource("../../assets/images/cadenas.png").toString()));
+		stage.getIcons().add(new Image(Main.class.getResource("assets/images/cadenas.png").toString()));
 		
 		dialog.setGraphic(im);
 		
