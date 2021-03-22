@@ -8,7 +8,9 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -128,15 +130,31 @@ public class MenuPrincipalBP extends BorderPane
             btnGerer.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
             btnGerer.setOnAction( new EventHandler< ActionEvent >()
             {
-            	
+
                 @Override
                 public void handle( ActionEvent arg0 )
                 {
-                	AlerteLogin alert= new AlerteLogin();
-                	if(alert.getResultat() ) {
-	                    getParent().getChildrenUnmodifiable().get( 0 ).setVisible( false );
-	                    getParent().getChildrenUnmodifiable().get( 2 ).setVisible( true );
-                	}
+                    AlerteLogin alert = new AlerteLogin();
+                    if ( alert.getResultat() )
+                    {
+                        Alert granted = new Alert( AlertType.INFORMATION );
+                        granted.setTitle( "ACCESS GRANTED" );
+                        String path;
+                        granted.setContentText( "ACCESS GRANTED" );
+                        path = "/be/helha/ttmc/assets/images/hackerman.gif";
+                        Image img = new Image( path );
+                        ImageView icon = new ImageView( img );
+                        icon.setFitHeight( img.getHeight() / 4 );
+                        icon.setFitWidth( img.getWidth() / 4 );
+                        granted.getDialogPane().setGraphic( icon );
+                        granted.setHeaderText( null );
+                        DialogPane grantedPane = granted.getDialogPane();
+                        grantedPane.getStylesheets().add( getClass().getResource( "../../assets/stylesheets/alert_granted_stylesheet.css" ).toExternalForm() );
+                        grantedPane.getStyleClass().add( "granted" );
+                        granted.showAndWait();
+                        getParent().getChildrenUnmodifiable().get( 0 ).setVisible( false );
+                        getParent().getChildrenUnmodifiable().get( 2 ).setVisible( true );
+                    }
                 }
             } );
         }

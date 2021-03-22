@@ -1,0 +1,19 @@
+.granted{
+    -fx-background-color: #000000;
+}
+.granted > *.button-bar > *.container{
+    -fx-background-color: #000000;
+}
+.granted > *.label.content{
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #32cd32;
+}
+.granted:header *.header-panel{
+    -fx-background-color: #a59c31;
+}
+.granted:header *.header-panel *.label{
+    -fx-font-size: 18px;
+    -fx-font-style: italic;
+    -fx-fill: #292929;
+}
