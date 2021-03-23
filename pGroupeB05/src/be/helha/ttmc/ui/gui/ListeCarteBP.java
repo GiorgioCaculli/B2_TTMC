@@ -24,7 +24,7 @@ import javafx.util.Callback;
 
 public class ListeCarteBP extends BorderPane
 {
-    private Button btnReturn, btnDelete;
+    private Button btnReturn, btnDelete, btnReload;
     private Deck d;
     private StackPane carteChoicePane = new StackPane();
     private TableView< BasicCard > table;
@@ -37,9 +37,11 @@ public class ListeCarteBP extends BorderPane
         cardListPane.setCenter( getTable() );
 
         HBox buttonBox = new HBox();
-        Region espaceVideRegion = new Region();
-        HBox.setHgrow( espaceVideRegion, Priority.ALWAYS );
-        buttonBox.getChildren().addAll( getBtnReturn(), espaceVideRegion, getBtnDelete() );
+        Region espaceVideReturnReload = new Region();
+        HBox.setHgrow( espaceVideReturnReload, Priority.ALWAYS );
+        Region espaceVideReloadDelete = new Region();
+        HBox.setHgrow( espaceVideReloadDelete, Priority.ALWAYS );
+        buttonBox.getChildren().addAll( getBtnReturn(), espaceVideReturnReload, getBtnReload(), espaceVideReloadDelete, getBtnDelete() );
 
         cardListPane.setBottom( buttonBox );
 
@@ -144,6 +146,24 @@ public class ListeCarteBP extends BorderPane
             } );
         }
         return btnDelete;
+    }
+
+    private Button getBtnReload()
+    {
+        if ( btnReload == null )
+        {
+            btnReload = new Button( "Reload" );
+            btnReload.setOnAction( new EventHandler< ActionEvent >()
+            {
+
+                @Override
+                public void handle( ActionEvent arg0 )
+                {
+                    table.setItems( FXCollections.observableArrayList( d.getCards() ) );
+                }
+            } );
+        }
+        return btnReload;
     }
 
 }
