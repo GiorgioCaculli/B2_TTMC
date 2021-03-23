@@ -5,6 +5,7 @@ import java.util.List;
 
 import be.helha.ttmc.model.Theme;
 import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.geometry.Pos;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
@@ -32,7 +33,7 @@ public class DeckTVBP extends BorderPane{
 			col=new TreeTableColumn<String, String>("Decks");
 			col.setCellValueFactory((CellDataFeatures<String, String> p)->
 				new ReadOnlyStringWrapper(p.getValue().getValue()));
-			col.setPrefWidth(250);
+			col.setPrefWidth(200);
 		}
 		return col;
 	}

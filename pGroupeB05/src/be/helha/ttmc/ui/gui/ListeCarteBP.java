@@ -3,6 +3,7 @@ package be.helha.ttmc.ui.gui;
 import be.helha.ttmc.model.Deck;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -24,7 +25,9 @@ public class ListeCarteBP extends BorderPane
         VBox vb = new VBox();
         vb.getChildren().addAll( hb, getBtnReturn() );
 
-        this.setCenter( vb );
+        this.setCenter( getLs() );
+        setLeft(getTv());
+        setBottom(getBtnReturn());
     }
 
     public Button getBtnReturn()
@@ -48,15 +51,18 @@ public class ListeCarteBP extends BorderPane
 
     public DeckTVBP getTv()
     {
-        if ( tv == null )
+        if ( tv == null ) {
             tv = new DeckTVBP();
+            tv.setPrefWidth(200);
+            
+        }
         return tv;
     }
 
     public ListeCarteTableViewBP getLs()
     {
         if ( ls == null )
-            ls = new ListeCarteTableViewBP();
+            ls = new ListeCarteTableViewBP(d);
         return ls;
     }
 

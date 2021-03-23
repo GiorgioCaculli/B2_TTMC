@@ -14,7 +14,7 @@ public class MainGui extends Application
 {
     private static final Logger logger = Logger.getLogger( "MainGui Class Logger" );
     private static final short WIDTH = 750;
-    private static final short HEIGHT = WIDTH;
+    private static final short HEIGHT = WIDTH+20;
 
     @Override
     public void start( Stage primaryStage )
