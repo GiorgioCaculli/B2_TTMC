@@ -47,6 +47,20 @@ public class Deck
         }
         return cards.remove( cards.get( i - 1 ) );
     }
+    
+    public boolean modify( BasicCard oldCard, BasicCard newCard )
+    {
+        if( oldCard == null || newCard == null )
+        {
+            return false;
+        }
+        if( cards.indexOf( oldCard ) < 0 )
+        {
+            return false;
+        }
+        cards.set( cards.indexOf( oldCard ), newCard );
+        return true;
+    }
 
     public List< BasicCard > getCards()
     {

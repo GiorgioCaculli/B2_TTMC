@@ -20,8 +20,7 @@ public class MenuAdminBP extends BorderPane
     public MenuAdminBP( Deck d )
     {
         this.d = d;
-        
-        
+
         VBox tile = new VBox();
         // this.setOrientation(Orientation.VERTICAL);
         tile.setPadding( new Insets( 20 ) );
@@ -32,7 +31,7 @@ public class MenuAdminBP extends BorderPane
         tile.setAlignment( Pos.CENTER );
         adminChoicePane.getChildren().add( tile );
         adminChoicePane.getChildren().add( new FenetreAjoutBP( d ) );
-        for( int i = 0; i < adminChoicePane.getChildren().size(); i++ )
+        for ( int i = 0; i < adminChoicePane.getChildren().size(); i++ )
         {
             adminChoicePane.getChildren().get( i ).setVisible( false );
         }
@@ -74,9 +73,9 @@ public class MenuAdminBP extends BorderPane
                 @Override
                 public void handle( ActionEvent arg0 )
                 {
-                    if( adminChoicePane.getChildren().size() > 2 )
+                    if ( adminChoicePane.getChildren().size() > 2 )
                     {
-                        for( int i = 2; i < adminChoicePane.getChildren().size(); i++ )
+                        for ( int i = 2; i < adminChoicePane.getChildren().size(); i++ )
                         {
                             adminChoicePane.getChildren().remove( i );
                         }
@@ -98,7 +97,7 @@ public class MenuAdminBP extends BorderPane
             btnRetour.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
             btnRetour.setOnAction( new EventHandler< ActionEvent >()
             {
-                
+
                 @Override
                 public void handle( ActionEvent arg0 )
                 {
