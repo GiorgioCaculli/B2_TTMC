@@ -224,7 +224,6 @@ public class FenetreSuppressionBP extends BorderPane
                             Serialization.saveGame( d );
                             Alert alert = new Alert( AlertType.INFORMATION, "La carte a bien ete modifiee!" );
                             alert.showAndWait();
-                            ListeCarteBP.getTable().setItems( FXCollections.observableArrayList( d.getCards() ) );
                             getParent().getChildrenUnmodifiable().get( 1 ).setVisible( false );
                             getParent().getChildrenUnmodifiable().get( 0 ).setVisible( true );
                             return;

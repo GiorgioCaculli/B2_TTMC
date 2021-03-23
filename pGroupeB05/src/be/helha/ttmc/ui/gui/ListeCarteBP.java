@@ -25,9 +25,9 @@ import javafx.util.Callback;
 public class ListeCarteBP extends BorderPane
 {
     private Button btnReturn, btnDelete;
-    private static Deck d;
-    private static StackPane carteChoicePane = new StackPane();
-    private static TableView< BasicCard > table;
+    private Deck d;
+    private StackPane carteChoicePane = new StackPane();
+    private TableView< BasicCard > table;
 
     public ListeCarteBP( Deck d )
     {
@@ -49,7 +49,7 @@ public class ListeCarteBP extends BorderPane
         setCenter( carteChoicePane );
     }
 
-    public static TableView< BasicCard > getTable()
+    public TableView< BasicCard > getTable()
     {
         if ( table == null )
         {
