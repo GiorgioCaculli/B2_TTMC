@@ -161,8 +161,8 @@ public class FenetreAjoutBP extends BorderPane
                 public void handle( ActionEvent arg0 )
                 {
                     Serialization.saveGame( d );
-                    getParent().getChildrenUnmodifiable().get( 3 ).setVisible( false );
-                    getParent().getChildrenUnmodifiable().get( 2 ).setVisible( true );
+                    getParent().getChildrenUnmodifiable().get( 1 ).setVisible( false );
+                    getParent().getChildrenUnmodifiable().get( 0 ).setVisible( true );
                 }
             } );
         }

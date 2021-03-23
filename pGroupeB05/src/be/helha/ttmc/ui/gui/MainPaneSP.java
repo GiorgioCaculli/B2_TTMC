@@ -11,9 +11,7 @@ public class MainPaneSP extends StackPane
     {
         getChildren().add( new MenuPrincipalBP( d ) );
         getChildren().add( new MenuPlayBP( d ) );
-        getChildren().add( new MenuAjoutBP( d ) );
-        getChildren().add( new FenetreAjoutBP( d ) );
-        getChildren().add( new ListeCarteBP( d ) );
+        getChildren().add( new MenuAdminBP( d ) );
         for( Node n : getChildren() )
         {
             n.setVisible( false );

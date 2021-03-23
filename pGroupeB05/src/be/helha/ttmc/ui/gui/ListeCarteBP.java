@@ -41,8 +41,8 @@ public class ListeCarteBP extends BorderPane
                 @Override
                 public void handle( ActionEvent arg0 )
                 {
-                    getParent().getChildrenUnmodifiable().get( 4 ).setVisible( false );
-                    getParent().getChildrenUnmodifiable().get( 2 ).setVisible( true );
+                    getParent().getChildrenUnmodifiable().get( 2 ).setVisible( false );
+                    getParent().getChildrenUnmodifiable().get( 0 ).setVisible( true );
                 }
             } );
         }
