@@ -27,7 +27,7 @@ import be.helha.ttmc.model.Question;
 import be.helha.ttmc.model.Theme;
 import be.helha.ttmc.serialization.Serialization;
 
-public class FenetreSuppressionBP extends BorderPane
+public class FenetreModificationBP extends BorderPane
 {
     private Label lblChal, lblAns;
     private List< Label > labelsCha;
@@ -41,10 +41,10 @@ public class FenetreSuppressionBP extends BorderPane
     private Deck d;
     private BasicCard bc;
 
-    public FenetreSuppressionBP( Deck d, BasicCard bc )
+    public FenetreModificationBP( Deck d, BasicCard bc )
     {
         this.d = d;
-        this.bc = bc;
+        this.bc = bc.clone();
         // creation de la partie superieure de la fenetre
         AnchorPane anch = new AnchorPane();
 
@@ -224,6 +224,11 @@ public class FenetreSuppressionBP extends BorderPane
                             Serialization.saveGame( d );
                             Alert alert = new Alert( AlertType.INFORMATION, "La carte a bien ete modifiee!" );
                             alert.showAndWait();
+                            Alert reloadAlert = new Alert( AlertType.INFORMATION );
+                            reloadAlert.setTitle( "Veuillez mettre a jour la liste!" );
+                            reloadAlert.setContentText( "Veuillez appuyer sur le bouton Reload pour mettre a jour la liste" );
+                            reloadAlert.setHeaderText( null );
+                            reloadAlert.show();
                             getParent().getChildrenUnmodifiable().get( 1 ).setVisible( false );
                             getParent().getChildrenUnmodifiable().get( 0 ).setVisible( true );
                             return;
@@ -349,7 +354,7 @@ public class FenetreSuppressionBP extends BorderPane
         return minChallenges;
     }
 
-    public FenetreSuppressionBP( int test )
+    public FenetreModificationBP( int test )
     {
 
         setMinChallenges( test );

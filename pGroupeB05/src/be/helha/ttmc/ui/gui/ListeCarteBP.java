@@ -91,7 +91,7 @@ public class ListeCarteBP extends BorderPane
                                 {
                                     carteChoicePane.getChildren().remove( i );
                                 }
-                                carteChoicePane.getChildren().add( new FenetreSuppressionBP( d, rowCard ) );
+                                carteChoicePane.getChildren().add( new FenetreModificationBP( d, rowCard ) );
                                 carteChoicePane.getChildren().get( 0 ).setVisible( false );
                                 carteChoicePane.getChildren().get( 1 ).setVisible( true );
                             }

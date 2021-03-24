@@ -102,6 +102,20 @@ public class BasicCard
         }
         return questions.remove( questions.get( i - 1 ) );
     }
+    
+    public boolean modify( Question oldQuestion, Question newQuestion )
+    {
+        if( oldQuestion == null || newQuestion == null )
+        {
+            return false;
+        }
+        if( oldQuestion.equals( newQuestion ) )
+        {
+            return false;
+        }
+        questions.set( questions.indexOf( oldQuestion ), newQuestion );
+        return true;
+    }
 
     public String toString()
     {
