@@ -29,11 +29,15 @@ public class MainPaneSP extends StackPane
         try
         {
             musics = new MusicGestion( path );
-       //     musics.start();
+            musics.gererThread(path).start();
+      
         }
         catch ( Exception e )
         {
             e.printStackTrace();
+        }finally {
+        	if(musics.gererThread(path) != null)
+        		musics.gererThread(path).interrupt();
         }
     }
 }

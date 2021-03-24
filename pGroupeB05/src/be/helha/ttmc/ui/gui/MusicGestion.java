@@ -26,32 +26,6 @@ public class MusicGestion
         gererMusic(path);
     	
 		start();
-        
-        new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-				while(id!=4) {
-					
-					mv.getMediaPlayer().setOnEndOfMedia(new Runnable() {
-				
-						@Override
-						public void run() {
-							if(id!=2)
-								id++;
-							else
-								id=0;
-							gererMusic(path);					    	
-							start();
-							
-	        			
-					
-						}
-					});
-				}
-				
-			}
-		}).start();
         	
    
         	
@@ -72,5 +46,34 @@ public class MusicGestion
          MediaPlayer mp = new MediaPlayer( m );
          mv = new MediaView(mp);
          mv.getMediaPlayer().setVolume( 0.2 );
+    }
+    
+    public Thread gererThread(List<String> path) {
+    	Thread tmp=	new Thread(new Runnable() {
+				
+				@Override
+				public void run() {
+					while(id!=4) {
+						
+						mv.getMediaPlayer().setOnEndOfMedia(new Runnable() {
+					
+							@Override
+							public void run() {
+								if(id!=2)
+									id++;
+								else
+									id=0;
+								gererMusic(path);					    	
+								start();
+								
+		        			
+						
+							}
+						});
+					}
+					
+				}
+			});
+    	return tmp;
     }
 }
