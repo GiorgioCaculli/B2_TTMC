@@ -16,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -71,17 +72,17 @@ public class JouerChoixQuestionBP extends BorderPane
         addEventFilter( KeyEvent.KEY_PRESSED, new EventHandler< KeyEvent >()
         {
 
-            @Override
+            @SuppressWarnings("unlikely-arg-type")
+			@Override
             public void handle( KeyEvent keyEvent )
             {
                 if ( keyEvent.getCode() == KeyCode.ESCAPE )
                 {
                 	MenuPlayBP mnbp= (MenuPlayBP) getParent().getParent();
-                    mnbp.getChoicePane().getChildren().get(
-                    		mnbp.getChoicePane().getChildren().indexOf(
-                    				mnbp.getMp())
-                    		).setVisible( true );
-                    System.out.println("test");
+                    for(Node n : mnbp.getChoicePane().getChildren()) {
+                    	if(n instanceof MenuPauseFP)
+                    		n.setVisible(true);
+                    }
                     keyEvent.consume();
                 }
 
