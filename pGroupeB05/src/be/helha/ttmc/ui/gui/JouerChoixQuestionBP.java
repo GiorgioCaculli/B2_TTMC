@@ -22,6 +22,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -78,11 +80,28 @@ public class JouerChoixQuestionBP extends BorderPane
             {
                 if ( keyEvent.getCode() == KeyCode.ESCAPE )
                 {
+                	ColorAdjust col= new ColorAdjust(0,-0.9,-0.5,0);
+                	GaussianBlur blur= new GaussianBlur(55);
+                	col.setInput(blur);
+                	setEffect(col);
                 	MenuPlayBP mnbp= (MenuPlayBP) getParent().getParent();
                     for(Node n : mnbp.getChoicePane().getChildren()) {
-                    	if(n instanceof MenuPauseFP)
+                    	if(n instanceof MenuPauseFP) {
                     		n.setVisible(true);
+                    		((MenuPauseFP) n).getBtnResume().setOnAction(new EventHandler<ActionEvent>() {
+								
+								@Override
+								public void handle(ActionEvent arg0) {
+									getAnimation().start();
+									n.setVisible(false);
+									setEffect(null);
+									
+								}
+							});
+                    	}
+                    		
                     }
+                    getAnimation().stop();
                     keyEvent.consume();
                 }
 
