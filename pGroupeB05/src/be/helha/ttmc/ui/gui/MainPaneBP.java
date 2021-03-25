@@ -4,23 +4,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 import be.helha.ttmc.model.Deck;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
+import javafx.scene.control.Slider;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 
-public class MainPaneSP extends StackPane
+public class MainPaneBP extends BorderPane
 {
     private MusicGestion musics;
+    private Slider slider;
+    private StackPane stackpane;
 
-    public MainPaneSP( Deck d )
+    public MainPaneBP( Deck d )
     {
-        getChildren().add( new MenuPrincipalBP( d ) );
-        getChildren().add( new MenuPlayBP( d ) );
-        getChildren().add( new MenuAdminBP( d ) );
+        getStackPane().getChildren().add( new MenuPrincipalBP( d ) );
+        getStackPane().getChildren().add( new MenuPlayBP( d ) );
+        getStackPane().getChildren().add( new MenuAdminBP( d ) );
         /*for( Node n : getChildren() )
         {
             n.setVisible( false );
         }
         getChildren().get( 0 ).setVisible( true );*/
+        
+        setCenter(getStackPane());
         setVisibleNode( "MenuPrincipalBP" );
         List< String > path = new ArrayList< String >();
         path.add( "assets/musics/EVAmusic.wav" );
@@ -46,7 +53,7 @@ public class MainPaneSP extends StackPane
 
     public void setVisibleNode( String paneName )
     {
-        for ( Node n : getChildren() )
+        for ( Node n : getStackPane().getChildren() )
         {
             if ( n.getClass().getSimpleName().equals( paneName ) )
             {
@@ -58,4 +65,22 @@ public class MainPaneSP extends StackPane
             }
         }
     }
+    
+    public Slider getSlider() {
+    	if(slider == null) {
+    		slider = new Slider(0,1,0.1);
+    		slider.valueProperty().addListener((ObservableValue<? extends Number> ov, Number old_val, Number new_val )->{ 
+    			musics.gererVolume(new_val.doubleValue());
+    		});
+    	}
+    	return slider;
+    		
+    }
+    
+    public StackPane getStackPane() {
+    	if(stackpane == null)
+    		stackpane= new StackPane();
+    	return stackpane;
+    }
+    
 }

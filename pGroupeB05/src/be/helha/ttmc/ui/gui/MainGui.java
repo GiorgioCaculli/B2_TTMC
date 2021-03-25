@@ -22,7 +22,7 @@ public class MainGui extends Application
         logger.log( Level.INFO, "Reading Deck" );
         Deck d = Serialization.loadDeck();
         logger.log( Level.INFO, String.format( "Number of cards in the deck: %d", d.getCards().size() ) );
-        MainPaneSP mp = new MainPaneSP( d );
+        MainPaneBP mp = new MainPaneBP( d );
         mp.getChildren().get( 0 ).setVisible( true );
         Scene scene = new Scene( mp );
         primaryStage.setResizable( false );

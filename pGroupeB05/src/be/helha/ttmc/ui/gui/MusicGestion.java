@@ -16,6 +16,7 @@ public class MusicGestion
     private MediaView mv;
     private Media m;
     private int id=0;
+    private double vol= 0.04;
 
     public MusicGestion( List<String> path )
     {
@@ -36,16 +37,21 @@ public class MusicGestion
     public void start()
     {
         mv.getMediaPlayer().play();
+        gererVolume(vol);
        
         
       
+    }
+    
+    public void gererVolume(double newVolume) {
+    	mv.getMediaPlayer().setVolume( newVolume );
     }
 
     public void gererMusic(List<String> path) {
     	 m = new Media( Main.class.getResource( path.get(id) ).toString() );
          MediaPlayer mp = new MediaPlayer( m );
          mv = new MediaView(mp);
-         mv.getMediaPlayer().setVolume( 0.2 );
+         
     }
     
     public Thread gererThread(List<String> path) {

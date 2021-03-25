@@ -81,7 +81,7 @@ public class MenuPrincipalBP extends BorderPane
                     }
                     else
                     {
-                        MainPaneSP mpsp = ( MainPaneSP ) getParent();
+                        MainPaneBP mpsp = ( MainPaneBP ) getParent();
                         mpsp.setVisibleNode( "MenuPlayBP" );
                     }
                 }
@@ -153,7 +153,7 @@ public class MenuPrincipalBP extends BorderPane
                         grantedPane.getStylesheets().add( Main.class.getResource( "assets/stylesheets/alert_granted_stylesheet.css" ).toExternalForm() );
                         grantedPane.getStyleClass().add( "granted" );
                         granted.showAndWait();
-                        MainPaneSP mpsp = ( MainPaneSP ) getParent();
+                        MainPaneBP mpsp = ( MainPaneBP ) getParent();
                         mpsp.setVisibleNode( "MenuAdminBP" );
                     }
                     else
