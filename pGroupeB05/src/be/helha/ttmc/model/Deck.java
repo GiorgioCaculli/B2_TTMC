@@ -23,7 +23,7 @@ public class Deck
         {
             return false;
         }
-        return cards.add( c );
+        return cards.add( c.clone() );
     }
 
     public boolean remove( BasicCard c )

@@ -7,6 +7,7 @@ import java.util.List;
 import be.helha.ttmc.model.BasicCard;
 import be.helha.ttmc.model.Deck;
 import be.helha.ttmc.model.Theme;
+import be.helha.ttmc.ui.gui.MenuPlayBP.MenuPlayMainVB;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -73,22 +74,24 @@ public class JouerChoixQuestionBP extends BorderPane
         vbTime.setPadding( new Insets( 5 ) );
         vbTime.setAlignment( Pos.CENTER );
         //vbTime.setStyle( "-fx-background-color: DAE6F3;-fx-font-size: 25pt;" );
-        for( Theme t : Theme.values() )
+        for ( Theme t : Theme.values() )
         {
-            if( bc.getTheme() == t )
+            if ( bc.getTheme() == t )
             {
-                vbTime.setStyle( String.format( "-fx-background-color: %s;-fx-font-size: 25pt;", t.backgroundColor().get( bc.getTheme() ) ) );
+                vbTime.setStyle( String.format( "-fx-background-color: %s;-fx-font-size: 25pt;",
+                        t.backgroundColor().get( bc.getTheme() ) ) );
             }
         }
         vbTime.getChildren().addAll( getSabIm(), getLblTime() );
 
         VBox vb = new VBox();
         vb.setPadding( new Insets( 20 ) );
-        for( Theme t : Theme.values() )
+        for ( Theme t : Theme.values() )
         {
-            if( bc.getTheme() == t )
+            if ( bc.getTheme() == t )
             {
-                vb.setStyle( String.format( "-fx-background-color: %s;-fx-font-size: 25pt;", t.backgroundColor().get( bc.getTheme() ) ) );
+                vb.setStyle( String.format( "-fx-background-color: %s;-fx-font-size: 25pt;",
+                        t.backgroundColor().get( bc.getTheme() ) ) );
             }
         }
         vb.setAlignment( Pos.CENTER );
@@ -97,7 +100,7 @@ public class JouerChoixQuestionBP extends BorderPane
         jeuReponseBP.setCenter( vb );
         sp.getChildren().add( jeuReponseBP );
     }
-    
+
     private void initCardPane( List< BasicCard > cards, int i )
     {
         time = 15;
@@ -111,11 +114,12 @@ public class JouerChoixQuestionBP extends BorderPane
         fp.setHgap( 5 );
         fp.setPrefWrapLength( 505 );
         fp.setAlignment( Pos.CENTER );
-        for( Theme t : Theme.values() )
+        for ( Theme t : Theme.values() )
         {
-            if( bc.getTheme() == t )
+            if ( bc.getTheme() == t )
             {
-                fp.setStyle( String.format( "-fx-background-color: %s;-fx-font-size: 25pt;", t.backgroundColor().get( bc.getTheme() ) ) );
+                fp.setStyle( String.format( "-fx-background-color: %s;-fx-font-size: 25pt;",
+                        t.backgroundColor().get( bc.getTheme() ) ) );
             }
         }
 
@@ -132,7 +136,7 @@ public class JouerChoixQuestionBP extends BorderPane
         vb.setSpacing( 10 );
         vb.getChildren().addAll( getLblTheme(), getLblSujet() );
         // vb.setStyle("-fx-font-size: 25pt;");
-        
+
         HBox hb = new HBox();
         hb.getChildren().addAll( getLblScore(), getScore() );
         hb.setSpacing( 20 );
@@ -146,12 +150,12 @@ public class JouerChoixQuestionBP extends BorderPane
         this.setCenter( sp );
         this.setTop( vb2 );
     }
-    
+
     public int getID()
     {
         return id;
     }
-    
+
     public void setID( int id )
     {
         this.id = id;
@@ -254,8 +258,8 @@ public class JouerChoixQuestionBP extends BorderPane
                 public void handle( ActionEvent arg0 )
                 {
                     getAnimation().stop();
-                    getParent().getChildrenUnmodifiable().get( 1 ).setVisible( false );
-                    getParent().getChildrenUnmodifiable().get( 0 ).setVisible( true );
+                    MenuPlayBP mpbp = ( MenuPlayBP ) getParent().getParent();
+                    mpbp.setVisibleNode( MenuPlayMainVB.class.getSimpleName() );
                 }
             } );
         }
@@ -278,7 +282,7 @@ public class JouerChoixQuestionBP extends BorderPane
                         time--;
                         getLblTime().setText( String.format( "%d", time ) );
                         elapsedTime = now;
-                        if( time == 0 )
+                        if ( time == 0 )
                         {
                             checkAnswer( now );
                         }
@@ -368,7 +372,7 @@ public class JouerChoixQuestionBP extends BorderPane
     {
         return bc.clone();
     }
-    
+
     private void checkAnswer( Object o )
     {
         cardNb++;
@@ -376,9 +380,10 @@ public class JouerChoixQuestionBP extends BorderPane
         Alert alert = new Alert( AlertType.INFORMATION );
         alert.setTitle( "Resultats" );
         String path;
-        if( cardNb >= cards.size() )
+        if ( cardNb >= cards.size() )
         {
-            alert.setContentText( String.format( "All questions have been answered, you scored %d points. Thank you for playing!", newScore ) );
+            alert.setContentText( String.format(
+                    "All questions have been answered, you scored %d points. Thank you for playing!", newScore ) );
             path = "/be/helha/ttmc/assets/images/banana.gif";
             getParent().getChildrenUnmodifiable().get( 1 ).setVisible( false );
             getParent().getChildrenUnmodifiable().get( 0 ).setVisible( true );
@@ -403,11 +408,11 @@ public class JouerChoixQuestionBP extends BorderPane
         icon.setFitWidth( 64 );
         alert.getDialogPane().setGraphic( icon );
         alert.setHeaderText( null );
-        if( o instanceof ActionEvent )
+        if ( o instanceof ActionEvent )
             alert.showAndWait();
-        else if( o instanceof Long )
+        else if ( o instanceof Long )
             alert.show();
-        if( cardNb < cards.size() )
+        if ( cardNb < cards.size() )
             initCardPane( cards, cardNb );
     }
 }

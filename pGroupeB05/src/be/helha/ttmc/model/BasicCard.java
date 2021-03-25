@@ -56,7 +56,7 @@ public class BasicCard
             {
                 throw new BasicCardOverMaxQuestionsException();
             }
-            questions.add( q );
+            questions.add( q.clone() );
         }
         catch( NullPointerException npe )
         {

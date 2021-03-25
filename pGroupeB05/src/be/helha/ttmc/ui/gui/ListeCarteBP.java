@@ -4,10 +4,12 @@ import be.helha.ttmc.model.BasicCard;
 import be.helha.ttmc.model.Deck;
 import be.helha.ttmc.model.Theme;
 import be.helha.ttmc.serialization.Serialization;
+import be.helha.ttmc.ui.gui.MenuAdminBP.MenuAdminMainVB;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
@@ -26,29 +28,60 @@ public class ListeCarteBP extends BorderPane
 {
     private Button btnReturn, btnDelete, btnReload;
     private Deck d;
-    private StackPane carteChoicePane = new StackPane();
+    private StackPane carteChoicePane;
     private TableView< BasicCard > table;
 
     public ListeCarteBP( Deck d )
     {
         this.d = d;
 
-        BorderPane cardListPane = new BorderPane();
-        cardListPane.setCenter( getTable() );
+        getCarteChoicePane().getChildren().add( new ListeCarteMainBP() );
 
-        HBox buttonBox = new HBox();
-        Region espaceVideReturnReload = new Region();
-        HBox.setHgrow( espaceVideReturnReload, Priority.ALWAYS );
-        Region espaceVideReloadDelete = new Region();
-        HBox.setHgrow( espaceVideReloadDelete, Priority.ALWAYS );
-        buttonBox.getChildren().addAll( getBtnReturn(), espaceVideReturnReload, getBtnReload(), espaceVideReloadDelete, getBtnDelete() );
+        setVisibleNode( ListeCarteMainBP.class.getSimpleName() );
 
-        cardListPane.setBottom( buttonBox );
+        setCenter( getCarteChoicePane() );
+    }
 
-        carteChoicePane.getChildren().add( cardListPane );
-        carteChoicePane.getChildren().get( 0 ).setVisible( true );
+    public StackPane getCarteChoicePane()
+    {
+        if ( carteChoicePane == null )
+        {
+            carteChoicePane = new StackPane();
+        }
+        return carteChoicePane;
+    }
 
-        setCenter( carteChoicePane );
+    protected class ListeCarteMainBP extends BorderPane
+    {
+        public ListeCarteMainBP()
+        {
+            setCenter( getTable() );
+
+            HBox buttonBox = new HBox();
+            Region espaceVideReturnReload = new Region();
+            HBox.setHgrow( espaceVideReturnReload, Priority.ALWAYS );
+            Region espaceVideReloadDelete = new Region();
+            HBox.setHgrow( espaceVideReloadDelete, Priority.ALWAYS );
+            buttonBox.getChildren().addAll( getBtnReturn(), espaceVideReturnReload, getBtnReload(),
+                    espaceVideReloadDelete, getBtnDelete() );
+
+            setBottom( buttonBox );
+        }
+    }
+
+    public void setVisibleNode( String paneName )
+    {
+        for ( Node n : getCarteChoicePane().getChildren() )
+        {
+            if ( n.getClass().getSimpleName().equals( paneName ) )
+            {
+                n.setVisible( true );
+            }
+            else
+            {
+                n.setVisible( false );
+            }
+        }
     }
 
     public TableView< BasicCard > getTable()
@@ -87,13 +120,15 @@ public class ListeCarteBP extends BorderPane
                             if ( arg0.getClickCount() == 2 && ( !row.isEmpty() ) )
                             {
                                 BasicCard rowCard = row.getItem();
-                                for ( int i = 1; i < carteChoicePane.getChildren().size(); i++ )
+                                for( int i = 0; i < getCarteChoicePane().getChildren().size(); i++ )
                                 {
-                                    carteChoicePane.getChildren().remove( i );
+                                    if( getCarteChoicePane().getChildren().get( i ).getClass().getSimpleName().equals( FenetreModificationBP.class.getSimpleName() ) )
+                                    {
+                                        getCarteChoicePane().getChildren().remove( i );
+                                    }
                                 }
-                                carteChoicePane.getChildren().add( new FenetreModificationBP( d, rowCard ) );
-                                carteChoicePane.getChildren().get( 0 ).setVisible( false );
-                                carteChoicePane.getChildren().get( 1 ).setVisible( true );
+                                getCarteChoicePane().getChildren().add( new FenetreModificationBP( d, rowCard ) );
+                                setVisibleNode( FenetreModificationBP.class.getSimpleName() );
                             }
                         }
                     } );
@@ -115,8 +150,8 @@ public class ListeCarteBP extends BorderPane
                 @Override
                 public void handle( ActionEvent arg0 )
                 {
-                    getParent().getChildrenUnmodifiable().get( 2 ).setVisible( false );
-                    getParent().getChildrenUnmodifiable().get( 0 ).setVisible( true );
+                    MenuAdminBP mabp = ( MenuAdminBP ) getParent().getParent();
+                    mabp.setVisibleNode( MenuAdminMainVB.class.getSimpleName() );
                 }
             } );
         }

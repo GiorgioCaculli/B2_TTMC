@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
@@ -12,30 +13,60 @@ import javafx.scene.layout.VBox;
 
 public class MenuPlayBP extends BorderPane
 {
-
     private Button btnSolo, btnMulti, btnRetour;
     private Deck d;
-    private StackPane choicePane = new StackPane();
+    private StackPane choicePane;
 
     public MenuPlayBP( Deck d )
     {
         this.d = d;
-        VBox tile = new VBox();
-        // this.setOrientation(Orientation.VERTICAL);
-        tile.setPadding( new Insets( 20 ) );
-        tile.setSpacing( 50 );
 
-        tile.setStyle( "-fx-background-color: DAE6F3;" + "-fx-font-size: 15pt;" );
-        tile.getChildren().addAll( getBtnSolo(), getBtnMulti(), getBtnRetour() );
-        tile.setAlignment( Pos.CENTER );
-        
-        choicePane.getChildren().add( tile );
+        getChoicePane().getChildren().add( new MenuPlayMainVB() );
+        setVisibleNode( MenuPlayMainVB.class.getSimpleName() );
 
-        this.setCenter( choicePane );
+        setCenter( choicePane );
 
     }
 
-    public Button getBtnSolo()
+    private StackPane getChoicePane()
+    {
+        if ( choicePane == null )
+        {
+            choicePane = new StackPane();
+        }
+        return choicePane;
+    }
+
+    public void setVisibleNode( String paneName )
+    {
+        for ( Node n : getChoicePane().getChildren() )
+        {
+            if ( n.getClass().getSimpleName().equals( paneName ) )
+            {
+                n.setVisible( true );
+            }
+            else
+            {
+                n.setVisible( false );
+            }
+        }
+    }
+
+    protected class MenuPlayMainVB extends VBox
+    {
+        public MenuPlayMainVB()
+        {
+            // this.setOrientation(Orientation.VERTICAL);
+            setPadding( new Insets( 20 ) );
+            setSpacing( 50 );
+
+            setStyle( "-fx-background-color: DAE6F3;" + "-fx-font-size: 15pt;" );
+            getChildren().addAll( getBtnSolo(), getBtnMulti(), getBtnRetour() );
+            setAlignment( Pos.CENTER );
+        }
+    }
+
+    private Button getBtnSolo()
     {
         if ( btnSolo == null )
         {
@@ -47,18 +78,17 @@ public class MenuPlayBP extends BorderPane
                 @Override
                 public void handle( ActionEvent arg0 )
                 {
-                    if( choicePane.getChildren().size() > 1 )
+                    for( int i = 0; i < getChoicePane().getChildren().size(); i++ )
                     {
-                        for( int i = 1; i < choicePane.getChildren().size(); i++ )
+                        if( getChoicePane().getChildren().get( i ).getClass().getSimpleName().equals( JouerChoixQuestionBP.class.getSimpleName() ) )
                         {
-                            choicePane.getChildren().remove( i );
+                            getChoicePane().getChildren().remove( i );
                         }
                     }
                     JouerChoixQuestionBP jcq = new JouerChoixQuestionBP( d );
                     jcq.setScore( 0 );
-                    choicePane.getChildren().get( 0 ).setVisible( false );
-                    choicePane.getChildren().add( jcq );
-                    choicePane.getChildren().get( 1 ).setVisible( true );
+                    getChoicePane().getChildren().add( jcq );
+                    setVisibleNode( jcq.getClass().getSimpleName() );
                 }
             } );
         }
@@ -83,7 +113,7 @@ public class MenuPlayBP extends BorderPane
         return btnMulti;
     }
 
-    public Button getBtnRetour()
+    private Button getBtnRetour()
     {
         if ( btnRetour == null )
         {
@@ -91,12 +121,12 @@ public class MenuPlayBP extends BorderPane
             btnRetour.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
             btnRetour.setOnAction( new EventHandler< ActionEvent >()
             {
-                
+
                 @Override
                 public void handle( ActionEvent arg0 )
                 {
-                    MainPaneBP mpbp = (MainPaneBP) getParent().getParent();
-                    mpbp.setVisibleNode( "MenuPrincipalBP" );
+                    MainPaneBP mpbp = ( MainPaneBP ) getParent().getParent();
+                    mpbp.setVisibleNode( MenuPrincipalBP.class.getSimpleName() );
                 }
             } );
         }

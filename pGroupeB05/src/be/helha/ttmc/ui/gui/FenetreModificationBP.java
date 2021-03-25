@@ -26,6 +26,7 @@ import be.helha.ttmc.model.Deck;
 import be.helha.ttmc.model.Question;
 import be.helha.ttmc.model.Theme;
 import be.helha.ttmc.serialization.Serialization;
+import be.helha.ttmc.ui.gui.ListeCarteBP.ListeCarteMainBP;
 
 public class FenetreModificationBP extends BorderPane
 {
@@ -163,8 +164,8 @@ public class FenetreModificationBP extends BorderPane
                 @Override
                 public void handle( ActionEvent arg0 )
                 {
-                    getParent().getChildrenUnmodifiable().get( 1 ).setVisible( false );
-                    getParent().getChildrenUnmodifiable().get( 0 ).setVisible( true );
+                    ListeCarteBP lcbp = ( ListeCarteBP ) getParent().getParent();
+                    lcbp.setVisibleNode( ListeCarteMainBP.class.getSimpleName() );
                 }
             } );
         }
@@ -229,8 +230,8 @@ public class FenetreModificationBP extends BorderPane
                             reloadAlert.setContentText( "Veuillez appuyer sur le bouton Reload pour mettre a jour la liste" );
                             reloadAlert.setHeaderText( null );
                             reloadAlert.show();
-                            getParent().getChildrenUnmodifiable().get( 1 ).setVisible( false );
-                            getParent().getChildrenUnmodifiable().get( 0 ).setVisible( true );
+                            ListeCarteBP lcbp = ( ListeCarteBP ) getParent().getParent();
+                            lcbp.setVisibleNode( ListeCarteMainBP.class.getSimpleName() );
                             return;
                         }
 

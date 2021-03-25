@@ -25,6 +25,7 @@ import be.helha.ttmc.model.Deck;
 import be.helha.ttmc.model.Question;
 import be.helha.ttmc.model.Theme;
 import be.helha.ttmc.serialization.Serialization;
+import be.helha.ttmc.ui.gui.MenuAdminBP.MenuAdminMainVB;
 
 public class FenetreAjoutBP extends BorderPane
 {
@@ -161,8 +162,8 @@ public class FenetreAjoutBP extends BorderPane
                 public void handle( ActionEvent arg0 )
                 {
                     Serialization.saveGame( d );
-                    getParent().getChildrenUnmodifiable().get( 1 ).setVisible( false );
-                    getParent().getChildrenUnmodifiable().get( 0 ).setVisible( true );
+                    MenuAdminBP mabp = ( MenuAdminBP ) getParent().getParent();
+                    mabp.setVisibleNode( MenuAdminMainVB.class.getSimpleName() );
                 }
             } );
         }

@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
@@ -15,30 +16,57 @@ public class MenuAdminBP extends BorderPane
 
     private Button btnAjout, btnListe, btnRetour;
     private Deck d;
-    private StackPane adminChoicePane = new StackPane();
+    private StackPane adminChoicePane;
 
     public MenuAdminBP( Deck d )
     {
         this.d = d;
 
-        VBox tile = new VBox();
-        // this.setOrientation(Orientation.VERTICAL);
-        tile.setPadding( new Insets( 20 ) );
-        tile.setSpacing( 50 );
+        getAdminChoicePane().getChildren().add( new MenuAdminMainVB() );
+        getAdminChoicePane().getChildren().add( new FenetreAjoutBP( d ) );
 
-        tile.setStyle( "-fx-background-color: DAE6F3;" + "-fx-font-size: 15pt;" );
-        tile.getChildren().addAll( getBtnAjout(), getBtnListe(), getBtnRetour() );
-        tile.setAlignment( Pos.CENTER );
-        adminChoicePane.getChildren().add( tile );
-        adminChoicePane.getChildren().add( new FenetreAjoutBP( d ) );
-        for ( int i = 0; i < adminChoicePane.getChildren().size(); i++ )
+        setVisibleNode( MenuAdminMainVB.class.getSimpleName() );
+
+        setCenter( getAdminChoicePane() );
+
+    }
+
+    public StackPane getAdminChoicePane()
+    {
+        if ( adminChoicePane == null )
         {
-            adminChoicePane.getChildren().get( i ).setVisible( false );
+            adminChoicePane = new StackPane();
         }
-        adminChoicePane.getChildren().get( 0 ).setVisible( true );
+        return adminChoicePane;
+    }
 
-        this.setCenter( adminChoicePane );
+    public void setVisibleNode( String paneName )
+    {
+        for ( Node n : getAdminChoicePane().getChildren() )
+        {
+            if ( n.getClass().getSimpleName().equals( paneName ) )
+            {
+                n.setVisible( true );
+            }
+            else
+            {
+                n.setVisible( false );
+            }
+        }
+    }
 
+    protected class MenuAdminMainVB extends VBox
+    {
+        public MenuAdminMainVB()
+        {
+            // this.setOrientation(Orientation.VERTICAL);
+            setPadding( new Insets( 20 ) );
+            setSpacing( 50 );
+
+            setStyle( "-fx-background-color: DAE6F3;" + "-fx-font-size: 15pt;" );
+            getChildren().addAll( getBtnAjout(), getBtnListe(), getBtnRetour() );
+            setAlignment( Pos.CENTER );
+        }
     }
 
     private Button getBtnAjout()
@@ -53,8 +81,7 @@ public class MenuAdminBP extends BorderPane
                 @Override
                 public void handle( ActionEvent arg0 )
                 {
-                    adminChoicePane.getChildren().get( 0 ).setVisible( false );
-                    adminChoicePane.getChildren().get( 1 ).setVisible( true );
+                    setVisibleNode( FenetreAjoutBP.class.getSimpleName() );
                 }
             } );
         }
@@ -73,16 +100,15 @@ public class MenuAdminBP extends BorderPane
                 @Override
                 public void handle( ActionEvent arg0 )
                 {
-                    if ( adminChoicePane.getChildren().size() > 2 )
+                    for( int i = 0; i < getAdminChoicePane().getChildren().size(); i++ )
                     {
-                        for ( int i = 2; i < adminChoicePane.getChildren().size(); i++ )
+                        if( getAdminChoicePane().getChildren().get( i ).getClass().getSimpleName().equals( ListeCarteBP.class.getSimpleName() ) )
                         {
-                            adminChoicePane.getChildren().remove( i );
+                            getAdminChoicePane().getChildren().remove( i );
                         }
                     }
-                    adminChoicePane.getChildren().add( new ListeCarteBP( d ) );
-                    adminChoicePane.getChildren().get( 0 ).setVisible( false );
-                    adminChoicePane.getChildren().get( 2 ).setVisible( true );
+                    getAdminChoicePane().getChildren().add( new ListeCarteBP( d ) );
+                    setVisibleNode( ListeCarteBP.class.getSimpleName() );
                 }
             } );
         }

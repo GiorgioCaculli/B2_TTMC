@@ -13,8 +13,6 @@ import javafx.scene.control.DialogPane;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -30,7 +28,7 @@ public class MenuPrincipalBP extends BorderPane
     public MenuPrincipalBP( Deck d )
     {
         this.d = d;
-        
+
         VBox vb = new VBox();
         vb.setPadding( new Insets( 20 ) );
         vb.setSpacing( 25 );
@@ -85,7 +83,7 @@ public class MenuPrincipalBP extends BorderPane
                     else
                     {
                         MainPaneBP mpbp = ( MainPaneBP ) getParent().getParent();
-                        mpbp.setVisibleNode( "MenuPlayBP" );
+                        mpbp.setVisibleNode( MenuPlayBP.class.getSimpleName() );
                     }
                 }
             } );
@@ -153,11 +151,12 @@ public class MenuPrincipalBP extends BorderPane
                         granted.getDialogPane().setGraphic( icon );
                         granted.setHeaderText( null );
                         DialogPane grantedPane = granted.getDialogPane();
-                        grantedPane.getStylesheets().add( Main.class.getResource( "assets/stylesheets/alert_granted_stylesheet.css" ).toExternalForm() );
+                        grantedPane.getStylesheets().add( Main.class
+                                .getResource( "assets/stylesheets/alert_granted_stylesheet.css" ).toExternalForm() );
                         grantedPane.getStyleClass().add( "granted" );
                         granted.showAndWait();
                         MainPaneBP mpbp = ( MainPaneBP ) getParent().getParent();
-                        mpbp.setVisibleNode( "MenuAdminBP" );
+                        mpbp.setVisibleNode( MenuAdminBP.class.getSimpleName() );
                     }
                     else
                     {
@@ -174,7 +173,8 @@ public class MenuPrincipalBP extends BorderPane
                         denied.getDialogPane().setGraphic( icon );
                         denied.setHeaderText( null );
                         DialogPane deniedPane = denied.getDialogPane();
-                        deniedPane.getStylesheets().add( Main.class.getResource( "assets/stylesheets/alert_denied_stylesheet.css" ).toExternalForm() );
+                        deniedPane.getStylesheets().add( Main.class
+                                .getResource( "assets/stylesheets/alert_denied_stylesheet.css" ).toExternalForm() );
                         deniedPane.getStyleClass().add( "denied" );
                         denied.showAndWait();
                     }
