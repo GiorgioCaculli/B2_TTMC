@@ -95,8 +95,8 @@ public class MenuPlayBP extends BorderPane
                 @Override
                 public void handle( ActionEvent arg0 )
                 {
-                    MainPaneBP mpsp = (MainPaneBP) getParent();
-                    mpsp.setVisibleNode( "MenuPrincipalBP" );
+                    MainPaneBP mpbp = (MainPaneBP) getParent().getParent();
+                    mpbp.setVisibleNode( "MenuPrincipalBP" );
                 }
             } );
         }

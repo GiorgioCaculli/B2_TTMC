@@ -101,8 +101,8 @@ public class MenuAdminBP extends BorderPane
                 @Override
                 public void handle( ActionEvent arg0 )
                 {
-                    getParent().getChildrenUnmodifiable().get( 2 ).setVisible( false );
-                    getParent().getChildrenUnmodifiable().get( 0 ).setVisible( true );
+                    MainPaneBP mpbp = ( MainPaneBP ) getParent().getParent();
+                    mpbp.setVisibleNode( "MenuPrincipalBP" );
                 }
             } );
         }

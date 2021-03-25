@@ -21,14 +21,8 @@ public class MainPaneBP extends BorderPane
         getStackPane().getChildren().add( new MenuPrincipalBP( d ) );
         getStackPane().getChildren().add( new MenuPlayBP( d ) );
         getStackPane().getChildren().add( new MenuAdminBP( d ) );
-        /*for( Node n : getChildren() )
-        {
-            n.setVisible( false );
-        }
-        getChildren().get( 0 ).setVisible( true );*/
-        
-        setCenter(getStackPane());
         setVisibleNode( "MenuPrincipalBP" );
+        setCenter( getStackPane() );
         List< String > path = new ArrayList< String >();
         path.add( "assets/musics/EVAmusic.wav" );
         path.add( "assets/musics/CreativeDestruction.wav" );
@@ -77,10 +71,13 @@ public class MainPaneBP extends BorderPane
     		
     }
     
-    public StackPane getStackPane() {
-    	if(stackpane == null)
-    		stackpane= new StackPane();
-    	return stackpane;
+    public StackPane getStackPane()
+    {
+        if ( stackpane == null )
+        {
+            stackpane = new StackPane();
+        }
+        return stackpane;
     }
     
 }
