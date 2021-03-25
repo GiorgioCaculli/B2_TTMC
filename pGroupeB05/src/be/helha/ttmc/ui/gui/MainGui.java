@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import be.helha.ttmc.model.Deck;
 import be.helha.ttmc.serialization.Serialization;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -36,5 +37,13 @@ public class MainGui extends Application
 
     public MainGui()
     {
+    }
+    
+    @Override
+    public void stop() throws Exception
+    {
+        super.stop();
+        Platform.exit();
+        System.exit( 0 );
     }
 }

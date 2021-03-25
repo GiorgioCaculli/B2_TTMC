@@ -12,6 +12,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 public class MainPaneBP extends BorderPane
@@ -54,7 +55,6 @@ public class MainPaneBP extends BorderPane
 				
 			}
 		}).start();
-    //    WindowEvent we= new WindowEvent(getParent());
         addEventFilter(KeyEvent.KEY_PRESSED,new EventHandler<KeyEvent>() {
 
 			@Override
