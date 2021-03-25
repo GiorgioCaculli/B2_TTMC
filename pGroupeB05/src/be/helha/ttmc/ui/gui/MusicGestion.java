@@ -54,6 +54,12 @@ public class MusicGestion
          
     }
     
+    public void stopMusic() {
+    	
+    	mv.getMediaPlayer().stop();
+    	
+    }
+    
     public Thread gererThread(List<String> path) {
     	Thread tmp=	new Thread(new Runnable() {
 				
