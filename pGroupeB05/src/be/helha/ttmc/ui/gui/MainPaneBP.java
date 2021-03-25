@@ -1,6 +1,8 @@
 package be.helha.ttmc.ui.gui;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import be.helha.ttmc.model.Deck;
@@ -33,7 +35,8 @@ public class MainPaneBP extends BorderPane
         List< String > path = new ArrayList< String >();
         path.add( "assets/musics/EVAmusic.wav" );
         path.add( "assets/musics/CreativeDestruction.wav" );
-        path.add( "assets/musics/intouch_IntoTheWild.wav" );
+        path.add( "assets/musics/Intouch_IntoTheWild.wav" );
+        Collections.shuffle( path );
 
         new Thread( new Runnable()
         {
