@@ -22,6 +22,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -65,6 +67,26 @@ public class JouerChoixQuestionBP extends BorderPane
         Collections.shuffle( cards );
         initCardPane( cards, cardNb );
         this.setBottom( getReturnButton() );
+        
+        addEventFilter( KeyEvent.KEY_PRESSED, new EventHandler< KeyEvent >()
+        {
+
+            @Override
+            public void handle( KeyEvent keyEvent )
+            {
+                if ( keyEvent.getCode() == KeyCode.ESCAPE )
+                {
+                	MenuPlayBP mnbp= (MenuPlayBP) getParent().getParent();
+                    mnbp.getChoicePane().getChildren().get(
+                    		mnbp.getChoicePane().getChildren().indexOf(
+                    				mnbp.getMp())
+                    		).setVisible( true );
+                    System.out.println("test");
+                    keyEvent.consume();
+                }
+
+            }
+        } );
     }
 
     private void initJeuReponseBP( int id )

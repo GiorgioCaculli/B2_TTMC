@@ -22,14 +22,14 @@ public class MainPaneBP extends BorderPane
 
     public MainPaneBP( Deck d )
     {
-        MenuPauseFP mp = new MenuPauseFP();
+        
 
         getStackPane().getChildren().add( new MenuPrincipalBP( d ) );
         getStackPane().getChildren().add( new MenuPlayBP( d ) );
         getStackPane().getChildren().add( new MenuAdminBP( d ) );
-        getStackPane().getChildren().add( mp );
+        
         setVisibleNode( MenuPrincipalBP.class.getSimpleName() );
-        setTop( getSlider() );
+   //     setTop( getSlider() );
         setCenter( getStackPane() );
         List< String > path = new ArrayList< String >();
         path.add( "assets/musics/EVAmusic.wav" );
@@ -56,21 +56,7 @@ public class MainPaneBP extends BorderPane
 
             }
         } ).start();
-        addEventFilter( KeyEvent.KEY_PRESSED, new EventHandler< KeyEvent >()
-        {
-
-            @Override
-            public void handle( KeyEvent keyEvent )
-            {
-                if ( keyEvent.getCode() == KeyCode.ESCAPE )
-                {
-
-                    mp.setVisible( true );
-                    keyEvent.consume();
-                }
-
-            }
-        } );
+        
     }
 
     public void setVisibleNode( String paneName )

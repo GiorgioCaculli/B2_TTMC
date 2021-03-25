@@ -1,5 +1,6 @@
 package be.helha.ttmc.ui.gui;
 
+import be.helha.ttmc.ui.gui.MenuPlayBP.MenuPlayMainVB;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -22,8 +23,8 @@ public class MenuPauseFP extends FlowPane
                 @Override
                 public void handle( ActionEvent arg0 )
                 {
-                    MainPaneBP mp = ( MainPaneBP ) getParent().getParent();
-                    mp.setVisibleNode( MenuPrincipalBP.class.getSimpleName() );
+                    MenuPlayBP mp = ( MenuPlayBP ) getParent().getParent();
+                    mp.setVisibleNode( MenuPlayMainVB.class.getSimpleName() );
 
                 }
             } );

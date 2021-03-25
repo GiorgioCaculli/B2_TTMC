@@ -16,10 +16,11 @@ public class MenuPlayBP extends BorderPane
     private Button btnSolo, btnMulti, btnRetour;
     private Deck d;
     private StackPane choicePane;
+    private MenuPauseFP mp;
 
     public MenuPlayBP( Deck d )
     {
-        this.d = d;
+        this.d = d;        
 
         getChoicePane().getChildren().add( new MenuPlayMainVB() );
         setVisibleNode( MenuPlayMainVB.class.getSimpleName() );
@@ -27,8 +28,14 @@ public class MenuPlayBP extends BorderPane
         setCenter( choicePane );
 
     }
+    
+    public MenuPauseFP getMp() {
+    	if(mp == null)
+    		mp= new MenuPauseFP();
+    	return mp;
+    }
 
-    private StackPane getChoicePane()
+    protected StackPane getChoicePane()
     {
         if ( choicePane == null )
         {
@@ -88,6 +95,7 @@ public class MenuPlayBP extends BorderPane
                     JouerChoixQuestionBP jcq = new JouerChoixQuestionBP( d );
                     jcq.setScore( 0 );
                     getChoicePane().getChildren().add( jcq );
+                    getChoicePane().getChildren().add( getMp() );
                     setVisibleNode( jcq.getClass().getSimpleName() );
                 }
             } );
