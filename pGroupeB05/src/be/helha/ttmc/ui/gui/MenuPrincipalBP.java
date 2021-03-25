@@ -81,8 +81,8 @@ public class MenuPrincipalBP extends BorderPane
                     }
                     else
                     {
-                        getParent().getChildrenUnmodifiable().get( 0 ).setVisible( false );
-                        getParent().getChildrenUnmodifiable().get( 1 ).setVisible( true );
+                        MainPaneSP mpsp = ( MainPaneSP ) getParent();
+                        mpsp.setVisibleNode( "MenuPlayBP" );
                     }
                 }
             } );
@@ -153,8 +153,8 @@ public class MenuPrincipalBP extends BorderPane
                         grantedPane.getStylesheets().add( Main.class.getResource( "assets/stylesheets/alert_granted_stylesheet.css" ).toExternalForm() );
                         grantedPane.getStyleClass().add( "granted" );
                         granted.showAndWait();
-                        getParent().getChildrenUnmodifiable().get( 0 ).setVisible( false );
-                        getParent().getChildrenUnmodifiable().get( 2 ).setVisible( true );
+                        MainPaneSP mpsp = ( MainPaneSP ) getParent();
+                        mpsp.setVisibleNode( "MenuAdminBP" );
                     }
                     else
                     {

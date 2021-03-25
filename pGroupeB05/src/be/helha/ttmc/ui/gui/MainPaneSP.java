@@ -10,34 +10,52 @@ import javafx.scene.layout.StackPane;
 public class MainPaneSP extends StackPane
 {
     private MusicGestion musics;
+
     public MainPaneSP( Deck d )
     {
         getChildren().add( new MenuPrincipalBP( d ) );
         getChildren().add( new MenuPlayBP( d ) );
         getChildren().add( new MenuAdminBP( d ) );
-        for( Node n : getChildren() )
+        /*for( Node n : getChildren() )
         {
             n.setVisible( false );
         }
-        getChildren().get( 0 ).setVisible( true );
-       List<String> path= new ArrayList<String>();
-       path.add("assets/musics/EVAmusic.wav");
-       path.add("assets/musics/CreativeDestruction.wav");
-       path.add("assets/musics/intouch_IntoTheWild.wav");
-    	   
-    	   
+        getChildren().get( 0 ).setVisible( true );*/
+        setVisibleNode( "MenuPrincipalBP" );
+        List< String > path = new ArrayList< String >();
+        path.add( "assets/musics/EVAmusic.wav" );
+        path.add( "assets/musics/CreativeDestruction.wav" );
+        path.add( "assets/musics/intouch_IntoTheWild.wav" );
+
         try
         {
             musics = new MusicGestion( path );
-            musics.gererThread(path).start();
-      
+            musics.gererThread( path ).start();
+
         }
         catch ( Exception e )
         {
             e.printStackTrace();
-        }finally {
-        	if(musics.gererThread(path) != null)
-        		musics.gererThread(path).interrupt();
+        }
+        finally
+        {
+            if ( musics.gererThread( path ) != null )
+                musics.gererThread( path ).interrupt();
+        }
+    }
+
+    public void setVisibleNode( String paneName )
+    {
+        for ( Node n : getChildren() )
+        {
+            if ( n.getClass().getSimpleName().equals( paneName ) )
+            {
+                n.setVisible( true );
+            }
+            else
+            {
+                n.setVisible( false );
+            }
         }
     }
 }
