@@ -1,5 +1,8 @@
 package be.helha.ttmc.ui.gui;
 
+import java.util.Optional;
+import java.util.Random;
+
 import be.helha.ttmc.model.Deck;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -7,6 +10,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -96,6 +100,22 @@ public class MenuPlayBP extends BorderPane
                     }
                     JouerChoixQuestionBP jcq = new JouerChoixQuestionBP( d );
                     jcq.setScore( 0 );
+                    TextInputDialog userNameDialog = new TextInputDialog();
+                    userNameDialog.setTitle( "Insert your nickname" );
+                    userNameDialog.setHeaderText( "Insert your nickname" );
+                    userNameDialog.setContentText( "Please, insert your nickname:" );
+                    Optional< String > userName = userNameDialog.showAndWait();
+                    if( userName.get().isEmpty() )
+                    {
+                        Random randId = new Random(999);
+                        jcq.setNickName( String.format( "User-%d", randId.nextInt() ) );
+                        jcq.getLblScore().setText( String.format( "User: %s - Score: ", jcq.getNickName() ) );
+                    }
+                    else
+                    {
+                        jcq.setNickName( String.format( "%s", userName.get() ) );
+                        jcq.getLblScore().setText( String.format( "User: %s - Score: ", jcq.getNickName() ) );
+                    }
                     getChoicePane().getChildren().add( jcq );
                     MenuPauseFP mp= new MenuPauseFP();
                     getChoicePane().getChildren().add( mp );

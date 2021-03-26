@@ -66,6 +66,7 @@ public class JouerChoixQuestionBP extends BorderPane
     private int cardNb = 0;
     private MenuPauseFP mpfp;
     private BorderPane cardPane;
+    private String nickName;
 
     public JouerChoixQuestionBP( Deck d )
     {
@@ -174,7 +175,7 @@ public class JouerChoixQuestionBP extends BorderPane
     private void initCardPane( List< BasicCard > cards, int i )
     {
         cardPane = new BorderPane();
-        time = 15;
+        time = 30;
         this.bc = cards.get( i );
         cardChoicePane = new StackPane();
         getLblTheme().setText( bc.getTheme().toString() );
@@ -461,6 +462,16 @@ public class JouerChoixQuestionBP extends BorderPane
     public BasicCard getBC()
     {
         return bc.clone();
+    }
+    
+    public void setNickName( String nickName )
+    {
+        this.nickName = nickName;
+    }
+    
+    public String getNickName()
+    {
+        return nickName;
     }
 
     private void checkAnswer( Object o )
