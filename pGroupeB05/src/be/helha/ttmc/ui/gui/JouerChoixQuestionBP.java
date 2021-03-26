@@ -16,7 +16,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -24,7 +23,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.effect.ColorAdjust;
-import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -52,7 +50,6 @@ public class JouerChoixQuestionBP extends BorderPane
     private StackPane cardChoicePane;
     private StackPane jouerChoixQuestionMainSP;
 
-    private BorderPane jeuReponseBP;
     private Label lblQuestion;
     private TextField txtRep;
     private Button btnVal;
@@ -100,7 +97,8 @@ public class JouerChoixQuestionBP extends BorderPane
                                 @Override
                                 public void handle( ActionEvent arg0 )
                                 {
-                                    if( !cardChoicePane.getChildren().get( cardChoicePane.getChildren().size() - 1 ).isVisible() )
+                                    if ( !cardChoicePane.getChildren().get( cardChoicePane.getChildren().size() - 1 )
+                                            .isVisible() )
                                     {
                                         getAnimation().start();
                                     }
@@ -109,7 +107,7 @@ public class JouerChoixQuestionBP extends BorderPane
 
                                 }
                             } );
-                    if( !cardChoicePane.getChildren().get( cardChoicePane.getChildren().size() - 1 ).isVisible() )
+                    if ( !cardChoicePane.getChildren().get( cardChoicePane.getChildren().size() - 1 ).isVisible() )
                     {
                         getAnimation().stop();
                     }
@@ -136,7 +134,7 @@ public class JouerChoixQuestionBP extends BorderPane
         }
         return mpfp;
     }
-    
+
     private class JeuReponseBP extends BorderPane
     {
         public JeuReponseBP()
@@ -219,7 +217,7 @@ public class JouerChoixQuestionBP extends BorderPane
         cardChoicePane.getChildren().add( fp );
         cardPane.setTop( vb2 );
         cardPane.setCenter( cardChoicePane );
-        if( getJouerChoixQuestionMainBP().getChildren().size() < 1 )
+        if ( getJouerChoixQuestionMainBP().getChildren().size() < 1 )
         {
             getJouerChoixQuestionMainBP().getChildren().add( cardPane );
         }
@@ -444,7 +442,8 @@ public class JouerChoixQuestionBP extends BorderPane
                 @Override
                 public void handle( KeyEvent keyEvent )
                 {
-                    if( keyEvent.getCode() == KeyCode.ENTER )
+                    if ( keyEvent.getCode() == KeyCode.ENTER && !cardChoicePane.getChildren()
+                            .get( cardChoicePane.getChildren().size() - 1 ).isVisible() )
                     {
                         checkAnswer( keyEvent );
                     }
@@ -463,12 +462,12 @@ public class JouerChoixQuestionBP extends BorderPane
     {
         return bc.clone();
     }
-    
+
     public void setNickName( String nickName )
     {
         this.nickName = nickName;
     }
-    
+
     public String getNickName()
     {
         return nickName;

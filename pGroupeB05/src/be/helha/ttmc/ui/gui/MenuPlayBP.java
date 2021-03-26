@@ -90,14 +90,6 @@ public class MenuPlayBP extends BorderPane
                             getChoicePane().getChildren().remove( i );
                         }
                     }
-                    
-                    for( int i = 0; i < getChoicePane().getChildren().size(); i++ )
-                    {
-                        if( getChoicePane().getChildren().get( i ).getClass().getSimpleName().equals( MenuPauseFP.class.getSimpleName() ) )
-                        {
-                            getChoicePane().getChildren().remove( i );
-                        }
-                    }
                     JouerChoixQuestionBP jcq = new JouerChoixQuestionBP( d );
                     jcq.setScore( 0 );
                     TextInputDialog userNameDialog = new TextInputDialog();
@@ -117,8 +109,6 @@ public class MenuPlayBP extends BorderPane
                         jcq.getLblScore().setText( String.format( "User: %s - Score: ", jcq.getNickName() ) );
                     }
                     getChoicePane().getChildren().add( jcq );
-                    MenuPauseFP mp= new MenuPauseFP();
-                    getChoicePane().getChildren().add( mp );
                     setVisibleNode( jcq.getClass().getSimpleName() );
                 }
             } );

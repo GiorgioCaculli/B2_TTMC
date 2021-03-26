@@ -100,9 +100,10 @@ public class MenuAdminBP extends BorderPane
                 @Override
                 public void handle( ActionEvent arg0 )
                 {
-                    for( int i = 0; i < getAdminChoicePane().getChildren().size(); i++ )
+                    for ( int i = 0; i < getAdminChoicePane().getChildren().size(); i++ )
                     {
-                        if( getAdminChoicePane().getChildren().get( i ).getClass().getSimpleName().equals( ListeCarteBP.class.getSimpleName() ) )
+                        if ( getAdminChoicePane().getChildren().get( i ).getClass().getSimpleName()
+                                .equals( ListeCarteBP.class.getSimpleName() ) )
                         {
                             getAdminChoicePane().getChildren().remove( i );
                         }

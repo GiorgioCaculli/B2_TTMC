@@ -120,9 +120,10 @@ public class ListeCarteBP extends BorderPane
                             if ( arg0.getClickCount() == 2 && ( !row.isEmpty() ) )
                             {
                                 BasicCard rowCard = row.getItem();
-                                for( int i = 0; i < getCarteChoicePane().getChildren().size(); i++ )
+                                for ( int i = 0; i < getCarteChoicePane().getChildren().size(); i++ )
                                 {
-                                    if( getCarteChoicePane().getChildren().get( i ).getClass().getSimpleName().equals( FenetreModificationBP.class.getSimpleName() ) )
+                                    if ( getCarteChoicePane().getChildren().get( i ).getClass().getSimpleName()
+                                            .equals( FenetreModificationBP.class.getSimpleName() ) )
                                     {
                                         getCarteChoicePane().getChildren().remove( i );
                                     }

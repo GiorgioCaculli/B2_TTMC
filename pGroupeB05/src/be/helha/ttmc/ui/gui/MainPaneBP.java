@@ -6,11 +6,8 @@ import java.util.List;
 
 import be.helha.ttmc.model.Deck;
 import javafx.beans.value.ObservableValue;
-import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Slider;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 
@@ -22,14 +19,13 @@ public class MainPaneBP extends BorderPane
 
     public MainPaneBP( Deck d )
     {
-        
 
         getStackPane().getChildren().add( new MenuPrincipalBP( d ) );
         getStackPane().getChildren().add( new MenuPlayBP( d ) );
         getStackPane().getChildren().add( new MenuAdminBP( d ) );
-        
+
         setVisibleNode( MenuPrincipalBP.class.getSimpleName() );
-   //     setTop( getSlider() );
+        //     setTop( getSlider() );
         setCenter( getStackPane() );
         List< String > path = new ArrayList< String >();
         path.add( "assets/musics/EVAmusic.wav" );
@@ -56,7 +52,7 @@ public class MainPaneBP extends BorderPane
 
             }
         } ).start();
-        
+
     }
 
     public void setVisibleNode( String paneName )
