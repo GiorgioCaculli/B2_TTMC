@@ -22,6 +22,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.effect.BoxBlur;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
@@ -48,7 +49,8 @@ public class JouerChoixQuestionBP extends BorderPane
     private int newScore = 0;
 
     private BasicCard bc;
-    private StackPane sp;
+    private StackPane cardChoicePane;
+    private StackPane jouerChoixQuestionMainSP;
 
     private BorderPane jeuReponseBP;
     private Label lblQuestion;
@@ -62,6 +64,8 @@ public class JouerChoixQuestionBP extends BorderPane
     private Label lblTime;
     private int id;
     private int cardNb = 0;
+    private MenuPauseFP mpfp;
+    private BorderPane cardPane;
 
     public JouerChoixQuestionBP( Deck d )
     {
@@ -69,85 +73,110 @@ public class JouerChoixQuestionBP extends BorderPane
         cards = this.d.getCards();
         Collections.shuffle( cards );
         initCardPane( cards, cardNb );
-        this.setBottom( getReturnButton() );
-        
-        addEventFilter( KeyEvent.KEY_PRESSED, new EventHandler< KeyEvent >()
-        {
+        getJouerChoixQuestionMainBP().getChildren().add( getMenuPauseFP() );
+        getJouerChoixQuestionMainBP().getChildren().get( 1 ).setVisible( false );
+        //setBottom( getReturnButton() ); // ESCAPE BUTTON
+        ColorAdjust col = new ColorAdjust( 0, -0.9, -0.5, 0 );
+        //GaussianBlur blur = new GaussianBlur( 15 ); // LENT
+        BoxBlur blur = new BoxBlur();
+        blur.setWidth( 15 );
+        blur.setHeight( 15 );
+        blur.setIterations( 3 );
+        col.setInput( blur );
 
-            @SuppressWarnings("unlikely-arg-type")
-			@Override
+        setOnKeyPressed( new EventHandler< KeyEvent >()
+        {
+            @Override
             public void handle( KeyEvent keyEvent )
             {
                 if ( keyEvent.getCode() == KeyCode.ESCAPE )
                 {
-                	ColorAdjust col= new ColorAdjust(0,-0.9,-0.5,0);
-                	GaussianBlur blur= new GaussianBlur(55);
-                	col.setInput(blur);
-                	setEffect(col);
-                	MenuPlayBP mnbp= (MenuPlayBP) getParent().getParent();
-                    for(Node n : mnbp.getChoicePane().getChildren()) {
-                    	if(n instanceof MenuPauseFP) {
-                    		n.setVisible(true);
-                    		((MenuPauseFP) n).getBtnResume().setOnAction(new EventHandler<ActionEvent>() {
-								
-								@Override
-								public void handle(ActionEvent arg0) {
-									getAnimation().start();
-									n.setVisible(false);
-									setEffect(null);
-									
-								}
-							});
-                    	}
-                    		
+                    cardPane.setEffect( blur );
+                    getJouerChoixQuestionMainBP().getChildren().get( 1 ).setVisible( true );
+                    ( ( MenuPauseFP ) getJouerChoixQuestionMainBP().getChildren().get( 1 ) ).getBtnResume()
+                            .setOnAction( new EventHandler< ActionEvent >()
+                            {
+                                @Override
+                                public void handle( ActionEvent arg0 )
+                                {
+                                    if( !cardChoicePane.getChildren().get( cardChoicePane.getChildren().size() - 1 ).isVisible() )
+                                    {
+                                        getAnimation().start();
+                                    }
+                                    cardPane.setEffect( null );
+                                    getJouerChoixQuestionMainBP().getChildren().get( 1 ).setVisible( false );
+
+                                }
+                            } );
+                    if( !cardChoicePane.getChildren().get( cardChoicePane.getChildren().size() - 1 ).isVisible() )
+                    {
+                        getAnimation().stop();
                     }
-                    getAnimation().stop();
                     keyEvent.consume();
                 }
-
             }
         } );
     }
 
-    private void initJeuReponseBP( int id )
+    private StackPane getJouerChoixQuestionMainBP()
     {
-        jeuReponseBP = new BorderPane();
-        HBox vbTime = new HBox();
-        vbTime.setPadding( new Insets( 5 ) );
-        vbTime.setAlignment( Pos.CENTER );
-        //vbTime.setStyle( "-fx-background-color: DAE6F3;-fx-font-size: 25pt;" );
-        for ( Theme t : Theme.values() )
+        if ( jouerChoixQuestionMainSP == null )
         {
-            if ( bc.getTheme() == t )
-            {
-                vbTime.setStyle( String.format( "-fx-background-color: %s;-fx-font-size: 25pt;",
-                        t.backgroundColor().get( bc.getTheme() ) ) );
-            }
+            jouerChoixQuestionMainSP = new StackPane();
         }
-        vbTime.getChildren().addAll( getSabIm(), getLblTime() );
+        return jouerChoixQuestionMainSP;
+    }
 
-        VBox vb = new VBox();
-        vb.setPadding( new Insets( 20 ) );
-        for ( Theme t : Theme.values() )
+    private MenuPauseFP getMenuPauseFP()
+    {
+        if ( mpfp == null )
         {
-            if ( bc.getTheme() == t )
-            {
-                vb.setStyle( String.format( "-fx-background-color: %s;-fx-font-size: 25pt;",
-                        t.backgroundColor().get( bc.getTheme() ) ) );
-            }
+            mpfp = new MenuPauseFP();
         }
-        vb.setAlignment( Pos.CENTER );
-        vb.getChildren().addAll( vbTime, getLblQuestion(), getTxtRep(), getBtnVal() );
-        getTxtRep().setText( "" );
-        jeuReponseBP.setCenter( vb );
-        sp.getChildren().add( jeuReponseBP );
+        return mpfp;
+    }
+    
+    private class JeuReponseBP extends BorderPane
+    {
+        public JeuReponseBP()
+        {
+            HBox vbTime = new HBox();
+            vbTime.setPadding( new Insets( 5 ) );
+            vbTime.setAlignment( Pos.CENTER );
+            //vbTime.setStyle( "-fx-background-color: DAE6F3;-fx-font-size: 25pt;" );
+            for ( Theme t : Theme.values() )
+            {
+                if ( bc.getTheme() == t )
+                {
+                    vbTime.setStyle( String.format( "-fx-background-color: %s;-fx-font-size: 25pt;",
+                            t.backgroundColor().get( bc.getTheme() ) ) );
+                }
+            }
+            vbTime.getChildren().addAll( getSabIm(), getLblTime() );
+
+            VBox vb = new VBox();
+            vb.setPadding( new Insets( 20 ) );
+            for ( Theme t : Theme.values() )
+            {
+                if ( bc.getTheme() == t )
+                {
+                    vb.setStyle( String.format( "-fx-background-color: %s;-fx-font-size: 25pt;",
+                            t.backgroundColor().get( bc.getTheme() ) ) );
+                }
+            }
+            vb.setAlignment( Pos.CENTER );
+            vb.getChildren().addAll( vbTime, getLblQuestion(), getTxtRep(), getBtnVal() );
+            getTxtRep().setText( "" );
+            setCenter( vb );
+        }
     }
 
     private void initCardPane( List< BasicCard > cards, int i )
     {
+        cardPane = new BorderPane();
         time = 15;
         this.bc = cards.get( i );
-        sp = new StackPane();
+        cardChoicePane = new StackPane();
         getLblTheme().setText( bc.getTheme().toString() );
         getLblSujet().setText( bc.getSubject().toString() );
         FlowPane fp = new FlowPane();
@@ -167,10 +196,8 @@ public class JouerChoixQuestionBP extends BorderPane
 
         for ( Button b : getChoix() )
         {
-            int j = 0;
-            initJeuReponseBP( j );
+            cardChoicePane.getChildren().add( new JeuReponseBP() );
             fp.getChildren().add( b );
-            j++;
         }
 
         VBox vb = new VBox();
@@ -188,9 +215,18 @@ public class JouerChoixQuestionBP extends BorderPane
         VBox vb2 = new VBox();
         vb2.getChildren().addAll( vb, hb );
         vb2.setStyle( "-fx-font-size: 25pt;" );
-        sp.getChildren().add( fp );
-        this.setCenter( sp );
-        this.setTop( vb2 );
+        cardChoicePane.getChildren().add( fp );
+        cardPane.setTop( vb2 );
+        cardPane.setCenter( cardChoicePane );
+        if( getJouerChoixQuestionMainBP().getChildren().size() < 1 )
+        {
+            getJouerChoixQuestionMainBP().getChildren().add( cardPane );
+        }
+        else
+        {
+            getJouerChoixQuestionMainBP().getChildren().set( 0, cardPane );
+        }
+        setCenter( getJouerChoixQuestionMainBP() );
     }
 
     public int getID()
@@ -223,8 +259,8 @@ public class JouerChoixQuestionBP extends BorderPane
                         setID( idQ );
                         setLblQuestion( bc.getQuestions().get( idQ ).getChallenge() );
                         getAnimation().start();
-                        sp.getChildren().get( maxBtn ).setVisible( false );
-                        sp.getChildren().get( idQ ).setVisible( true );
+                        cardChoicePane.getChildren().get( maxBtn ).setVisible( false );
+                        cardChoicePane.getChildren().get( idQ ).setVisible( true );
                     }
                 } );
                 choix.add( b );
@@ -401,6 +437,18 @@ public class JouerChoixQuestionBP extends BorderPane
         if ( txtRep == null )
         {
             txtRep = new TextField();
+            txtRep.setOnKeyPressed( new EventHandler< KeyEvent >()
+            {
+
+                @Override
+                public void handle( KeyEvent keyEvent )
+                {
+                    if( keyEvent.getCode() == KeyCode.ENTER )
+                    {
+                        checkAnswer( keyEvent );
+                    }
+                }
+            } );
         }
         return txtRep;
     }
@@ -427,8 +475,8 @@ public class JouerChoixQuestionBP extends BorderPane
             alert.setContentText( String.format(
                     "All questions have been answered, you scored %d points. Thank you for playing!", newScore ) );
             path = "/be/helha/ttmc/assets/images/banana.gif";
-            getParent().getChildrenUnmodifiable().get( 1 ).setVisible( false );
-            getParent().getChildrenUnmodifiable().get( 0 ).setVisible( true );
+            MenuPlayBP mpbp = ( MenuPlayBP ) getParent().getParent();
+            mpbp.setVisibleNode( MenuPlayMainVB.class.getSimpleName() );
         }
         else
         {
@@ -450,7 +498,7 @@ public class JouerChoixQuestionBP extends BorderPane
         icon.setFitWidth( 64 );
         alert.getDialogPane().setGraphic( icon );
         alert.setHeaderText( null );
-        if ( o instanceof ActionEvent )
+        if ( o instanceof ActionEvent || o instanceof KeyEvent )
             alert.showAndWait();
         else if ( o instanceof Long )
             alert.show();

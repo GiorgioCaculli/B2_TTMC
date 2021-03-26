@@ -31,7 +31,7 @@ public class MenuPauseFP extends BorderPane
                 @Override
                 public void handle( ActionEvent arg0 )
                 {
-                    MenuPlayBP mp = ( MenuPlayBP ) getParent().getParent();
+                    MenuPlayBP mp = ( MenuPlayBP ) getParent().getParent().getParent().getParent();
                     mp.setVisibleNode( MenuPlayMainVB.class.getSimpleName() );
 
                 }
@@ -45,7 +45,6 @@ public class MenuPauseFP extends BorderPane
         if ( btnResume == null )
         {
             btnResume = new Button( "resume" );
-            btnResume.setOpacity(1.0);
             btnResume.setOnAction( new EventHandler< ActionEvent >()
             {
 
