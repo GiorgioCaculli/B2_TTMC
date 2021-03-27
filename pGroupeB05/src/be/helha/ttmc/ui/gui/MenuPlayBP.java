@@ -128,6 +128,15 @@ public class MenuPlayBP extends BorderPane
                 @Override
                 public void handle( ActionEvent arg0 )
                 {
+                    for( int i = 0; i < getChoicePane().getChildren().size(); i++ )
+                    {
+                        if( getChoicePane().getChildren().get( i ).getClass().getSimpleName().equals( MenuMultiplayerBP.class.getSimpleName() ) )
+                        {
+                            getChoicePane().getChildren().remove( i );
+                        }
+                    }
+                    getChoicePane().getChildren().add( new MenuMultiplayerBP( d ) );
+                    setVisibleNode( MenuMultiplayerBP.class.getSimpleName() );
                 }
             } );
         }

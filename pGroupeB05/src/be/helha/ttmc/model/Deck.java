@@ -83,4 +83,14 @@ public class Deck
         }
         return sb.toString();
     }
+    
+    public Deck clone()
+    {
+        Deck tmpDeck = new Deck();
+        for( BasicCard c : cards )
+        {
+            tmpDeck.add( c.clone() );
+        }
+        return tmpDeck;
+    }
 }
