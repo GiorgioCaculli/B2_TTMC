@@ -21,7 +21,7 @@ public class MainGui extends Application
     public void start( Stage primaryStage )
     {
         logger.log( Level.INFO, "Reading Deck" );
-        Deck d = Serialization.loadDeck();
+        Deck d = Serialization.loadDeck( "deck.json" );
         logger.log( Level.INFO, String.format( "Number of cards in the deck: %d", d.getCards().size() ) );
         MainPaneBP mp = new MainPaneBP( d );
         mp.getChildren().get( 0 ).setVisible( true );

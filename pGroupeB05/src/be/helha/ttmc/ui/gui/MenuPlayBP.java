@@ -3,7 +3,9 @@ package be.helha.ttmc.ui.gui;
 import java.util.Optional;
 import java.util.Random;
 
+import be.helha.ttmc.Main;
 import be.helha.ttmc.model.Deck;
+import be.helha.ttmc.serialization.Serialization;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -23,7 +25,7 @@ public class MenuPlayBP extends BorderPane
 
     public MenuPlayBP( Deck d )
     {
-        this.d = d;        
+        this.d = d;
 
         getChoicePane().getChildren().add( new MenuPlayMainVB() );
         setVisibleNode( MenuPlayMainVB.class.getSimpleName() );
@@ -31,7 +33,6 @@ public class MenuPlayBP extends BorderPane
         setCenter( choicePane );
 
     }
-   
 
     protected StackPane getChoicePane()
     {
@@ -83,23 +84,30 @@ public class MenuPlayBP extends BorderPane
                 @Override
                 public void handle( ActionEvent arg0 )
                 {
-                    for( int i = 0; i < getChoicePane().getChildren().size(); i++ )
+                    for ( int i = 0; i < getChoicePane().getChildren().size(); i++ )
                     {
-                        if( getChoicePane().getChildren().get( i ).getClass().getSimpleName().equals( JouerChoixQuestionBP.class.getSimpleName() ) )
+                        if ( getChoicePane().getChildren().get( i ).getClass().getSimpleName()
+                                .equals( JouerChoixQuestionBP.class.getSimpleName() ) )
                         {
                             getChoicePane().getChildren().remove( i );
                         }
                     }
-                    JouerChoixQuestionBP jcq = new JouerChoixQuestionBP( d );
-                    jcq.setScore( 0 );
                     TextInputDialog userNameDialog = new TextInputDialog();
                     userNameDialog.setTitle( "Insert your nickname" );
                     userNameDialog.setHeaderText( "Insert your nickname" );
                     userNameDialog.setContentText( "Please, insert your nickname:" );
                     Optional< String > userName = userNameDialog.showAndWait();
-                    if( userName.get().isEmpty() )
+                    if ( userName.get().equals( "giorgio" ) || userName.get().equals( "guillaume" )
+                            || userName.get().equals( "tanguy" ) )
                     {
-                        Random randId = new Random(999);
+                        d = Serialization
+                                .loadDeck( String.format( "assets/decks/%s.json", userName.get() ).toString() );
+                    }
+                    JouerChoixQuestionBP jcq = new JouerChoixQuestionBP( d );
+                    jcq.setScore( 0 );
+                    if ( userName.get().isEmpty() )
+                    {
+                        Random randId = new Random( 999 );
                         jcq.setNickName( String.format( "User-%d", randId.nextInt() ) );
                         jcq.getLblScore().setText( String.format( "User: %s - Score: ", jcq.getNickName() ) );
                     }
@@ -128,9 +136,10 @@ public class MenuPlayBP extends BorderPane
                 @Override
                 public void handle( ActionEvent arg0 )
                 {
-                    for( int i = 0; i < getChoicePane().getChildren().size(); i++ )
+                    for ( int i = 0; i < getChoicePane().getChildren().size(); i++ )
                     {
-                        if( getChoicePane().getChildren().get( i ).getClass().getSimpleName().equals( MenuMultiplayerBP.class.getSimpleName() ) )
+                        if ( getChoicePane().getChildren().get( i ).getClass().getSimpleName()
+                                .equals( MenuMultiplayerBP.class.getSimpleName() ) )
                         {
                             getChoicePane().getChildren().remove( i );
                         }

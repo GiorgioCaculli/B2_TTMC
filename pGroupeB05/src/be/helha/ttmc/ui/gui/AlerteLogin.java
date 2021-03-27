@@ -21,7 +21,9 @@ import javafx.util.Pair;
 
 public class AlerteLogin extends Alert
 {
-    Optional< Pair< String, String > > result = null;
+    private Optional< Pair< String, String > > result = null;
+
+    TextField username = new TextField();
 
     public AlerteLogin()
     {
@@ -46,8 +48,7 @@ public class AlerteLogin extends Alert
         grid.setHgap( 10 );
         grid.setVgap( 10 );
         grid.setPadding( new Insets( 20, 150, 10, 10 ) );
-
-        TextField username = new TextField();
+        
         username.setPromptText( "Username" );
         PasswordField password = new PasswordField();
         password.setPromptText( "Password" );
@@ -92,8 +93,15 @@ public class AlerteLogin extends Alert
     {
         Optional< Pair< String, String > > credentials = result;
         if ( credentials != null )
-            return credentials.get().getKey().equals( "admin" ) && credentials.get().getValue().equals( "helha" );
+            return ( credentials.get().getKey().equals( "admin" ) || credentials.get().getKey().equals( "user" )
+                    || credentials.get().getKey().equals( "giorgio" ) || credentials.get().getKey().equals( "guillaume" )
+                    || credentials.get().getKey().equals( "tanguy" ) || credentials.get().getKey().equals( "altares" ) )
+                    && credentials.get().getValue().equals( "helha" );
         return false;
-
+    }
+    
+    public String getUsername()
+    {
+        return username.getText();
     }
 }

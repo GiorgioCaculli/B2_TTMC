@@ -1,0 +1,284 @@
+{
+  "cards": [
+    {
+      "author": "Tanguy Taminiau",
+      "subject": "Culinary Inventions",
+      "theme": "IMPROBABLE",
+      "questions": [
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Culinary Inventions",
+          "challenge": "Where was the hamburger invented?",
+          "answer": "Hamburg, Germany",
+          "theme": "IMPROBABLE"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Culinary Inventions",
+          "challenge": "Was the tarte Tatin created by mistake?",
+          "answer": "Yes",
+          "theme": "IMPROBABLE"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Culinary Inventions",
+          "challenge": "Where is the Jupiler brewed?",
+          "answer": "Jupil",
+          "theme": "IMPROBABLE"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Culinary Inventions",
+          "challenge": "Which forgotten ingredient allowed the creation of the brownie?",
+          "answer": "Baking powder",
+          "theme": "IMPROBABLE"
+        }
+      ]
+    },
+    {
+      "author": "Tanguy Taminiau",
+      "subject": "Hotel",
+      "theme": "IMPROBABLE",
+      "questions": [
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Hotel",
+          "challenge": "How much does a night cost in the most expensive hotel in the world (in €)?",
+          "answer": "7800",
+          "theme": "IMPROBABLE"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Hotel",
+          "challenge": "Where is the tallest hotel in the world situated?",
+          "answer": "Shangai",
+          "theme": "IMPROBABLE"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Hotel",
+          "challenge": "Where is the most expensive hotel in the world situated?",
+          "answer": "Dubai",
+          "theme": "IMPROBABLE"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Hotel",
+          "challenge": "Where is the \"Ice Hotel\" situated?",
+          "answer": "Sweden",
+          "theme": "IMPROBABLE"
+        }
+      ]
+    },
+    {
+      "author": "Tanguy Taminiau",
+      "subject": "Films",
+      "theme": "PLEASURE",
+      "questions": [
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Films",
+          "challenge": "Who invented the cinema?",
+          "answer": "The Lumiere Brothers",
+          "theme": "PLEASURE"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Films",
+          "challenge": "Who made Star wars?",
+          "answer": "George Lucas",
+          "theme": "PLEASURE"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Films",
+          "challenge": "Who interpreted Frank Martin (the protagonist) in the movie \"The Transporter\"?",
+          "answer": "Jason Statham",
+          "theme": "PLEASURE"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Films",
+          "challenge": "Who produced the movie \"The Shining\"?",
+          "answer": "Stanley Kubrick",
+          "theme": "PLEASURE"
+        }
+      ]
+    },
+    {
+      "author": "Tanguy Taminiau",
+      "subject": "Video Games",
+      "theme": "PLEASURE",
+      "questions": [
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Video Games",
+          "challenge": "Which company made the NES?",
+          "answer": "Nintendo",
+          "theme": "PLEASURE"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Video Games",
+          "challenge": "What does NES stand for?",
+          "answer": "Nintendo Entertainment System",
+          "theme": "PLEASURE"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Video Games",
+          "challenge": "What is the name of the best selling console in the world (all generations combined)?",
+          "answer": "Playstation 2",
+          "theme": "PLEASURE"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Video Games",
+          "challenge": "Which year was the Sega Saturn released in Europe?",
+          "answer": "July 1995",
+          "theme": "PLEASURE"
+        }
+      ]
+    },
+    {
+      "author": "Tanguy Taminiau",
+      "subject": "Linux Command Line",
+      "theme": "INFORMATICS",
+      "questions": [
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Linux Command Line",
+          "challenge": "How to change directory?",
+          "answer": "cd",
+          "theme": "INFORMATICS"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Linux Command Line",
+          "challenge": "How to delete a file or directory?",
+          "answer": "rm",
+          "theme": "INFORMATICS"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Linux Command Line",
+          "challenge": "How to make a symbolic link?",
+          "answer": "ln -s",
+          "theme": "INFORMATICS"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Linux Command Line",
+          "challenge": "What Linux command allows you to completely fill a hard disk with zeroes?",
+          "answer": "dd",
+          "theme": "INFORMATICS"
+        }
+      ]
+    },
+    {
+      "author": "Tanguy Taminiau",
+      "subject": "Linux Distributions",
+      "theme": "INFORMATICS",
+      "questions": [
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Linux Distributions",
+          "challenge": "What is the most famous Linux distribution?",
+          "answer": "Ubuntu",
+          "theme": "INFORMATICS"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Linux Distributions",
+          "challenge": "What is the most known Linux distribution for ethical hacking and penetration testing (little tip for you, it\u0027s the OS used in Mr Robot)?",
+          "answer": "Kali",
+          "theme": "INFORMATICS"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Linux Distributions",
+          "challenge": "What is Ubuntu based on?",
+          "answer": "Debian",
+          "theme": "INFORMATICS"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Linux Distributions",
+          "challenge": "What major base Linux distribution for desktop is missing from the list: -Debian, -RedHat, -Arch, -Enoch, - ?",
+          "answer": "Slackware",
+          "theme": "INFORMATICS"
+        }
+      ]
+    },
+    {
+      "author": "Tanguy Taminiau",
+      "subject": "School Path",
+      "theme": "SCHOOL",
+      "questions": [
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "School Path",
+          "challenge": "What\u0027s the name of the Primary School diploma in Belgium?",
+          "answer": "CEB",
+          "theme": "SCHOOL"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "School Path",
+          "challenge": "At what age can we legally stop attending school?",
+          "answer": "18 years",
+          "theme": "SCHOOL"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "School Path",
+          "challenge": "How many years does it take to obtain a degree in Nursing?",
+          "answer": "3 years",
+          "theme": "SCHOOL"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "School Path",
+          "challenge": "How many years does it take on average to complete a doctorate?",
+          "answer": "8 years",
+          "theme": "SCHOOL"
+        }
+      ]
+    },
+    {
+      "author": "Tanguy Taminiau",
+      "subject": "Cost of studies",
+      "theme": "SCHOOL",
+      "questions": [
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Cost of studies",
+          "challenge": "How much does a year of Primary School cost in Belgium?",
+          "answer": "0",
+          "theme": "SCHOOL"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Cost of studies",
+          "challenge": "How much does a year of University cost in Belgium?",
+          "answer": "800",
+          "theme": "SCHOOL"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Cost of studies",
+          "challenge": "How much does a year of university in the USA cost at least?",
+          "answer": "15000",
+          "theme": "SCHOOL"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Cost of studies",
+          "challenge": "How much does a year of university in Japan cost?",
+          "answer": "6800",
+          "theme": "SCHOOL"
+        }
+      ]
+    }
+  ]
+}
