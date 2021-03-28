@@ -64,15 +64,17 @@ public class JouerChoixQuestionBP extends BorderPane
     private MenuPauseFP mpfp;
     private BorderPane cardPane;
     private String nickName;
+	private PlateauBp pla;
 
     public JouerChoixQuestionBP( Deck d )
     {
         this.d = d;
         cards = this.d.getCards();
+        getPla();
         Collections.shuffle( cards );
         initCardPane( cards, cardNb );
-        getJouerChoixQuestionMainBP().getChildren().add( getMenuPauseFP() );
-        getJouerChoixQuestionMainBP().getChildren().get( 1 ).setVisible( false );
+        getJouerChoixQuestionMainSP().getChildren().add( getMenuPauseFP() );
+        getJouerChoixQuestionMainSP().getChildren().get( 1 ).setVisible( false );
         //setBottom( getReturnButton() ); // ESCAPE BUTTON
         ColorAdjust col = new ColorAdjust( 0, -0.9, -0.5, 0 );
         //GaussianBlur blur = new GaussianBlur( 15 ); // LENT
@@ -90,8 +92,8 @@ public class JouerChoixQuestionBP extends BorderPane
                 if ( keyEvent.getCode() == KeyCode.ESCAPE )
                 {
                     cardPane.setEffect( blur );
-                    getJouerChoixQuestionMainBP().getChildren().get( 1 ).setVisible( true );
-                    ( ( MenuPauseFP ) getJouerChoixQuestionMainBP().getChildren().get( 1 ) ).getBtnResume()
+                    getJouerChoixQuestionMainSP().getChildren().get( 1 ).setVisible( true );
+                    ( ( MenuPauseFP ) getJouerChoixQuestionMainSP().getChildren().get( 1 ) ).getBtnResume()
                             .setOnAction( new EventHandler< ActionEvent >()
                             {
                                 @Override
@@ -103,7 +105,7 @@ public class JouerChoixQuestionBP extends BorderPane
                                         getAnimation().start();
                                     }
                                     cardPane.setEffect( null );
-                                    getJouerChoixQuestionMainBP().getChildren().get( 1 ).setVisible( false );
+                                    getJouerChoixQuestionMainSP().getChildren().get( 1 ).setVisible( false );
 
                                 }
                             } );
@@ -117,7 +119,7 @@ public class JouerChoixQuestionBP extends BorderPane
         } );
     }
 
-    private StackPane getJouerChoixQuestionMainBP()
+    private StackPane getJouerChoixQuestionMainSP()
     {
         if ( jouerChoixQuestionMainSP == null )
         {
@@ -170,6 +172,12 @@ public class JouerChoixQuestionBP extends BorderPane
         }
     }
 
+    public PlateauBp getPla() {
+		if(pla == null)
+    		pla= new PlateauBp(d);
+    	return pla;
+    }
+    
     private void initCardPane( List< BasicCard > cards, int i )
     {
         cardPane = new BorderPane();
@@ -217,15 +225,17 @@ public class JouerChoixQuestionBP extends BorderPane
         cardChoicePane.getChildren().add( fp );
         cardPane.setTop( vb2 );
         cardPane.setCenter( cardChoicePane );
-        if ( getJouerChoixQuestionMainBP().getChildren().size() < 1 )
+        if ( getJouerChoixQuestionMainSP().getChildren().size() < 1 )
         {
-            getJouerChoixQuestionMainBP().getChildren().add( cardPane );
+            getJouerChoixQuestionMainSP().getChildren().add( cardPane );
         }
         else
         {
-            getJouerChoixQuestionMainBP().getChildren().set( 0, cardPane );
+            getJouerChoixQuestionMainSP().getChildren().set( 0, cardPane );
         }
-        setCenter( getJouerChoixQuestionMainBP() );
+        HBox hbpla= new HBox();
+        hbpla.getChildren().addAll(getPla(), getJouerChoixQuestionMainSP());
+        setCenter( hbpla );
     }
 
     public int getID()
