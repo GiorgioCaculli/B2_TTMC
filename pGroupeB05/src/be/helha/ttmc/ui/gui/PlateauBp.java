@@ -33,8 +33,10 @@ public class PlateauBp extends BorderPane{
 			text= (i+1)+"";
 			Label lab= new Label(text);
 			if((i+1)*MOUV_Y > 790-HEIGHT_RECT*3) {
-				if((int)(((i+1)*MOUV_Y)/(790-HEIGHT_RECT*3)) > rangX)
+				if((int)(((i+1)*MOUV_Y)/(790-HEIGHT_RECT*3)) > rangX) {
 					rangX++;
+					test=0;
+				}
 				
 				
 				mouvY= (test+1)*MOUV_Y;
