@@ -474,10 +474,10 @@ public class JouerChoixQuestionMultiplayerBP extends BorderPane
                         String.format( "All questions have been answered, you scored %d points. Thank you for playing!",
                                 joueurs.get( playerID ).getScorePlayer() ) );
                 path = "/be/helha/ttmc/assets/images/banana.gif";
-                if ( playerID > 0 )
+                if ( playerID < maxPlayers - 1 )
                 {
                     getJouerChoixQuestionMainSP().getChildren().get( playerID ).setVisible( false );
-                    getJouerChoixQuestionMainSP().getChildren().get( playerID - 1 ).setVisible( true );
+                    getJouerChoixQuestionMainSP().getChildren().get( playerID + 1 ).setVisible( true );
                 }
                 else
                 {

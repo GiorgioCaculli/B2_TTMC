@@ -122,8 +122,8 @@ public class JouerChoixQuestionBP extends BorderPane
                         @Override
                         public void handle( ActionEvent arg0 )
                         {
-                            LobbySoloBP mp = ( LobbySoloBP ) getParent().getParent();
-                            mp.setVisibleNode( LobbySoloMainBP.class.getSimpleName() );
+                            LobbySoloBP lsbp = ( LobbySoloBP ) getParent().getParent();
+                            lsbp.setVisibleNode( LobbySoloMainBP.class.getSimpleName() );
                         }
                     } );
                     keyEvent.consume();
@@ -509,8 +509,8 @@ public class JouerChoixQuestionBP extends BorderPane
             alert.setContentText( String.format(
                     "All questions have been answered, you scored %d points. Thank you for playing!", newScore ) );
             path = "/be/helha/ttmc/assets/images/banana.gif";
-            MenuPlayBP mpbp = ( MenuPlayBP ) getParent().getParent();
-            mpbp.setVisibleNode( MenuPlayMainVB.class.getSimpleName() );
+            LobbySoloBP lsbp = ( LobbySoloBP ) getParent().getParent();
+            lsbp.setVisibleNode( LobbySoloMainBP.class.getSimpleName() );
         }
         else
         {
