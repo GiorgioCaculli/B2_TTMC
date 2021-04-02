@@ -248,7 +248,7 @@ public class JouerChoixQuestionBP extends BorderPane
         }
         //HBox hbpla = new HBox();
         //hbpla.getChildren().addAll( getPla(), getJouerChoixQuestionMainSP() );
-        setLeft( getPla() );
+        setBottom( getPla() );
         setCenter( getJouerChoixQuestionMainSP() );
     }
 
