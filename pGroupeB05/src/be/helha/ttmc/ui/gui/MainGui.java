@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import be.helha.ttmc.model.Deck;
 import be.helha.ttmc.serialization.Serialization;
+import be.helha.ttmc.ui.GUIConstant;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
@@ -32,7 +33,7 @@ public class MainGui extends Application
         primaryStage.setScene( scene );
         primaryStage.getIcons().add( new Image( "be/helha/ttmc/assets/images/paw.png" ) );
         primaryStage.show();
-        primaryStage.setTitle( "What do you know about it?" );
+        primaryStage.setTitle( GUIConstant.TITLE );
     }
 
     public MainGui()

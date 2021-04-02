@@ -302,7 +302,7 @@
         {
           "author": "Tanguy Taminiau",
           "subject": "Culinary Inventions",
-          "challenge": "Where is the Jupiler brewed?",
+          "challenge": "Where is Jupiler brewed?",
           "answer": "Jupil",
           "theme": "IMPROBABLE"
         },
@@ -540,7 +540,7 @@
         {
           "author": "Tanguy Taminiau",
           "subject": "Cost of studies",
-          "challenge": "How much does a year of University cost in Belgium?",
+          "challenge": "How much does a year of University in Belgium cost?",
           "answer": "800",
           "theme": "SCHOOL"
         },
@@ -834,7 +834,7 @@
         {
           "author": "Giorgio Caculli",
           "subject": "Tools",
-          "challenge": "What is the name of the object that alloww you to punch holes on your sheet?",
+          "challenge": "What is the name of the object that allows you to punch holes on your sheet?",
           "answer": "Hole punch",
           "theme": "SCHOOL"
         }
