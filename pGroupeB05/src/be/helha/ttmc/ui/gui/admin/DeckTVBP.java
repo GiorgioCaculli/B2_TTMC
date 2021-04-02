@@ -1,4 +1,4 @@
-package be.helha.ttmc.ui.gui;
+package be.helha.ttmc.ui.gui.admin;
 
 import java.util.ArrayList;
 import java.util.List;

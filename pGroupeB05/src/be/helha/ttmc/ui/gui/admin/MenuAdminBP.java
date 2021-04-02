@@ -1,6 +1,7 @@
-package be.helha.ttmc.ui.gui;
+package be.helha.ttmc.ui.gui.admin;
 
 import be.helha.ttmc.model.Deck;
+import be.helha.ttmc.ui.gui.MainPaneBP;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;

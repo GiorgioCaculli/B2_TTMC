@@ -1,14 +1,14 @@
-package be.helha.ttmc.ui.gui;
+package be.helha.ttmc.ui.gui.play;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 import be.helha.ttmc.model.BasicCard;
 import be.helha.ttmc.model.Deck;
 import be.helha.ttmc.model.Theme;
-import be.helha.ttmc.ui.gui.MenuPlayBP.MenuPlayMainVB;
+import be.helha.ttmc.ui.Player;
+import be.helha.ttmc.ui.gui.MenuPauseFP;
+import be.helha.ttmc.ui.gui.play.LobbyMultiLocalBP.LobbyMultiLocalMainBP;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -21,7 +21,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.effect.ColorAdjust;
@@ -43,62 +42,23 @@ public class JouerChoixQuestionMultiplayerBP extends BorderPane
     private StackPane jouerChoixQuestionMainSP;
 
     private MenuPauseFP mpfp;
-    private List< Joueur > players;
+    private List< Joueur > joueurs;
     private int maxPlayers;
     private int currentlyPlaying;
 
-    public JouerChoixQuestionMultiplayerBP( Deck d )
+    public JouerChoixQuestionMultiplayerBP( Deck d, List< Player > players )
     {
         Deck d1 = d.clone();
-        TextInputDialog nbPlayersDialog = new TextInputDialog();
-        nbPlayersDialog.setTitle( "Number of players" );
-        nbPlayersDialog.setContentText( "Please, insert the number of players:" );
-        nbPlayersDialog.setHeaderText( "Insert the number of players" );
-        Optional< String > nbPlayersInput = null;
-        int nbPlayers = 0;
-        while ( nbPlayers == 0 || nbPlayers < 0 )
+        this.maxPlayers = players.size();
+        joueurs = new ArrayList<>();
+        for( Player p : players )
         {
-            nbPlayersInput = nbPlayersDialog.showAndWait();
-            if ( nbPlayersInput.isPresent() && !nbPlayersInput.get().isEmpty() )
-            {
-                try
-                {
-                    nbPlayers = Integer.parseInt( nbPlayersInput.get() );
-                }
-                catch ( NumberFormatException nbe )
-                {
-                    nbPlayers = -1;
-                }
-            }
-            else
-            {
-                nbPlayers = -1;
-            }
+            Joueur j = new Joueur( p.getCards() );
+            j.setNickNamePlayer( p.getNickNamePlayer() );
+            j.setScorePlayer( 0 );
+            joueurs.add( j );
         }
-        this.maxPlayers = nbPlayers;
-        players = new ArrayList<>( maxPlayers );
-        for ( int i = 0; i < maxPlayers; i++ )
-        {
-            List< BasicCard > cards = d1.getCards();
-            Collections.shuffle( cards );
-            Joueur joueur = new Joueur( cards );
-            //joueur.setScorePlayer( 0 );
-            TextInputDialog userNameDialogPlayer = new TextInputDialog();
-            userNameDialogPlayer.setTitle( String.format( "Player %d - Insert your nickname", i + 1 ) );
-            userNameDialogPlayer.setHeaderText( String.format( "Player %d - Insert your nickname", i + 1 ) );
-            userNameDialogPlayer.setContentText( String.format( "Please, insert your nickname player %d:", i + 1 ) );
-            Optional< String > userNamePlayer = userNameDialogPlayer.showAndWait();
-            if ( userNamePlayer.isPresent() && !userNamePlayer.get().isEmpty() )
-            {
-                joueur.setNickNamePlayer( String.format( "%s", userNamePlayer.get() ) );
-            }
-            else
-            {
-                joueur.setNickNamePlayer( String.format( "User-%d", i + 1 ) );
-            }
-            players.add( joueur );
-        }
-        initCardPane( players, maxPlayers );
+        initCardPane( joueurs, maxPlayers );
         getJouerChoixQuestionMainSP().getChildren().add( getMenuPauseFP() );
         getJouerChoixQuestionMainSP().getChildren().get( maxPlayers ).setVisible( false );
         ColorAdjust col = new ColorAdjust( 0, -0.9, -0.5, 0 );
@@ -147,8 +107,8 @@ public class JouerChoixQuestionMultiplayerBP extends BorderPane
                         @Override
                         public void handle( ActionEvent arg0 )
                         {
-                            MenuPlayBP mp = ( MenuPlayBP ) getParent().getParent().getParent().getParent();
-                            mp.setVisibleNode( MenuPlayMainVB.class.getSimpleName() );
+                            LobbyMultiLocalBP lmlbp = ( LobbyMultiLocalBP ) getParent().getParent();
+                            lmlbp.setVisibleNode( LobbyMultiLocalMainBP.class.getSimpleName() );
                         }
                     } );
                     keyEvent.consume();
@@ -322,7 +282,7 @@ public class JouerChoixQuestionMultiplayerBP extends BorderPane
                     @Override
                     public void handle( ActionEvent arg0 )
                     {
-                        players.get( currentlyPlaying ).getCardPaneJoueur().checkAnswerPlayer( arg0, currentlyPlaying );
+                        joueurs.get( currentlyPlaying ).getCardPaneJoueur().checkAnswerPlayer( arg0, currentlyPlaying );
                     }
                 } );
             }
@@ -341,7 +301,7 @@ public class JouerChoixQuestionMultiplayerBP extends BorderPane
 
     }
 
-    private class CardPaneJoueur extends BorderPane
+    protected class CardPaneJoueur extends BorderPane
     {
         private Label lblThemePlayer;
         private Label lblSujetPlayer;
@@ -426,7 +386,7 @@ public class JouerChoixQuestionMultiplayerBP extends BorderPane
             HBox scoreBox = new HBox();
             Region espaceVideNicknameScore = new Region();
             HBox.setHgrow( espaceVideNicknameScore, Priority.ALWAYS );
-            scoreBox.getChildren().addAll( new Label( String.format( "%s", players.get( id ).getNickNamePlayer() ) ),
+            scoreBox.getChildren().addAll( new Label( String.format( "%s", joueurs.get( id ).getNickNamePlayer() ) ),
                     espaceVideNicknameScore, getLblScore() );
 
             VBox vbPlayer = new VBox();
@@ -475,7 +435,7 @@ public class JouerChoixQuestionMultiplayerBP extends BorderPane
         public Label getLblScore()
         {
             if ( lblScore == null )
-                lblScore = new Label( String.format( "Score: %2d", players.get( id ).getScorePlayer() ) );
+                lblScore = new Label( String.format( "Score: %2d", joueurs.get( id ).getScorePlayer() ) );
             return lblScore;
         }
 
@@ -503,39 +463,44 @@ public class JouerChoixQuestionMultiplayerBP extends BorderPane
 
         private void checkAnswerPlayer( Object o, int playerID )
         {
-            players.get( playerID ).setCardNb( players.get( playerID ).getCardNb() + 1 );
-            players.get( playerID ).getCardPaneJoueur().getReponsesBP().get( idQuestion ).getAnimationPlayer().stop();
+            joueurs.get( playerID ).setCardNb( joueurs.get( playerID ).getCardNb() + 1 );
+            joueurs.get( playerID ).getCardPaneJoueur().getReponsesBP().get( idQuestion ).getAnimationPlayer().stop();
             Alert alert = new Alert( AlertType.INFORMATION );
             alert.setTitle( "Resultats" );
             String path;
-            if ( players.get( playerID ).getCardNb() >= players.get( playerID ).getCards().size() )
+            if ( joueurs.get( playerID ).getCardNb() >= joueurs.get( playerID ).getCards().size() )
             {
                 alert.setContentText(
                         String.format( "All questions have been answered, you scored %d points. Thank you for playing!",
-                                players.get( playerID ).getScorePlayer() ) );
+                                joueurs.get( playerID ).getScorePlayer() ) );
                 path = "/be/helha/ttmc/assets/images/banana.gif";
-                if ( playerID > players.size() )
+                if ( playerID > 0 )
                 {
                     getJouerChoixQuestionMainSP().getChildren().get( playerID ).setVisible( false );
                     getJouerChoixQuestionMainSP().getChildren().get( playerID - 1 ).setVisible( true );
                 }
+                else
+                {
+                    LobbyMultiLocalBP lmlbp = ( LobbyMultiLocalBP ) getParent().getParent().getParent().getParent();
+                    lmlbp.setVisibleNode( LobbyMultiLocalMainBP.class.getSimpleName() );
+                }
             }
             else
             {
-                if ( players.get( playerID ).getCardPaneJoueur().getReponsesBP().get( idQuestion ).getTxtRepPlayer()
+                if ( joueurs.get( playerID ).getCardPaneJoueur().getReponsesBP().get( idQuestion ).getTxtRepPlayer()
                         .getText().equalsIgnoreCase( bcPlayer.getQuestions()
-                                .get( players.get( playerID ).getCardPaneJoueur().getIdQuestion() ).getAnswer() ) )
+                                .get( joueurs.get( playerID ).getCardPaneJoueur().getIdQuestion() ).getAnswer() ) )
                 {
                     alert.setContentText( "Brava tu as reussi !" );
                     path = "/be/helha/ttmc/assets/images/banana.gif";
-                    players.get( playerID ).setScorePlayer( players.get( playerID ).getScorePlayer()
-                            + players.get( playerID ).getCardPaneJoueur().getIdQuestion() + 1 );
-                    getLblScore().setText( String.format( "Score: %2d", players.get( playerID ).getScorePlayer() ) );
+                    joueurs.get( playerID ).setScorePlayer( joueurs.get( playerID ).getScorePlayer()
+                            + joueurs.get( playerID ).getCardPaneJoueur().getIdQuestion() + 1 );
+                    getLblScore().setText( String.format( "Score: %2d", joueurs.get( playerID ).getScorePlayer() ) );
                 }
                 else
                 {
                     alert.setContentText( "La reponse etait : " + bcPlayer.getQuestions()
-                            .get( players.get( playerID ).getCardPaneJoueur().getIdQuestion() ).getAnswer() );
+                            .get( joueurs.get( playerID ).getCardPaneJoueur().getIdQuestion() ).getAnswer() );
                     path = "/be/helha/ttmc/assets/images/sonicPleure.gif";
                 }
             }
@@ -548,7 +513,7 @@ public class JouerChoixQuestionMultiplayerBP extends BorderPane
                 alert.showAndWait();
             else if ( o instanceof Long )
                 alert.show();
-            if ( players.get( playerID ).getCardNb() < players.get( playerID ).getCards().size() )
+            if ( joueurs.get( playerID ).getCardNb() < joueurs.get( playerID ).getCards().size() )
             {
                 if ( playerID < maxPlayers - 1
                         && getJouerChoixQuestionMainSP().getChildren().get( playerID ).isVisible() )
@@ -560,66 +525,20 @@ public class JouerChoixQuestionMultiplayerBP extends BorderPane
                 else
                 {
                     currentlyPlaying = 0;
-                    initCardPane( players, maxPlayers );
+                    initCardPane( joueurs, maxPlayers );
                 }
             }
 
         }
     }
 
-    private class Joueur
+    protected class Joueur extends Player
     {
-        private List< BasicCard > cards;
-        private int cardNb = 0;
-        private String nickNamePlayer;
-        private int scorePlayer;
-
         private CardPaneJoueur cardPane;
 
         public Joueur( List< BasicCard > cards )
         {
-            setCards( cards );
-            setScorePlayer( 0 );
-        }
-
-        public void setCards( List< BasicCard > cards )
-        {
-            this.cards = cards;
-        }
-
-        public List< BasicCard > getCards()
-        {
-            return cards;
-        }
-
-        public int getCardNb()
-        {
-            return cardNb;
-        }
-
-        public void setCardNb( int cardNb )
-        {
-            this.cardNb = cardNb;
-        }
-
-        public void setNickNamePlayer( String nickNamePlayer )
-        {
-            this.nickNamePlayer = nickNamePlayer;
-        }
-
-        public String getNickNamePlayer()
-        {
-            return nickNamePlayer;
-        }
-
-        public int getScorePlayer()
-        {
-            return scorePlayer;
-        }
-
-        public void setScorePlayer( int scorePlayer )
-        {
-            this.scorePlayer = scorePlayer;
+            super( cards );
         }
 
         public CardPaneJoueur getCardPaneJoueur()
@@ -633,15 +552,15 @@ public class JouerChoixQuestionMultiplayerBP extends BorderPane
         }
     }
 
-    private void initCardPane( List< Joueur > players, int nbJoueurs )
+    private void initCardPane( List< Joueur > joueurs, int nbJoueurs )
     {
         if ( getJouerChoixQuestionMainSP().getChildren().size() < nbJoueurs )
         {
             for ( int j = 0; j < nbJoueurs; j++ )
             {
-                players.get( j ).setCardPaneJoueur(
-                        new CardPaneJoueur( players.get( j ).getCards().get( players.get( j ).getCardNb() ), j ) );
-                getJouerChoixQuestionMainSP().getChildren().add( players.get( j ).getCardPaneJoueur() );
+                joueurs.get( j ).setCardPaneJoueur(
+                        new CardPaneJoueur( joueurs.get( j ).getCards().get( joueurs.get( j ).getCardNb() ), j ) );
+                getJouerChoixQuestionMainSP().getChildren().add( joueurs.get( j ).getCardPaneJoueur() );
                 if ( j > 0 )
                 {
                     getJouerChoixQuestionMainSP().getChildren().get( j ).setVisible( false );
@@ -652,9 +571,9 @@ public class JouerChoixQuestionMultiplayerBP extends BorderPane
         {
             for ( int j = 0; j < nbJoueurs; j++ )
             {
-                players.get( j ).setCardPaneJoueur(
-                        new CardPaneJoueur( players.get( j ).getCards().get( players.get( j ).getCardNb() ), j ) );
-                getJouerChoixQuestionMainSP().getChildren().set( j, players.get( j ).getCardPaneJoueur() );
+                joueurs.get( j ).setCardPaneJoueur(
+                        new CardPaneJoueur( joueurs.get( j ).getCards().get( joueurs.get( j ).getCardNb() ), j ) );
+                getJouerChoixQuestionMainSP().getChildren().set( j, joueurs.get( j ).getCardPaneJoueur() );
                 if ( j > 0 )
                 {
                     getJouerChoixQuestionMainSP().getChildren().get( j ).setVisible( false );

@@ -1,4 +1,4 @@
-package be.helha.ttmc.ui.gui;
+package be.helha.ttmc.ui.gui.play;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,7 +7,10 @@ import java.util.List;
 import be.helha.ttmc.model.BasicCard;
 import be.helha.ttmc.model.Deck;
 import be.helha.ttmc.model.Theme;
-import be.helha.ttmc.ui.gui.MenuPlayBP.MenuPlayMainVB;
+import be.helha.ttmc.ui.gui.MenuPauseFP;
+import be.helha.ttmc.ui.gui.PlateauBp;
+import be.helha.ttmc.ui.gui.play.LobbySoloBP.LobbySoloMainBP;
+import be.helha.ttmc.ui.gui.play.MenuPlayBP.MenuPlayMainVB;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -119,8 +122,8 @@ public class JouerChoixQuestionBP extends BorderPane
                         @Override
                         public void handle( ActionEvent arg0 )
                         {
-                            MenuPlayBP mp = ( MenuPlayBP ) getParent().getParent();
-                            mp.setVisibleNode( MenuPlayMainVB.class.getSimpleName() );
+                            LobbySoloBP mp = ( LobbySoloBP ) getParent().getParent();
+                            mp.setVisibleNode( LobbySoloMainBP.class.getSimpleName() );
                         }
                     } );
                     keyEvent.consume();

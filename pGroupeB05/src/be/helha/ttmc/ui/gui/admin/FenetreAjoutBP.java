@@ -1,4 +1,4 @@
-package be.helha.ttmc.ui.gui;
+package be.helha.ttmc.ui.gui.admin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ import be.helha.ttmc.model.Deck;
 import be.helha.ttmc.model.Question;
 import be.helha.ttmc.model.Theme;
 import be.helha.ttmc.serialization.Serialization;
-import be.helha.ttmc.ui.gui.MenuAdminBP.MenuAdminMainVB;
+import be.helha.ttmc.ui.gui.admin.MenuAdminBP.MenuAdminMainVB;
 
 public class FenetreAjoutBP extends BorderPane
 {

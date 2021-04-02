@@ -2,6 +2,9 @@ package be.helha.ttmc.ui.gui;
 
 import be.helha.ttmc.Main;
 import be.helha.ttmc.model.Deck;
+import be.helha.ttmc.ui.gui.admin.AlerteLogin;
+import be.helha.ttmc.ui.gui.admin.MenuAdminBP;
+import be.helha.ttmc.ui.gui.play.MenuPlayBP;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;

@@ -1,7 +1,7 @@
-package be.helha.ttmc.ui.gui;
+package be.helha.ttmc.ui.gui.play;
 
 import be.helha.ttmc.model.Deck;
-import be.helha.ttmc.ui.gui.MenuPlayBP.MenuPlayMainVB;
+import be.helha.ttmc.ui.gui.play.MenuPlayBP.MenuPlayMainVB;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -20,7 +20,7 @@ public class MenuMultiplayerBP extends BorderPane
 
     public MenuMultiplayerBP( Deck d )
     {
-        this.d = d;        
+        this.d = d;
 
         getChoicePane().getChildren().add( new MenuMultiplayerMainVB() );
         setVisibleNode( MenuMultiplayerMainVB.class.getSimpleName() );
@@ -28,7 +28,6 @@ public class MenuMultiplayerBP extends BorderPane
         setCenter( choiceMultiplayerPane );
 
     }
-   
 
     protected StackPane getChoicePane()
     {
@@ -80,16 +79,16 @@ public class MenuMultiplayerBP extends BorderPane
                 @Override
                 public void handle( ActionEvent arg0 )
                 {
-                    for( int i = 0; i < getChoicePane().getChildren().size(); i++ )
+                    for ( int i = 0; i < getChoicePane().getChildren().size(); i++ )
                     {
-                        if( getChoicePane().getChildren().get( i ).getClass().getSimpleName().equals( JouerChoixQuestionMultiplayerBP.class.getSimpleName() ) )
+                        if ( getChoicePane().getChildren().get( i ).getClass().getSimpleName()
+                                .equals( LobbyMultiLocalBP.class.getSimpleName() ) )
                         {
                             getChoicePane().getChildren().remove( i );
                         }
                     }
-                    JouerChoixQuestionMultiplayerBP jcqm = new JouerChoixQuestionMultiplayerBP( d );
-                    getChoicePane().getChildren().add( jcqm );
-                    setVisibleNode( jcqm.getClass().getSimpleName() );
+                    getChoicePane().getChildren().add( new LobbyMultiLocalBP( d ) );
+                    setVisibleNode( LobbyMultiLocalBP.class.getSimpleName() );
                 }
             } );
         }

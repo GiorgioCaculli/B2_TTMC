@@ -6,6 +6,9 @@ import java.util.List;
 
 import be.helha.ttmc.model.Deck;
 import be.helha.ttmc.ui.Settings;
+import be.helha.ttmc.ui.gui.admin.MenuAdminBP;
+import be.helha.ttmc.ui.gui.play.MenuPlayBP;
+import be.helha.ttmc.ui.gui.util.MusicGestion;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
 import javafx.scene.control.Slider;

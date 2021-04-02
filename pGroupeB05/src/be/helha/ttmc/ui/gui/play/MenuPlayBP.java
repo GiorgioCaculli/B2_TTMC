@@ -1,10 +1,12 @@
-package be.helha.ttmc.ui.gui;
+package be.helha.ttmc.ui.gui.play;
 
 import java.util.Optional;
 import java.util.Random;
 
 import be.helha.ttmc.model.Deck;
 import be.helha.ttmc.serialization.Serialization;
+import be.helha.ttmc.ui.gui.MainPaneBP;
+import be.helha.ttmc.ui.gui.MenuPrincipalBP;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -86,44 +88,13 @@ public class MenuPlayBP extends BorderPane
                     for ( int i = 0; i < getChoicePane().getChildren().size(); i++ )
                     {
                         if ( getChoicePane().getChildren().get( i ).getClass().getSimpleName()
-                                .equals( JouerChoixQuestionBP.class.getSimpleName() ) )
+                                .equals( LobbySoloBP.class.getSimpleName() ) )
                         {
                             getChoicePane().getChildren().remove( i );
                         }
                     }
-                    TextInputDialog userNameDialog = new TextInputDialog();
-                    userNameDialog.setTitle( "Insert your nickname" );
-                    userNameDialog.setHeaderText( "Insert your nickname" );
-                    userNameDialog.setContentText( "Please, insert your nickname:" );
-                    Optional< String > userName = userNameDialog.showAndWait();
-                    JouerChoixQuestionBP jcq = new JouerChoixQuestionBP( d );
-                    jcq.setScore( 0 );
-                    if( userName.isPresent() )
-                    {
-                        if ( userName.get().equals( "giorgio" ) || userName.get().equals( "guillaume" )
-                                || userName.get().equals( "tanguy" ) )
-                        {
-                            d = Serialization
-                                    .loadDeck( String.format( "assets/decks/%s.json", userName.get() ).toString() );
-                        }
-                        else if ( userName.get().isEmpty() )
-                        {
-                            jcq.setNickName( "User-1" );
-                            jcq.getLblScore().setText( String.format( "User: %s - Score: ", jcq.getNickName() ) );
-                        }
-                        else
-                        {
-                            jcq.setNickName( String.format( "%s", userName.get() ) );
-                            jcq.getLblScore().setText( String.format( "User: %s - Score: ", jcq.getNickName() ) );
-                        }
-                    }
-                    else
-                    {
-                        jcq.setNickName( "User-1" );
-                        jcq.getLblScore().setText( String.format( "User: %s - Score: ", jcq.getNickName() ) );
-                    }
-                    getChoicePane().getChildren().add( jcq );
-                    setVisibleNode( jcq.getClass().getSimpleName() );
+                    getChoicePane().getChildren().add( new LobbySoloBP( d ) );
+                    setVisibleNode( LobbySoloBP.class.getSimpleName() );
                 }
             } );
         }

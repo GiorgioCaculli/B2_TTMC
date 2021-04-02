@@ -1,4 +1,4 @@
-package be.helha.ttmc.ui.gui;
+package be.helha.ttmc.ui.gui.util;
 
 import java.util.List;
 import java.util.logging.Level;
