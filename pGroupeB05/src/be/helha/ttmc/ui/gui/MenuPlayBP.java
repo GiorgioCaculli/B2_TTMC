@@ -96,23 +96,30 @@ public class MenuPlayBP extends BorderPane
                     userNameDialog.setHeaderText( "Insert your nickname" );
                     userNameDialog.setContentText( "Please, insert your nickname:" );
                     Optional< String > userName = userNameDialog.showAndWait();
-                    if ( userName.get().equals( "giorgio" ) || userName.get().equals( "guillaume" )
-                            || userName.get().equals( "tanguy" ) )
-                    {
-                        d = Serialization
-                                .loadDeck( String.format( "assets/decks/%s.json", userName.get() ).toString() );
-                    }
                     JouerChoixQuestionBP jcq = new JouerChoixQuestionBP( d );
                     jcq.setScore( 0 );
-                    if ( userName.get().isEmpty() )
+                    if( userName.isPresent() )
                     {
-                        Random randId = new Random( 999 );
-                        jcq.setNickName( String.format( "User-%d", randId.nextInt() ) );
-                        jcq.getLblScore().setText( String.format( "User: %s - Score: ", jcq.getNickName() ) );
+                        if ( userName.get().equals( "giorgio" ) || userName.get().equals( "guillaume" )
+                                || userName.get().equals( "tanguy" ) )
+                        {
+                            d = Serialization
+                                    .loadDeck( String.format( "assets/decks/%s.json", userName.get() ).toString() );
+                        }
+                        else if ( userName.get().isEmpty() )
+                        {
+                            jcq.setNickName( "User-1" );
+                            jcq.getLblScore().setText( String.format( "User: %s - Score: ", jcq.getNickName() ) );
+                        }
+                        else
+                        {
+                            jcq.setNickName( String.format( "%s", userName.get() ) );
+                            jcq.getLblScore().setText( String.format( "User: %s - Score: ", jcq.getNickName() ) );
+                        }
                     }
                     else
                     {
-                        jcq.setNickName( String.format( "%s", userName.get() ) );
+                        jcq.setNickName( "User-1" );
                         jcq.getLblScore().setText( String.format( "User: %s - Score: ", jcq.getNickName() ) );
                     }
                     getChoicePane().getChildren().add( jcq );
