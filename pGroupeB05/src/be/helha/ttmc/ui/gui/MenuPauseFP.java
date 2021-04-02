@@ -1,6 +1,5 @@
 package be.helha.ttmc.ui.gui;
 
-import be.helha.ttmc.ui.gui.MenuPlayBP.MenuPlayMainVB;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -19,17 +18,6 @@ public class MenuPauseFP extends BorderPane
         if ( btnBack == null )
         {
             btnBack = new Button( "Back to main menu" );
-            btnBack.setOnAction( new EventHandler< ActionEvent >()
-            {
-
-                @Override
-                public void handle( ActionEvent arg0 )
-                {
-                    MenuPlayBP mp = ( MenuPlayBP ) getParent().getParent().getParent().getParent();
-                    mp.setVisibleNode( MenuPlayMainVB.class.getSimpleName() );
-
-                }
-            } );
         }
         return btnBack;
     }

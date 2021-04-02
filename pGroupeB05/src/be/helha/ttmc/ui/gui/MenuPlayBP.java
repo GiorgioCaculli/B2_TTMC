@@ -3,7 +3,6 @@ package be.helha.ttmc.ui.gui;
 import java.util.Optional;
 import java.util.Random;
 
-import be.helha.ttmc.Main;
 import be.helha.ttmc.model.Deck;
 import be.helha.ttmc.serialization.Serialization;
 import javafx.event.ActionEvent;

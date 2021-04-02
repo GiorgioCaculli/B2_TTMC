@@ -5,6 +5,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import be.helha.ttmc.Main;
+import be.helha.ttmc.ui.Settings;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -15,13 +16,15 @@ public class MusicGestion
     private MediaView mv;
     private Media m;
     private int id = 0;
-    private double vol = 0.04;
+    private double vol;
+    private Settings s;
 
-    public MusicGestion( List< String > path )
+    public MusicGestion( List< String > path, Settings s )
     {
-
+        this.s = s;
         logger.log( Level.INFO,
                 String.format( "Reading music file: %s", Main.class.getResource( path.get( id ) ).toString() ) );
+        vol = s.getVolume();
 
         gererMusic( path );
 
@@ -38,7 +41,8 @@ public class MusicGestion
 
     public void gererVolume( double newVolume )
     {
-        mv.getMediaPlayer().setVolume( newVolume );
+        s.setVolume( newVolume );
+        mv.getMediaPlayer().setVolume( s.getVolume() );
     }
 
     public void gererMusic( List< String > path )

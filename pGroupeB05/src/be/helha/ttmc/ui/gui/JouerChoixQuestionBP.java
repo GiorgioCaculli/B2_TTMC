@@ -64,7 +64,7 @@ public class JouerChoixQuestionBP extends BorderPane
     private MenuPauseFP mpfp;
     private BorderPane cardPane;
     private String nickName;
-	private PlateauBp pla;
+    private PlateauBp pla;
 
     public JouerChoixQuestionBP( Deck d )
     {
@@ -93,26 +93,36 @@ public class JouerChoixQuestionBP extends BorderPane
                 {
                     cardPane.setEffect( blur );
                     getJouerChoixQuestionMainSP().getChildren().get( 1 ).setVisible( true );
-                    ( ( MenuPauseFP ) getJouerChoixQuestionMainSP().getChildren().get( 1 ) ).getBtnResume()
-                            .setOnAction( new EventHandler< ActionEvent >()
+                    MenuPauseFP mpfp = ( ( MenuPauseFP ) getJouerChoixQuestionMainSP().getChildren().get( 1 ) );
+                    mpfp.getBtnResume().setOnAction( new EventHandler< ActionEvent >()
+                    {
+                        @Override
+                        public void handle( ActionEvent arg0 )
+                        {
+                            if ( !cardChoicePane.getChildren().get( cardChoicePane.getChildren().size() - 1 )
+                                    .isVisible() )
                             {
-                                @Override
-                                public void handle( ActionEvent arg0 )
-                                {
-                                    if ( !cardChoicePane.getChildren().get( cardChoicePane.getChildren().size() - 1 )
-                                            .isVisible() )
-                                    {
-                                        getAnimation().start();
-                                    }
-                                    cardPane.setEffect( null );
-                                    getJouerChoixQuestionMainSP().getChildren().get( 1 ).setVisible( false );
+                                getAnimation().start();
+                            }
+                            cardPane.setEffect( null );
+                            getJouerChoixQuestionMainSP().getChildren().get( 1 ).setVisible( false );
 
-                                }
-                            } );
+                        }
+                    } );
                     if ( !cardChoicePane.getChildren().get( cardChoicePane.getChildren().size() - 1 ).isVisible() )
                     {
                         getAnimation().stop();
                     }
+                    mpfp.getBtnBack().setOnAction( new EventHandler< ActionEvent >()
+                    {
+
+                        @Override
+                        public void handle( ActionEvent arg0 )
+                        {
+                            MenuPlayBP mp = ( MenuPlayBP ) getParent().getParent();
+                            mp.setVisibleNode( MenuPlayMainVB.class.getSimpleName() );
+                        }
+                    } );
                     keyEvent.consume();
                 }
             }
@@ -172,12 +182,13 @@ public class JouerChoixQuestionBP extends BorderPane
         }
     }
 
-    public PlateauBp getPla() {
-		if(pla == null)
-    		pla= new PlateauBp(d);
-    	return pla;
+    public PlateauBp getPla()
+    {
+        if ( pla == null )
+            pla = new PlateauBp( d );
+        return pla;
     }
-    
+
     private void initCardPane( List< BasicCard > cards, int i )
     {
         cardPane = new BorderPane();
@@ -233,8 +244,8 @@ public class JouerChoixQuestionBP extends BorderPane
         {
             getJouerChoixQuestionMainSP().getChildren().set( 0, cardPane );
         }
-        HBox hbpla= new HBox();
-        hbpla.getChildren().addAll(getPla(), getJouerChoixQuestionMainSP());
+        HBox hbpla = new HBox();
+        hbpla.getChildren().addAll( getPla(), getJouerChoixQuestionMainSP() );
         setCenter( hbpla );
     }
 

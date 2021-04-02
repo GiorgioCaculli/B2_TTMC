@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import be.helha.ttmc.model.Deck;
+import be.helha.ttmc.ui.Settings;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
 import javafx.scene.control.Slider;
@@ -17,7 +18,7 @@ public class MainPaneBP extends BorderPane
     private Slider slider;
     private StackPane stackpane;
 
-    public MainPaneBP( Deck d )
+    public MainPaneBP( Deck d, Settings s )
     {
 
         getStackPane().getChildren().add( new MenuPrincipalBP( d ) );
@@ -41,7 +42,7 @@ public class MainPaneBP extends BorderPane
             {
                 try
                 {
-                    musics = new MusicGestion( path );
+                    musics = new MusicGestion( path, s );
                     musics.gererThread( path ).run();
 
                 }

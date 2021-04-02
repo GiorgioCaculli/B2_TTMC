@@ -2,18 +2,12 @@ package be.helha.ttmc.serialization;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Writer;
-import java.nio.file.Path;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -33,7 +27,6 @@ public class Serialization
     {
         gb.setPrettyPrinting();
         String path = "deck.json";
-        Path p = new File( path ).toPath();
         File json = null;
         try
         {
@@ -60,9 +53,9 @@ public class Serialization
     public static Deck loadDeck( String path )
     {
         Deck d = null;
+        gson = gb.create();
         try
         {
-            gson = gb.create();
             if( path.contains( "assets/decks" ) )
             {
                 InputStream in = Main.class.getResourceAsStream( path );
@@ -75,9 +68,8 @@ public class Serialization
         }
         catch ( JsonSyntaxException | JsonIOException | FileNotFoundException e )
         {
-            // TODO Auto-generated catch block
-            d = new Deck();
-            e.printStackTrace();
+            InputStream in = Main.class.getResourceAsStream( "assets/decks/deck.json" );
+            d = gson.fromJson( new BufferedReader( new InputStreamReader( in ) ), Deck.class );
         }
         return d;
     }

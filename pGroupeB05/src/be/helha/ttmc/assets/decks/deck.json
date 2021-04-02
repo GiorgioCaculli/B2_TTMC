@@ -1,0 +1,844 @@
+{
+  "cards": [
+    {
+      "author": "Guillaume Lambert",
+      "subject": "Coffee",
+      "theme": "IMPROBABLE",
+      "questions": [
+        {
+          "author": "Guillaume Lambert",
+          "subject": "Coffee",
+          "challenge": "What is coffee made from (two words)?",
+          "answer": "coffee bean",
+          "theme": "IMPROBABLE"
+        },
+        {
+          "author": "Guillaume Lambert",
+          "subject": "Coffee",
+          "challenge": " What is the name of a strong and well-known Italian coffee?",
+          "answer": "Espresso",
+          "theme": "IMPROBABLE"
+        },
+        {
+          "author": "Guillaume Lambert",
+          "subject": "Coffee",
+          "challenge": "What is the name of the caffeine in tea? ",
+          "answer": "Theine",
+          "theme": "IMPROBABLE"
+        },
+        {
+          "author": "Guillaume Lambert",
+          "subject": "Coffee",
+          "challenge": "Where are the world’s most expensive coffee beans harvested (three words)?",
+          "answer": "In Luwak feces",
+          "theme": "IMPROBABLE"
+        }
+      ]
+    },
+    {
+      "author": "Guillaume Lambert",
+      "subject": "Drugs",
+      "theme": "IMPROBABLE",
+      "questions": [
+        {
+          "author": "Guillaume Lambert",
+          "subject": "Drugs",
+          "challenge": "What disease is insulin used for?",
+          "answer": "Diabetes",
+          "theme": "IMPROBABLE"
+        },
+        {
+          "author": "Guillaume Lambert",
+          "subject": "Drugs",
+          "challenge": "What is name of the molecule contained in Dafalgan?",
+          "answer": "Paracetamol",
+          "theme": "IMPROBABLE"
+        },
+        {
+          "author": "Guillaume Lambert",
+          "subject": "Drugs",
+          "challenge": "What is the first element of an anti-venom?",
+          "answer": "Venom",
+          "theme": "IMPROBABLE"
+        },
+        {
+          "author": "Guillaume Lambert",
+          "subject": "Drugs",
+          "challenge": "What kind of drugs is salicilic acid used for?",
+          "answer": "Painkillers",
+          "theme": "IMPROBABLE"
+        }
+      ]
+    },
+    {
+      "author": "Guillaume Lambert",
+      "subject": "General School Knowledge",
+      "theme": "SCHOOL",
+      "questions": [
+        {
+          "author": "Guillaume Lambert",
+          "subject": "General School Knowledge",
+          "challenge": "Up until what age is it compulsary to go to school full time in Belgium?",
+          "answer": "15",
+          "theme": "SCHOOL"
+        },
+        {
+          "author": "Guillaume Lambert",
+          "subject": "General School Knowledge",
+          "challenge": "At what age is one obliged to start going to school in Belgium?",
+          "answer": "5",
+          "theme": "SCHOOL"
+        },
+        {
+          "author": "Guillaume Lambert",
+          "subject": "General School Knowledge",
+          "challenge": "What is the name of the organization that allows studying abroad?",
+          "answer": "Erasmus",
+          "theme": "SCHOOL"
+        },
+        {
+          "author": "Guillaume Lambert",
+          "subject": "General School Knowledge",
+          "challenge": "How many compulsory general courses are there in the last year of Secondary School in Belgium?",
+          "answer": "10",
+          "theme": "SCHOOL"
+        }
+      ]
+    },
+    {
+      "author": "Guillaume Lambert",
+      "subject": "School History",
+      "theme": "SCHOOL",
+      "questions": [
+        {
+          "author": "Guillaume Lambert",
+          "subject": "School History",
+          "challenge": "According to popular tradition, who invented the school?",
+          "answer": "Charlemagne",
+          "theme": "SCHOOL"
+        },
+        {
+          "author": "Guillaume Lambert",
+          "subject": "School History",
+          "challenge": "Who took over the role of teacher in the earlier ages?",
+          "answer": "Church",
+          "theme": "SCHOOL"
+        },
+        {
+          "author": "Guillaume Lambert",
+          "subject": "School History",
+          "challenge": "When did the school become co-educational in Belgium?",
+          "answer": "1982",
+          "theme": "SCHOOL"
+        },
+        {
+          "author": "Guillaume Lambert",
+          "subject": "School History",
+          "challenge": "Who made school compulsory in France?",
+          "answer": "Jule Ferry",
+          "theme": "SCHOOL"
+        }
+      ]
+    },
+    {
+      "author": "Guillaume Lambert",
+      "subject": "Pop Culture",
+      "theme": "PLEASURE",
+      "questions": [
+        {
+          "author": "Guillaume Lambert",
+          "subject": "Pop Culture",
+          "challenge": "What is the name of the Korean musical boy bands?",
+          "answer": "KPop",
+          "theme": "PLEASURE"
+        },
+        {
+          "author": "Guillaume Lambert",
+          "subject": "Pop Culture",
+          "challenge": "What is the name of dressing up as a fictional character?",
+          "answer": "Cosplay",
+          "theme": "PLEASURE"
+        },
+        {
+          "author": "Guillaume Lambert",
+          "subject": "Pop Culture",
+          "challenge": "What is the name of the most popular virtual idol with blue hair and twintails?",
+          "answer": "Hatsune Miku",
+          "theme": "PLEASURE"
+        },
+        {
+          "author": "Guillaume Lambert",
+          "subject": "Pop Culture",
+          "challenge": "Who wears fursuits?",
+          "answer": "Furries",
+          "theme": "PLEASURE"
+        }
+      ]
+    },
+    {
+      "author": "Guillaume Lambert",
+      "subject": "Anime/Manga",
+      "theme": "PLEASURE",
+      "questions": [
+        {
+          "author": "Guillaume Lambert",
+          "subject": "Anime/Manga",
+          "challenge": "Who is the hero in the series Dragon Ball?",
+          "answer": "San Goku",
+          "theme": "PLEASURE"
+        },
+        {
+          "author": "Guillaume Lambert",
+          "subject": "Anime/Manga",
+          "challenge": "Who is the mascot of Pokemon?",
+          "answer": "Pikachu",
+          "theme": "PLEASURE"
+        },
+        {
+          "author": "Guillaume Lambert",
+          "subject": "Anime/Manga",
+          "challenge": "What letter is the name of Light’s opponent?",
+          "answer": "L",
+          "theme": "PLEASURE"
+        },
+        {
+          "author": "Guillaume Lambert",
+          "subject": "Anime/Manga",
+          "challenge": "What does the category name \"Shonen\" mean?",
+          "answer": "Young Boy",
+          "theme": "PLEASURE"
+        }
+      ]
+    },
+    {
+      "author": "Guillaume Lambert",
+      "subject": "POO",
+      "theme": "INFORMATICS",
+      "questions": [
+        {
+          "author": "Guillaume Lambert",
+          "subject": "POO",
+          "challenge": "How many arithmetic operators are there?",
+          "answer": "5",
+          "theme": "INFORMATICS"
+        },
+        {
+          "author": "Guillaume Lambert",
+          "subject": "POO",
+          "challenge": "What is the emblematic sentence that we write when we start to code?",
+          "answer": "Hello world",
+          "theme": "INFORMATICS"
+        },
+        {
+          "author": "Guillaume Lambert",
+          "subject": "POO",
+          "challenge": "What sentence makes a main class a main class in java?",
+          "answer": "public static void main(String args[])",
+          "theme": "INFORMATICS"
+        },
+        {
+          "author": "Guillaume Lambert",
+          "subject": "POO",
+          "challenge": "What does JDK stand for?",
+          "answer": "Java Development Kit",
+          "theme": "INFORMATICS"
+        }
+      ]
+    },
+    {
+      "author": "Guillaume Lambert",
+      "subject": "PPOO",
+      "theme": "INFORMATICS",
+      "questions": [
+        {
+          "author": "Guillaume Lambert",
+          "subject": "PPOO",
+          "challenge": "What is the principle of securing access to attributes called?",
+          "answer": "Encapsulation",
+          "theme": "INFORMATICS"
+        },
+        {
+          "author": "Guillaume Lambert",
+          "subject": "PPOO",
+          "challenge": "What should I add to prevent instantiation of a parent class?",
+          "answer": "abstract",
+          "theme": "INFORMATICS"
+        },
+        {
+          "author": "Guillaume Lambert",
+          "subject": "PPOO",
+          "challenge": "How do you make a variable become a constant?",
+          "answer": "final",
+          "theme": "INFORMATICS"
+        },
+        {
+          "author": "Guillaume Lambert",
+          "subject": "PPOO",
+          "challenge": "Tell me about the different types of associations (in alphabetical order)",
+          "answer": "Aggregation Association Composition Dependency",
+          "theme": "INFORMATICS"
+        }
+      ]
+    },
+    {
+      "author": "Tanguy Taminiau",
+      "subject": "Culinary Inventions",
+      "theme": "IMPROBABLE",
+      "questions": [
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Culinary Inventions",
+          "challenge": "Where was the hamburger invented?",
+          "answer": "Hamburg, Germany",
+          "theme": "IMPROBABLE"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Culinary Inventions",
+          "challenge": "Was the tarte Tatin created by mistake?",
+          "answer": "Yes",
+          "theme": "IMPROBABLE"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Culinary Inventions",
+          "challenge": "Where is Jupiler brewed?",
+          "answer": "Jupil",
+          "theme": "IMPROBABLE"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Culinary Inventions",
+          "challenge": "Which forgotten ingredient allowed the creation of the brownie?",
+          "answer": "Baking powder",
+          "theme": "IMPROBABLE"
+        }
+      ]
+    },
+    {
+      "author": "Tanguy Taminiau",
+      "subject": "Hotel",
+      "theme": "IMPROBABLE",
+      "questions": [
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Hotel",
+          "challenge": "How much does a night cost in the most expensive hotel in the world (in €)?",
+          "answer": "7800",
+          "theme": "IMPROBABLE"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Hotel",
+          "challenge": "Where is the tallest hotel in the world situated?",
+          "answer": "Shangai",
+          "theme": "IMPROBABLE"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Hotel",
+          "challenge": "Where is the most expensive hotel in the world situated?",
+          "answer": "Dubai",
+          "theme": "IMPROBABLE"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Hotel",
+          "challenge": "Where is the \"Ice Hotel\" situated?",
+          "answer": "Sweden",
+          "theme": "IMPROBABLE"
+        }
+      ]
+    },
+    {
+      "author": "Tanguy Taminiau",
+      "subject": "Films",
+      "theme": "PLEASURE",
+      "questions": [
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Films",
+          "challenge": "Who invented the cinema?",
+          "answer": "The Lumiere Brothers",
+          "theme": "PLEASURE"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Films",
+          "challenge": "Who made Star wars?",
+          "answer": "George Lucas",
+          "theme": "PLEASURE"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Films",
+          "challenge": "Who interpreted Frank Martin (the protagonist) in the movie \"The Transporter\"?",
+          "answer": "Jason Statham",
+          "theme": "PLEASURE"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Films",
+          "challenge": "Who produced the movie \"The Shining\"?",
+          "answer": "Stanley Kubrick",
+          "theme": "PLEASURE"
+        }
+      ]
+    },
+    {
+      "author": "Tanguy Taminiau",
+      "subject": "Video Games",
+      "theme": "PLEASURE",
+      "questions": [
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Video Games",
+          "challenge": "Which company made the NES?",
+          "answer": "Nintendo",
+          "theme": "PLEASURE"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Video Games",
+          "challenge": "What does NES stand for?",
+          "answer": "Nintendo Entertainment System",
+          "theme": "PLEASURE"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Video Games",
+          "challenge": "What is the name of the best selling console in the world (all generations combined)?",
+          "answer": "Playstation 2",
+          "theme": "PLEASURE"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Video Games",
+          "challenge": "Which year was the Sega Saturn released in Europe?",
+          "answer": "July 1995",
+          "theme": "PLEASURE"
+        }
+      ]
+    },
+    {
+      "author": "Tanguy Taminiau",
+      "subject": "Linux Command Line",
+      "theme": "INFORMATICS",
+      "questions": [
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Linux Command Line",
+          "challenge": "How to change directory?",
+          "answer": "cd",
+          "theme": "INFORMATICS"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Linux Command Line",
+          "challenge": "How to delete a file or directory?",
+          "answer": "rm",
+          "theme": "INFORMATICS"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Linux Command Line",
+          "challenge": "How to make a symbolic link?",
+          "answer": "ln -s",
+          "theme": "INFORMATICS"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Linux Command Line",
+          "challenge": "What Linux command allows you to completely fill a hard disk with zeroes?",
+          "answer": "dd",
+          "theme": "INFORMATICS"
+        }
+      ]
+    },
+    {
+      "author": "Tanguy Taminiau",
+      "subject": "Linux Distributions",
+      "theme": "INFORMATICS",
+      "questions": [
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Linux Distributions",
+          "challenge": "What is the most famous Linux distribution?",
+          "answer": "Ubuntu",
+          "theme": "INFORMATICS"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Linux Distributions",
+          "challenge": "What is the most known Linux distribution for ethical hacking and penetration testing (little tip for you, it\u0027s the OS used in Mr Robot)?",
+          "answer": "Kali",
+          "theme": "INFORMATICS"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Linux Distributions",
+          "challenge": "What is Ubuntu based on?",
+          "answer": "Debian",
+          "theme": "INFORMATICS"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Linux Distributions",
+          "challenge": "What major base Linux distribution for desktop is missing from the list: -Debian, -RedHat, -Arch, -Enoch, - ?",
+          "answer": "Slackware",
+          "theme": "INFORMATICS"
+        }
+      ]
+    },
+    {
+      "author": "Tanguy Taminiau",
+      "subject": "School Path",
+      "theme": "SCHOOL",
+      "questions": [
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "School Path",
+          "challenge": "What\u0027s the name of the Primary School diploma in Belgium?",
+          "answer": "CEB",
+          "theme": "SCHOOL"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "School Path",
+          "challenge": "At what age can we legally stop attending school?",
+          "answer": "18 years",
+          "theme": "SCHOOL"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "School Path",
+          "challenge": "How many years does it take to obtain a degree in Nursing?",
+          "answer": "3 years",
+          "theme": "SCHOOL"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "School Path",
+          "challenge": "How many years does it take on average to complete a doctorate?",
+          "answer": "8 years",
+          "theme": "SCHOOL"
+        }
+      ]
+    },
+    {
+      "author": "Tanguy Taminiau",
+      "subject": "Cost of studies",
+      "theme": "SCHOOL",
+      "questions": [
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Cost of studies",
+          "challenge": "How much does a year of Primary School cost in Belgium?",
+          "answer": "0",
+          "theme": "SCHOOL"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Cost of studies",
+          "challenge": "How much does a year of University in Belgium cost?",
+          "answer": "800",
+          "theme": "SCHOOL"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Cost of studies",
+          "challenge": "How much does a year of university in the USA cost at least?",
+          "answer": "15000",
+          "theme": "SCHOOL"
+        },
+        {
+          "author": "Tanguy Taminiau",
+          "subject": "Cost of studies",
+          "challenge": "How much does a year of university in Japan cost?",
+          "answer": "6800",
+          "theme": "SCHOOL"
+        }
+      ]
+    },
+    {
+      "author": "Giorgio Caculli",
+      "subject": "Military History",
+      "theme": "IMPROBABLE",
+      "questions": [
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Military History",
+          "challenge": "What is the acronym of the famous North Atlantic Treaty alliance?",
+          "answer": "NATO",
+          "theme": "IMPROBABLE"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Military History",
+          "challenge": "What is the cheapest but most reliable gun ever invented?",
+          "answer": "AK-47",
+          "theme": "IMPROBABLE"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Military History",
+          "challenge": "What is the name of the crisis that would have caused a Third World War if it wasn\u0027t averted?",
+          "answer": "Cuban Missile Crisis",
+          "theme": "IMPROBABLE"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Military History",
+          "challenge": "What is the name of the world\u0027s most useless aircraft carrier?",
+          "answer": "Shinano",
+          "theme": "IMPROBABLE"
+        }
+      ]
+    },
+    {
+      "author": "Giorgio Caculli",
+      "subject": "Unexpected Facts",
+      "theme": "IMPROBABLE",
+      "questions": [
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Unexpected Facts",
+          "challenge": "What company saved Apple from bankruptcy?",
+          "answer": "Microsoft",
+          "theme": "IMPROBABLE"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Unexpected Facts",
+          "challenge": "What did Hitler aspire to be before becoming the Chancellor of Nazi Germany?",
+          "answer": "Painter",
+          "theme": "IMPROBABLE"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Unexpected Facts",
+          "challenge": "What is the name of the actor whose kicks were so fast that the movie had to be slowed down in order to make them visible?",
+          "answer": "Bruce Lee",
+          "theme": "IMPROBABLE"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Unexpected Facts",
+          "challenge": "What is the name of the illicit activity that Mark Zuckerberg did in order to create Facemash before creating Facebook?",
+          "answer": "Privacy violation",
+          "theme": "IMPROBABLE"
+        }
+      ]
+    },
+    {
+      "author": "Giorgio Caculli",
+      "subject": "Linux",
+      "theme": "INFORMATICS",
+      "questions": [
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Linux",
+          "challenge": "What is the animal that represents Linux?",
+          "answer": "Penguin",
+          "theme": "INFORMATICS"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Linux",
+          "challenge": "What is the name of the creator of the Linux Kernel?",
+          "answer": "Linus Torvalds",
+          "theme": "INFORMATICS"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Linux",
+          "challenge": "What is the name of one of the most popular init systems in Linux?",
+          "answer": "Systemd",
+          "theme": "INFORMATICS"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Linux",
+          "challenge": "Let\u0027s assume a script is called \u0027\u0027script.sh\u0027\u0027, what command would render it executable?",
+          "answer": "chmod +x script.sh",
+          "theme": "INFORMATICS"
+        }
+      ]
+    },
+    {
+      "author": "Giorgio Caculli",
+      "subject": "Java Programming",
+      "theme": "INFORMATICS",
+      "questions": [
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Java Programming",
+          "challenge": "What keyword allows you to declare an integer in Java?",
+          "answer": "int",
+          "theme": "INFORMATICS"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Java Programming",
+          "challenge": "What keywords allow you to declare a private static constant in Java?",
+          "answer": "private static final",
+          "theme": "INFORMATICS"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Java Programming",
+          "challenge": "What would a public abstract class called Entity be declared like if it were to implement an interface called Clonable?",
+          "answer": "public abstract class Entity implements Clonable",
+          "theme": "INFORMATICS"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Java Programming",
+          "challenge": "What is an ArrayList containing strings declared like if you were to start with the List interface? (name it strings)",
+          "answer": "List\u003cString\u003e strings \u003d new ArrayList\u003c\u003e();",
+          "theme": "INFORMATICS"
+        }
+      ]
+    },
+    {
+      "author": "Giorgio Caculli",
+      "subject": "Sports",
+      "theme": "PLEASURE",
+      "questions": [
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Sports",
+          "challenge": "What\u0027s the name of the sport that primarily relies on punches?",
+          "answer": "Boxing",
+          "theme": "PLEASURE"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Sports",
+          "challenge": "What\u0027s the name of the martial art that primarily relies on kicks?",
+          "answer": "Taekwondo",
+          "theme": "PLEASURE"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Sports",
+          "challenge": "What is the name of the martial art that slaves use to practice while acting like they were dancing?",
+          "answer": "Capoeira",
+          "theme": "PLEASURE"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Sports",
+          "challenge": "In which martial art is \u0027\u0027Ippon Seoi Nage\u0027\u0027 the name of a move of?",
+          "answer": "Judo",
+          "theme": "PLEASURE"
+        }
+      ]
+    },
+    {
+      "author": "Giorgio Caculli",
+      "subject": "Languages",
+      "theme": "PLEASURE",
+      "questions": [
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Languages",
+          "challenge": "What language is the base of Italian, Spanish, French and Romanian?",
+          "answer": "Latin",
+          "theme": "PLEASURE"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Languages",
+          "challenge": "What is the writing system of the Russian language called?",
+          "answer": "Cyrillic",
+          "theme": "PLEASURE"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Languages",
+          "challenge": "Name the tree types of writing in the Japanese language in alphabetical order:",
+          "answer": "Hiragana Kanji Katakana",
+          "theme": "PLEASURE"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Languages",
+          "challenge": "A, E, I, O, U is the order of vowels in European languages, what is the order like in the Japanese language?",
+          "answer": "A, I, U, E, O",
+          "theme": "PLEASURE"
+        }
+      ]
+    },
+    {
+      "author": "Giorgio Caculli",
+      "subject": "Education System",
+      "theme": "SCHOOL",
+      "questions": [
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Education System",
+          "challenge": "What is the highest mark a student can get in the Belgian education system?",
+          "answer": "20",
+          "theme": "SCHOOL"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Education System",
+          "challenge": "What is the grading system like in the United States?",
+          "answer": "A B C D F",
+          "theme": "SCHOOL"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Education System",
+          "challenge": "What month does the school year start in Japan?",
+          "answer": "April",
+          "theme": "SCHOOL"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Education System",
+          "challenge": "Which is the oldest University in the world?",
+          "answer": "University of Bologna",
+          "theme": "SCHOOL"
+        }
+      ]
+    },
+    {
+      "author": "Giorgio Caculli",
+      "subject": "Tools",
+      "theme": "SCHOOL",
+      "questions": [
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Tools",
+          "challenge": "What is the name of the object that allows you to take erasable notes or simply draw?",
+          "answer": "Pencil",
+          "theme": "SCHOOL"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Tools",
+          "challenge": "What is the name of the object that allows you to sharpen your colored pencils?",
+          "answer": "Pencil sharpner",
+          "theme": "SCHOOL"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Tools",
+          "challenge": "What is the name of the metallic object that allows you to hold papers together?",
+          "answer": "Paper clip",
+          "theme": "SCHOOL"
+        },
+        {
+          "author": "Giorgio Caculli",
+          "subject": "Tools",
+          "challenge": "What is the name of the object that allows you to punch holes on your sheet?",
+          "answer": "Hole punch",
+          "theme": "SCHOOL"
+        }
+      ]
+    }
+  ]
+}
