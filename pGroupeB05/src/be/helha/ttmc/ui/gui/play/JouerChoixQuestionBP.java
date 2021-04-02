@@ -8,7 +8,6 @@ import be.helha.ttmc.model.BasicCard;
 import be.helha.ttmc.model.Deck;
 import be.helha.ttmc.model.Theme;
 import be.helha.ttmc.ui.gui.MenuPauseFP;
-import be.helha.ttmc.ui.gui.PlateauBp;
 import be.helha.ttmc.ui.gui.play.LobbySoloBP.LobbySoloMainBP;
 import be.helha.ttmc.ui.gui.play.MenuPlayBP.MenuPlayMainVB;
 import javafx.animation.AnimationTimer;
@@ -67,7 +66,7 @@ public class JouerChoixQuestionBP extends BorderPane
     private MenuPauseFP mpfp;
     private BorderPane cardPane;
     private String nickName;
-    private PlateauBp pla;
+    private PlateauBP pla;
 
     public JouerChoixQuestionBP( Deck d )
     {
@@ -185,10 +184,10 @@ public class JouerChoixQuestionBP extends BorderPane
         }
     }
 
-    public PlateauBp getPla()
+    public PlateauBP getPla()
     {
         if ( pla == null )
-            pla = new PlateauBp( d );
+            pla = new PlateauBP( d );
         return pla;
     }
 
@@ -247,9 +246,10 @@ public class JouerChoixQuestionBP extends BorderPane
         {
             getJouerChoixQuestionMainSP().getChildren().set( 0, cardPane );
         }
-        HBox hbpla = new HBox();
-        hbpla.getChildren().addAll( getPla(), getJouerChoixQuestionMainSP() );
-        setCenter( hbpla );
+        //HBox hbpla = new HBox();
+        //hbpla.getChildren().addAll( getPla(), getJouerChoixQuestionMainSP() );
+        setLeft( getPla() );
+        setCenter( getJouerChoixQuestionMainSP() );
     }
 
     public int getID()

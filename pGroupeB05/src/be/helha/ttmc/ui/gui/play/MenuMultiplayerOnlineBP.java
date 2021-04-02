@@ -1,7 +1,7 @@
 package be.helha.ttmc.ui.gui.play;
 
 import be.helha.ttmc.model.Deck;
-import be.helha.ttmc.ui.gui.play.MenuPlayBP.MenuPlayMainVB;
+import be.helha.ttmc.ui.gui.play.MenuMultiplayerBP.MenuMultiplayerMainVB;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -12,31 +12,30 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
-public class MenuMultiplayerBP extends BorderPane
+public class MenuMultiplayerOnlineBP extends BorderPane
 {
-    private Button btnLocal, btnOnline, btnRetour;
+    private Button btnHost, btnJoin, btnRetour;
     private Deck d;
-    private StackPane choiceMultiplayerPane;
+    private StackPane choiceMultiplayerOnlinePane;
 
-    public MenuMultiplayerBP( Deck d )
+    public MenuMultiplayerOnlineBP( Deck d )
     {
         this.d = d;
 
-        getChoicePane().getChildren().add( new MenuMultiplayerMainVB() );
-        getChoicePane().getChildren().add( new MenuMultiplayerOnlineBP( d ) );
-        setVisibleNode( MenuMultiplayerMainVB.class.getSimpleName() );
+        getChoicePane().getChildren().add( new MenuMultiplayerOnlineMainVB() );
+        setVisibleNode( MenuMultiplayerOnlineMainVB.class.getSimpleName() );
 
-        setCenter( choiceMultiplayerPane );
+        setCenter( choiceMultiplayerOnlinePane );
 
     }
 
     protected StackPane getChoicePane()
     {
-        if ( choiceMultiplayerPane == null )
+        if ( choiceMultiplayerOnlinePane == null )
         {
-            choiceMultiplayerPane = new StackPane();
+            choiceMultiplayerOnlinePane = new StackPane();
         }
-        return choiceMultiplayerPane;
+        return choiceMultiplayerOnlinePane;
     }
 
     public void setVisibleNode( String paneName )
@@ -54,9 +53,9 @@ public class MenuMultiplayerBP extends BorderPane
         }
     }
 
-    protected class MenuMultiplayerMainVB extends VBox
+    protected class MenuMultiplayerOnlineMainVB extends VBox
     {
-        public MenuMultiplayerMainVB()
+        public MenuMultiplayerOnlineMainVB()
         {
             // this.setOrientation(Orientation.VERTICAL);
             setPadding( new Insets( 20 ) );
@@ -70,11 +69,11 @@ public class MenuMultiplayerBP extends BorderPane
 
     private Button getBtnLocal()
     {
-        if ( btnLocal == null )
+        if ( btnHost == null )
         {
-            btnLocal = new Button( "Local" );
-            btnLocal.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
-            btnLocal.setOnAction( new EventHandler< ActionEvent >()
+            btnHost = new Button( "Host" );
+            btnHost.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
+            btnHost.setOnAction( new EventHandler< ActionEvent >()
             {
 
                 @Override
@@ -83,36 +82,35 @@ public class MenuMultiplayerBP extends BorderPane
                     for ( int i = 0; i < getChoicePane().getChildren().size(); i++ )
                     {
                         if ( getChoicePane().getChildren().get( i ).getClass().getSimpleName()
-                                .equals( LobbyMultiLocalBP.class.getSimpleName() ) )
+                                .equals( LobbyMultiOnlineBP.class.getSimpleName() ) )
                         {
                             getChoicePane().getChildren().remove( i );
                         }
                     }
-                    getChoicePane().getChildren().add( new LobbyMultiLocalBP( d ) );
-                    setVisibleNode( LobbyMultiLocalBP.class.getSimpleName() );
+                    getChoicePane().getChildren().add( new LobbyMultiOnlineBP( d ) );
+                    setVisibleNode( LobbyMultiOnlineBP.class.getSimpleName() );
                 }
             } );
         }
-        return btnLocal;
+        return btnHost;
     }
 
     public Button getBtnOnline()
     {
-        if ( btnOnline == null )
+        if ( btnJoin == null )
         {
-            btnOnline = new Button( "Online" );
-            btnOnline.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
-            btnOnline.setOnAction( new EventHandler< ActionEvent >()
+            btnJoin = new Button( "Join" );
+            btnJoin.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
+            btnJoin.setOnAction( new EventHandler< ActionEvent >()
             {
 
                 @Override
                 public void handle( ActionEvent arg0 )
                 {
-                    setVisibleNode( MenuMultiplayerOnlineBP.class.getSimpleName() );
                 }
             } );
         }
-        return btnOnline;
+        return btnJoin;
     }
 
     private Button getBtnRetour()
@@ -127,8 +125,8 @@ public class MenuMultiplayerBP extends BorderPane
                 @Override
                 public void handle( ActionEvent arg0 )
                 {
-                    MenuPlayBP mpbp = ( MenuPlayBP ) getParent().getParent();
-                    mpbp.setVisibleNode( MenuPlayMainVB.class.getSimpleName() );
+                    MenuMultiplayerBP mpbp = ( MenuMultiplayerBP ) getParent().getParent();
+                    mpbp.setVisibleNode( MenuMultiplayerMainVB.class.getSimpleName() );
                 }
             } );
         }

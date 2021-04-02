@@ -1,4 +1,4 @@
-package be.helha.ttmc.ui.gui;
+package be.helha.ttmc.ui.gui.play;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-public class PlateauBp extends BorderPane{
+public class PlateauBP extends BorderPane{
 	private int nbCases;
 	private List<Rectangle> cases;
 	private List<Label> num;
@@ -20,7 +20,7 @@ public class PlateauBp extends BorderPane{
 	private final double MOUV_X = WIDTH_RECT+1;
 	private final double MOUV_Y = HEIGHT_RECT+1;
 	
-	public PlateauBp(Deck d) {
+	public PlateauBP(Deck d) {
 		nbCases= d.getCards().size();
 		AnchorPane anch = new AnchorPane();
 		getCases();
