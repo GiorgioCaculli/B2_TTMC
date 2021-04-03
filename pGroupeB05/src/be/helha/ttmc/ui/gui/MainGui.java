@@ -22,7 +22,7 @@ public class MainGui extends Application
     {
         Settings s = new Settings( "application.properties" );
         int WIDTH = s.getWidth();
-        int HEIGHT = s.getWidth() + 20;
+        int HEIGHT = s.getHeight() + 20;
         logger.log( Level.INFO, "Reading Deck" );
         Deck d = Serialization.loadDeck( s.getDeckName() );
         logger.log( Level.INFO, String.format( "Number of cards in the deck: %d", d.getCards().size() ) );

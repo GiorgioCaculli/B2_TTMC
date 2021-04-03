@@ -86,15 +86,15 @@ public class MenuMultiplayerOnlineBP extends BorderPane
                     for ( int i = 0; i < getChoicePane().getChildren().size(); i++ )
                     {
                         if ( getChoicePane().getChildren().get( i ).getClass().getSimpleName()
-                                .equals( LobbyMultiOnlineBP.class.getSimpleName() ) )
+                                .equals( LobbyMultiOnlineHostBP.class.getSimpleName() ) )
                         {
                             getChoicePane().getChildren().remove( i );
                         }
                     }
                     try
                     {
-                        getChoicePane().getChildren().add( new LobbyMultiOnlineBP( d, s ) );
-                        setVisibleNode( LobbyMultiOnlineBP.class.getSimpleName() );
+                        getChoicePane().getChildren().add( new LobbyMultiOnlineHostBP( d, s ) );
+                        setVisibleNode( LobbyMultiOnlineHostBP.class.getSimpleName() );
                     }
                     catch ( IOException e )
                     {

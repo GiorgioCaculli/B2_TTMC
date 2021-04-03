@@ -13,8 +13,8 @@ public class ChatBP extends BorderPane
     {
         conversationArea.setEditable( false );
         conversationArea.setFocusTraversable( false );
-        conversationArea.setPrefRowCount( 2 );
-        conversationArea.setPrefColumnCount( 1 );
+        conversationArea.setPrefColumnCount( 20 );
+        conversationArea.setWrapText( true );
         messageField.setFocusTraversable( false );
         setCenter( conversationArea );
         setBottom( messageField );

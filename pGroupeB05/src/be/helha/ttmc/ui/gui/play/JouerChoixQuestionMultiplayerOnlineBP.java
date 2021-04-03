@@ -10,7 +10,7 @@ import be.helha.ttmc.ui.Player;
 import be.helha.ttmc.ui.Settings;
 import be.helha.ttmc.ui.gui.MenuPauseFP;
 import be.helha.ttmc.ui.gui.play.LobbyMultiLocalBP.LobbyMultiLocalMainBP;
-import be.helha.ttmc.ui.gui.play.LobbyMultiOnlineBP.LobbyMultiOnlineMainBP;
+import be.helha.ttmc.ui.gui.play.LobbyMultiOnlineHostBP.LobbyMultiOnlineMainBP;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -39,7 +39,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
 
-public class JouerChoixQuestionMultiplayerBP extends BorderPane
+public class JouerChoixQuestionMultiplayerOnlineBP extends BorderPane
 {
     private StackPane jouerChoixQuestionMainSP;
 
@@ -49,7 +49,7 @@ public class JouerChoixQuestionMultiplayerBP extends BorderPane
     private int currentlyPlaying;
     private Settings settings;
 
-    public JouerChoixQuestionMultiplayerBP( Deck d, List< Player > players, Settings settings )
+    public JouerChoixQuestionMultiplayerOnlineBP( Deck d, List< Player > players, Settings settings )
     {
         this.settings = settings;
         this.maxPlayers = players.size();
@@ -111,14 +111,9 @@ public class JouerChoixQuestionMultiplayerBP extends BorderPane
                         @Override
                         public void handle( ActionEvent arg0 )
                         {
-                            if( getParent().getParent() instanceof LobbyMultiLocalBP )
+                            if ( getParent().getParent() instanceof LobbyMultiOnlineHostBP )
                             {
-                                LobbyMultiLocalBP lmlbp = ( LobbyMultiLocalBP ) getParent().getParent();
-                                lmlbp.setVisibleNode( LobbyMultiLocalMainBP.class.getSimpleName() );
-                            }
-                            else if ( getParent().getParent() instanceof LobbyMultiOnlineBP )
-                            {
-                                LobbyMultiOnlineBP lmobp = ( LobbyMultiOnlineBP ) getParent().getParent();
+                                LobbyMultiOnlineHostBP lmobp = ( LobbyMultiOnlineHostBP ) getParent().getParent();
                                 lmobp.setVisibleNode( LobbyMultiOnlineMainBP.class.getSimpleName() );
                             }
                         }
@@ -495,14 +490,9 @@ public class JouerChoixQuestionMultiplayerBP extends BorderPane
                 }
                 else
                 {
-                    if( getParent().getParent().getParent().getParent() instanceof LobbyMultiLocalBP )
+                    if( getParent().getParent().getParent().getParent() instanceof LobbyMultiOnlineHostBP )
                     {
-                        LobbyMultiLocalBP lmlbp = ( LobbyMultiLocalBP ) getParent().getParent().getParent().getParent();
-                        lmlbp.setVisibleNode( LobbyMultiLocalMainBP.class.getSimpleName() );
-                    }
-                    if( getParent().getParent().getParent().getParent() instanceof LobbyMultiOnlineBP )
-                    {
-                        LobbyMultiOnlineBP lmobp = ( LobbyMultiOnlineBP ) getParent().getParent().getParent().getParent();
+                        LobbyMultiOnlineHostBP lmobp = ( LobbyMultiOnlineHostBP ) getParent().getParent().getParent().getParent();
                         lmobp.setVisibleNode( LobbyMultiOnlineMainBP.class.getSimpleName() );
                     }
                 }

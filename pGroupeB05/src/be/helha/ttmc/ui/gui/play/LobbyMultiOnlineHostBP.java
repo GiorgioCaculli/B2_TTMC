@@ -28,7 +28,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
-public class LobbyMultiOnlineBP extends BorderPane
+public class LobbyMultiOnlineHostBP extends BorderPane
 {
     private StackPane lobbyMultiLocalSP = new StackPane();
 
@@ -43,7 +43,7 @@ public class LobbyMultiOnlineBP extends BorderPane
     private Player hostPlayer = null;
     private Settings settings;
 
-    public LobbyMultiOnlineBP( Deck d, Settings settings ) throws IOException
+    public LobbyMultiOnlineHostBP( Deck d, Settings settings ) throws IOException
     {
         server = new Server();
         this.settings = settings;
@@ -52,7 +52,7 @@ public class LobbyMultiOnlineBP extends BorderPane
         for ( int i = 0; i < lobbyMultiLocalSP.getChildren().size(); i++ )
         {
             if ( lobbyMultiLocalSP.getChildren().get( i ).getClass().getSimpleName()
-                    .equals( JouerChoixQuestionMultiplayerBP.class.getSimpleName() ) )
+                    .equals( JouerChoixQuestionMultiplayerOnlineBP.class.getSimpleName() ) )
             {
                 lobbyMultiLocalSP.getChildren().remove( i );
             }
@@ -160,7 +160,7 @@ public class LobbyMultiOnlineBP extends BorderPane
                 for ( int i = 0; i < lobbyMultiLocalSP.getChildren().size(); i++ )
                 {
                     if ( lobbyMultiLocalSP.getChildren().get( i ).getClass().getSimpleName()
-                            .equals( JouerChoixQuestionMultiplayerBP.class.getSimpleName() ) )
+                            .equals( JouerChoixQuestionMultiplayerOnlineBP.class.getSimpleName() ) )
                     {
                         lobbyMultiLocalSP.getChildren().remove( i );
                     }
@@ -171,8 +171,8 @@ public class LobbyMultiOnlineBP extends BorderPane
                     Collections.shuffle( cards );
                     p.setCards( cards );
                 }
-                lobbyMultiLocalSP.getChildren().add( new JouerChoixQuestionMultiplayerBP( d, players, settings ) );
-                setVisibleNode( JouerChoixQuestionMultiplayerBP.class.getSimpleName() );
+                lobbyMultiLocalSP.getChildren().add( new JouerChoixQuestionMultiplayerOnlineBP( d, players, settings ) );
+                setVisibleNode( JouerChoixQuestionMultiplayerOnlineBP.class.getSimpleName() );
             }
         } );
 

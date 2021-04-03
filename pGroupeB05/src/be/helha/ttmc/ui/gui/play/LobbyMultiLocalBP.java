@@ -9,7 +9,7 @@ import be.helha.ttmc.model.BasicCard;
 import be.helha.ttmc.model.Deck;
 import be.helha.ttmc.ui.Player;
 import be.helha.ttmc.ui.Settings;
-import be.helha.ttmc.ui.gui.play.JouerChoixQuestionMultiplayerBP.Joueur;
+import be.helha.ttmc.ui.gui.play.JouerChoixQuestionMultiplayerLocalBP.Joueur;
 import be.helha.ttmc.ui.gui.play.MenuMultiplayerBP.MenuMultiplayerMainVB;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -34,7 +34,7 @@ public class LobbyMultiLocalBP extends BorderPane
         for ( int i = 0; i < lobbyMultiLocalSP.getChildren().size(); i++ )
         {
             if ( lobbyMultiLocalSP.getChildren().get( i ).getClass().getSimpleName()
-                    .equals( JouerChoixQuestionMultiplayerBP.class.getSimpleName() ) )
+                    .equals( JouerChoixQuestionMultiplayerLocalBP.class.getSimpleName() ) )
             {
                 lobbyMultiLocalSP.getChildren().remove( i );
             }
@@ -96,7 +96,7 @@ public class LobbyMultiLocalBP extends BorderPane
                 for ( int i = 0; i < lobbyMultiLocalSP.getChildren().size(); i++ )
                 {
                     if ( lobbyMultiLocalSP.getChildren().get( i ).getClass().getSimpleName()
-                            .equals( JouerChoixQuestionMultiplayerBP.class.getSimpleName() ) )
+                            .equals( JouerChoixQuestionMultiplayerLocalBP.class.getSimpleName() ) )
                     {
                         lobbyMultiLocalSP.getChildren().remove( i );
                     }
@@ -107,8 +107,8 @@ public class LobbyMultiLocalBP extends BorderPane
                     Collections.shuffle( cards );
                     p.setCards( cards );
                 }
-                lobbyMultiLocalSP.getChildren().add( new JouerChoixQuestionMultiplayerBP( d, players, s ) );
-                setVisibleNode( JouerChoixQuestionMultiplayerBP.class.getSimpleName() );
+                lobbyMultiLocalSP.getChildren().add( new JouerChoixQuestionMultiplayerLocalBP( d, players, s ) );
+                setVisibleNode( JouerChoixQuestionMultiplayerLocalBP.class.getSimpleName() );
             }
         } );
 
