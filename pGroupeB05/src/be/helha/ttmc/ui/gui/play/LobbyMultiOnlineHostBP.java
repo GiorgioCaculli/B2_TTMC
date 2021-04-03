@@ -279,7 +279,7 @@ public class LobbyMultiOnlineHostBP extends BorderPane
                 {
                     sendMessageToAll( inputLine );
                     chatBox.getConversationArea()
-                            .appendText( String.format( "%s: %s\n", socket.getRemoteSocketAddress(), inputLine ) );
+                            .appendText( String.format( "%s\n", inputLine ) );
                 }
                 chatBox.getConversationArea()
                         .appendText( String.format( "IP: %s disconnected\n", socket.getRemoteSocketAddress() ) );

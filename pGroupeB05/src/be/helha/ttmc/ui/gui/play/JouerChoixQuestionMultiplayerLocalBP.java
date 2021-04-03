@@ -367,7 +367,7 @@ public class JouerChoixQuestionMultiplayerLocalBP extends BorderPane
                 getCardChoicePanePlayer().getChildren().add( jeuRep );
                 int idQ = j;
                 Button b = new Button( "Question Level: " + ( idQ + 1 ) );
-                b.setMinSize( 100, 100 );
+                b.setMinSize( settings.getWidth() / 3, settings.getHeight() / 3 );
                 b.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
                 b.setOnAction( new EventHandler< ActionEvent >()
                 {
