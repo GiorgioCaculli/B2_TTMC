@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import be.helha.ttmc.model.Deck;
 import be.helha.ttmc.serialization.Serialization;
+import be.helha.ttmc.ui.Settings;
 import be.helha.ttmc.ui.gui.play.MenuPlayBP.MenuPlayMainVB;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -23,9 +24,12 @@ public class LobbySoloBP extends BorderPane
     private Button returnButton = new Button( "Return" );
 
     private String nickName;
+    
+    private Settings s;
 
-    public LobbySoloBP( Deck d )
+    public LobbySoloBP( Deck d, Settings s )
     {
+        this.s = s;
         for ( int i = 0; i < lobbyPaneSP.getChildren().size(); i++ )
         {
             if ( lobbyPaneSP.getChildren().get( i ).getClass().getSimpleName()
@@ -72,7 +76,7 @@ public class LobbySoloBP extends BorderPane
                 {
                     deck = Serialization.loadDeck( String.format( "assets/decks/%s.json", nickName ).toString() );
                 }
-                JouerChoixQuestionBP jcq = new JouerChoixQuestionBP( deck );
+                JouerChoixQuestionBP jcq = new JouerChoixQuestionBP( deck, s );
                 jcq.setScore( 0 );
                 jcq.setNickName( String.format( "%s", nickName ) );
                 jcq.getLblScore().setText( String.format( "User: %s - Score: ", jcq.getNickName() ) );

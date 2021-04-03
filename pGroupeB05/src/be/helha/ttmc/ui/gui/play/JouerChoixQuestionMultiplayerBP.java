@@ -7,6 +7,7 @@ import be.helha.ttmc.model.BasicCard;
 import be.helha.ttmc.model.Deck;
 import be.helha.ttmc.model.Theme;
 import be.helha.ttmc.ui.Player;
+import be.helha.ttmc.ui.Settings;
 import be.helha.ttmc.ui.gui.MenuPauseFP;
 import be.helha.ttmc.ui.gui.play.LobbyMultiLocalBP.LobbyMultiLocalMainBP;
 import be.helha.ttmc.ui.gui.play.LobbyMultiOnlineBP.LobbyMultiOnlineMainBP;
@@ -46,10 +47,11 @@ public class JouerChoixQuestionMultiplayerBP extends BorderPane
     private List< Joueur > joueurs;
     private int maxPlayers;
     private int currentlyPlaying;
+    private Settings settings;
 
-    public JouerChoixQuestionMultiplayerBP( Deck d, List< Player > players )
+    public JouerChoixQuestionMultiplayerBP( Deck d, List< Player > players, Settings settings )
     {
-        Deck d1 = d.clone();
+        this.settings = settings;
         this.maxPlayers = players.size();
         joueurs = new ArrayList<>();
         for( Player p : players )
@@ -76,6 +78,7 @@ public class JouerChoixQuestionMultiplayerBP extends BorderPane
             {
                 if ( keyEvent.getCode() == KeyCode.ESCAPE )
                 {
+                    requestFocus();
                     getJouerChoixQuestionMainSP().getChildren().get( maxPlayers ).setVisible( true );
                     MenuPauseFP mpfp = ( ( MenuPauseFP ) getJouerChoixQuestionMainSP().getChildren()
                             .get( maxPlayers ) );
@@ -124,6 +127,8 @@ public class JouerChoixQuestionMultiplayerBP extends BorderPane
                 }
             }
         } );
+        setFocused( true );
+        setFocusTraversable( true );
     }
 
     private StackPane getJouerChoixQuestionMainSP()
@@ -161,7 +166,7 @@ public class JouerChoixQuestionMultiplayerBP extends BorderPane
         {
             this.bcPlayer = bcPlayer;
             setID( id );
-            timePlayer = 30;
+            timePlayer = settings.getTimerSeconds();
             HBox vbTimePlayer = new HBox();
             vbTimePlayer.setPadding( new Insets( 5 ) );
             vbTimePlayer.setAlignment( Pos.CENTER );
@@ -244,7 +249,7 @@ public class JouerChoixQuestionMultiplayerBP extends BorderPane
                             elapsedTimePlayer = now;
                             if ( timePlayer == 0 )
                             {
-                                //checkAnswerPlayer( now );
+                                joueurs.get( currentlyPlaying ).getCardPaneJoueur().checkAnswerPlayer( now, currentlyPlaying );
                             }
                         }
 
@@ -367,7 +372,7 @@ public class JouerChoixQuestionMultiplayerBP extends BorderPane
                 getCardChoicePanePlayer().getChildren().add( jeuRep );
                 int idQ = j;
                 Button b = new Button( "Question Level: " + ( idQ + 1 ) );
-                b.setMinSize( 250, 250 );
+                b.setMinSize( 100, 100 );
                 b.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
                 b.setOnAction( new EventHandler< ActionEvent >()
                 {

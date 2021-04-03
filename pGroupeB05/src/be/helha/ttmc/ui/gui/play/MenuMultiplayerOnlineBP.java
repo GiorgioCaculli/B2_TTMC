@@ -1,6 +1,9 @@
 package be.helha.ttmc.ui.gui.play;
 
+import java.io.IOException;
+
 import be.helha.ttmc.model.Deck;
+import be.helha.ttmc.ui.Settings;
 import be.helha.ttmc.ui.gui.play.MenuMultiplayerBP.MenuMultiplayerMainVB;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -17,11 +20,12 @@ public class MenuMultiplayerOnlineBP extends BorderPane
     private Button btnHost, btnJoin, btnRetour;
     private Deck d;
     private StackPane choiceMultiplayerOnlinePane;
+    private Settings s;
 
-    public MenuMultiplayerOnlineBP( Deck d )
+    public MenuMultiplayerOnlineBP( Deck d, Settings s )
     {
         this.d = d;
-
+        this.s = s;
         getChoicePane().getChildren().add( new MenuMultiplayerOnlineMainVB() );
         setVisibleNode( MenuMultiplayerOnlineMainVB.class.getSimpleName() );
 
@@ -87,8 +91,15 @@ public class MenuMultiplayerOnlineBP extends BorderPane
                             getChoicePane().getChildren().remove( i );
                         }
                     }
-                    getChoicePane().getChildren().add( new LobbyMultiOnlineBP( d ) );
-                    setVisibleNode( LobbyMultiOnlineBP.class.getSimpleName() );
+                    try
+                    {
+                        getChoicePane().getChildren().add( new LobbyMultiOnlineBP( d, s ) );
+                        setVisibleNode( LobbyMultiOnlineBP.class.getSimpleName() );
+                    }
+                    catch ( IOException e )
+                    {
+                        e.printStackTrace();
+                    }
                 }
             } );
         }

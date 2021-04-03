@@ -7,6 +7,7 @@ import java.util.List;
 import be.helha.ttmc.model.BasicCard;
 import be.helha.ttmc.model.Deck;
 import be.helha.ttmc.model.Theme;
+import be.helha.ttmc.ui.Settings;
 import be.helha.ttmc.ui.gui.MenuPauseFP;
 import be.helha.ttmc.ui.gui.play.LobbySoloBP.LobbySoloMainBP;
 import be.helha.ttmc.ui.gui.play.MenuPlayBP.MenuPlayMainVB;
@@ -67,10 +68,12 @@ public class JouerChoixQuestionBP extends BorderPane
     private BorderPane cardPane;
     private String nickName;
     private PlateauBP pla;
+    private Settings s;
 
-    public JouerChoixQuestionBP( Deck d )
+    public JouerChoixQuestionBP( Deck d, Settings s )
     {
         this.d = d;
+        this.s = s;
         cards = this.d.getCards();
         getPla();
         Collections.shuffle( cards );
@@ -194,7 +197,7 @@ public class JouerChoixQuestionBP extends BorderPane
     private void initCardPane( List< BasicCard > cards, int i )
     {
         cardPane = new BorderPane();
-        time = 30;
+        time = s.getTimerSeconds();
         this.bc = cards.get( i );
         cardChoicePane = new StackPane();
         getLblTheme().setText( bc.getTheme().toString() );
@@ -271,7 +274,7 @@ public class JouerChoixQuestionBP extends BorderPane
             for ( int i = 0; i < maxBtn; i++ )
             {
                 Button b = new Button( "Question Level: " + ( i + 1 ) );
-                b.setMinSize( 250, 250 );
+                b.setMinSize( s.getWidth() / 3, s.getHeight() / 3 ); // 250 x 250
                 b.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
                 int idQ = i;
                 b.setOnAction( new EventHandler< ActionEvent >()

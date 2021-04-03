@@ -1,10 +1,7 @@
 package be.helha.ttmc.ui.gui.play;
 
-import java.util.Optional;
-import java.util.Random;
-
 import be.helha.ttmc.model.Deck;
-import be.helha.ttmc.serialization.Serialization;
+import be.helha.ttmc.ui.Settings;
 import be.helha.ttmc.ui.gui.MainPaneBP;
 import be.helha.ttmc.ui.gui.MenuPrincipalBP;
 import javafx.event.ActionEvent;
@@ -13,7 +10,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -23,11 +19,12 @@ public class MenuPlayBP extends BorderPane
     private Button btnSolo, btnMulti, btnRetour;
     private Deck d;
     private StackPane choicePane;
+    private Settings s;
 
-    public MenuPlayBP( Deck d )
+    public MenuPlayBP( Deck d, Settings s )
     {
         this.d = d;
-
+        this.s = s;
         getChoicePane().getChildren().add( new MenuPlayMainVB() );
         setVisibleNode( MenuPlayMainVB.class.getSimpleName() );
 
@@ -93,7 +90,7 @@ public class MenuPlayBP extends BorderPane
                             getChoicePane().getChildren().remove( i );
                         }
                     }
-                    getChoicePane().getChildren().add( new LobbySoloBP( d ) );
+                    getChoicePane().getChildren().add( new LobbySoloBP( d, s ) );
                     setVisibleNode( LobbySoloBP.class.getSimpleName() );
                 }
             } );
@@ -121,7 +118,7 @@ public class MenuPlayBP extends BorderPane
                             getChoicePane().getChildren().remove( i );
                         }
                     }
-                    getChoicePane().getChildren().add( new MenuMultiplayerBP( d ) );
+                    getChoicePane().getChildren().add( new MenuMultiplayerBP( d, s ) );
                     setVisibleNode( MenuMultiplayerBP.class.getSimpleName() );
                 }
             } );

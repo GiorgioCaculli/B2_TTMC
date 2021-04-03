@@ -1,6 +1,7 @@
 package be.helha.ttmc.ui.gui.play;
 
 import be.helha.ttmc.model.Deck;
+import be.helha.ttmc.ui.Settings;
 import be.helha.ttmc.ui.gui.play.MenuPlayBP.MenuPlayMainVB;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -17,13 +18,14 @@ public class MenuMultiplayerBP extends BorderPane
     private Button btnLocal, btnOnline, btnRetour;
     private Deck d;
     private StackPane choiceMultiplayerPane;
+    private Settings s;
 
-    public MenuMultiplayerBP( Deck d )
+    public MenuMultiplayerBP( Deck d, Settings s )
     {
         this.d = d;
-
+        this.s = s;
         getChoicePane().getChildren().add( new MenuMultiplayerMainVB() );
-        getChoicePane().getChildren().add( new MenuMultiplayerOnlineBP( d ) );
+        getChoicePane().getChildren().add( new MenuMultiplayerOnlineBP( d, s ) );
         setVisibleNode( MenuMultiplayerMainVB.class.getSimpleName() );
 
         setCenter( choiceMultiplayerPane );
@@ -88,7 +90,7 @@ public class MenuMultiplayerBP extends BorderPane
                             getChoicePane().getChildren().remove( i );
                         }
                     }
-                    getChoicePane().getChildren().add( new LobbyMultiLocalBP( d ) );
+                    getChoicePane().getChildren().add( new LobbyMultiLocalBP( d, s ) );
                     setVisibleNode( LobbyMultiLocalBP.class.getSimpleName() );
                 }
             } );
