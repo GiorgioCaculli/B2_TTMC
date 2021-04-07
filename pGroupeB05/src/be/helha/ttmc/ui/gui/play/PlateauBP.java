@@ -15,6 +15,7 @@ public class PlateauBP extends BorderPane
     private int nbCases;
     private List< Rectangle > cases;
     private List< Label > num;
+    private PionCircle pion;
 
     private final double WIDTH_RECT = 35.;
     private final double HEIGHT_RECT = 30.;
@@ -57,10 +58,22 @@ public class PlateauBP extends BorderPane
             getCases().get( i ).setX( mouvX );
             anch.getChildren().addAll( getCases().get( i ), getNum().get( i ) );
         }
+        anch.getChildren().add(getPion());
         setCenter( anch );
     }
 
-    private List< Rectangle > getCases()
+    public PionCircle getPion() {
+    	if(pion ==null) {
+    		pion = new PionCircle(getCases().get(0).getX()+WIDTH_RECT/2, getCases().get(0).getY()+HEIGHT_RECT/2, WIDTH_RECT/3);
+    	}
+    	return pion;
+    }
+    
+    public double getHEIGHT_RECT() {
+    	return HEIGHT_RECT;
+    }
+    
+    protected List< Rectangle > getCases()
     {
         if ( cases == null )
         {
@@ -77,6 +90,10 @@ public class PlateauBP extends BorderPane
 
     }
 
+    public double getWIDTH_RECT() {
+    	return WIDTH_RECT;
+    }
+    
     private List< Label > getNum()
     {
         if ( num == null )
