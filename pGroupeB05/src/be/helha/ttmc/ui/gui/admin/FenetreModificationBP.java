@@ -69,7 +69,7 @@ public class FenetreModificationBP extends BorderPane
         anch.getChildren().addAll( getLblTheme(), getCb(), getLblAuthor(), getTxtAuthor(), getLblSubject(),
                 getTxtSubject() );
 
-        // cr�ation de la partie inf�rieure de la fen�tre
+        // creation de la partie inferieure de la fenetre
         GridPane grid = new GridPane();
         grid.setPadding( new Insets( 10., 10., 10., 10. ) );
         grid.setHgap( 5. );
@@ -81,7 +81,7 @@ public class FenetreModificationBP extends BorderPane
             colConstr.setPercentWidth( 100. / nbcols );
             grid.getColumnConstraints().add( colConstr );
         }
-        // ajout des labels de l�gendes
+        // ajout des labels de legendes
         grid.add( getLblChal(), 0, 1 );
         grid.add( getLblAns(), 7, 1 );
 
@@ -208,7 +208,7 @@ public class FenetreModificationBP extends BorderPane
                                 if ( !b.add( q ) )
                                 {
                                     Alert alert = new Alert( AlertType.ERROR,
-                                            "Une des questions des deja presente sur la carte!" );
+                                            "One of the questions is already present on the card!" );
                                     alert.showAndWait();
                                     break;
                                 }
@@ -217,16 +217,16 @@ public class FenetreModificationBP extends BorderPane
                             if ( !d.modify( bc, b ) )
                             {
 
-                                Alert alert = new Alert( AlertType.ERROR, "La carte n'a pas su etre modifee!" );
+                                Alert alert = new Alert( AlertType.ERROR, "The card has not been modified!" );
                                 alert.showAndWait();
                                 return;
                             }
                             Serialization.saveGame( d );
-                            Alert alert = new Alert( AlertType.INFORMATION, "La carte a bien ete modifiee!" );
+                            Alert alert = new Alert( AlertType.INFORMATION, "The card has been modified!" );
                             alert.showAndWait();
                             Alert reloadAlert = new Alert( AlertType.INFORMATION );
-                            reloadAlert.setTitle( "Veuillez mettre a jour la liste!" );
-                            reloadAlert.setContentText( "Veuillez appuyer sur le bouton Reload pour mettre a jour la liste" );
+                            reloadAlert.setTitle( "Please, update the list!" );
+                            reloadAlert.setContentText( "Please, click on the Reload button to update the list!" );
                             reloadAlert.setHeaderText( null );
                             reloadAlert.show();
                             ListeCarteBP lcbp = ( ListeCarteBP ) getParent().getParent();
@@ -236,7 +236,7 @@ public class FenetreModificationBP extends BorderPane
 
                     } // affichage d'une fenetre d'information quand les champs ne sont pas complets
 
-                    Alert alert = new Alert( AlertType.WARNING, "Au moins un champ est vide! Veuillez le remplir !" );
+                    Alert alert = new Alert( AlertType.WARNING, "At least one of the fields is empty! Please, fill it!" );
                     alert.showAndWait();
 
                 }
@@ -256,7 +256,7 @@ public class FenetreModificationBP extends BorderPane
                 @Override
                 public void handle( ActionEvent arg0 )
                 {
-                    Alert alert = new Alert( AlertType.CONFIRMATION, "Voulez-vous videz les champs ?" );
+                    Alert alert = new Alert( AlertType.CONFIRMATION, "Do you want to empty the fields?" );
                     if ( alert.showAndWait().get() == ButtonType.OK )
                     {
                         getTxtAuthor().clear();
@@ -359,7 +359,7 @@ public class FenetreModificationBP extends BorderPane
 
         setMinChallenges( test );
 
-        // cr�ation de la partie sup�rieure de la fen�tre
+        // creation de la partie superieure de la fenetre
         AnchorPane anch = new AnchorPane();
 
         anch.setTopAnchor( getLblTheme(), 4. );
@@ -383,7 +383,7 @@ public class FenetreModificationBP extends BorderPane
         anch.getChildren().addAll( getLblTheme(), getCb(), getLblAuthor(), getTxtAuthor(), getLblSubject(),
                 getTxtSubject() );
 
-        // cr�ation de la partie inf�rieure de la fen�tre
+        // creation de la partie inferieure de la fenetre
         GridPane grid = new GridPane();
         grid.setPadding( new Insets( 10., 10., 10., 10. ) );
         grid.setHgap( 5. );
@@ -395,7 +395,7 @@ public class FenetreModificationBP extends BorderPane
             colConstr.setPercentWidth( 100. / nbcols );
             grid.getColumnConstraints().add( colConstr );
         }
-        // ajout des labels de l�gendes
+        // ajout des labels de legendes
         grid.add( getLblChal(), 0, 1 );
         grid.add( getLblAns(), 7, 1 );
 
@@ -418,7 +418,7 @@ public class FenetreModificationBP extends BorderPane
         GridPane.setHalignment( getButtonCancel(), HPos.CENTER );
         GridPane.setHalignment( getButtonsOK(), HPos.CENTER );
 
-        // ajout des diff�rents composants dans la borderPane
+        // ajout des differents composants dans la borderPane
         VBox vb = new VBox();
         vb.getChildren().addAll( anch, grid );
         this.setCenter( vb );

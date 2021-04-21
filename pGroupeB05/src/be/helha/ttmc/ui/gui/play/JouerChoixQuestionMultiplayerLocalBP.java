@@ -54,7 +54,7 @@ public class JouerChoixQuestionMultiplayerLocalBP extends BorderPane
         this.settings = settings;
         this.maxPlayers = players.size();
         joueurs = new ArrayList<>();
-        for( Player p : players )
+        for ( Player p : players )
         {
             Joueur j = new Joueur( p.getCards() );
             j.setNickNamePlayer( p.getNickNamePlayer() );
@@ -111,7 +111,7 @@ public class JouerChoixQuestionMultiplayerLocalBP extends BorderPane
                         @Override
                         public void handle( ActionEvent arg0 )
                         {
-                            if( getParent().getParent() instanceof LobbyMultiLocalBP )
+                            if ( getParent().getParent() instanceof LobbyMultiLocalBP )
                             {
                                 LobbyMultiLocalBP lmlbp = ( LobbyMultiLocalBP ) getParent().getParent();
                                 lmlbp.setVisibleNode( LobbyMultiLocalMainBP.class.getSimpleName() );
@@ -244,7 +244,8 @@ public class JouerChoixQuestionMultiplayerLocalBP extends BorderPane
                             elapsedTimePlayer = now;
                             if ( timePlayer == 0 )
                             {
-                                joueurs.get( currentlyPlaying ).getCardPaneJoueur().checkAnswerPlayer( now, currentlyPlaying );
+                                joueurs.get( currentlyPlaying ).getCardPaneJoueur().checkAnswerPlayer( now,
+                                        currentlyPlaying );
                             }
                         }
 
@@ -490,7 +491,7 @@ public class JouerChoixQuestionMultiplayerLocalBP extends BorderPane
                 }
                 else
                 {
-                    if( getParent().getParent().getParent().getParent() instanceof LobbyMultiLocalBP )
+                    if ( getParent().getParent().getParent().getParent() instanceof LobbyMultiLocalBP )
                     {
                         LobbyMultiLocalBP lmlbp = ( LobbyMultiLocalBP ) getParent().getParent().getParent().getParent();
                         lmlbp.setVisibleNode( LobbyMultiLocalMainBP.class.getSimpleName() );
@@ -503,7 +504,7 @@ public class JouerChoixQuestionMultiplayerLocalBP extends BorderPane
                         .getText().equalsIgnoreCase( bcPlayer.getQuestions()
                                 .get( joueurs.get( playerID ).getCardPaneJoueur().getIdQuestion() ).getAnswer() ) )
                 {
-                    alert.setContentText( "Brava tu as reussi !" );
+                    alert.setContentText( "The answer is correct! Good job!" );
                     path = "/be/helha/ttmc/assets/images/banana.gif";
                     joueurs.get( playerID ).setScorePlayer( joueurs.get( playerID ).getScorePlayer()
                             + joueurs.get( playerID ).getCardPaneJoueur().getIdQuestion() + 1 );
@@ -511,8 +512,9 @@ public class JouerChoixQuestionMultiplayerLocalBP extends BorderPane
                 }
                 else
                 {
-                    alert.setContentText( "La reponse etait : " + bcPlayer.getQuestions()
-                            .get( joueurs.get( playerID ).getCardPaneJoueur().getIdQuestion() ).getAnswer() );
+                    alert.setContentText(
+                            "The answer is not correct\nThe correct answer was: " + bcPlayer.getQuestions()
+                                    .get( joueurs.get( playerID ).getCardPaneJoueur().getIdQuestion() ).getAnswer() );
                     path = "/be/helha/ttmc/assets/images/sonicPleure.gif";
                 }
             }

@@ -521,7 +521,7 @@ public class JouerChoixQuestionBP extends BorderPane
 
             if ( getTxtRep().getText().equalsIgnoreCase( bc.getQuestions().get( getID() ).getAnswer() ) )
             {
-                alert.setContentText( "Brava tu as reussi !" );
+                alert.setContentText( "The answer is correct! Good job!" );
                 path = "/be/helha/ttmc/assets/images/banana.gif";
                 newScore += ( getID() + 1 );
                 setScore( newScore );
@@ -531,7 +531,8 @@ public class JouerChoixQuestionBP extends BorderPane
             }
             else
             {
-                alert.setContentText( "La reponse etait : " + bc.getQuestions().get( getID() ).getAnswer() );
+                alert.setContentText( "The answer is not correct\nThe correct answer was: "
+                        + bc.getQuestions().get( getID() ).getAnswer() );
                 path = "/be/helha/ttmc/assets/images/sonicPleure.gif";
             }
         }

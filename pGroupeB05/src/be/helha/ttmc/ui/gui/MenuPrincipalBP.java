@@ -80,7 +80,7 @@ public class MenuPrincipalBP extends BorderPane
                     if ( d.getCards().size() == 0 )
                     {
                         Alert alert = new Alert( AlertType.ERROR,
-                                "Aucun deck de question trouve!\n Veuillez ajouter des cartes depuis l'admin panel!" );
+                                "No deck found!\nPlease, add some cards from the admin panel!" );
                         alert.showAndWait();
                     }
                     else
@@ -115,7 +115,7 @@ public class MenuPrincipalBP extends BorderPane
                 @Override
                 public void handle( ActionEvent arg0 )
                 {
-                    Alert alert = new Alert( AlertType.CONFIRMATION, "Leave the game ?" );
+                    Alert alert = new Alert( AlertType.CONFIRMATION, "Leave the game?" );
                     if ( alert.showAndWait().get() == ButtonType.OK )
                     {
                         Stage stage = ( Stage ) getScene().getWindow();

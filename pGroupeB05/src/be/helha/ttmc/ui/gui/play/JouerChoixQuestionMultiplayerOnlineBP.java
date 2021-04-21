@@ -54,7 +54,7 @@ public class JouerChoixQuestionMultiplayerOnlineBP extends BorderPane
         this.settings = settings;
         this.maxPlayers = players.size();
         joueurs = new ArrayList<>();
-        for( Player p : players )
+        for ( Player p : players )
         {
             Joueur j = new Joueur( p.getCards() );
             j.setNickNamePlayer( p.getNickNamePlayer() );
@@ -249,7 +249,8 @@ public class JouerChoixQuestionMultiplayerOnlineBP extends BorderPane
                             elapsedTimePlayer = now;
                             if ( timePlayer == 0 )
                             {
-                                joueurs.get( currentlyPlaying ).getCardPaneJoueur().checkAnswerPlayer( now, currentlyPlaying );
+                                joueurs.get( currentlyPlaying ).getCardPaneJoueur().checkAnswerPlayer( now,
+                                        currentlyPlaying );
                             }
                         }
 
@@ -495,14 +496,16 @@ public class JouerChoixQuestionMultiplayerOnlineBP extends BorderPane
                 }
                 else
                 {
-                    if( getParent().getParent().getParent().getParent() instanceof LobbyMultiOnlineHostBP )
+                    if ( getParent().getParent().getParent().getParent() instanceof LobbyMultiOnlineHostBP )
                     {
-                        LobbyMultiOnlineHostBP lmohbp = ( LobbyMultiOnlineHostBP ) getParent().getParent().getParent().getParent();
+                        LobbyMultiOnlineHostBP lmohbp = ( LobbyMultiOnlineHostBP ) getParent().getParent().getParent()
+                                .getParent();
                         lmohbp.setVisibleNode( LobbyMultiOnlineMainBP.class.getSimpleName() );
                     }
-                    if( getParent().getParent().getParent().getParent() instanceof LobbyMultiOnlineJoinBP )
+                    if ( getParent().getParent().getParent().getParent() instanceof LobbyMultiOnlineJoinBP )
                     {
-                        LobbyMultiOnlineJoinBP lmojbp = ( LobbyMultiOnlineJoinBP ) getParent().getParent().getParent().getParent();
+                        LobbyMultiOnlineJoinBP lmojbp = ( LobbyMultiOnlineJoinBP ) getParent().getParent().getParent()
+                                .getParent();
                         lmojbp.setVisibleNode( LobbyMultiOnlineMainBP.class.getSimpleName() );
                     }
                 }
@@ -513,7 +516,7 @@ public class JouerChoixQuestionMultiplayerOnlineBP extends BorderPane
                         .getText().equalsIgnoreCase( bcPlayer.getQuestions()
                                 .get( joueurs.get( playerID ).getCardPaneJoueur().getIdQuestion() ).getAnswer() ) )
                 {
-                    alert.setContentText( "Brava tu as reussi !" );
+                    alert.setContentText( "The answer is correct! Good job!" );
                     path = "/be/helha/ttmc/assets/images/banana.gif";
                     joueurs.get( playerID ).setScorePlayer( joueurs.get( playerID ).getScorePlayer()
                             + joueurs.get( playerID ).getCardPaneJoueur().getIdQuestion() + 1 );
@@ -521,8 +524,9 @@ public class JouerChoixQuestionMultiplayerOnlineBP extends BorderPane
                 }
                 else
                 {
-                    alert.setContentText( "La reponse etait : " + bcPlayer.getQuestions()
-                            .get( joueurs.get( playerID ).getCardPaneJoueur().getIdQuestion() ).getAnswer() );
+                    alert.setContentText(
+                            "The answer is not correct!\nThe correct answer was: " + bcPlayer.getQuestions()
+                                    .get( joueurs.get( playerID ).getCardPaneJoueur().getIdQuestion() ).getAnswer() );
                     path = "/be/helha/ttmc/assets/images/sonicPleure.gif";
                 }
             }

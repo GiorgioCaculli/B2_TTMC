@@ -43,7 +43,7 @@ public class FenetreAjoutBP extends BorderPane
     public FenetreAjoutBP( Deck d )
     {
         this.d = d;
-        // creation de la partie sup�rieure de la fen�tre
+        // creation de la partie superieure de la fenetre
         AnchorPane anch = new AnchorPane();
 
         anch.setTopAnchor( getLblTheme(), 4. );
@@ -67,7 +67,7 @@ public class FenetreAjoutBP extends BorderPane
         anch.getChildren().addAll( getLblTheme(), getCb(), getLblAuthor(), getTxtAuthor(), getLblSubject(),
                 getTxtSubject() );
 
-        // cr�ation de la partie inf�rieure de la fen�tre
+        // creation de la partie inferieure de la fenetre
         GridPane grid = new GridPane();
         grid.setPadding( new Insets( 10., 10., 10., 10. ) );
         grid.setHgap( 5. );
@@ -79,7 +79,7 @@ public class FenetreAjoutBP extends BorderPane
             colConstr.setPercentWidth( 100. / nbcols );
             grid.getColumnConstraints().add( colConstr );
         }
-        // ajout des labels de l�gendes
+        // ajout des labels de legendes
         grid.add( getLblChal(), 0, 1 );
         grid.add( getLblAns(), 7, 1 );
 
@@ -207,7 +207,7 @@ public class FenetreAjoutBP extends BorderPane
                                 if ( !b.add( q ) )
                                 {
                                     Alert alert = new Alert( AlertType.ERROR,
-                                            "Une des questions des d�j� pr�sente sur la carte!" );
+                                            "One of the questions is already present on the card!" );
                                     alert.showAndWait();
                                     break;
                                 }
@@ -216,18 +216,18 @@ public class FenetreAjoutBP extends BorderPane
                             if ( !d.add( b ) )
                             {
 
-                                Alert alert = new Alert( AlertType.ERROR, "La carte est deja presente dans le deck!" );
+                                Alert alert = new Alert( AlertType.ERROR, "The card already exists in the deck!" );
                                 alert.showAndWait();
                                 return;
                             }
-                            Alert alert = new Alert( AlertType.INFORMATION, "La carte a bien ete rajoutee au deck!" );
+                            Alert alert = new Alert( AlertType.INFORMATION, "The card has been added to the deck!" );
                             alert.showAndWait();
                             return;
                         }
 
                     } // affichage d'une fenetre d'information quand les champs ne sont pas complets
 
-                    Alert alert = new Alert( AlertType.WARNING, "Au moins un champ est vide! Veuillez le remplir !" );
+                    Alert alert = new Alert( AlertType.WARNING, "At lest one field is empty! Please, fill it!" );
                     alert.showAndWait();
 
                 }
@@ -247,7 +247,7 @@ public class FenetreAjoutBP extends BorderPane
                 @Override
                 public void handle( ActionEvent arg0 )
                 {
-                    Alert alert = new Alert( AlertType.CONFIRMATION, "Voulez-vous videz les champs ?" );
+                    Alert alert = new Alert( AlertType.CONFIRMATION, "Do you want to empty the fields?" );
                     if ( alert.showAndWait().get() == ButtonType.OK )
                     {
                         getTxtAuthor().clear();
@@ -344,7 +344,7 @@ public class FenetreAjoutBP extends BorderPane
 
         setMinChallenges( test );
 
-        // cr�ation de la partie sup�rieure de la fen�tre
+        // creation de la partie superieure de la fenetre
         AnchorPane anch = new AnchorPane();
 
         anch.setTopAnchor( getLblTheme(), 4. );
@@ -368,7 +368,7 @@ public class FenetreAjoutBP extends BorderPane
         anch.getChildren().addAll( getLblTheme(), getCb(), getLblAuthor(), getTxtAuthor(), getLblSubject(),
                 getTxtSubject() );
 
-        // cr�ation de la partie inf�rieure de la fen�tre
+        // creation de la partie inferieure de la fenetre
         GridPane grid = new GridPane();
         grid.setPadding( new Insets( 10., 10., 10., 10. ) );
         grid.setHgap( 5. );
@@ -380,7 +380,7 @@ public class FenetreAjoutBP extends BorderPane
             colConstr.setPercentWidth( 100. / nbcols );
             grid.getColumnConstraints().add( colConstr );
         }
-        // ajout des labels de l�gendes
+        // ajout des labels de legendes
         grid.add( getLblChal(), 0, 1 );
         grid.add( getLblAns(), 7, 1 );
 
@@ -403,7 +403,7 @@ public class FenetreAjoutBP extends BorderPane
         GridPane.setHalignment( getButtonCancel(), HPos.CENTER );
         GridPane.setHalignment( getButtonsOK(), HPos.CENTER );
 
-        // ajout des diff�rents composants dans la borderPane
+        // ajout des differents composants dans la borderPane
         VBox vb = new VBox();
         vb.getChildren().addAll( anch, grid );
         this.setCenter( vb );
