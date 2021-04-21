@@ -1,8 +1,11 @@
 package be.helha.ttmc.ui.gui.play;
 
 import java.io.IOException;
+import java.net.ConnectException;
+import java.net.UnknownHostException;
 
 import be.helha.ttmc.model.Deck;
+import be.helha.ttmc.ui.Client;
 import be.helha.ttmc.ui.Settings;
 import be.helha.ttmc.ui.gui.play.MenuMultiplayerBP.MenuMultiplayerMainVB;
 import javafx.event.ActionEvent;
@@ -10,7 +13,9 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -66,12 +71,12 @@ public class MenuMultiplayerOnlineBP extends BorderPane
             setSpacing( 50 );
 
             setStyle( "-fx-background-color: DAE6F3;" + "-fx-font-size: 15pt;" );
-            getChildren().addAll( getBtnLocal(), getBtnOnline(), getBtnRetour() );
+            getChildren().addAll( getBtnHost(), getBtnJoin(), getBtnRetour() );
             setAlignment( Pos.CENTER );
         }
     }
 
-    private Button getBtnLocal()
+    private Button getBtnHost()
     {
         if ( btnHost == null )
         {
@@ -106,7 +111,7 @@ public class MenuMultiplayerOnlineBP extends BorderPane
         return btnHost;
     }
 
-    public Button getBtnOnline()
+    public Button getBtnJoin()
     {
         if ( btnJoin == null )
         {
@@ -118,6 +123,38 @@ public class MenuMultiplayerOnlineBP extends BorderPane
                 @Override
                 public void handle( ActionEvent arg0 )
                 {
+                    for ( int i = 0; i < getChoicePane().getChildren().size(); i++ )
+                    {
+                        if ( getChoicePane().getChildren().get( i ).getClass().getSimpleName()
+                                .equals( LobbyMultiOnlineJoinBP.class.getSimpleName() ) )
+                        {
+                            getChoicePane().getChildren().remove( i );
+                        }
+                    }
+                    try
+                    {
+                        AlerteJoin aj = new AlerteJoin();
+                        Client c = new Client( aj.getUsername(), aj.getIPAddress() );
+                        getChoicePane().getChildren().add( new LobbyMultiOnlineJoinBP( c ) );
+                        setVisibleNode( LobbyMultiOnlineJoinBP.class.getSimpleName() );
+                    }
+                    catch ( UnknownHostException e )
+                    {
+                        e.printStackTrace();
+                    }
+                    catch( ConnectException e )
+                    {
+                        Alert alert = new Alert( AlertType.ERROR );
+                        alert.setTitle( "ConnectException" );
+                        alert.setHeaderText( "ConnectException caught" );
+                        alert.setContentText( e.getMessage() );
+                        e.printStackTrace();
+                        alert.showAndWait();
+                    }
+                    catch ( IOException e )
+                    {
+                        e.printStackTrace();
+                    }
                 }
             } );
         }

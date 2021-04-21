@@ -69,7 +69,7 @@ public class JouerChoixQuestionBP extends BorderPane
     private String nickName;
     private PlateauBP pla;
     private Settings s;
-    private int bonneRep=0;
+    private int bonneRep = 0;
 
     public JouerChoixQuestionBP( Deck d, Settings s )
     {
@@ -518,7 +518,7 @@ public class JouerChoixQuestionBP extends BorderPane
         }
         else
         {
-        	
+
             if ( getTxtRep().getText().equalsIgnoreCase( bc.getQuestions().get( getID() ).getAnswer() ) )
             {
                 alert.setContentText( "Brava tu as reussi !" );
@@ -526,9 +526,8 @@ public class JouerChoixQuestionBP extends BorderPane
                 newScore += ( getID() + 1 );
                 setScore( newScore );
                 bonneRep++;
-                getPla().getPion().setPos(
-                		getPla().getCases().get(bonneRep).getX() + getPla().getWIDTH_RECT()/2
-                		, getPla().getCases().get(bonneRep).getY()+ getPla().getHEIGHT_RECT()/2);
+                getPla().getPion().setPos( getPla().getCases().get( bonneRep ).getX() + getPla().getWIDTH_RECT() / 2,
+                        getPla().getCases().get( bonneRep ).getY() + getPla().getHEIGHT_RECT() / 2 );
             }
             else
             {

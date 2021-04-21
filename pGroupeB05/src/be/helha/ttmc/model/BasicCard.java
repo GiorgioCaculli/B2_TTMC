@@ -1,6 +1,7 @@
 package be.helha.ttmc.model;
 
 import java.util.List;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import be.helha.ttmc.exception.QuestionDoubleException;
@@ -15,8 +16,9 @@ import be.helha.ttmc.exception.BasicCardOverMaxQuestionsException;
  *         LA199566
  * @version 1.0
  */
-public class BasicCard
+public class BasicCard implements Serializable
 {
+    private static final long serialVersionUID = -7761798679803585516L;
     private String author, subject;
     private Theme theme;
     private List< Question > questions;

@@ -113,8 +113,13 @@ public class JouerChoixQuestionMultiplayerOnlineBP extends BorderPane
                         {
                             if ( getParent().getParent() instanceof LobbyMultiOnlineHostBP )
                             {
-                                LobbyMultiOnlineHostBP lmobp = ( LobbyMultiOnlineHostBP ) getParent().getParent();
-                                lmobp.setVisibleNode( LobbyMultiOnlineMainBP.class.getSimpleName() );
+                                LobbyMultiOnlineHostBP lmohbp = ( LobbyMultiOnlineHostBP ) getParent().getParent();
+                                lmohbp.setVisibleNode( LobbyMultiOnlineMainBP.class.getSimpleName() );
+                            }
+                            if ( getParent().getParent() instanceof LobbyMultiOnlineJoinBP )
+                            {
+                                LobbyMultiOnlineJoinBP lmojbp = ( LobbyMultiOnlineJoinBP ) getParent().getParent();
+                                lmojbp.setVisibleNode( LobbyMultiOnlineMainBP.class.getSimpleName() );
                             }
                         }
                     } );
@@ -492,8 +497,13 @@ public class JouerChoixQuestionMultiplayerOnlineBP extends BorderPane
                 {
                     if( getParent().getParent().getParent().getParent() instanceof LobbyMultiOnlineHostBP )
                     {
-                        LobbyMultiOnlineHostBP lmobp = ( LobbyMultiOnlineHostBP ) getParent().getParent().getParent().getParent();
-                        lmobp.setVisibleNode( LobbyMultiOnlineMainBP.class.getSimpleName() );
+                        LobbyMultiOnlineHostBP lmohbp = ( LobbyMultiOnlineHostBP ) getParent().getParent().getParent().getParent();
+                        lmohbp.setVisibleNode( LobbyMultiOnlineMainBP.class.getSimpleName() );
+                    }
+                    if( getParent().getParent().getParent().getParent() instanceof LobbyMultiOnlineJoinBP )
+                    {
+                        LobbyMultiOnlineJoinBP lmojbp = ( LobbyMultiOnlineJoinBP ) getParent().getParent().getParent().getParent();
+                        lmojbp.setVisibleNode( LobbyMultiOnlineMainBP.class.getSimpleName() );
                     }
                 }
             }

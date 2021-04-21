@@ -1,7 +1,10 @@
 package be.helha.ttmc.model;
 
-public class Question
+import java.io.Serializable;
+
+public class Question implements Serializable
 {
+    private static final long serialVersionUID = -5695162803564015663L;
     private String author, subject, challenge, answer;
     private Theme theme;
 

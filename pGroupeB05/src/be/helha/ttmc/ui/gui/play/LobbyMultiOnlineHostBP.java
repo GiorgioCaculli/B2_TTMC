@@ -3,11 +3,14 @@ package be.helha.ttmc.ui.gui.play;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CountDownLatch;
 
 import be.helha.ttmc.model.BasicCard;
 import be.helha.ttmc.model.Deck;
@@ -30,31 +33,33 @@ import javafx.scene.layout.VBox;
 
 public class LobbyMultiOnlineHostBP extends BorderPane
 {
-    private StackPane lobbyMultiLocalSP = new StackPane();
+    private StackPane lobbyMultiOnlineHostSP = new StackPane();
 
     private Button newGameButton = new Button( "New Game" );
     private Button returnButton = new Button( "Return" );
     private ChatBP chatBox = new ChatBP();
     private Server server;
     private List< ServerThread > serverThreads = new ArrayList<>();
-    private DataOutputStream toServer;
+    private OutputStream toServer;
     private Thread callThread = null;
-    private Socket socket = null;
     private Player hostPlayer = null;
     private Settings settings;
+    private CountDownLatch countDownLatch = null;
+    private List< Player > players = null;
 
     public LobbyMultiOnlineHostBP( Deck d, Settings settings ) throws IOException
     {
         server = new Server();
+        countDownLatch = new CountDownLatch( 1 );
         this.settings = settings;
         setTop( new Label( String.format( "%s:%d", server.getServerSocket().getInetAddress().toString(),
                 server.getPortNumber() ) ) );
-        for ( int i = 0; i < lobbyMultiLocalSP.getChildren().size(); i++ )
+        for ( int i = 0; i < lobbyMultiOnlineHostSP.getChildren().size(); i++ )
         {
-            if ( lobbyMultiLocalSP.getChildren().get( i ).getClass().getSimpleName()
+            if ( lobbyMultiOnlineHostSP.getChildren().get( i ).getClass().getSimpleName()
                     .equals( JouerChoixQuestionMultiplayerOnlineBP.class.getSimpleName() ) )
             {
-                lobbyMultiLocalSP.getChildren().remove( i );
+                lobbyMultiOnlineHostSP.getChildren().remove( i );
             }
         }
         TextInputDialog nbPlayersDialog = new TextInputDialog();
@@ -83,7 +88,7 @@ public class LobbyMultiOnlineHostBP extends BorderPane
             }
         }
         int maxPlayers = nbPlayers;
-        List< Player > players = new ArrayList<>( maxPlayers );
+        players = new ArrayList<>( maxPlayers );
         int i = 0;
         List< BasicCard > cards = d.getCards();
         Collections.shuffle( cards );
@@ -101,7 +106,10 @@ public class LobbyMultiOnlineHostBP extends BorderPane
         {
             hostPlayer.setNickNamePlayer( String.format( "User-%d", i + 1 ) );
         }
-        players.add( hostPlayer );
+
+        Client client = new Client( hostPlayer.getNickNamePlayer() );
+        toServer = new DataOutputStream( client.getSocket().getOutputStream() );
+        ( ( DataOutputStream ) toServer ).writeUTF( client.getUserName() );
 
         callThread = new Thread( new Runnable()
         {
@@ -109,27 +117,50 @@ public class LobbyMultiOnlineHostBP extends BorderPane
             public void run()
             {
                 ServerThread t = null;
-                int maxServerJoin = 0;
-                while ( !server.getServerSocket().isClosed() && maxServerJoin < maxPlayers - 1 )
+                while ( !Thread.currentThread().isInterrupted() && serverThreads.size() <= maxPlayers - 1 )
                 {
                     try
                     {
-                        t = new ServerThread( server.getServerSocket().accept() );
-                        serverThreads.add( t );
-                        t.start();
+                        t = new ServerThread( server.getServerSocket().accept(), cards );
+                        if ( serverThreads.add( t ) )
+                        {
+                            t.start();
+                        }
+                        else
+                        {
+                            System.out.println( "user already present" );
+                        }
                     }
                     catch ( IOException e )
                     {
                         e.printStackTrace();
                     }
-                    maxServerJoin++;
                 }
             }
         } );
-        callThread.start();
 
-        Client client = new Client( hostPlayer.getNickNamePlayer() );
-        socket = client.getSocket();
+        Thread clientIsUpThread = new Thread( new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                while ( !Thread.currentThread().isInterrupted() )
+                {
+                    for ( int i = 0; i < serverThreads.size(); i++ )
+                    {
+                        if ( serverThreads.get( i ).getSocket().isClosed() )
+                        {
+                            System.out.println( "True" );
+                            chatBox.getConversationArea().appendText( String.format( "IP: %s disconnected.\n",
+                                    serverThreads.get( i ).getPlayer().getNickNamePlayer() ) );
+                            serverThreads.get( i ).interrupt();
+                            serverThreads.remove( i );
+                            players.remove( i );
+                        }
+                    }
+                }
+            }
+        } );
 
         chatBox.getMessageField().setOnKeyPressed( new EventHandler< KeyEvent >()
         {
@@ -140,9 +171,13 @@ public class LobbyMultiOnlineHostBP extends BorderPane
                 {
                     try
                     {
-                        toServer = new DataOutputStream( socket.getOutputStream() );
-                        writeMessageToAll( chatBox.getMessageField().getText().trim(), toServer );
-                        chatBox.getMessageField().clear();
+                        if ( !chatBox.getMessageField().getText().isEmpty() )
+                        {
+                            ( ( DataOutputStream ) toServer ).writeUTF( String.format( "%s: %s",
+                                    hostPlayer.getNickNamePlayer(), chatBox.getMessageField().getText().trim() ) );
+                            toServer.flush();
+                            chatBox.getMessageField().clear();
+                        }
                     }
                     catch ( IOException e )
                     {
@@ -157,21 +192,27 @@ public class LobbyMultiOnlineHostBP extends BorderPane
             @Override
             public void handle( ActionEvent arg0 )
             {
-                for ( int i = 0; i < lobbyMultiLocalSP.getChildren().size(); i++ )
+                for ( int i = 0; i < lobbyMultiOnlineHostSP.getChildren().size(); i++ )
                 {
-                    if ( lobbyMultiLocalSP.getChildren().get( i ).getClass().getSimpleName()
+                    if ( lobbyMultiOnlineHostSP.getChildren().get( i ).getClass().getSimpleName()
                             .equals( JouerChoixQuestionMultiplayerOnlineBP.class.getSimpleName() ) )
                     {
-                        lobbyMultiLocalSP.getChildren().remove( i );
+                        lobbyMultiOnlineHostSP.getChildren().remove( i );
                     }
+                }
+                for ( int i = 0; i < serverThreads.size(); i++ )
+                {
+                    players.add( serverThreads.get( i ).getPlayer() );
                 }
                 for ( Player p : players )
                 {
+                    System.out.println( p );
                     List< BasicCard > cards = d.getCards();
                     Collections.shuffle( cards );
                     p.setCards( cards );
                 }
-                lobbyMultiLocalSP.getChildren().add( new JouerChoixQuestionMultiplayerOnlineBP( d, players, settings ) );
+                lobbyMultiOnlineHostSP.getChildren()
+                        .add( new JouerChoixQuestionMultiplayerOnlineBP( d, players, settings ) );
                 setVisibleNode( JouerChoixQuestionMultiplayerOnlineBP.class.getSimpleName() );
             }
         } );
@@ -183,6 +224,8 @@ public class LobbyMultiOnlineHostBP extends BorderPane
             {
                 try
                 {
+                    callThread.interrupt();
+                    clientIsUpThread.interrupt();
                     server.getServerSocket().close();
                 }
                 catch ( IOException e )
@@ -193,15 +236,19 @@ public class LobbyMultiOnlineHostBP extends BorderPane
                 mmbp.setVisibleNode( MenuMultiplayerOnlineMainVB.class.getSimpleName() );
             }
         } );
-        lobbyMultiLocalSP.getChildren().add( new LobbyMultiOnlineMainBP() );
+        lobbyMultiOnlineHostSP.getChildren().add( new LobbyMultiOnlineMainBP() );
 
         setRight( chatBox );
-        setCenter( lobbyMultiLocalSP );
+        setCenter( lobbyMultiOnlineHostSP );
+
+        callThread.start();
+
+        clientIsUpThread.start();
     }
 
     public void setVisibleNode( String nodeName )
     {
-        for ( Node n : lobbyMultiLocalSP.getChildren() )
+        for ( Node n : lobbyMultiOnlineHostSP.getChildren() )
         {
             if ( n.getClass().getSimpleName().equals( nodeName ) )
             {
@@ -225,27 +272,19 @@ public class LobbyMultiOnlineHostBP extends BorderPane
         }
     }
 
-    public void sendMessageToAll( String message )
+    private void sendMessageToAll( String message )
     {
-        for ( ServerThread t : serverThreads )
+        System.out.println( serverThreads.size() );
+        for ( int i = 0; i < serverThreads.size(); i++ )
         {
             try
             {
-                t.writeMessage( message );
+                serverThreads.get( i ).writeMessage( message );
             }
             catch ( IOException e )
             {
-                e.printStackTrace();
+                serverThreads.remove( i );
             }
-        }
-    }
-
-    private void writeMessageToAll( String message, DataOutputStream out ) throws IOException
-    {
-        if ( !chatBox.getMessageField().getText().isEmpty() )
-        {
-            out.writeUTF( String.format( "%s: %s", hostPlayer.getNickNamePlayer(), message ) );
-            out.flush();
         }
     }
 
@@ -254,11 +293,15 @@ public class LobbyMultiOnlineHostBP extends BorderPane
         private Socket socket = null;
         private DataInputStream inputFromClient;
         private DataOutputStream outputToClient;
+        private Player newPlayer = null;
+        private List< BasicCard > cards;
+        private Thread chatThread = null;
 
-        public ServerThread( Socket socket )
+        public ServerThread( Socket socket, List< BasicCard > cards )
         {
             super( "ServerThread" );
             this.socket = socket;
+            this.cards = cards;
         }
 
         public void writeMessage( String message ) throws IOException
@@ -270,39 +313,65 @@ public class LobbyMultiOnlineHostBP extends BorderPane
         {
             try
             {
-                outputToClient = new DataOutputStream( socket.getOutputStream() );
-                inputFromClient = new DataInputStream( socket.getInputStream() );
+                OutputStream socketOutputStream = socket.getOutputStream();
+                InputStream socketInputStream = socket.getInputStream();
+                outputToClient = new DataOutputStream( socketOutputStream );
+                inputFromClient = new DataInputStream( socketInputStream );
                 chatBox.getConversationArea()
                         .appendText( String.format( "IP: %s connected\n", socket.getRemoteSocketAddress() ) );
-                String inputLine;
-                while ( ( ( inputLine = inputFromClient.readUTF() ) != null ) )
+                Collections.shuffle( cards );
+                newPlayer = new Player( cards );
+                newPlayer.setNickNamePlayer( inputFromClient.readUTF() );
+                chatThread = new Thread( new Runnable()
                 {
-                    sendMessageToAll( inputLine );
-                    chatBox.getConversationArea()
-                            .appendText( String.format( "%s\n", inputLine ) );
-                }
-                chatBox.getConversationArea()
-                        .appendText( String.format( "IP: %s disconnected\n", socket.getRemoteSocketAddress() ) );
-                socket.close();
+                    @Override
+                    public void run()
+                    {
+                        try
+                        {
+                            while ( !Thread.currentThread().isInterrupted()
+                                    && !socket.isClosed() )
+                            {
+                                String inputLine = inputFromClient.readUTF();
+                                sendMessageToAll( inputLine );
+                                chatBox.getConversationArea().appendText( String.format( "%s\n", inputLine ) );
+                            }
+                            socket.close();
+                        }
+                        catch ( IOException e )
+                        {
+                            e.printStackTrace();
+                            interrupt();
+                        }
+                    }
+                } );
+                chatThread.start();
             }
             catch ( IOException e )
             {
                 e.printStackTrace();
+                interrupt();
             }
-            finally
+        }
+
+        public Player getPlayer()
+        {
+            return newPlayer;
+        }
+
+        public Socket getSocket()
+        {
+            return socket;
+        }
+
+        public boolean equals( Object o )
+        {
+            if ( o instanceof ServerThread )
             {
-                if ( socket != null && !socket.isClosed() )
-                {
-                    try
-                    {
-                        socket.close();
-                    }
-                    catch ( IOException e )
-                    {
-                        e.printStackTrace();
-                    }
-                }
+                ServerThread tmp = ( ServerThread ) o;
+                return tmp.getPlayer().getNickNamePlayer().equalsIgnoreCase( getPlayer().getNickNamePlayer() );
             }
+            return false;
         }
     }
 }

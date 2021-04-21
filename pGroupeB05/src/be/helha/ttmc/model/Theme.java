@@ -1,8 +1,9 @@
 package be.helha.ttmc.model;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public enum Theme
+public enum Theme implements Serializable
 {
     IMPROBABLE, INFORMATICS, PLEASURE, SCHOOL;
     

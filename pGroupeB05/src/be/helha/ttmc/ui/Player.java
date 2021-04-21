@@ -56,4 +56,14 @@ public class Player
     {
         this.scorePlayer = scorePlayer;
     }
+    
+    public boolean equals( Object o )
+    {
+        if( o instanceof Player )
+        {
+            Player tmpp = ( Player ) o;
+            return tmpp.nickNamePlayer.equals( nickNamePlayer );
+        }
+        return false;
+    }
 }

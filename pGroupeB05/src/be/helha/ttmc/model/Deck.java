@@ -1,11 +1,12 @@
 package be.helha.ttmc.model;
 
+import java.io.Serializable;
 import java.util.List;
-import java.util.Random;
 import java.util.ArrayList;
 
-public class Deck
+public class Deck implements Serializable
 {
+    private static final long serialVersionUID = -7971558764768326440L;
     private List< BasicCard > cards;
 
     public Deck()
@@ -47,14 +48,14 @@ public class Deck
         }
         return cards.remove( cards.get( i - 1 ) );
     }
-    
+
     public boolean modify( BasicCard oldCard, BasicCard newCard )
     {
-        if( oldCard == null || newCard == null )
+        if ( oldCard == null || newCard == null )
         {
             return false;
         }
-        if( cards.indexOf( oldCard ) < 0 )
+        if ( cards.indexOf( oldCard ) < 0 )
         {
             return false;
         }
@@ -83,11 +84,11 @@ public class Deck
         }
         return sb.toString();
     }
-    
+
     public Deck clone()
     {
         Deck tmpDeck = new Deck();
-        for( BasicCard c : cards )
+        for ( BasicCard c : cards )
         {
             tmpDeck.add( c.clone() );
         }
