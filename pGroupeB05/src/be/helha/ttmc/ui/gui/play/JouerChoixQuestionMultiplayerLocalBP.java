@@ -48,9 +48,12 @@ public class JouerChoixQuestionMultiplayerLocalBP extends BorderPane
     private int maxPlayers;
     private int currentlyPlaying;
     private Settings settings;
+    private Deck d;
+    private PlateauBP pla;
 
     public JouerChoixQuestionMultiplayerLocalBP( Deck d, List< Player > players, Settings settings )
     {
+        this.d = d;
         this.settings = settings;
         this.maxPlayers = players.size();
         joueurs = new ArrayList<>();
@@ -64,6 +67,7 @@ public class JouerChoixQuestionMultiplayerLocalBP extends BorderPane
         initCardPane( joueurs, maxPlayers );
         getJouerChoixQuestionMainSP().getChildren().add( getMenuPauseFP() );
         getJouerChoixQuestionMainSP().getChildren().get( maxPlayers ).setVisible( false );
+        setBottom( getPla() );
         ColorAdjust col = new ColorAdjust( 0, -0.9, -0.5, 0 );
         BoxBlur blur = new BoxBlur();
         blur.setWidth( 15 );
@@ -124,6 +128,15 @@ public class JouerChoixQuestionMultiplayerLocalBP extends BorderPane
         } );
         setFocused( true );
         setFocusTraversable( true );
+    }
+
+    private PlateauBP getPla()
+    {
+        if ( pla == null )
+        {
+            pla = new PlateauBP( d, maxPlayers, settings );
+        }
+        return pla;
     }
 
     private StackPane getJouerChoixQuestionMainSP()
@@ -509,6 +522,12 @@ public class JouerChoixQuestionMultiplayerLocalBP extends BorderPane
                     joueurs.get( playerID ).setScorePlayer( joueurs.get( playerID ).getScorePlayer()
                             + joueurs.get( playerID ).getCardPaneJoueur().getIdQuestion() + 1 );
                     getLblScore().setText( String.format( "Score: %2d", joueurs.get( playerID ).getScorePlayer() ) );
+                    joueurs.get( playerID ).setBonnesRep( joueurs.get( playerID ).getBonnesRep() + 1 );
+                    getPla().getPion( playerID )
+                            .setPos( getPla().getCases().get( joueurs.get( playerID ).getBonnesRep() ).getX()
+                                    + getPla().getWIDTH_RECT() / 2,
+                                    getPla().getCases().get( joueurs.get( playerID ).getBonnesRep() ).getY()
+                                            + getPla().getHEIGHT_RECT() / 2 );
                 }
                 else
                 {

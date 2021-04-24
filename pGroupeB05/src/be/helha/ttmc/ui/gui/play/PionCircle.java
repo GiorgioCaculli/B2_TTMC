@@ -5,12 +5,12 @@ import javafx.scene.shape.Circle;
 
 public class PionCircle extends Circle
 {
-    public static Color couleur = Color.MEDIUMAQUAMARINE;
-
-    public PionCircle( double centerX, double centerY, double radius )
+    private Color color;
+    public PionCircle( double centerX, double centerY, double radius, Color color )
     {
         super( centerX, centerY, radius );
-        colorPion();
+        this.color = color;
+        setFill( color );
     }
 
     public void setPos( double newX, double newY )
@@ -18,9 +18,9 @@ public class PionCircle extends Circle
         this.setCenterX( newX );
         this.setCenterY( newY );
     }
-
-    public void colorPion()
+    
+    public Color getColor()
     {
-        setFill( couleur );
+        return color;
     }
 }

@@ -10,6 +10,7 @@ public class Player
     private int cardNb = 0;
     private String nickNamePlayer;
     private int scorePlayer;
+    private int bonnesRep = 0;
     
     public Player( List< BasicCard > cards )
     {
@@ -55,6 +56,16 @@ public class Player
     public void setScorePlayer( int scorePlayer )
     {
         this.scorePlayer = scorePlayer;
+    }
+    
+    public int getBonnesRep()
+    {
+        return bonnesRep;
+    }
+    
+    public void setBonnesRep( int bonnesRep )
+    {
+        this.bonnesRep = bonnesRep;
     }
     
     public boolean equals( Object o )

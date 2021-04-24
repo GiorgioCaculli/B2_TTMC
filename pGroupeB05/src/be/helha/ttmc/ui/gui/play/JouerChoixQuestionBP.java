@@ -191,7 +191,7 @@ public class JouerChoixQuestionBP extends BorderPane
     public PlateauBP getPla()
     {
         if ( pla == null )
-            pla = new PlateauBP( d );
+            pla = new PlateauBP( d, 1, s );
         return pla;
     }
 
@@ -526,7 +526,7 @@ public class JouerChoixQuestionBP extends BorderPane
                 newScore += ( getID() + 1 );
                 setScore( newScore );
                 bonneRep++;
-                getPla().getPion().setPos( getPla().getCases().get( bonneRep ).getX() + getPla().getWIDTH_RECT() / 2,
+                getPla().getPion( 0 ).setPos( getPla().getCases().get( bonneRep ).getX() + getPla().getWIDTH_RECT() / 2,
                         getPla().getCases().get( bonneRep ).getY() + getPla().getHEIGHT_RECT() / 2 );
             }
             else

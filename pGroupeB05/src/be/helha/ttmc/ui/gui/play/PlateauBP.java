@@ -2,8 +2,10 @@ package be.helha.ttmc.ui.gui.play;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import be.helha.ttmc.model.Deck;
+import be.helha.ttmc.ui.Settings;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -15,15 +17,18 @@ public class PlateauBP extends BorderPane
     private int nbCases;
     private List< Rectangle > cases;
     private List< Label > num;
-    private PionCircle pion;
+    private PionCircle pions[];
 
     private final double WIDTH_RECT = 35.;
     private final double HEIGHT_RECT = 30.;
     private final double MOUV_X = WIDTH_RECT + 1;
     private final double MOUV_Y = HEIGHT_RECT + 1;
+    
+    private Settings s;
 
-    public PlateauBP( Deck d )
+    public PlateauBP( Deck d, int nbJoueurs, Settings s )
     {
+        this.s = s;
         nbCases = d.getCards().size();
         AnchorPane anch = new AnchorPane();
         getCases();
@@ -36,9 +41,9 @@ public class PlateauBP extends BorderPane
             double mouvX = ( i + 1 ) * MOUV_X;
             text = ( i + 1 ) + "";
             Label lab = new Label( text );
-            if ( ( i + 1 ) * MOUV_X > 790 - WIDTH_RECT * 3 )
+            if ( ( i + 1 ) * MOUV_X > s.getWidth() - WIDTH_RECT * 3 )
             {
-                if ( ( int ) ( ( ( i + 1 ) * MOUV_X ) / ( 790 - WIDTH_RECT * 3 ) ) > rangY )
+                if ( ( int ) ( ( ( i + 1 ) * MOUV_X ) / ( s.getWidth() - WIDTH_RECT * 3 ) ) > rangY )
                 {
                     rangY++;
                     test = 0;
@@ -58,18 +63,18 @@ public class PlateauBP extends BorderPane
             getCases().get( i ).setX( mouvX );
             anch.getChildren().addAll( getCases().get( i ), getNum().get( i ) );
         }
-        anch.getChildren().add( getPion() );
-        setCenter( anch );
-    }
-
-    public PionCircle getPion()
-    {
-        if ( pion == null )
+        pions = new PionCircle[ nbJoueurs ];
+        for ( int i = 0; i < nbJoueurs; i++ )
         {
-            pion = new PionCircle( getCases().get( 0 ).getX() + WIDTH_RECT / 2,
-                    getCases().get( 0 ).getY() + HEIGHT_RECT / 2, WIDTH_RECT / 3 );
+            Random randColorR = new Random();
+            Random randColorG = new Random();
+            Random randColorB = new Random();
+            pions[ i ] = new PionCircle( getCases().get( 0 ).getX() + WIDTH_RECT / 2,
+                    getCases().get( 0 ).getY() + HEIGHT_RECT / 2, WIDTH_RECT / 3,
+                    Color.rgb( randColorR.nextInt( 255 ), randColorG.nextInt( 255 ), randColorB.nextInt( 255 ) ) );
+            anch.getChildren().add( pions[ i ] );
         }
-        return pion;
+        setCenter( anch );
     }
 
     public double getHEIGHT_RECT()
@@ -104,5 +109,10 @@ public class PlateauBP extends BorderPane
         if ( num == null )
             num = new ArrayList<>();
         return num;
+    }
+    
+    public PionCircle getPion( int id )
+    {
+        return pions[id];
     }
 }
