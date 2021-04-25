@@ -29,7 +29,16 @@ public class MusicGestion
         gererMusic( path );
 
         startMusic();
-
+    }
+    
+    public MediaView getMediaView()
+    {
+        return mv;
+    }
+    
+    public Media getMedia()
+    {
+        return m;
     }
 
     public void startMusic()
@@ -55,9 +64,7 @@ public class MusicGestion
 
     public void stopMusic()
     {
-
         mv.getMediaPlayer().stop();
-
     }
 
     public Thread gererThread( List< String > path )
