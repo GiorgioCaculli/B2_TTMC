@@ -20,32 +20,7 @@ public class MainPaneBP extends BorderPane
 
     public MainPaneBP( Deck d, Settings s )
     {
-        List< String > path = new ArrayList< String >();
-        path.add( "assets/musics/EVAmusic.wav" );
-        path.add( "assets/musics/CreativeDestruction.wav" );
-        path.add( "assets/musics/Intouch_IntoTheWild.wav" );
-        Collections.shuffle( path );
-
-        new Thread( new Runnable()
-        {
-
-            @Override
-            public void run()
-            {
-                try
-                {
-                    musics = new MusicGestion( path, s );
-                    musics.gererThread( path ).run();
-
-                }
-                catch ( Exception e )
-                {
-                    e.printStackTrace();
-                }
-
-            }
-        } ).start();
-
+        musics = new MusicGestion( s );
         getStackPane().getChildren().add( new MenuPrincipalBP( d ) );
         getStackPane().getChildren().add( new MenuPlayBP( d, s ) );
         getStackPane().getChildren().add( new SettingsBP( s, musics ) );

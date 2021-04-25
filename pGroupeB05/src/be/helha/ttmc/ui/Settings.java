@@ -17,6 +17,7 @@ public class Settings
     private String deckName;
     private int timerSeconds;
     private double volume;
+    private boolean mute;
 
     public Settings( String configFileName )
     {
@@ -51,6 +52,7 @@ public class Settings
         setDeckName( props.getProperty( "deck" ) );
         setVolume( Double.parseDouble( props.getProperty( "volume" ) ) );
         setTimerSeconds( Integer.parseInt( props.getProperty( "timer" ) ) );
+        setMute( Boolean.parseBoolean( props.getProperty( "mute" ) ) );
     }
     
     public void setTitle( String title )
@@ -111,5 +113,15 @@ public class Settings
     public double getVolume()
     {
         return volume;
+    }
+    
+    public void setMute( boolean mute )
+    {
+        this.mute = mute;
+    }
+    
+    public boolean isMute()
+    {
+        return mute;
     }
 }

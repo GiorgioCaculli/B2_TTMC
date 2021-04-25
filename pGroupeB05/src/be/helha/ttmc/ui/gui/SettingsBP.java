@@ -78,7 +78,9 @@ public class SettingsBP extends BorderPane
             slider.valueProperty()
                     .addListener( ( ObservableValue< ? extends Number > ov, Number old_val, Number new_val ) ->
                     {
-                        musicGestion.gererVolume( new_val.doubleValue() / 100. );
+                        double vol = new_val.doubleValue() / 100.;
+                        musicGestion.gererVolume( vol );
+                        musicGestion.setVol( vol );
                     } );
             slider.setShowTickMarks( true );
             slider.setShowTickLabels( true );
@@ -103,10 +105,12 @@ public class SettingsBP extends BorderPane
                     {
 
                         musicGestion.getMediaView().getMediaPlayer().setMute( false );
+                        settings.setMute( false );
                     }
                     else
                     {
                         musicGestion.getMediaView().getMediaPlayer().setMute( true );
+                        settings.setMute( true );
                     }
                 }
             } );
