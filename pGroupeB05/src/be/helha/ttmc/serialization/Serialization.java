@@ -70,6 +70,15 @@ public class Serialization
         {
             InputStream in = Main.class.getResourceAsStream( "assets/decks/deck.json" );
             d = gson.fromJson( new BufferedReader( new InputStreamReader( in ) ), Deck.class );
+            saveGame( d );
+            try
+            {
+                d = gson.fromJson( new FileReader( path ), Deck.class );
+            }
+            catch ( JsonSyntaxException | JsonIOException | FileNotFoundException e1 )
+            {
+                e1.printStackTrace();
+            }
         }
         return d;
     }
