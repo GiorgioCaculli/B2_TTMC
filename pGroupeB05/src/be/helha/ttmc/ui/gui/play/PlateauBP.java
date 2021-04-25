@@ -23,7 +23,7 @@ public class PlateauBP extends BorderPane
     private final double HEIGHT_RECT = 30.;
     private final double MOUV_X = WIDTH_RECT + 1;
     private final double MOUV_Y = HEIGHT_RECT + 1;
-    
+
     private Settings s;
 
     public PlateauBP( Deck d, int nbJoueurs, Settings s )
@@ -96,7 +96,6 @@ public class PlateauBP extends BorderPane
             }
         }
         return cases;
-
     }
 
     public double getWIDTH_RECT()
@@ -110,9 +109,9 @@ public class PlateauBP extends BorderPane
             num = new ArrayList<>();
         return num;
     }
-    
+
     public PionCircle getPion( int id )
     {
-        return pions[id];
+        return pions[ id ];
     }
 }
