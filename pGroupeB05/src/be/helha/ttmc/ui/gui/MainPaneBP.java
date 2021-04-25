@@ -9,28 +9,17 @@ import be.helha.ttmc.ui.Settings;
 import be.helha.ttmc.ui.gui.admin.MenuAdminBP;
 import be.helha.ttmc.ui.gui.play.MenuPlayBP;
 import be.helha.ttmc.ui.gui.util.MusicGestion;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
-import javafx.scene.control.Slider;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 
 public class MainPaneBP extends BorderPane
 {
     private MusicGestion musics;
-    private Slider slider;
     private StackPane stackpane;
 
     public MainPaneBP( Deck d, Settings s )
     {
-
-        getStackPane().getChildren().add( new MenuPrincipalBP( d ) );
-        getStackPane().getChildren().add( new MenuPlayBP( d, s ) );
-        getStackPane().getChildren().add( new MenuAdminBP( d ) );
-
-        setVisibleNode( MenuPrincipalBP.class.getSimpleName() );
-        //     setTop( getSlider() );
-        setCenter( getStackPane() );
         List< String > path = new ArrayList< String >();
         path.add( "assets/musics/EVAmusic.wav" );
         path.add( "assets/musics/CreativeDestruction.wav" );
@@ -57,6 +46,14 @@ public class MainPaneBP extends BorderPane
             }
         } ).start();
 
+        getStackPane().getChildren().add( new MenuPrincipalBP( d ) );
+        getStackPane().getChildren().add( new MenuPlayBP( d, s ) );
+        getStackPane().getChildren().add( new SettingsBP( s, musics ) );
+        getStackPane().getChildren().add( new MenuAdminBP( d ) );
+        getStackPane().getChildren().add( new CreditsBP() );
+
+        setVisibleNode( MenuPrincipalBP.class.getSimpleName() );
+        setCenter( getStackPane() );
     }
 
     public void setVisibleNode( String paneName )
@@ -73,23 +70,6 @@ public class MainPaneBP extends BorderPane
                 n.setVisible( false );
             }
         }
-    }
-
-    public Slider getSlider()
-    {
-        if ( slider == null )
-        {
-            slider = new Slider( 0, 100, 10 );
-            slider.valueProperty()
-                    .addListener( ( ObservableValue< ? extends Number > ov, Number old_val, Number new_val ) ->
-                    {
-                        musics.gererVolume( new_val.doubleValue() / 100. );
-                    } );
-            slider.setShowTickMarks( true );
-            slider.setShowTickLabels( true );
-        }
-        return slider;
-
     }
 
     public StackPane getStackPane()

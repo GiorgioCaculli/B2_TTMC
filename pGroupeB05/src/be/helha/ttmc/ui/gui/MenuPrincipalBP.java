@@ -23,7 +23,7 @@ import javafx.stage.Stage;
 public class MenuPrincipalBP extends BorderPane
 {
 
-    private Button btnJouer, btnParametres, btnQuitter, btnGerer;
+    private Button btnJouer, btnParametres, btnQuitter, btnGerer, btnCredits;
     private ImageView im1, im2;
     private int larg = 175, lon = 175;
     private Deck d;
@@ -36,7 +36,7 @@ public class MenuPrincipalBP extends BorderPane
         vb.setPadding( new Insets( 20 ) );
         vb.setSpacing( 25 );
         vb.getChildren().addAll( getIm2(), getBtnJouer(), getBtnParametres(), getBtnQuitter(), getBtnGerer(),
-                getIm1() );
+                getBtnCredits(), getIm1() );
 
         vb.setStyle( "-fx-background-color: DAE6F3;" + "-fx-font-size: 15pt;" );
         vb.setAlignment( Pos.CENTER );
@@ -69,7 +69,7 @@ public class MenuPrincipalBP extends BorderPane
     {
         if ( btnJouer == null )
         {
-            btnJouer = new Button( "Play !" );
+            btnJouer = new Button( "Play!" );
             btnJouer.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
             btnJouer.setOnAction( new EventHandler< ActionEvent >()
             {
@@ -94,12 +94,40 @@ public class MenuPrincipalBP extends BorderPane
         return btnJouer;
     }
 
+    public Button getBtnCredits()
+    {
+        if ( btnCredits == null )
+        {
+            btnCredits = new Button( "Credits" );
+            btnCredits.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
+            btnCredits.setOnAction( new EventHandler< ActionEvent >()
+            {
+                @Override
+                public void handle( ActionEvent arg0 )
+                {
+                    MainPaneBP mpbp = ( MainPaneBP ) getParent().getParent();
+                    mpbp.setVisibleNode( CreditsBP.class.getSimpleName() );
+                }
+            } );
+        }
+        return btnCredits;
+    }
+
     public Button getBtnParametres()
     {
         if ( btnParametres == null )
         {
             btnParametres = new Button( "Settings" );
             btnParametres.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
+            btnParametres.setOnAction( new EventHandler< ActionEvent >()
+            {
+                @Override
+                public void handle( ActionEvent arg0 )
+                {
+                    MainPaneBP mpbp = ( MainPaneBP ) getParent().getParent();
+                    mpbp.setVisibleNode( SettingsBP.class.getSimpleName() );
+                }
+            } );
         }
         return btnParametres;
     }
