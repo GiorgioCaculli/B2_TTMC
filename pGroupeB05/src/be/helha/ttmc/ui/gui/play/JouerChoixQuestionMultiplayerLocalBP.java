@@ -96,6 +96,7 @@ public class JouerChoixQuestionMultiplayerLocalBP extends BorderPane
                             {
                                 getJouerChoixQuestionMainSP().getChildren().get( currentlyPlaying ).setEffect( null );
                                 cpj.getReponsesBP().get( cpj.getIdQuestion() ).getAnimationPlayer().start();
+                                cpj.getReponsesBP().get( cpj.getIdQuestion() ).getTxtRepPlayer().setEditable( true );
                             }
                             getJouerChoixQuestionMainSP().getChildren().get( maxPlayers ).setVisible( false );
 
@@ -107,6 +108,7 @@ public class JouerChoixQuestionMultiplayerLocalBP extends BorderPane
                     {
                         getJouerChoixQuestionMainSP().getChildren().get( currentlyPlaying ).setEffect( blur );
                         cpj.getReponsesBP().get( cpj.getIdQuestion() ).getAnimationPlayer().stop();
+                        cpj.getReponsesBP().get( cpj.getIdQuestion() ).getTxtRepPlayer().setEditable( false );
                     }
                     mpfp.getBtnBack().setOnAction( new EventHandler< ActionEvent >()
                     {

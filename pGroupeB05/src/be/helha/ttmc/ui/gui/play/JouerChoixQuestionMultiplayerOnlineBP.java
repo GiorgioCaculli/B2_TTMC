@@ -47,9 +47,12 @@ public class JouerChoixQuestionMultiplayerOnlineBP extends BorderPane
     private int maxPlayers;
     private int currentlyPlaying;
     private Settings settings;
+    private Deck d;
+    private PlateauBP pla;
 
     public JouerChoixQuestionMultiplayerOnlineBP( Deck d, List< Player > players, Settings settings )
     {
+        this.d = d;
         this.settings = settings;
         this.maxPlayers = players.size();
         joueurs = new ArrayList<>();
@@ -63,6 +66,7 @@ public class JouerChoixQuestionMultiplayerOnlineBP extends BorderPane
         initCardPane( joueurs, maxPlayers );
         getJouerChoixQuestionMainSP().getChildren().add( getMenuPauseFP() );
         getJouerChoixQuestionMainSP().getChildren().get( maxPlayers ).setVisible( false );
+        setBottom( getPla() );
         ColorAdjust col = new ColorAdjust( 0, -0.9, -0.5, 0 );
         BoxBlur blur = new BoxBlur();
         blur.setWidth( 15 );
@@ -92,6 +96,7 @@ public class JouerChoixQuestionMultiplayerOnlineBP extends BorderPane
                             {
                                 getJouerChoixQuestionMainSP().getChildren().get( currentlyPlaying ).setEffect( null );
                                 cpj.getReponsesBP().get( cpj.getIdQuestion() ).getAnimationPlayer().start();
+                                cpj.getReponsesBP().get( cpj.getIdQuestion() ).getTxtRepPlayer().setEditable( true );
                             }
                             getJouerChoixQuestionMainSP().getChildren().get( maxPlayers ).setVisible( false );
 
@@ -103,6 +108,7 @@ public class JouerChoixQuestionMultiplayerOnlineBP extends BorderPane
                     {
                         getJouerChoixQuestionMainSP().getChildren().get( currentlyPlaying ).setEffect( blur );
                         cpj.getReponsesBP().get( cpj.getIdQuestion() ).getAnimationPlayer().stop();
+                        cpj.getReponsesBP().get( cpj.getIdQuestion() ).getTxtRepPlayer().setEditable( false );
                     }
                     mpfp.getBtnBack().setOnAction( new EventHandler< ActionEvent >()
                     {
@@ -128,6 +134,15 @@ public class JouerChoixQuestionMultiplayerOnlineBP extends BorderPane
         } );
         setFocused( true );
         setFocusTraversable( true );
+    }
+
+    private PlateauBP getPla()
+    {
+        if ( pla == null )
+        {
+            pla = new PlateauBP( d, maxPlayers, settings );
+        }
+        return pla;
     }
 
     private StackPane getJouerChoixQuestionMainSP()
@@ -400,10 +415,12 @@ public class JouerChoixQuestionMultiplayerOnlineBP extends BorderPane
             }
 
             HBox scoreBox = new HBox();
+            PionCircle playerPion = getPla().getPion( id ).clone();
             Region espaceVideNicknameScore = new Region();
             HBox.setHgrow( espaceVideNicknameScore, Priority.ALWAYS );
-            scoreBox.getChildren().addAll( new Label( String.format( "%s", joueurs.get( id ).getNickNamePlayer() ) ),
-                    espaceVideNicknameScore, getLblScore() );
+            scoreBox.getChildren().addAll( playerPion,
+                    new Label( String.format( "%s", joueurs.get( id ).getNickNamePlayer() ) ), espaceVideNicknameScore,
+                    getLblScore() );
 
             VBox vbPlayer = new VBox();
             vbPlayer.setPadding( new Insets( 20 ) );
@@ -522,6 +539,12 @@ public class JouerChoixQuestionMultiplayerOnlineBP extends BorderPane
                     joueurs.get( playerID ).setScorePlayer( joueurs.get( playerID ).getScorePlayer()
                             + joueurs.get( playerID ).getCardPaneJoueur().getIdQuestion() + 1 );
                     getLblScore().setText( String.format( "Score: %2d", joueurs.get( playerID ).getScorePlayer() ) );
+                    joueurs.get( playerID ).setBonnesRep( joueurs.get( playerID ).getBonnesRep() + 1 );
+                    getPla().getPion( playerID )
+                            .setPos( getPla().getCases().get( joueurs.get( playerID ).getBonnesRep() ).getX()
+                                    + getPla().getWIDTH_RECT() / 2,
+                                    getPla().getCases().get( joueurs.get( playerID ).getBonnesRep() ).getY()
+                                            + getPla().getHEIGHT_RECT() / 2 );
                 }
                 else
                 {
