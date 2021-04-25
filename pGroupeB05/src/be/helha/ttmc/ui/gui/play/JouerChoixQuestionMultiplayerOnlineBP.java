@@ -9,7 +9,6 @@ import be.helha.ttmc.model.Theme;
 import be.helha.ttmc.ui.Player;
 import be.helha.ttmc.ui.Settings;
 import be.helha.ttmc.ui.gui.MenuPauseFP;
-import be.helha.ttmc.ui.gui.play.LobbyMultiLocalBP.LobbyMultiLocalMainBP;
 import be.helha.ttmc.ui.gui.play.LobbyMultiOnlineHostBP.LobbyMultiOnlineMainBP;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
@@ -290,7 +289,7 @@ public class JouerChoixQuestionMultiplayerOnlineBP extends BorderPane
         {
             if ( btnVal == null )
             {
-                btnVal = new Button( "Valider!" );
+                btnVal = new Button( "Confirm!" );
                 btnVal.setOnAction( new EventHandler< ActionEvent >()
                 {
 
@@ -372,7 +371,9 @@ public class JouerChoixQuestionMultiplayerOnlineBP extends BorderPane
                 getReponsesBP().add( jeuRep );
                 getCardChoicePanePlayer().getChildren().add( jeuRep );
                 int idQ = j;
-                Button b = new Button( "Question Level: " + ( idQ + 1 ) );
+                Button b = new Button( String.format( "%d", idQ + 1 ) );
+                b.setStyle( "-fx-font-size:80" );
+                b.setTextAlignment( TextAlignment.CENTER );
                 b.setMinSize( settings.getWidth() / 3, settings.getHeight() / 3 );
                 b.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
                 b.setOnAction( new EventHandler< ActionEvent >()
@@ -481,7 +482,7 @@ public class JouerChoixQuestionMultiplayerOnlineBP extends BorderPane
             joueurs.get( playerID ).setCardNb( joueurs.get( playerID ).getCardNb() + 1 );
             joueurs.get( playerID ).getCardPaneJoueur().getReponsesBP().get( idQuestion ).getAnimationPlayer().stop();
             Alert alert = new Alert( AlertType.INFORMATION );
-            alert.setTitle( "Resultats" );
+            alert.setTitle( "Results" );
             String path;
             if ( joueurs.get( playerID ).getCardNb() >= joueurs.get( playerID ).getCards().size() )
             {

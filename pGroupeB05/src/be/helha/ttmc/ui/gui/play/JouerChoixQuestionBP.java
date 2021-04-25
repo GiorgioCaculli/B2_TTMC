@@ -231,7 +231,8 @@ public class JouerChoixQuestionBP extends BorderPane
         // vb.setStyle("-fx-font-size: 25pt;");
 
         HBox hb = new HBox();
-        hb.getChildren().addAll( getLblScore(), getScore() );
+        PionCircle playerPion = getPla().getPion( 0 ).clone();
+        hb.getChildren().addAll( playerPion, getLblScore(), getScore() );
         hb.setSpacing( 20 );
         hb.setPadding( new Insets( 0, 10, 0, 5 ) );
         hb.setAlignment( Pos.BASELINE_RIGHT );
@@ -274,7 +275,9 @@ public class JouerChoixQuestionBP extends BorderPane
             int maxBtn = 4;
             for ( int i = 0; i < maxBtn; i++ )
             {
-                Button b = new Button( "Question Level: " + ( i + 1 ) );
+                Button b = new Button( String.format( "%d", i + 1 ) );
+                b.setStyle( "-fx-font-size:80" );
+                b.setTextAlignment( TextAlignment.CENTER );
                 b.setMinSize( s.getWidth() / 3, s.getHeight() / 3 ); // 250 x 250
                 b.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
                 int idQ = i;
@@ -434,7 +437,7 @@ public class JouerChoixQuestionBP extends BorderPane
     {
         if ( btnVal == null )
         {
-            btnVal = new Button( "Valider!" );
+            btnVal = new Button( "Confirm!" );
             btnVal.setOnAction( new EventHandler< ActionEvent >()
             {
 
@@ -506,7 +509,7 @@ public class JouerChoixQuestionBP extends BorderPane
         cardNb++;
         getAnimation().stop();
         Alert alert = new Alert( AlertType.INFORMATION );
-        alert.setTitle( "Resultats" );
+        alert.setTitle( "Results" );
         String path;
         if ( cardNb >= cards.size() )
         {

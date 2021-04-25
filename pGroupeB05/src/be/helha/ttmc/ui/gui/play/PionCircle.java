@@ -23,4 +23,9 @@ public class PionCircle extends Circle
     {
         return color;
     }
+    
+    public PionCircle clone()
+    {
+        return new PionCircle( getCenterX(), getCenterY(), getRadius(), color );
+    }
 }

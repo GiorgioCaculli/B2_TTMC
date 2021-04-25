@@ -28,11 +28,11 @@ public class MusicGestion
 
         gererMusic( path );
 
-        start();
+        startMusic();
 
     }
 
-    public void start()
+    public void startMusic()
     {
         mv.getMediaPlayer().play();
         gererVolume( vol );
@@ -68,7 +68,7 @@ public class MusicGestion
             @Override
             public void run()
             {
-                while ( id != 4 )
+                while ( true )
                 {
 
                     mv.getMediaPlayer().setOnEndOfMedia( new Runnable()
@@ -77,12 +77,18 @@ public class MusicGestion
                         @Override
                         public void run()
                         {
-                            if ( id != 2 )
+                            if ( id < path.size() - 1 )
+                            {
                                 id++;
+                            }
                             else
+                            {
                                 id = 0;
+                            }
                             gererMusic( path );
-                            start();
+                            logger.log( Level.INFO,
+                                    String.format( "Reading music file: %s", Main.class.getResource( path.get( id ) ).toString() ) );
+                            startMusic();
 
                         }
                     } );

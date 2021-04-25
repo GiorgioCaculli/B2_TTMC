@@ -10,7 +10,6 @@ import be.helha.ttmc.ui.Player;
 import be.helha.ttmc.ui.Settings;
 import be.helha.ttmc.ui.gui.MenuPauseFP;
 import be.helha.ttmc.ui.gui.play.LobbyMultiLocalBP.LobbyMultiLocalMainBP;
-import be.helha.ttmc.ui.gui.play.LobbyMultiOnlineHostBP.LobbyMultiOnlineMainBP;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -298,7 +297,7 @@ public class JouerChoixQuestionMultiplayerLocalBP extends BorderPane
         {
             if ( btnVal == null )
             {
-                btnVal = new Button( "Valider!" );
+                btnVal = new Button( "Confirm!" );
                 btnVal.setOnAction( new EventHandler< ActionEvent >()
                 {
 
@@ -380,7 +379,9 @@ public class JouerChoixQuestionMultiplayerLocalBP extends BorderPane
                 getReponsesBP().add( jeuRep );
                 getCardChoicePanePlayer().getChildren().add( jeuRep );
                 int idQ = j;
-                Button b = new Button( "Question Level: " + ( idQ + 1 ) );
+                Button b = new Button( String.format( "%d", idQ + 1 ) );
+                b.setStyle( "-fx-font-size:80" );
+                b.setTextAlignment( TextAlignment.CENTER );
                 b.setMinSize( settings.getWidth() / 3, settings.getHeight() / 3 );
                 b.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
                 b.setOnAction( new EventHandler< ActionEvent >()
@@ -407,10 +408,12 @@ public class JouerChoixQuestionMultiplayerLocalBP extends BorderPane
             }
 
             HBox scoreBox = new HBox();
+            PionCircle playerPion = getPla().getPion( id ).clone();
             Region espaceVideNicknameScore = new Region();
             HBox.setHgrow( espaceVideNicknameScore, Priority.ALWAYS );
-            scoreBox.getChildren().addAll( new Label( String.format( "%s", joueurs.get( id ).getNickNamePlayer() ) ),
-                    espaceVideNicknameScore, getLblScore() );
+            scoreBox.getChildren().addAll( playerPion,
+                    new Label( String.format( "%s", joueurs.get( id ).getNickNamePlayer() ) ), espaceVideNicknameScore,
+                    getLblScore() );
 
             VBox vbPlayer = new VBox();
             vbPlayer.setPadding( new Insets( 20 ) );
@@ -489,7 +492,7 @@ public class JouerChoixQuestionMultiplayerLocalBP extends BorderPane
             joueurs.get( playerID ).setCardNb( joueurs.get( playerID ).getCardNb() + 1 );
             joueurs.get( playerID ).getCardPaneJoueur().getReponsesBP().get( idQuestion ).getAnimationPlayer().stop();
             Alert alert = new Alert( AlertType.INFORMATION );
-            alert.setTitle( "Resultats" );
+            alert.setTitle( "Results" );
             String path;
             if ( joueurs.get( playerID ).getCardNb() >= joueurs.get( playerID ).getCards().size() )
             {
