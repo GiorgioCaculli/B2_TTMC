@@ -11,6 +11,7 @@ public class PionCircle extends Circle
         super( centerX, centerY, radius );
         this.color = color;
         setFill( color );
+        setStroke( Color.BLACK );
     }
 
     public void setPos( double newX, double newY )
