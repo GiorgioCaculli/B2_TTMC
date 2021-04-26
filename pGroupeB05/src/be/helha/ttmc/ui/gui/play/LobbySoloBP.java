@@ -6,30 +6,111 @@ import be.helha.ttmc.model.Deck;
 import be.helha.ttmc.serialization.Serialization;
 import be.helha.ttmc.ui.Settings;
 import be.helha.ttmc.ui.gui.play.MenuPlayBP.MenuPlayMainVB;
+import be.helha.ttmc.ui.gui.util.MusicGestion;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 
 public class LobbySoloBP extends BorderPane
 {
     private StackPane lobbyPaneSP = new StackPane();
 
-    private Button newGameButton = new Button( "New Game" );
-    private Button loadGameButton = new Button( "Load Game" );
-    private Button returnButton = new Button( "Return" );
+    private Button newGameButton ;
+    private Button loadGameButton;
+    private Button returnButton;
 
     private String nickName;
+    private Deck d;
     
     private Settings s;
+    private MusicGestion m;
+    
+    
 
-    public LobbySoloBP( Deck d, Settings s )
+    public Button getNewGameButton() {
+    	if(newGameButton== null) {
+    		
+    		newGameButton= new Button( "New Game" );
+    		Font txt= Font.font("Times New Roman", FontWeight.BOLD, FontPosture.ITALIC, 100);
+    		newGameButton.setFont(txt);
+    		newGameButton.setMaxWidth(s.getWidth()-55.);
+    		newGameButton.setMinHeight(s.getHeight()/4);
+    		newGameButton.setOnAction( new EventHandler< ActionEvent >()
+            {
+                @Override
+                public void handle( ActionEvent arg0 )
+                {
+                    for ( int i = 0; i < lobbyPaneSP.getChildren().size(); i++ )
+                    {
+                        if ( lobbyPaneSP.getChildren().get( i ).getClass().getSimpleName()
+                                .equals( JouerChoixQuestionBP.class.getSimpleName() ) )
+                        {
+                            lobbyPaneSP.getChildren().remove( i );
+                        }
+                    }
+                    Deck deck = d.clone();
+                    if ( nickName.equals( "giorgio" ) || nickName.equals( "guillaume" ) || nickName.equals( "tanguy" ) )
+                    {
+                        deck = Serialization.loadDeck( String.format( "assets/decks/%s.json", nickName ).toString() );
+                    }
+                    JouerChoixQuestionBP jcq = new JouerChoixQuestionBP( deck, s ,m);
+                    jcq.setScore( 0 );
+                    jcq.setNickName( String.format( "%s", nickName ) );
+                    jcq.getLblScore().setText( String.format( "User: %s - Score: ", jcq.getNickName() ) );
+                    lobbyPaneSP.getChildren().add( jcq );
+                    setVisibleNode( jcq.getClass().getSimpleName() );
+                }
+            } );
+    	}
+		return newGameButton;
+	}
+
+	public Button getLoadGameButton() {
+		if(loadGameButton==null) {
+			loadGameButton = new Button( "Load Game" );
+			Font txt= Font.font("Times New Roman", FontWeight.BOLD, FontPosture.ITALIC, 100);
+			loadGameButton.setFont(txt);
+			loadGameButton.setMaxWidth(s.getWidth()-55.);
+			loadGameButton.setMinHeight(s.getHeight()/4);
+		}
+		return loadGameButton;
+	}
+
+	public Button getReturnButton() {
+		if(returnButton== null) {
+			returnButton = new Button( "Return" );
+			Font txt= Font.font("Times New Roman", FontWeight.BOLD, FontPosture.ITALIC, 100);
+			returnButton.setFont(txt);
+			returnButton.setMaxWidth(s.getWidth()-55.);
+			returnButton.setMinHeight(s.getHeight()/4);
+			returnButton.setOnAction( new EventHandler< ActionEvent >()
+	        {
+
+	            @Override
+	            public void handle( ActionEvent arg0 )
+	            {
+	                MenuPlayBP mpbp =  ( ( MenuPlayBP ) getParent().getParent() );
+	                mpbp.setVisibleNode( MenuPlayMainVB.class.getSimpleName() );
+	            }
+	        } );
+		}
+		return returnButton;
+	}
+
+	public LobbySoloBP( Deck d, Settings s, MusicGestion m )
     {
+		this.d= d;
         this.s = s;
+        this.m= m;
         for ( int i = 0; i < lobbyPaneSP.getChildren().size(); i++ )
         {
             if ( lobbyPaneSP.getChildren().get( i ).getClass().getSimpleName()
@@ -58,43 +139,10 @@ public class LobbySoloBP extends BorderPane
         {
             nickName = "User-1";
         }
-        newGameButton.setOnAction( new EventHandler< ActionEvent >()
-        {
-            @Override
-            public void handle( ActionEvent arg0 )
-            {
-                for ( int i = 0; i < lobbyPaneSP.getChildren().size(); i++ )
-                {
-                    if ( lobbyPaneSP.getChildren().get( i ).getClass().getSimpleName()
-                            .equals( JouerChoixQuestionBP.class.getSimpleName() ) )
-                    {
-                        lobbyPaneSP.getChildren().remove( i );
-                    }
-                }
-                Deck deck = d.clone();
-                if ( nickName.equals( "giorgio" ) || nickName.equals( "guillaume" ) || nickName.equals( "tanguy" ) )
-                {
-                    deck = Serialization.loadDeck( String.format( "assets/decks/%s.json", nickName ).toString() );
-                }
-                JouerChoixQuestionBP jcq = new JouerChoixQuestionBP( deck, s );
-                jcq.setScore( 0 );
-                jcq.setNickName( String.format( "%s", nickName ) );
-                jcq.getLblScore().setText( String.format( "User: %s - Score: ", jcq.getNickName() ) );
-                lobbyPaneSP.getChildren().add( jcq );
-                setVisibleNode( jcq.getClass().getSimpleName() );
-            }
-        } );
-        returnButton.setOnAction( new EventHandler< ActionEvent >()
-        {
-
-            @Override
-            public void handle( ActionEvent arg0 )
-            {
-                MenuPlayBP mpbp =  ( ( MenuPlayBP ) getParent().getParent() );
-                mpbp.setVisibleNode( MenuPlayMainVB.class.getSimpleName() );
-            }
-        } );
-        lobbyPaneSP.getChildren().add( new LobbySoloMainBP() );
+        
+        
+        lobbyPaneSP.getChildren().addAll( new LobbySoloMainBP() );
+     
         setCenter( lobbyPaneSP );
     }
 
@@ -118,8 +166,10 @@ public class LobbySoloBP extends BorderPane
         public LobbySoloMainBP()
         {
             VBox choiceBox = new VBox();
-            choiceBox.getChildren().addAll( newGameButton, loadGameButton, returnButton );
-
+            choiceBox.getChildren().addAll( getNewGameButton(), getLoadGameButton(), getReturnButton() );
+            choiceBox.setAlignment(Pos.CENTER);
+            choiceBox.setSpacing(5.);
+            
             setCenter( choiceBox );
         }
     }

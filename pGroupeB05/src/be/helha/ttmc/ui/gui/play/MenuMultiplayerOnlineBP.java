@@ -8,6 +8,7 @@ import be.helha.ttmc.model.Deck;
 import be.helha.ttmc.ui.Client;
 import be.helha.ttmc.ui.Settings;
 import be.helha.ttmc.ui.gui.play.MenuMultiplayerBP.MenuMultiplayerMainVB;
+import be.helha.ttmc.ui.gui.util.MusicGestion;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -26,11 +27,13 @@ public class MenuMultiplayerOnlineBP extends BorderPane
     private Deck d;
     private StackPane choiceMultiplayerOnlinePane;
     private Settings s;
+    private MusicGestion m;
 
-    public MenuMultiplayerOnlineBP( Deck d, Settings s )
+    public MenuMultiplayerOnlineBP( Deck d, Settings s, MusicGestion m )
     {
         this.d = d;
         this.s = s;
+        this.m= m;
         getChoicePane().getChildren().add( new MenuMultiplayerOnlineMainVB() );
         setVisibleNode( MenuMultiplayerOnlineMainVB.class.getSimpleName() );
 
@@ -98,7 +101,7 @@ public class MenuMultiplayerOnlineBP extends BorderPane
                     }
                     try
                     {
-                        getChoicePane().getChildren().add( new LobbyMultiOnlineHostBP( d, s ) );
+                        getChoicePane().getChildren().add( new LobbyMultiOnlineHostBP( d, s , m) );
                         setVisibleNode( LobbyMultiOnlineHostBP.class.getSimpleName() );
                     }
                     catch ( IOException e )

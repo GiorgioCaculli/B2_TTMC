@@ -29,7 +29,12 @@ public class PlateauBP extends BorderPane
     public PlateauBP( Deck d, int nbJoueurs, Settings s )
     {
         this.s = s;
-        nbCases = d.getCards().size();
+        int nbCartes;
+        if(d.getCards().size()%nbJoueurs != 0)
+        	nbCartes= d.getCards().size()-(d.getCards().size()%nbJoueurs); 
+        else
+        	nbCartes= d.getCards().size();
+        nbCases = nbCartes/nbJoueurs;
         AnchorPane anch = new AnchorPane();
         getCases();
         getNum();

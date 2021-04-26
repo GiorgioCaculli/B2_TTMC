@@ -19,6 +19,7 @@ import be.helha.ttmc.ui.Player;
 import be.helha.ttmc.ui.Server;
 import be.helha.ttmc.ui.Settings;
 import be.helha.ttmc.ui.gui.play.MenuMultiplayerOnlineBP.MenuMultiplayerOnlineMainVB;
+import be.helha.ttmc.ui.gui.util.MusicGestion;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -46,12 +47,14 @@ public class LobbyMultiOnlineHostBP extends BorderPane
     private Settings settings;
     private CountDownLatch countDownLatch = null;
     private List< Player > players = null;
+    private MusicGestion m;
 
-    public LobbyMultiOnlineHostBP( Deck d, Settings settings ) throws IOException
+    public LobbyMultiOnlineHostBP( Deck d, Settings settings, MusicGestion m ) throws IOException
     {
         server = new Server();
         countDownLatch = new CountDownLatch( 1 );
         this.settings = settings;
+        this.m= m;
         setTop( new Label( String.format( "%s:%d", server.getServerSocket().getInetAddress().toString(),
                 server.getPortNumber() ) ) );
         for ( int i = 0; i < lobbyMultiOnlineHostSP.getChildren().size(); i++ )
@@ -212,7 +215,7 @@ public class LobbyMultiOnlineHostBP extends BorderPane
                     p.setCards( cards );
                 }
                 lobbyMultiOnlineHostSP.getChildren()
-                        .add( new JouerChoixQuestionMultiplayerOnlineBP( d, players, settings ) );
+                        .add( new JouerChoixQuestionMultiplayerOnlineBP( d, players, settings,m ) );
                 setVisibleNode( JouerChoixQuestionMultiplayerOnlineBP.class.getSimpleName() );
             }
         } );

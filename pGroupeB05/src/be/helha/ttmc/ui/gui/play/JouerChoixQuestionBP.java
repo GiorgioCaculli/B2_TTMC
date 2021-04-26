@@ -11,6 +11,7 @@ import be.helha.ttmc.ui.Settings;
 import be.helha.ttmc.ui.gui.MenuPauseFP;
 import be.helha.ttmc.ui.gui.play.LobbySoloBP.LobbySoloMainBP;
 import be.helha.ttmc.ui.gui.play.MenuPlayBP.MenuPlayMainVB;
+import be.helha.ttmc.ui.gui.util.MusicGestion;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -70,11 +71,13 @@ public class JouerChoixQuestionBP extends BorderPane
     private PlateauBP pla;
     private Settings s;
     private int bonneRep = 0;
+    private MusicGestion m;
 
-    public JouerChoixQuestionBP( Deck d, Settings s )
+    public JouerChoixQuestionBP( Deck d, Settings s, MusicGestion m)
     {
         this.d = d;
         this.s = s;
+        this.m= m;
         cards = this.d.getCards();
         getPla();
         Collections.shuffle( cards );
@@ -148,7 +151,7 @@ public class JouerChoixQuestionBP extends BorderPane
     {
         if ( mpfp == null )
         {
-            mpfp = new MenuPauseFP();
+            mpfp = new MenuPauseFP(s, m);
         }
         return mpfp;
     }

@@ -22,7 +22,7 @@ public class MainPaneBP extends BorderPane
     {
         musics = new MusicGestion( s );
         getStackPane().getChildren().add( new MenuPrincipalBP( d ) );
-        getStackPane().getChildren().add( new MenuPlayBP( d, s ) );
+        getStackPane().getChildren().add( new MenuPlayBP( d, s ,musics) );
         getStackPane().getChildren().add( new SettingsBP( s, musics ) );
         getStackPane().getChildren().add( new MenuAdminBP( d ) );
         getStackPane().getChildren().add( new CreditsBP() );

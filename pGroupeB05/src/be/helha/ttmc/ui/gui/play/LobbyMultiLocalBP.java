@@ -11,6 +11,7 @@ import be.helha.ttmc.ui.Player;
 import be.helha.ttmc.ui.Settings;
 import be.helha.ttmc.ui.gui.play.JouerChoixQuestionMultiplayerLocalBP.Joueur;
 import be.helha.ttmc.ui.gui.play.MenuMultiplayerBP.MenuMultiplayerMainVB;
+import be.helha.ttmc.ui.gui.util.MusicGestion;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -27,10 +28,12 @@ public class LobbyMultiLocalBP extends BorderPane
     private Button newGameButton = new Button( "New Game" );
     private Button returnButton = new Button( "Return" );
     private Settings s;
+    private MusicGestion m;
 
-    public LobbyMultiLocalBP( Deck d, Settings s )
+    public LobbyMultiLocalBP( Deck d, Settings s, MusicGestion m )
     {
         this.s = s;
+        this.m= m;
         for ( int i = 0; i < lobbyMultiLocalSP.getChildren().size(); i++ )
         {
             if ( lobbyMultiLocalSP.getChildren().get( i ).getClass().getSimpleName()
@@ -107,7 +110,7 @@ public class LobbyMultiLocalBP extends BorderPane
                     Collections.shuffle( cards );
                     p.setCards( cards );
                 }
-                lobbyMultiLocalSP.getChildren().add( new JouerChoixQuestionMultiplayerLocalBP( d, players, s ) );
+                lobbyMultiLocalSP.getChildren().add( new JouerChoixQuestionMultiplayerLocalBP( d, players, s ,m) );
                 setVisibleNode( JouerChoixQuestionMultiplayerLocalBP.class.getSimpleName() );
             }
         } );

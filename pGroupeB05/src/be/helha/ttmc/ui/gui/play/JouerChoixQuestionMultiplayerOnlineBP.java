@@ -10,6 +10,7 @@ import be.helha.ttmc.ui.Player;
 import be.helha.ttmc.ui.Settings;
 import be.helha.ttmc.ui.gui.MenuPauseFP;
 import be.helha.ttmc.ui.gui.play.LobbyMultiOnlineHostBP.LobbyMultiOnlineMainBP;
+import be.helha.ttmc.ui.gui.util.MusicGestion;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -49,10 +50,12 @@ public class JouerChoixQuestionMultiplayerOnlineBP extends BorderPane
     private Settings settings;
     private Deck d;
     private PlateauBP pla;
+    private MusicGestion m;
 
-    public JouerChoixQuestionMultiplayerOnlineBP( Deck d, List< Player > players, Settings settings )
+    public JouerChoixQuestionMultiplayerOnlineBP( Deck d, List< Player > players, Settings settings ,MusicGestion m)
     {
         this.d = d;
+        this.m= m;
         this.settings = settings;
         this.maxPlayers = players.size();
         joueurs = new ArrayList<>();
@@ -158,7 +161,7 @@ public class JouerChoixQuestionMultiplayerOnlineBP extends BorderPane
     {
         if ( mpfp == null )
         {
-            mpfp = new MenuPauseFP();
+            mpfp = new MenuPauseFP(settings,m);
         }
         return mpfp;
     }

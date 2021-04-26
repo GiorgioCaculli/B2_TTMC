@@ -4,6 +4,7 @@ import be.helha.ttmc.model.Deck;
 import be.helha.ttmc.ui.Settings;
 import be.helha.ttmc.ui.gui.MainPaneBP;
 import be.helha.ttmc.ui.gui.MenuPrincipalBP;
+import be.helha.ttmc.ui.gui.util.MusicGestion;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -20,11 +21,13 @@ public class MenuPlayBP extends BorderPane
     private Deck d;
     private StackPane choicePane;
     private Settings s;
+    private MusicGestion m;
 
-    public MenuPlayBP( Deck d, Settings s )
+    public MenuPlayBP( Deck d, Settings s ,MusicGestion m)
     {
         this.d = d;
         this.s = s;
+        this.m=m;
         getChoicePane().getChildren().add( new MenuPlayMainVB() );
         setVisibleNode( MenuPlayMainVB.class.getSimpleName() );
 
@@ -90,7 +93,7 @@ public class MenuPlayBP extends BorderPane
                             getChoicePane().getChildren().remove( i );
                         }
                     }
-                    getChoicePane().getChildren().add( new LobbySoloBP( d, s ) );
+                    getChoicePane().getChildren().add( new LobbySoloBP( d, s ,m) );
                     setVisibleNode( LobbySoloBP.class.getSimpleName() );
                 }
             } );
@@ -118,7 +121,7 @@ public class MenuPlayBP extends BorderPane
                             getChoicePane().getChildren().remove( i );
                         }
                     }
-                    getChoicePane().getChildren().add( new MenuMultiplayerBP( d, s ) );
+                    getChoicePane().getChildren().add( new MenuMultiplayerBP( d, s ,m) );
                     setVisibleNode( MenuMultiplayerBP.class.getSimpleName() );
                 }
             } );

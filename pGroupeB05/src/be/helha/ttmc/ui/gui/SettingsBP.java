@@ -81,6 +81,7 @@ public class SettingsBP extends BorderPane
                         double vol = new_val.doubleValue() / 100.;
                         musicGestion.gererVolume( vol );
                         musicGestion.setVol( vol );
+                        settings.setVolume(vol);
                     } );
             slider.setShowTickMarks( true );
             slider.setShowTickLabels( true );
