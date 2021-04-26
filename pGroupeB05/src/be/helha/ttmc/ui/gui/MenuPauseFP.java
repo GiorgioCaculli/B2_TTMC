@@ -126,9 +126,10 @@ public class MenuPauseFP extends BorderPane
     	this.s= s;
     	this.mus= musi;
     	
-    	LinearGradient gradiant= new LinearGradient(0, 0, 0, 1, true, CycleMethod.NO_CYCLE,
-    			new Stop(0, Color.CYAN),
-    			new Stop(1, Color.ROYALBLUE)
+    	Stop[] etapes = { new Stop(0, Color.ROYALBLUE), new Stop(0.5, Color.AQUA),new Stop(1,Color.CYAN)};
+    	
+    	LinearGradient gradiant= new LinearGradient(0, 1, 0, 0, true, CycleMethod.NO_CYCLE,
+    			etapes
     			);
     	
     	Rectangle rect = new Rectangle(250., 250.);
