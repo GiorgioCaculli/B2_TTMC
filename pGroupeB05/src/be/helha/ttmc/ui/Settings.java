@@ -5,6 +5,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Locale;
 import java.util.Properties;
 
@@ -12,7 +15,7 @@ import be.helha.ttmc.Main;
 
 public class Settings
 {
-    private String title;
+    private String configFileName;
     private int width;
     private int height;
     private String deckName;
@@ -22,10 +25,12 @@ public class Settings
     private String language;
     private String country;
     private Locale locale;
+    private Properties props;
 
     public Settings( String configFileName )
     {
-        Properties props = null;
+        this.configFileName = configFileName;
+        props = null;
         InputStream in = null;
         try
         {
@@ -39,6 +44,8 @@ public class Settings
             in = Main.class.getResourceAsStream( "res/application.properties" );
             try
             {
+                Files.copy( in, Paths.get( configFileName ), StandardCopyOption.REPLACE_EXISTING );
+                in = new FileInputStream( new File( configFileName ) );
                 props.load( in );
             }
             catch ( IOException e1 )
@@ -50,7 +57,6 @@ public class Settings
         {
             e.printStackTrace();
         }
-        setTitle( props.getProperty( "title" ) );
         setWidth( Integer.parseInt( props.getProperty( "width" ) ) );
         setHeight( Integer.parseInt( props.getProperty( "height" ) ) );
         setDeckName( props.getProperty( "deck" ) );
@@ -62,14 +68,14 @@ public class Settings
         setLocale( new Locale( getLanguage(), getCountry() ) );
     }
     
-    public void setTitle( String title )
+    public Properties getProperties()
     {
-        this.title = title;
+        return props;
     }
     
-    public String getTitle()
+    public String getConfigFileName()
     {
-        return title;
+        return configFileName;
     }
 
     public void setWidth( int width )
@@ -105,6 +111,7 @@ public class Settings
     public void setTimerSeconds( int timerSeconds )
     {
         this.timerSeconds = timerSeconds;
+        props.setProperty( "timer", String.format( "%d", timerSeconds ) );
     }
 
     public int getTimerSeconds()
@@ -135,6 +142,7 @@ public class Settings
     public void setLanguage( String language )
     {
         this.language = language;
+        props.setProperty( "language", language );
     }
     
     public String getLanguage()
@@ -145,6 +153,7 @@ public class Settings
     public void setCountry( String country )
     {
         this.country = country;
+        props.setProperty( "country", country );
     }
     
     public String getCountry()

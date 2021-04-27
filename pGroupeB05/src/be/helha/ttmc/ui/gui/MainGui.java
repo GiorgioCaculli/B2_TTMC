@@ -1,5 +1,8 @@
 package be.helha.ttmc.ui.gui;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,11 +19,12 @@ import javafx.scene.image.Image;
 public class MainGui extends Application
 {
     private static final Logger logger = Logger.getLogger( "MainGui Class Logger" );
+    private Settings s;
 
     @Override
     public void start( Stage primaryStage )
     {
-        Settings s = new Settings( "application.properties" );
+        s = new Settings( "application.properties" );
         int WIDTH = s.getWidth();
         int HEIGHT = s.getHeight() + 20;
         logger.log( Level.INFO, "Reading Deck" );
@@ -46,6 +50,14 @@ public class MainGui extends Application
     public void stop() throws Exception
     {
         super.stop();
+        try
+        {
+            s.getProperties().store( new FileOutputStream( new File( s.getConfigFileName() ) ), "" );
+        }
+        catch ( IOException e )
+        {
+            e.printStackTrace();
+        }
         Platform.exit();
         System.exit( 0 );
     }
