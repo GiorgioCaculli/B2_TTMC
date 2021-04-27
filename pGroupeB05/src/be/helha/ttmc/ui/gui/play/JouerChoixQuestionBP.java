@@ -221,11 +221,27 @@ public class JouerChoixQuestionBP extends BorderPane
             }
         }
 
+        VBox vbquestion= new VBox();
+        int indice=0;
+        HBox hbquestion= new HBox();
+        hbquestion.setSpacing(10);
         for ( Button b : getChoix() )
         {
+        	
             cardChoicePane.getChildren().add( new JeuReponseBP() );
-            fp.getChildren().add( b );
+            if(indice %2 ==0) {
+        		vbquestion.getChildren().add(hbquestion);
+        		hbquestion=new HBox();
+        		hbquestion.setSpacing(10);
+        	}
+        	hbquestion.getChildren().add(b);
+        	indice++;
+            
         }
+        vbquestion.getChildren().add(hbquestion);
+        
+        vbquestion.setSpacing(10);
+        fp.getChildren().add( vbquestion );
 
         VBox vb = new VBox();
         vb.setPadding( new Insets( 20 ) );
@@ -281,8 +297,8 @@ public class JouerChoixQuestionBP extends BorderPane
                 Button b = new Button( String.format( "%d", i + 1 ) );
                 b.setStyle( "-fx-font-size:80" );
                 b.setTextAlignment( TextAlignment.CENTER );
-                b.setMinSize( s.getWidth() / 3, s.getHeight() / 3 ); // 250 x 250
-                b.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
+                b.setMinSize( s.getWidth() / 5, s.getHeight() / 5 ); // 250 x 250
+                b.setMaxSize( Double.MAX_VALUE/2, Double.MAX_VALUE/2 );
                 int idQ = i;
                 b.setOnAction( new EventHandler< ActionEvent >()
                 {

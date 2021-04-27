@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import be.helha.ttmc.Main;
 import be.helha.ttmc.model.Deck;
 import be.helha.ttmc.ui.Settings;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
 public class PlateauBP extends BorderPane
@@ -19,8 +22,8 @@ public class PlateauBP extends BorderPane
     private List< Label > num;
     private PionCircle pions[];
 
-    private final double WIDTH_RECT = 35.;
-    private final double HEIGHT_RECT = 30.;
+    private final double WIDTH_RECT = 75.;
+    private final double HEIGHT_RECT = 70.;
     private final double MOUV_X = WIDTH_RECT + 1;
     private final double MOUV_Y = HEIGHT_RECT + 1;
 
@@ -59,11 +62,16 @@ public class PlateauBP extends BorderPane
             }
             double mouvY = rangY * MOUV_Y;
             getCases().get( i ).setY( mouvY );
+            getCases().get(i).setOpacity(0.3);
             lab.setTranslateY( mouvY );
 
-            if ( i == d.getCards().size() - 1 )
-                lab.setText( text + "\nFinish" );
+            if ( i == nbCases - 1 )
+                lab.setText( text = "Finish" );
             lab.setLayoutX( mouvX );
+            lab.setStyle("-fx-text-fill: darkslategrey;"
+            		+ "-fx-font-size: 16px;"
+            		);
+            
             getNum().add( lab );
             getCases().get( i ).setX( mouvX );
             anch.getChildren().addAll( getCases().get( i ), getNum().get( i ) );
@@ -92,11 +100,14 @@ public class PlateauBP extends BorderPane
         if ( cases == null )
         {
             cases = new ArrayList<>();
+            Image im= new Image(Main.class.getResource("assets/images/paw.png").toString());
+            
             for ( int i = 0; i < nbCases; i++ )
             {
                 Rectangle rect = new Rectangle( WIDTH_RECT, HEIGHT_RECT );
-                rect.setStroke( Color.BLUE );
+             //   rect.setStroke( Color.BLUE );
                 rect.setFill( Color.ALICEBLUE );
+                rect.setFill(new ImagePattern(im));
                 cases.add( rect );
             }
         }
