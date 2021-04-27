@@ -1,8 +1,13 @@
 package be.helha.ttmc.ui.gui;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 import be.helha.ttmc.ui.GUIConstant;
 import be.helha.ttmc.ui.Settings;
 import be.helha.ttmc.ui.gui.util.MusicGestion;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -16,10 +21,13 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class SettingsBP extends BorderPane
 {
@@ -33,6 +41,11 @@ public class SettingsBP extends BorderPane
     private Label languageLabel;
     private ObservableList< String > languages;
     private ComboBox< String > languageComboBox;
+    private boolean languageChanged = false;
+    private Label windowSizeLabel;
+    private ObservableList< String > windowSizes;
+    private ComboBox< String > windowSizeComboBox;
+    private boolean windowSizeChanged = false;
 
     public SettingsBP( Settings s, MusicGestion musicGestion )
     {
@@ -56,11 +69,16 @@ public class SettingsBP extends BorderPane
         HBox languageBox = new HBox();
         languageBox.getChildren().add( getLanguageLabel() );
         languageBox.getChildren().add( getLanguageComboBox() );
+        
+        HBox windowSizeBox = new HBox();
+        windowSizeBox.getChildren().add( getWindowSizeLabel() );
+        windowSizeBox.getChildren().add( getWindowSizeComboBox() );
 
         VBox settingsBox = new VBox();
         settingsBox.getChildren().add( volumeBox );
         settingsBox.getChildren().add( timerBox );
         settingsBox.getChildren().add( languageBox );
+        settingsBox.getChildren().add( windowSizeBox );
 
         fp.getChildren().add( settingsBox );
 
@@ -68,6 +86,19 @@ public class SettingsBP extends BorderPane
         fp.setAlignment( Pos.CENTER );
         setCenter( fp );
         setBottom( getBackButton() );
+        
+        setOnKeyPressed( new EventHandler< KeyEvent >()
+        {
+            @Override
+            public void handle( KeyEvent keyEvent )
+            {
+                if ( keyEvent.getCode() == KeyCode.ESCAPE )
+                {
+                    getBackButton().fire();
+                    keyEvent.consume();
+                }
+            }
+        } );
     }
 
     public Button getBackButton()
@@ -81,8 +112,33 @@ public class SettingsBP extends BorderPane
                 @Override
                 public void handle( ActionEvent arg0 )
                 {
-                    MainPaneBP mpbp = ( MainPaneBP ) getParent().getParent();
-                    mpbp.setVisibleNode( MenuPrincipalBP.class.getSimpleName() );
+                    try
+                    {
+                        settings.getProperties().store( new FileOutputStream( new File( settings.getConfigFileName() ) ), "" );
+                    }
+                    catch ( IOException e )
+                    {
+                        e.printStackTrace();
+                    }
+                    if ( languageChanged || windowSizeChanged )
+                    {
+                        musicGestion.stopMusic();
+                        Stage stage = ( Stage ) getScene().getWindow();
+                        stage.close();
+                        Platform.runLater( new Runnable()
+                        {
+                            @Override
+                            public void run()
+                            {
+                                new MainGui().restart( new Stage() );
+                            }
+                        } );
+                    }
+                    else
+                    {
+                        MainPaneBP mpbp = ( MainPaneBP ) getParent().getParent();
+                        mpbp.setVisibleNode( MenuPrincipalBP.class.getSimpleName() );
+                    }
                 }
             } );
         }
@@ -241,18 +297,22 @@ public class SettingsBP extends BorderPane
                         case "English":
                             settings.setLanguage( "en" );
                             settings.setCountry( "UK" );
+                            languageChanged = true;
                             break;
                         case "Français":
                             settings.setLanguage( "fr" );
                             settings.setCountry( "BE" );
+                            languageChanged = true;
                             break;
                         case "Italiano":
                             settings.setLanguage( "it" );
                             settings.setCountry( "IT" );
+                            languageChanged = true;
                             break;
                         case "日本語":
                             settings.setLanguage( "ja" );
                             settings.setCountry( "JP" );
+                            languageChanged = true;
                             break;
                         default:
                             break;
@@ -261,5 +321,83 @@ public class SettingsBP extends BorderPane
             } );
         }
         return languageComboBox;
+    }
+    
+    public Label getWindowSizeLabel()
+    {
+        if( windowSizeLabel == null )
+        {
+            windowSizeLabel = new Label( "Window size:" );
+        }
+        return windowSizeLabel;
+    }
+    
+    public ObservableList< String > getWindowSizes()
+    {
+        if( windowSizes == null )
+        {
+            windowSizes = FXCollections.observableArrayList( "1200x800", "1024x768", "800x600" );
+        }
+        return windowSizes;
+    }
+    
+    public ComboBox< String > getWindowSizeComboBox()
+    {
+        if( windowSizeComboBox == null )
+        {
+            windowSizeComboBox = new ComboBox< String >( getWindowSizes() );
+            switch ( String.format( "%dx%d", settings.getWidth(), settings.getHeight() ) )
+            {
+                case "1200x800":
+                    windowSizeComboBox.setValue( getWindowSizes().get( 0 ) );
+                    break;
+                case "1024x768":
+                    windowSizeComboBox.setValue( getWindowSizes().get( 1 ) );
+                    break;
+                case "800x600":
+                    windowSizeComboBox.setValue( getWindowSizes().get( 2 ) );
+                    break;
+                default:
+                    break;
+            }
+            windowSizeComboBox.valueProperty().addListener( new ChangeListener< String >()
+            {
+                @Override
+                public void changed( ObservableValue< ? extends String > observable, String oldValue, String newValue )
+                {
+                    int width = Integer.parseInt( newValue.split( "x" )[0] );
+                    int height = Integer.parseInt( newValue.split( "x" )[1] );
+                    Stage stage = ( Stage ) getScene().getWindow();
+                    switch ( newValue )
+                    {
+                        case "1200x800":
+                            settings.setWidth( width );
+                            settings.setHeight( height );
+                            stage.setWidth( settings.getWidth() );
+                            stage.setHeight( settings.getHeight() );
+                            windowSizeChanged = true;
+                            break;
+                        case "1024x768":
+                            settings.setWidth( width );
+                            settings.setHeight( height );
+                            stage.setWidth( settings.getWidth() );
+                            stage.setHeight( settings.getHeight() );
+                            windowSizeChanged = true;
+                            break;
+                        case "800x600":
+                            settings.setWidth( width );
+                            settings.setHeight( height );
+                            stage.setWidth( settings.getWidth() );
+                            stage.setHeight( settings.getHeight() );
+                            windowSizeChanged = true;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            } );
+            
+        }
+        return windowSizeComboBox;
     }
 }

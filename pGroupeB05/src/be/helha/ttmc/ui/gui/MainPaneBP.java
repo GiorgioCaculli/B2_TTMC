@@ -11,12 +11,10 @@ import javafx.scene.layout.StackPane;
 
 public class MainPaneBP extends BorderPane
 {
-    private MusicGestion musics;
     private StackPane stackpane;
 
-    public MainPaneBP( Deck d, Settings s )
+    public MainPaneBP( Deck d, Settings s, MusicGestion musics )
     {
-        musics = new MusicGestion( s );
         getStackPane().getChildren().add( new MenuPrincipalBP( d ) );
         getStackPane().getChildren().add( new MenuPlayBP( d, s ,musics) );
         getStackPane().getChildren().add( new SettingsBP( s, musics ) );

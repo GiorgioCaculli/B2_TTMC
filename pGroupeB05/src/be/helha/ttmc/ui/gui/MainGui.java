@@ -10,6 +10,7 @@ import be.helha.ttmc.model.Deck;
 import be.helha.ttmc.serialization.Serialization;
 import be.helha.ttmc.ui.GUIConstant;
 import be.helha.ttmc.ui.Settings;
+import be.helha.ttmc.ui.gui.util.MusicGestion;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
@@ -20,9 +21,13 @@ public class MainGui extends Application
 {
     private static final Logger logger = Logger.getLogger( "MainGui Class Logger" );
     private Settings s;
-
-    @Override
-    public void start( Stage primaryStage )
+    private MusicGestion musics;
+    
+    public void cleanup()
+    {
+    }
+    
+    public void startGame( Stage stage )
     {
         s = new Settings( "application.properties" );
         int WIDTH = s.getWidth();
@@ -30,16 +35,29 @@ public class MainGui extends Application
         logger.log( Level.INFO, "Reading Deck" );
         Deck d = Serialization.loadDeck( s.getDeckName() );
         logger.log( Level.INFO, String.format( "Number of cards in the deck: %d", d.getCards().size() ) );
-        MainPaneBP mp = new MainPaneBP( d, s );
+        musics = new MusicGestion( s );
+        MainPaneBP mp = new MainPaneBP( d, s, musics );
         mp.getChildren().get( 0 ).setVisible( true );
         Scene scene = new Scene( mp );
-        primaryStage.setResizable( false );
-        primaryStage.setHeight( HEIGHT );
-        primaryStage.setWidth( WIDTH );
-        primaryStage.setScene( scene );
-        primaryStage.getIcons().add( new Image( "be/helha/ttmc/assets/images/paw.png" ) );
-        primaryStage.show();
-        primaryStage.setTitle( GUIConstant.TITLE );
+        stage.setResizable( false );
+        stage.setHeight( HEIGHT );
+        stage.setWidth( WIDTH );
+        stage.setScene( scene );
+        stage.getIcons().add( new Image( "be/helha/ttmc/assets/images/paw.png" ) );
+        stage.show();
+        stage.setTitle( GUIConstant.TITLE );
+    }
+    
+    public void restart( Stage stage )
+    {
+        cleanup();
+        startGame( stage );
+    }
+
+    @Override
+    public void start( Stage primaryStage )
+    {
+        startGame( primaryStage );
     }
 
     public MainGui()

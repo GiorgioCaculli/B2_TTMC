@@ -81,6 +81,7 @@ public class Settings
     public void setWidth( int width )
     {
         this.width = width;
+        props.setProperty( "width", String.format( "%d", width ) );
     }
 
     public int getWidth()
@@ -91,6 +92,7 @@ public class Settings
     public void setHeight( int height )
     {
         this.height = height;
+        props.setProperty( "height", String.format( "%d", height ) );
     }
 
     public int getHeight()
