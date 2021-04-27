@@ -1,9 +1,5 @@
 package be.helha.ttmc.ui.gui;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import be.helha.ttmc.model.Deck;
 import be.helha.ttmc.ui.Settings;
 import be.helha.ttmc.ui.gui.admin.MenuAdminBP;

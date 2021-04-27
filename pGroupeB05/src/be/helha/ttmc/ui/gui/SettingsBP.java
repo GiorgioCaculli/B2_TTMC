@@ -1,5 +1,6 @@
 package be.helha.ttmc.ui.gui;
 
+import be.helha.ttmc.ui.GUIConstant;
 import be.helha.ttmc.ui.Settings;
 import be.helha.ttmc.ui.gui.util.MusicGestion;
 import javafx.beans.value.ObservableValue;
@@ -52,7 +53,7 @@ public class SettingsBP extends BorderPane
     {
         if ( backButton == null )
         {
-            backButton = new Button( "Return" );
+            backButton = new Button( GUIConstant.BUTTON_RETURN );
             backButton.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
             backButton.setOnAction( new EventHandler< ActionEvent >()
             {

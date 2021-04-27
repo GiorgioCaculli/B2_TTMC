@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Locale;
 import java.util.Properties;
 
 import be.helha.ttmc.Main;
@@ -18,6 +19,9 @@ public class Settings
     private int timerSeconds;
     private double volume;
     private boolean mute;
+    private String language;
+    private String country;
+    private Locale locale;
 
     public Settings( String configFileName )
     {
@@ -53,6 +57,9 @@ public class Settings
         setVolume( Double.parseDouble( props.getProperty( "volume" ) ) );
         setTimerSeconds( Integer.parseInt( props.getProperty( "timer" ) ) );
         setMute( Boolean.parseBoolean( props.getProperty( "mute" ) ) );
+        setLanguage( props.getProperty( "language" ) );
+        setCountry( props.getProperty( "country" ) );
+        setLocale( new Locale( getLanguage(), getCountry() ) );
     }
     
     public void setTitle( String title )
@@ -123,5 +130,35 @@ public class Settings
     public boolean isMute()
     {
         return mute;
+    }
+    
+    public void setLanguage( String language )
+    {
+        this.language = language;
+    }
+    
+    public String getLanguage()
+    {
+        return language;
+    }
+    
+    public void setCountry( String country )
+    {
+        this.country = country;
+    }
+    
+    public String getCountry()
+    {
+        return country;
+    }
+    
+    public void setLocale( Locale locale )
+    {
+        this.locale = locale;
+    }
+    
+    public Locale getLocale()
+    {
+        return locale;
     }
 }

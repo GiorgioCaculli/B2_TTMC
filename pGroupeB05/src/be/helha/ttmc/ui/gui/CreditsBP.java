@@ -1,5 +1,6 @@
 package be.helha.ttmc.ui.gui;
 
+import be.helha.ttmc.ui.GUIConstant;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -21,7 +22,7 @@ public class CreditsBP extends BorderPane
     {
         if( backButton == null )
         {
-            backButton = new Button( "Return" );
+            backButton = new Button( GUIConstant.BUTTON_RETURN );
             backButton.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
             backButton.setOnAction( new EventHandler< ActionEvent >()
             {

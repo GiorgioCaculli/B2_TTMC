@@ -16,17 +16,19 @@ import com.google.gson.JsonSyntaxException;
 
 import be.helha.ttmc.Main;
 import be.helha.ttmc.model.Deck;
+import be.helha.ttmc.ui.Settings;
 
 public class Serialization
 {
     private static GsonBuilder gb = new GsonBuilder();
 
     private static Gson gson;
+    private static Settings s = new Settings( "application.properties" );
 
     public static void saveGame( Deck d )
     {
         gb.setPrettyPrinting();
-        String path = "deck.json";
+        String path = s.getDeckName();
         File json = null;
         try
         {
@@ -68,7 +70,7 @@ public class Serialization
         }
         catch ( JsonSyntaxException | JsonIOException | FileNotFoundException e )
         {
-            InputStream in = Main.class.getResourceAsStream( "assets/decks/deck.json" );
+            InputStream in = Main.class.getResourceAsStream( String.format( "assets/decks/%s", s.getDeckName() ) );
             d = gson.fromJson( new BufferedReader( new InputStreamReader( in ) ), Deck.class );
             saveGame( d );
             try

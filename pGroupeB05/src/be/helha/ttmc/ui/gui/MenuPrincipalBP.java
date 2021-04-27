@@ -2,6 +2,7 @@ package be.helha.ttmc.ui.gui;
 
 import be.helha.ttmc.Main;
 import be.helha.ttmc.model.Deck;
+import be.helha.ttmc.ui.GUIConstant;
 import be.helha.ttmc.ui.gui.admin.AlerteLogin;
 import be.helha.ttmc.ui.gui.admin.MenuAdminBP;
 import be.helha.ttmc.ui.gui.play.MenuPlayBP;
@@ -69,7 +70,7 @@ public class MenuPrincipalBP extends BorderPane
     {
         if ( btnJouer == null )
         {
-            btnJouer = new Button( "Play!" );
+            btnJouer = new Button( GUIConstant.BUTTON_PLAY );
             btnJouer.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
             btnJouer.setOnAction( new EventHandler< ActionEvent >()
             {
@@ -98,7 +99,7 @@ public class MenuPrincipalBP extends BorderPane
     {
         if ( btnCredits == null )
         {
-            btnCredits = new Button( "Credits" );
+            btnCredits = new Button( GUIConstant.BUTTON_CREDITS );
             btnCredits.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
             btnCredits.setOnAction( new EventHandler< ActionEvent >()
             {
@@ -117,7 +118,7 @@ public class MenuPrincipalBP extends BorderPane
     {
         if ( btnParametres == null )
         {
-            btnParametres = new Button( "Settings" );
+            btnParametres = new Button( GUIConstant.BUTTON_SETTINGS );
             btnParametres.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
             btnParametres.setOnAction( new EventHandler< ActionEvent >()
             {
@@ -136,14 +137,14 @@ public class MenuPrincipalBP extends BorderPane
     {
         if ( btnQuitter == null )
         {
-            btnQuitter = new Button( "Leave the game" );
+            btnQuitter = new Button( GUIConstant.BUTTON_LEAVE_GAME );
             btnQuitter.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
             btnQuitter.setOnAction( new EventHandler< ActionEvent >()
             {
                 @Override
                 public void handle( ActionEvent arg0 )
                 {
-                    Alert alert = new Alert( AlertType.CONFIRMATION, "Leave the game?" );
+                    Alert alert = new Alert( AlertType.CONFIRMATION, GUIConstant.DIALOG_EXIT_CONTENT );
                     if ( alert.showAndWait().get() == ButtonType.OK )
                     {
                         Stage stage = ( Stage ) getScene().getWindow();
@@ -159,7 +160,7 @@ public class MenuPrincipalBP extends BorderPane
     {
         if ( btnGerer == null )
         {
-            btnGerer = new Button( "Admin Panel" );
+            btnGerer = new Button( GUIConstant.BUTTON_ADMIN_PANEL );
             btnGerer.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
             btnGerer.setOnAction( new EventHandler< ActionEvent >()
             {
