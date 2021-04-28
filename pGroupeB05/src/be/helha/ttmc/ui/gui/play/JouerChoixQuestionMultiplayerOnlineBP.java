@@ -8,7 +8,7 @@ import be.helha.ttmc.model.Deck;
 import be.helha.ttmc.model.Theme;
 import be.helha.ttmc.ui.Player;
 import be.helha.ttmc.ui.Settings;
-import be.helha.ttmc.ui.gui.MenuPauseFP;
+import be.helha.ttmc.ui.gui.MenuPauseBP;
 import be.helha.ttmc.ui.gui.play.LobbyMultiOnlineHostBP.LobbyMultiOnlineMainBP;
 import be.helha.ttmc.ui.gui.util.MusicGestion;
 import javafx.animation.AnimationTimer;
@@ -43,7 +43,7 @@ public class JouerChoixQuestionMultiplayerOnlineBP extends BorderPane
 {
     private StackPane jouerChoixQuestionMainSP;
 
-    private MenuPauseFP mpfp;
+    private MenuPauseBP mpfp;
     private List< Joueur > joueurs;
     private int maxPlayers;
     private int currentlyPlaying;
@@ -86,7 +86,7 @@ public class JouerChoixQuestionMultiplayerOnlineBP extends BorderPane
                 {
                     requestFocus();
                     getJouerChoixQuestionMainSP().getChildren().get( maxPlayers ).setVisible( true );
-                    MenuPauseFP mpfp = ( ( MenuPauseFP ) getJouerChoixQuestionMainSP().getChildren()
+                    MenuPauseBP mpfp = ( ( MenuPauseBP ) getJouerChoixQuestionMainSP().getChildren()
                             .get( maxPlayers ) );
                     mpfp.getBtnResume().setOnAction( new EventHandler< ActionEvent >()
                     {
@@ -157,11 +157,11 @@ public class JouerChoixQuestionMultiplayerOnlineBP extends BorderPane
         return jouerChoixQuestionMainSP;
     }
 
-    private MenuPauseFP getMenuPauseFP()
+    private MenuPauseBP getMenuPauseFP()
     {
         if ( mpfp == null )
         {
-            mpfp = new MenuPauseFP(settings,m);
+            mpfp = new MenuPauseBP(settings,m);
         }
         return mpfp;
     }

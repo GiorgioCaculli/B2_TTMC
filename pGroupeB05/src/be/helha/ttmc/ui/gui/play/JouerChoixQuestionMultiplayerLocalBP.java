@@ -8,7 +8,7 @@ import be.helha.ttmc.model.Deck;
 import be.helha.ttmc.model.Theme;
 import be.helha.ttmc.ui.Player;
 import be.helha.ttmc.ui.Settings;
-import be.helha.ttmc.ui.gui.MenuPauseFP;
+import be.helha.ttmc.ui.gui.MenuPauseBP;
 import be.helha.ttmc.ui.gui.play.LobbyMultiLocalBP.LobbyMultiLocalMainBP;
 import be.helha.ttmc.ui.gui.util.MusicGestion;
 import javafx.animation.AnimationTimer;
@@ -43,7 +43,7 @@ public class JouerChoixQuestionMultiplayerLocalBP extends BorderPane
 {
     private StackPane jouerChoixQuestionMainSP;
 
-    private MenuPauseFP mpfp;
+    private MenuPauseBP mpfp;
     private List< Joueur > joueurs;
     private int maxPlayers;
     private int currentlyPlaying;
@@ -51,11 +51,12 @@ public class JouerChoixQuestionMultiplayerLocalBP extends BorderPane
     private Deck d;
     private PlateauBP pla;
     private MusicGestion m;
+    private ScoreBoxBP scoreBox;
 
-    public JouerChoixQuestionMultiplayerLocalBP( Deck d, List< Player > players, Settings settings ,MusicGestion m)
+    public JouerChoixQuestionMultiplayerLocalBP( Deck d, List< Player > players, Settings settings, MusicGestion m )
     {
         this.d = d;
-        this.m= m;
+        this.m = m;
         this.settings = settings;
         this.maxPlayers = players.size();
         joueurs = new ArrayList<>();
@@ -70,6 +71,8 @@ public class JouerChoixQuestionMultiplayerLocalBP extends BorderPane
         getJouerChoixQuestionMainSP().getChildren().add( getMenuPauseFP() );
         getJouerChoixQuestionMainSP().getChildren().get( maxPlayers ).setVisible( false );
         setBottom( getPla() );
+        scoreBox = new ScoreBoxBP( joueurs );
+        setRight( scoreBox );
         ColorAdjust col = new ColorAdjust( 0, -0.9, -0.5, 0 );
         BoxBlur blur = new BoxBlur();
         blur.setWidth( 15 );
@@ -86,7 +89,7 @@ public class JouerChoixQuestionMultiplayerLocalBP extends BorderPane
                 {
                     requestFocus();
                     getJouerChoixQuestionMainSP().getChildren().get( maxPlayers ).setVisible( true );
-                    MenuPauseFP mpfp = ( ( MenuPauseFP ) getJouerChoixQuestionMainSP().getChildren()
+                    MenuPauseBP mpfp = ( ( MenuPauseBP ) getJouerChoixQuestionMainSP().getChildren()
                             .get( maxPlayers ) );
                     mpfp.getBtnResume().setOnAction( new EventHandler< ActionEvent >()
                     {
@@ -134,6 +137,39 @@ public class JouerChoixQuestionMultiplayerLocalBP extends BorderPane
         setFocusTraversable( true );
     }
 
+    private class ScoreBoxBP extends BorderPane
+    {
+        private List< Label > scoreLabels;
+
+        public ScoreBoxBP( List< Joueur > joueurs )
+        {
+            scoreLabels = new ArrayList<>();
+            VBox scoreBox = new VBox();
+            HBox scoreBoxInfoBox = new HBox();
+            Label scoreBoxInfoLabel = new Label( "Scores:" );
+            scoreBoxInfoLabel.setStyle( "-fx-font-size: 40px" );
+            scoreBoxInfoBox.getChildren().add( scoreBoxInfoLabel );
+            scoreBox.getChildren().add( scoreBoxInfoBox );
+            for ( int i = 0; i < joueurs.size(); i++ )
+            {
+                HBox playerScoreBox = new HBox();
+                Label scoreLabel = new Label( String.format( "%2d", joueurs.get( i ).getScorePlayer() ) );
+                scoreLabel.setStyle( "-fx-font-size: 40pt;" );
+                PionCircle playerPion = getPla().getPion( i ).clone();
+                scoreLabels.add( scoreLabel );
+                playerScoreBox.getChildren().add( playerPion );
+                playerScoreBox.getChildren().add( scoreLabels.get( i ) );
+                scoreBox.getChildren().add( playerScoreBox );
+            }
+            setCenter( scoreBox );
+        }
+
+        public List< Label > getScoreLabels()
+        {
+            return scoreLabels;
+        }
+    }
+
     private PlateauBP getPla()
     {
         if ( pla == null )
@@ -152,11 +188,11 @@ public class JouerChoixQuestionMultiplayerLocalBP extends BorderPane
         return jouerChoixQuestionMainSP;
     }
 
-    private MenuPauseFP getMenuPauseFP()
+    private MenuPauseBP getMenuPauseFP()
     {
         if ( mpfp == null )
         {
-            mpfp = new MenuPauseFP(settings, m);
+            mpfp = new MenuPauseBP( settings, m );
         }
         return mpfp;
     }
@@ -364,6 +400,9 @@ public class JouerChoixQuestionMultiplayerLocalBP extends BorderPane
                 }
             }
 
+            VBox vbQuestion = new VBox();
+            HBox hbQuestion = new HBox();
+            hbQuestion.setSpacing( 10 );
             for ( int j = 0; j < maxBtn; j++ )
             {
                 JeuReponseBP jeuRep = new JeuReponseBP( bcPlayer, j );
@@ -387,7 +426,7 @@ public class JouerChoixQuestionMultiplayerLocalBP extends BorderPane
                 Button b = new Button( String.format( "%d", idQ + 1 ) );
                 b.setStyle( "-fx-font-size:80" );
                 b.setTextAlignment( TextAlignment.CENTER );
-                b.setMinSize( settings.getWidth() / 3, settings.getHeight() / 3 );
+                b.setMinSize( settings.getWidth() / 5, settings.getHeight() / 5 );
                 b.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
                 b.setOnAction( new EventHandler< ActionEvent >()
                 {
@@ -409,16 +448,25 @@ public class JouerChoixQuestionMultiplayerLocalBP extends BorderPane
                         }
                     }
                 } );
-                fpPlayer.getChildren().add( b );
+                if ( j % 2 == 0 )
+                {
+                    vbQuestion.getChildren().add( hbQuestion );
+                    hbQuestion = new HBox();
+                    hbQuestion.setSpacing( 10 );
+                }
+                hbQuestion.getChildren().add( b );
             }
+            vbQuestion.getChildren().add( hbQuestion );
+            vbQuestion.setSpacing( 10 );
+            fpPlayer.getChildren().add( vbQuestion );
 
             HBox scoreBox = new HBox();
             PionCircle playerPion = getPla().getPion( id ).clone();
             Region espaceVideNicknameScore = new Region();
             HBox.setHgrow( espaceVideNicknameScore, Priority.ALWAYS );
-            scoreBox.getChildren().addAll( playerPion,
-                    new Label( String.format( "%s", joueurs.get( id ).getNickNamePlayer() ) ), espaceVideNicknameScore,
-                    getLblScore() );
+            Label playerNickNameLabel = new Label( String.format( "%s", joueurs.get( id ).getNickNamePlayer() ) );
+            playerNickNameLabel.setStyle( "-fx-font-size: 40px;" );
+            scoreBox.getChildren().addAll( playerPion, playerNickNameLabel, espaceVideNicknameScore, getLblScore() );
 
             VBox vbPlayer = new VBox();
             vbPlayer.setPadding( new Insets( 20 ) );
@@ -466,7 +514,10 @@ public class JouerChoixQuestionMultiplayerLocalBP extends BorderPane
         public Label getLblScore()
         {
             if ( lblScore == null )
+            {
                 lblScore = new Label( String.format( "Score: %2d", joueurs.get( id ).getScorePlayer() ) );
+                lblScore.setStyle( "-fx-font-size: 40px;" );
+            }
             return lblScore;
         }
 
@@ -499,7 +550,9 @@ public class JouerChoixQuestionMultiplayerLocalBP extends BorderPane
             Alert alert = new Alert( AlertType.INFORMATION );
             alert.setTitle( "Results" );
             String path;
-            if ( joueurs.get( playerID ).getCardNb() >= joueurs.get( playerID ).getCards().size() )
+            //if ( joueurs.get( playerID ).getCardNb() >= joueurs.get( playerID ).getCards().size() )
+            if ( joueurs.get( playerID ).getBonnesRep() >= 24
+                    || joueurs.get( playerID ).getCardNb() >= joueurs.get( playerID ).getCards().size() )
             {
                 alert.setContentText(
                         String.format( "All questions have been answered, you scored %d points. Thank you for playing!",
@@ -530,6 +583,8 @@ public class JouerChoixQuestionMultiplayerLocalBP extends BorderPane
                     joueurs.get( playerID ).setScorePlayer( joueurs.get( playerID ).getScorePlayer()
                             + joueurs.get( playerID ).getCardPaneJoueur().getIdQuestion() + 1 );
                     getLblScore().setText( String.format( "Score: %2d", joueurs.get( playerID ).getScorePlayer() ) );
+                    scoreBox.getScoreLabels().get( playerID )
+                            .setText( String.format( "%2d", joueurs.get( playerID ).getScorePlayer() ) );
                     joueurs.get( playerID ).setBonnesRep( joueurs.get( playerID ).getBonnesRep() + 1 );
                     getPla().getPion( playerID )
                             .setPos( getPla().getCases().get( joueurs.get( playerID ).getBonnesRep() ).getX()

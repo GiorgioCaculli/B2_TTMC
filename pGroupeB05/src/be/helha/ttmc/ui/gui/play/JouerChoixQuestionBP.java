@@ -8,7 +8,7 @@ import be.helha.ttmc.model.BasicCard;
 import be.helha.ttmc.model.Deck;
 import be.helha.ttmc.model.Theme;
 import be.helha.ttmc.ui.Settings;
-import be.helha.ttmc.ui.gui.MenuPauseFP;
+import be.helha.ttmc.ui.gui.MenuPauseBP;
 import be.helha.ttmc.ui.gui.play.LobbySoloBP.LobbySoloMainBP;
 import be.helha.ttmc.ui.gui.play.MenuPlayBP.MenuPlayMainVB;
 import be.helha.ttmc.ui.gui.util.MusicGestion;
@@ -65,7 +65,7 @@ public class JouerChoixQuestionBP extends BorderPane
     private Label lblTime;
     private int id;
     private int cardNb = 0;
-    private MenuPauseFP mpfp;
+    private MenuPauseBP mpfp;
     private BorderPane cardPane;
     private String nickName;
     private PlateauBP pla;
@@ -102,7 +102,7 @@ public class JouerChoixQuestionBP extends BorderPane
                 {
                     cardPane.setEffect( blur );
                     getJouerChoixQuestionMainSP().getChildren().get( 1 ).setVisible( true );
-                    MenuPauseFP mpfp = ( ( MenuPauseFP ) getJouerChoixQuestionMainSP().getChildren().get( 1 ) );
+                    MenuPauseBP mpfp = ( ( MenuPauseBP ) getJouerChoixQuestionMainSP().getChildren().get( 1 ) );
                     mpfp.getBtnResume().setOnAction( new EventHandler< ActionEvent >()
                     {
                         @Override
@@ -147,11 +147,11 @@ public class JouerChoixQuestionBP extends BorderPane
         return jouerChoixQuestionMainSP;
     }
 
-    private MenuPauseFP getMenuPauseFP()
+    private MenuPauseBP getMenuPauseFP()
     {
         if ( mpfp == null )
         {
-            mpfp = new MenuPauseFP(s, m);
+            mpfp = new MenuPauseBP(s, m);
         }
         return mpfp;
     }

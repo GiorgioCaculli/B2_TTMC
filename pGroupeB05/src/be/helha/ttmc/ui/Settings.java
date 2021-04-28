@@ -5,9 +5,13 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
 
@@ -26,6 +30,7 @@ public class Settings
     private String country;
     private Locale locale;
     private Properties props;
+    private List< String > languages;
 
     public Settings( String configFileName )
     {
@@ -36,7 +41,7 @@ public class Settings
         {
             props = new Properties();
             in = new FileInputStream( new File( configFileName ) );
-            props.load( in );
+            props.load( new InputStreamReader( in, Charset.forName( "UTF-8" ) ) );
         }
         catch ( FileNotFoundException e )
         {
@@ -46,7 +51,7 @@ public class Settings
             {
                 Files.copy( in, Paths.get( configFileName ), StandardCopyOption.REPLACE_EXISTING );
                 in = new FileInputStream( new File( configFileName ) );
-                props.load( in );
+                props.load( new InputStreamReader( in, Charset.forName( "UTF-8" ) ) );
             }
             catch ( IOException e1 )
             {
@@ -57,6 +62,11 @@ public class Settings
         {
             e.printStackTrace();
         }
+        languages = new ArrayList<>();
+        languages.add( props.getProperty( "language_english" ) );
+        languages.add( props.getProperty( "language_french" ) );
+        languages.add( props.getProperty( "language_italian" ) );
+        languages.add( props.getProperty( "language_japanese" ) );
         setWidth( Integer.parseInt( props.getProperty( "width" ) ) );
         setHeight( Integer.parseInt( props.getProperty( "height" ) ) );
         setDeckName( props.getProperty( "deck" ) );
@@ -66,6 +76,7 @@ public class Settings
         setLanguage( props.getProperty( "language" ) );
         setCountry( props.getProperty( "country" ) );
         setLocale( new Locale( getLanguage(), getCountry() ) );
+        setLanguages( languages );
     }
     
     public Properties getProperties()
@@ -103,6 +114,7 @@ public class Settings
     public void setDeckName( String deckName )
     {
         this.deckName = deckName;
+        props.setProperty( "deck", deckName );
     }
 
     public String getDeckName()
@@ -124,6 +136,7 @@ public class Settings
     public void setVolume( double volume )
     {
         this.volume = volume;
+        props.setProperty( "volume", String.format( "%.2f", volume ) );
     }
 
     public double getVolume()
@@ -134,6 +147,7 @@ public class Settings
     public void setMute( boolean mute )
     {
         this.mute = mute;
+        props.setProperty( "mute", String.format( "%s", mute ) );
     }
     
     public boolean isMute()
@@ -171,5 +185,15 @@ public class Settings
     public Locale getLocale()
     {
         return locale;
+    }
+    
+    public void setLanguages( List< String > languages )
+    {
+        this.languages = languages;
+    }
+    
+    public List< String > getLanguages()
+    {
+        return languages;
     }
 }

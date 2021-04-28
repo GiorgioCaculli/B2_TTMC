@@ -24,7 +24,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 
-public class MenuPauseFP extends BorderPane
+public class MenuPauseBP extends BorderPane
 {
     private Button btnBack;
     private Button btnResume;
@@ -112,6 +112,7 @@ public class MenuPauseFP extends BorderPane
             slide.setMaxSize( 200, 200 );
             slide.setShowTickLabels( true );
             slide.setShowTickMarks( true );
+            slide.setValue( s.getVolume() * 100 );
             slide.valueProperty()
                     .addListener( ( ObservableValue< ? extends Number > ov, Number old_val, Number new_val ) ->
                     {
@@ -133,7 +134,7 @@ public class MenuPauseFP extends BorderPane
         return lblVolume;
     }
 
-    public MenuPauseFP( Settings s, MusicGestion musi )
+    public MenuPauseBP( Settings s, MusicGestion musi )
     {
         this.s = s;
         this.mus = musi;

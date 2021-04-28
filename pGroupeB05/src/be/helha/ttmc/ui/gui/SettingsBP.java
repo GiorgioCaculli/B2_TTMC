@@ -3,6 +3,9 @@ package be.helha.ttmc.ui.gui;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
+import java.util.Locale;
 
 import be.helha.ttmc.ui.GUIConstant;
 import be.helha.ttmc.ui.Settings;
@@ -17,6 +20,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -46,6 +50,8 @@ public class SettingsBP extends BorderPane
     private ObservableList< String > windowSizes;
     private ComboBox< String > windowSizeComboBox;
     private boolean windowSizeChanged = false;
+    private Label maximizeWindowLabel;
+    private CheckBox maximizeWindowCheckBox;
 
     public SettingsBP( Settings s, MusicGestion musicGestion )
     {
@@ -69,16 +75,21 @@ public class SettingsBP extends BorderPane
         HBox languageBox = new HBox();
         languageBox.getChildren().add( getLanguageLabel() );
         languageBox.getChildren().add( getLanguageComboBox() );
-        
+
         HBox windowSizeBox = new HBox();
         windowSizeBox.getChildren().add( getWindowSizeLabel() );
         windowSizeBox.getChildren().add( getWindowSizeComboBox() );
+
+        HBox maximizeWindowBox = new HBox();
+        maximizeWindowBox.getChildren().add( getMaximizeWindowLabel() );
+        maximizeWindowBox.getChildren().add( getMaximizeWindowCheckBox() );
 
         VBox settingsBox = new VBox();
         settingsBox.getChildren().add( volumeBox );
         settingsBox.getChildren().add( timerBox );
         settingsBox.getChildren().add( languageBox );
         settingsBox.getChildren().add( windowSizeBox );
+        settingsBox.getChildren().add( maximizeWindowBox );
 
         fp.getChildren().add( settingsBox );
 
@@ -86,7 +97,7 @@ public class SettingsBP extends BorderPane
         fp.setAlignment( Pos.CENTER );
         setCenter( fp );
         setBottom( getBackButton() );
-        
+
         setOnKeyPressed( new EventHandler< KeyEvent >()
         {
             @Override
@@ -114,7 +125,10 @@ public class SettingsBP extends BorderPane
                 {
                     try
                     {
-                        settings.getProperties().store( new FileOutputStream( new File( settings.getConfigFileName() ) ), "" );
+                        settings.getProperties()
+                                .store( new OutputStreamWriter(
+                                        new FileOutputStream( new File( settings.getConfigFileName() ) ),
+                                        StandardCharsets.UTF_8 ), "" );
                     }
                     catch ( IOException e )
                     {
@@ -201,7 +215,7 @@ public class SettingsBP extends BorderPane
     {
         if ( timerLabel == null )
         {
-            timerLabel = new Label( "Timer duration:" );
+            timerLabel = new Label( "Timer duration: " );
         }
         return timerLabel;
     }
@@ -251,7 +265,7 @@ public class SettingsBP extends BorderPane
     {
         if ( languageLabel == null )
         {
-            languageLabel = new Label( "Language" );
+            languageLabel = new Label( "Language: " );
         }
         return languageLabel;
     }
@@ -260,7 +274,7 @@ public class SettingsBP extends BorderPane
     {
         if ( languages == null )
         {
-            languages = FXCollections.observableArrayList( "English", "Français", "Italiano", "日本語" );
+            languages = FXCollections.observableArrayList( settings.getLanguages() );
         }
         return languages;
     }
@@ -287,6 +301,7 @@ public class SettingsBP extends BorderPane
                 default:
                     break;
             }
+            String currentLanguage = languageComboBox.getValue();
             languageComboBox.valueProperty().addListener( new ChangeListener< String >()
             {
                 @Override
@@ -297,107 +312,146 @@ public class SettingsBP extends BorderPane
                         case "English":
                             settings.setLanguage( "en" );
                             settings.setCountry( "UK" );
-                            languageChanged = true;
                             break;
                         case "Français":
                             settings.setLanguage( "fr" );
                             settings.setCountry( "BE" );
-                            languageChanged = true;
                             break;
                         case "Italiano":
                             settings.setLanguage( "it" );
                             settings.setCountry( "IT" );
-                            languageChanged = true;
                             break;
                         case "日本語":
                             settings.setLanguage( "ja" );
                             settings.setCountry( "JP" );
-                            languageChanged = true;
                             break;
                         default:
                             break;
+                    }
+                    if( !newValue.equalsIgnoreCase( currentLanguage ) )
+                    {
+                        settings.setLocale( new Locale( settings.getLanguage(), settings.getCountry() ) );
+                        languageChanged = true;
+                    }
+                    else
+                    {
+                        languageChanged = false;
                     }
                 }
             } );
         }
         return languageComboBox;
     }
-    
+
     public Label getWindowSizeLabel()
     {
-        if( windowSizeLabel == null )
+        if ( windowSizeLabel == null )
         {
-            windowSizeLabel = new Label( "Window size:" );
+            windowSizeLabel = new Label( "Window size: " );
         }
         return windowSizeLabel;
     }
-    
+
     public ObservableList< String > getWindowSizes()
     {
-        if( windowSizes == null )
+        if ( windowSizes == null )
         {
-            windowSizes = FXCollections.observableArrayList( "1200x800", "1024x768", "800x600" );
+            windowSizes = FXCollections.observableArrayList( "1440x900", "1280x800" );
         }
         return windowSizes;
     }
-    
+
     public ComboBox< String > getWindowSizeComboBox()
     {
-        if( windowSizeComboBox == null )
+        if ( windowSizeComboBox == null )
         {
             windowSizeComboBox = new ComboBox< String >( getWindowSizes() );
             switch ( String.format( "%dx%d", settings.getWidth(), settings.getHeight() ) )
             {
-                case "1200x800":
+                case "1440x900":
                     windowSizeComboBox.setValue( getWindowSizes().get( 0 ) );
                     break;
-                case "1024x768":
+                case "1280x800":
                     windowSizeComboBox.setValue( getWindowSizes().get( 1 ) );
-                    break;
-                case "800x600":
-                    windowSizeComboBox.setValue( getWindowSizes().get( 2 ) );
                     break;
                 default:
                     break;
             }
+            String currentSize = windowSizeComboBox.getValue();
             windowSizeComboBox.valueProperty().addListener( new ChangeListener< String >()
             {
                 @Override
                 public void changed( ObservableValue< ? extends String > observable, String oldValue, String newValue )
                 {
-                    int width = Integer.parseInt( newValue.split( "x" )[0] );
-                    int height = Integer.parseInt( newValue.split( "x" )[1] );
+                    int width = Integer.parseInt( newValue.split( "x" )[ 0 ] );
+                    int height = Integer.parseInt( newValue.split( "x" )[ 1 ] );
                     Stage stage = ( Stage ) getScene().getWindow();
                     switch ( newValue )
                     {
-                        case "1200x800":
-                            settings.setWidth( width );
-                            settings.setHeight( height );
-                            stage.setWidth( settings.getWidth() );
-                            stage.setHeight( settings.getHeight() );
-                            windowSizeChanged = true;
-                            break;
-                        case "1024x768":
-                            settings.setWidth( width );
-                            settings.setHeight( height );
-                            stage.setWidth( settings.getWidth() );
-                            stage.setHeight( settings.getHeight() );
-                            windowSizeChanged = true;
-                            break;
-                        case "800x600":
-                            settings.setWidth( width );
-                            settings.setHeight( height );
-                            stage.setWidth( settings.getWidth() );
-                            stage.setHeight( settings.getHeight() );
-                            windowSizeChanged = true;
+                        case "1440x900":
+                        case "1280x800":
+                            if ( !newValue.equalsIgnoreCase( currentSize ) )
+                            {
+                                settings.setWidth( width );
+                                settings.setHeight( height );
+                                stage.setWidth( settings.getWidth() );
+                                stage.setHeight( settings.getHeight() );
+                                windowSizeChanged = true;
+                            }
+                            else
+                            {
+                                settings.setWidth( width );
+                                settings.setHeight( height );
+                                stage.setWidth( settings.getWidth() );
+                                stage.setHeight( settings.getHeight() );
+                                windowSizeChanged = false;
+                            }
                             break;
                         default:
                             break;
                     }
                 }
             } );
-            
+
         }
         return windowSizeComboBox;
+    }
+
+    public Label getMaximizeWindowLabel()
+    {
+        if ( maximizeWindowLabel == null )
+        {
+            maximizeWindowLabel = new Label( "Maximize window: " );
+        }
+        return maximizeWindowLabel;
+    }
+
+    public CheckBox getMaximizeWindowCheckBox()
+    {
+        if ( maximizeWindowCheckBox == null )
+        {
+            maximizeWindowCheckBox = new CheckBox();
+            maximizeWindowCheckBox.selectedProperty().addListener( new ChangeListener< Boolean >()
+            {
+
+                @Override
+                public void changed( ObservableValue< ? extends Boolean > observable, Boolean oldValue,
+                        Boolean newValue )
+                {
+                    Stage stage = ( Stage ) getScene().getWindow();
+                    if ( newValue )
+                    {
+                        stage.setFullScreen( true );
+                    }
+                    else
+                    {
+                        stage.setFullScreen( false );
+                        stage.setWidth( settings.getWidth() );
+                        stage.setHeight( settings.getHeight() );
+                    }
+                }
+            } );
+        }
+        return maximizeWindowCheckBox;
     }
 }
