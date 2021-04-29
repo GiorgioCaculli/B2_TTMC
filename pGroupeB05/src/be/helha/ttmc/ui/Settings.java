@@ -10,6 +10,8 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -70,12 +72,16 @@ public class Settings
         setWidth( Integer.parseInt( props.getProperty( "width" ) ) );
         setHeight( Integer.parseInt( props.getProperty( "height" ) ) );
         setDeckName( props.getProperty( "deck" ) );
-        String volumeStr = props.getProperty( "volume" );
-        if( volumeStr.contains( "," ) )
+        NumberFormat format = NumberFormat.getInstance( Locale.getDefault() );
+        try
         {
-            volumeStr.replace( ",", "." );
+            Number number = format.parse( props.getProperty( "volume" ) );
+            setVolume( number.doubleValue() );
         }
-        setVolume( Double.parseDouble( volumeStr ) );
+        catch ( ParseException e )
+        {
+            e.printStackTrace();
+        }
         setTimerSeconds( Integer.parseInt( props.getProperty( "timer" ) ) );
         setMute( Boolean.parseBoolean( props.getProperty( "mute" ) ) );
         setLanguage( props.getProperty( "language" ) );
@@ -83,12 +89,12 @@ public class Settings
         setLocale( new Locale( getLanguage(), getCountry() ) );
         setLanguages( languages );
     }
-    
+
     public Properties getProperties()
     {
         return props;
     }
-    
+
     public String getConfigFileName()
     {
         return configFileName;
@@ -148,55 +154,55 @@ public class Settings
     {
         return volume;
     }
-    
+
     public void setMute( boolean mute )
     {
         this.mute = mute;
         props.setProperty( "mute", String.format( "%s", mute ) );
     }
-    
+
     public boolean isMute()
     {
         return mute;
     }
-    
+
     public void setLanguage( String language )
     {
         this.language = language;
         props.setProperty( "language", language );
     }
-    
+
     public String getLanguage()
     {
         return language;
     }
-    
+
     public void setCountry( String country )
     {
         this.country = country;
         props.setProperty( "country", country );
     }
-    
+
     public String getCountry()
     {
         return country;
     }
-    
+
     public void setLocale( Locale locale )
     {
         this.locale = locale;
     }
-    
+
     public Locale getLocale()
     {
         return locale;
     }
-    
+
     public void setLanguages( List< String > languages )
     {
         this.languages = languages;
     }
-    
+
     public List< String > getLanguages()
     {
         return languages;
