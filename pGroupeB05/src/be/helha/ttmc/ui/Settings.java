@@ -70,7 +70,12 @@ public class Settings
         setWidth( Integer.parseInt( props.getProperty( "width" ) ) );
         setHeight( Integer.parseInt( props.getProperty( "height" ) ) );
         setDeckName( props.getProperty( "deck" ) );
-        setVolume( Double.parseDouble( props.getProperty( "volume" ) ) );
+        String volumeStr = props.getProperty( "volume" );
+        if( volumeStr.contains( "," ) )
+        {
+            volumeStr.replace( ",", "." );
+        }
+        setVolume( Double.parseDouble( volumeStr ) );
         setTimerSeconds( Integer.parseInt( props.getProperty( "timer" ) ) );
         setMute( Boolean.parseBoolean( props.getProperty( "mute" ) ) );
         setLanguage( props.getProperty( "language" ) );
