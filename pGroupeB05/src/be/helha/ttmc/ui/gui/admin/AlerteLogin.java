@@ -3,6 +3,7 @@ package be.helha.ttmc.ui.gui.admin;
 import java.util.Optional;
 
 import be.helha.ttmc.Main;
+import be.helha.ttmc.ui.GUIConstant;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -29,8 +30,8 @@ public class AlerteLogin extends Alert
     {
         super( AlertType.INFORMATION );
         Dialog< Pair< String, String > > dialog = new Dialog<>();
-        dialog.setTitle( "Login Dialog" );
-        dialog.setHeaderText( "Admin access :" );
+        dialog.setTitle( GUIConstant.DIALOG_LOGIN_TITLE );
+        dialog.setHeaderText( GUIConstant.DIALOG_LOGIN_CONTENT );
 
         ImageView im = new ImageView( Main.class.getResource( "assets/images/cadenas.png" ).toString() );
         im.setFitWidth( 50 );
@@ -41,7 +42,7 @@ public class AlerteLogin extends Alert
 
         dialog.setGraphic( im );
 
-        ButtonType loginButtonType = new ButtonType( "Login", ButtonData.OK_DONE );
+        ButtonType loginButtonType = new ButtonType( GUIConstant.DIALOG_LOGIN_BUTTON, ButtonData.OK_DONE );
         dialog.getDialogPane().getButtonTypes().addAll( loginButtonType, ButtonType.CANCEL );
 
         GridPane grid = new GridPane();
@@ -49,13 +50,13 @@ public class AlerteLogin extends Alert
         grid.setVgap( 10 );
         grid.setPadding( new Insets( 20, 150, 10, 10 ) );
         
-        username.setPromptText( "Username" );
+        username.setPromptText( GUIConstant.DIALOG_LOGIN_USERNAME );
         PasswordField password = new PasswordField();
-        password.setPromptText( "Password" );
+        password.setPromptText( GUIConstant.DIALOG_LOGIN_PASSWORD );
 
-        grid.add( new Label( "Username :" ), 0, 0 );
+        grid.add( new Label( GUIConstant.DIALOG_LOGIN_USERNAME + ":" ), 0, 0 );
         grid.add( username, 1, 0 );
-        grid.add( new Label( "Password :" ), 0, 1 );
+        grid.add( new Label( GUIConstant.DIALOG_LOGIN_PASSWORD + ":" ), 0, 1 );
         grid.add( password, 1, 1 );
 
         Node loginButton = dialog.getDialogPane().lookupButton( loginButtonType );
@@ -83,9 +84,6 @@ public class AlerteLogin extends Alert
 
         result.ifPresent( usernamePassword ->
         {
-            System.out.println(
-                    "Username =" + usernamePassword.getKey() + ", Password = " + usernamePassword.getValue() );
-
         } );
     }
 

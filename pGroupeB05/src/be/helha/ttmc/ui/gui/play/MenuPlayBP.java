@@ -1,6 +1,7 @@
 package be.helha.ttmc.ui.gui.play;
 
 import be.helha.ttmc.model.Deck;
+import be.helha.ttmc.ui.GUIConstant;
 import be.helha.ttmc.ui.Settings;
 import be.helha.ttmc.ui.gui.MainPaneBP;
 import be.helha.ttmc.ui.gui.MenuPrincipalBP;
@@ -77,7 +78,7 @@ public class MenuPlayBP extends BorderPane
     {
         if ( btnSolo == null )
         {
-            btnSolo = new Button( "Single Player" );
+            btnSolo = new Button( GUIConstant.BUTTON_SINGLE_PLAYER );
             btnSolo.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
             btnSolo.setOnAction( new EventHandler< ActionEvent >()
             {
@@ -105,7 +106,7 @@ public class MenuPlayBP extends BorderPane
     {
         if ( btnMulti == null )
         {
-            btnMulti = new Button( "Multiplayer" );
+            btnMulti = new Button( GUIConstant.BUTTON_MULTIPLAYER );
             btnMulti.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
             btnMulti.setOnAction( new EventHandler< ActionEvent >()
             {
@@ -133,7 +134,7 @@ public class MenuPlayBP extends BorderPane
     {
         if ( btnRetour == null )
         {
-            btnRetour = new Button( "Return" );
+            btnRetour = new Button( GUIConstant.BUTTON_RETURN );
             btnRetour.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
             btnRetour.setOnAction( new EventHandler< ActionEvent >()
             {

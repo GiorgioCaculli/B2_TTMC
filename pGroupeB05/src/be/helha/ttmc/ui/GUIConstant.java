@@ -24,6 +24,24 @@ public class GUIConstant
     public static final String BUTTON_BACK_TO_MAIN_MENU = rb.getString( "button_back_to_main_menu" );
     public static final String BUTTON_BACK_TO_LOBBY = rb.getString( "button_back_to_lobby" );
     
+    // BUTTONS PLAY MENU
+    public static final String BUTTON_SINGLE_PLAYER = rb.getString( "button_single_player" );
+    public static final String BUTTON_MULTIPLAYER = rb.getString( "button_multiplayer" );
+    
+    // DIALOG play
+    public static final String DIALOG_PLAY_TITLE = rb.getString( "dialog_play_title" );
+    public static final String DIALOG_PLAY_CONTENT = rb.getString( "dialog_play_content" );
+    public static final String DIALOG_PLAY_MESSAGE = rb.getString( "dialog_play_message" );
+    
     // DIALOG exit
     public static final String DIALOG_EXIT_CONTENT = rb.getString( "dialog_exit_content" );
+    
+    // DIALOG admin
+    public static final String DIALOG_LOGIN_TITLE = rb.getString( "dialog_login_title" );
+    public static final String DIALOG_LOGIN_CONTENT = rb.getString( "dialog_login_content" );
+    public static final String DIALOG_LOGIN_USERNAME = rb.getString( "dialog_login_username" );
+    public static final String DIALOG_LOGIN_PASSWORD = rb.getString( "dialog_login_password" );
+    public static final String DIALOG_LOGIN_ACCESS_GRANTED = rb.getString( "dialog_login_access_granted" );
+    public static final String DIALOG_LOGIN_ACCESS_DENIED = rb.getString( "dialog_login_access_denied" );
+    public static final String DIALOG_LOGIN_BUTTON = rb.getString( "dialog_login_button" );
 }

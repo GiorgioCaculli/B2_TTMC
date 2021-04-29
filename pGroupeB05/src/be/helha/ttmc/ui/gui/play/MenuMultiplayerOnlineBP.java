@@ -6,6 +6,7 @@ import java.net.UnknownHostException;
 
 import be.helha.ttmc.model.Deck;
 import be.helha.ttmc.ui.Client;
+import be.helha.ttmc.ui.GUIConstant;
 import be.helha.ttmc.ui.Settings;
 import be.helha.ttmc.ui.gui.play.MenuMultiplayerBP.MenuMultiplayerMainVB;
 import be.helha.ttmc.ui.gui.util.MusicGestion;
@@ -168,7 +169,7 @@ public class MenuMultiplayerOnlineBP extends BorderPane
     {
         if ( btnRetour == null )
         {
-            btnRetour = new Button( "Return" );
+            btnRetour = new Button( GUIConstant.BUTTON_RETURN );
             btnRetour.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
             btnRetour.setOnAction( new EventHandler< ActionEvent >()
             {

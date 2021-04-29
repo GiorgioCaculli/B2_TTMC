@@ -240,9 +240,9 @@ public class MenuPrincipalBP extends BorderPane
                     if ( alert.getResultat() )
                     {
                         Alert granted = new Alert( AlertType.INFORMATION );
-                        granted.setTitle( "ACCESS GRANTED" );
+                        granted.setTitle( GUIConstant.DIALOG_LOGIN_ACCESS_GRANTED );
                         String path;
-                        granted.setContentText( "ACCESS GRANTED" );
+                        granted.setContentText( GUIConstant.DIALOG_LOGIN_ACCESS_GRANTED );
                         path = "/be/helha/ttmc/assets/images/hackerman.gif";
                         Image img = new Image( path );
                         ImageView icon = new ImageView( img );
@@ -262,9 +262,9 @@ public class MenuPrincipalBP extends BorderPane
                     {
 
                         Alert denied = new Alert( AlertType.INFORMATION );
-                        denied.setTitle( "ACCESS DENIED" );
+                        denied.setTitle( GUIConstant.DIALOG_LOGIN_ACCESS_DENIED );
                         String path;
-                        denied.setContentText( "ACCESS DENIED" );
+                        denied.setContentText( GUIConstant.DIALOG_LOGIN_ACCESS_DENIED );
                         path = "/be/helha/ttmc/assets/images/anonymous.png";
                         Image img = new Image( path );
                         ImageView icon = new ImageView( img );

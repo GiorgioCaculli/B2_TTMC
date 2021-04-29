@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import be.helha.ttmc.model.Deck;
 import be.helha.ttmc.serialization.Serialization;
+import be.helha.ttmc.ui.GUIConstant;
 import be.helha.ttmc.ui.Settings;
 import be.helha.ttmc.ui.gui.play.MenuPlayBP.MenuPlayMainVB;
 import be.helha.ttmc.ui.gui.util.MusicGestion;
@@ -110,7 +111,7 @@ public class LobbySoloBP extends BorderPane
 		if(returnButton== null) {
 			
 			
-			returnButton = new Button( "Return" );
+			returnButton = new Button( GUIConstant.BUTTON_RETURN );
 			returnButton.setTextFill(gradiant);
 			returnButton.setStyle("-fx-background-color: plum;");
 			returnButton.setEffect(new DropShadow(25, 13, 13, Color.DARKSLATEGREY));
@@ -146,9 +147,9 @@ public class LobbySoloBP extends BorderPane
             }
         }
         TextInputDialog userNameDialog = new TextInputDialog();
-        userNameDialog.setTitle( "Insert your nickname" );
-        userNameDialog.setHeaderText( "Insert your nickname" );
-        userNameDialog.setContentText( "Please, insert your nickname:" );
+        userNameDialog.setTitle( GUIConstant.DIALOG_PLAY_TITLE );
+        userNameDialog.setHeaderText( GUIConstant.DIALOG_PLAY_CONTENT );
+        userNameDialog.setContentText( GUIConstant.DIALOG_PLAY_MESSAGE );
         Optional< String > userName = userNameDialog.showAndWait();
         if ( userName.isPresent() )
         {

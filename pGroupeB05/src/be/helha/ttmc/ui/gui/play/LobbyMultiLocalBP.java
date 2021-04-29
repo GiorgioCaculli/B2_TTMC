@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import be.helha.ttmc.model.BasicCard;
 import be.helha.ttmc.model.Deck;
+import be.helha.ttmc.ui.GUIConstant;
 import be.helha.ttmc.ui.Player;
 import be.helha.ttmc.ui.Settings;
 import be.helha.ttmc.ui.gui.play.JouerChoixQuestionMultiplayerLocalBP.Joueur;
@@ -65,7 +66,7 @@ public class LobbyMultiLocalBP extends BorderPane
 
 	public Button getReturnButton() {
 		if(returnButton==null) {
-			returnButton = new Button( "Return" );
+			returnButton = new Button( GUIConstant.BUTTON_RETURN );
 			Font txt= Font.font("Times New Roman", FontWeight.BOLD, FontPosture.ITALIC, 100);
 			returnButton.setFont(txt);
 			returnButton.setEffect(new DropShadow(25, 13, 13, Color.DARKSLATEGREY));
