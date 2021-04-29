@@ -111,6 +111,28 @@ public class SettingsBP extends BorderPane
         } );
     }
 
+    private void changementSettings() {
+    	if ( languageChanged || windowSizeChanged )
+        {
+            musicGestion.stopMusic();
+            Stage stage = ( Stage ) getScene().getWindow();
+            stage.close();
+            Platform.runLater( new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    new MainGui().restart( new Stage() );
+                }
+            } );
+        }
+        else
+        {
+            MainPaneBP mpbp = ( MainPaneBP ) getParent().getParent();
+            mpbp.setVisibleNode( MenuPrincipalBP.class.getSimpleName() );
+        }
+    }
+    
     public Button getBackButton()
     {
         if ( backButton == null )
@@ -133,25 +155,7 @@ public class SettingsBP extends BorderPane
                     {
                         e.printStackTrace();
                     }
-                    if ( languageChanged || windowSizeChanged )
-                    {
-                        musicGestion.stopMusic();
-                        Stage stage = ( Stage ) getScene().getWindow();
-                        stage.close();
-                        Platform.runLater( new Runnable()
-                        {
-                            @Override
-                            public void run()
-                            {
-                                new MainGui().restart( new Stage() );
-                            }
-                        } );
-                    }
-                    else
-                    {
-                        MainPaneBP mpbp = ( MainPaneBP ) getParent().getParent();
-                        mpbp.setVisibleNode( MenuPrincipalBP.class.getSimpleName() );
-                    }
+                    changementSettings();
                 }
             } );
         }
@@ -369,9 +373,13 @@ public class SettingsBP extends BorderPane
             {
                 case "1440x900":
                     windowSizeComboBox.setValue( getWindowSizes().get( 0 ) );
+                    getMaximizeWindowCheckBox().setSelected(false);
+                    getMaximizeWindowCheckBox().disarm();
                     break;
                 case "1280x800":
                     windowSizeComboBox.setValue( getWindowSizes().get( 1 ) );
+                    getMaximizeWindowCheckBox().setSelected(false);
+                    getMaximizeWindowCheckBox().disarm();
                     break;
                 default:
                     break;
@@ -441,6 +449,10 @@ public class SettingsBP extends BorderPane
                     if ( newValue )
                     {
                         stage.setFullScreen( true );
+                        settings.setWidth((int) stage.getWidth());
+                        settings.setHeight((int)stage.getHeight());
+                        stage.setWidth( settings.getWidth() );
+                        stage.setHeight( settings.getHeight() );
                     }
                     else
                     {
@@ -448,6 +460,7 @@ public class SettingsBP extends BorderPane
                         stage.setWidth( settings.getWidth() );
                         stage.setHeight( settings.getHeight() );
                     }
+                    changementSettings();
                 }
             } );
         }
