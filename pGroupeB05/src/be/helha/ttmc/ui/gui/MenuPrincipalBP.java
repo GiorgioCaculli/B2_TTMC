@@ -3,6 +3,7 @@ package be.helha.ttmc.ui.gui;
 import be.helha.ttmc.Main;
 import be.helha.ttmc.model.Deck;
 import be.helha.ttmc.ui.GUIConstant;
+import be.helha.ttmc.ui.Settings;
 import be.helha.ttmc.ui.gui.admin.AlerteLogin;
 import be.helha.ttmc.ui.gui.admin.MenuAdminBP;
 import be.helha.ttmc.ui.gui.play.MenuPlayBP;
@@ -15,10 +16,21 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 public class MenuPrincipalBP extends BorderPane
@@ -28,20 +40,35 @@ public class MenuPrincipalBP extends BorderPane
     private ImageView im1, im2;
     private int larg = 175, lon = 175;
     private Deck d;
+    private Settings s;
+    
+    private Stop[] etapes = { new Stop(0, Color.BLUEVIOLET),
+    		new Stop(0.3, Color.ROYALBLUE),new Stop(0.7,Color.LIGHTSTEELBLUE)};
+	private LinearGradient gradiant= new LinearGradient(0, 1, 0, 0, true, CycleMethod.NO_CYCLE,
+			etapes);
+	private Font txt= Font.font("Times New Roman", FontWeight.BOLD, FontPosture.ITALIC, 75);	
 
-    public MenuPrincipalBP( Deck d )
+    public MenuPrincipalBP( Deck d, Settings s )
     {
         this.d = d;
-
+        this.s=s;
         VBox vb = new VBox();
-        vb.setPadding( new Insets( 20 ) );
+        vb.setPadding( new Insets( 20.,420.,920.,20. ) );
         vb.setSpacing( 25 );
-        vb.getChildren().addAll( getIm2(), getBtnJouer(), getBtnParametres(), getBtnQuitter(), getBtnGerer(),
-                getBtnCredits(), getIm1() );
+        vb.getChildren().addAll( /*getIm2(), */getBtnJouer(), getBtnParametres(), getBtnQuitter(), getBtnGerer(),
+                getBtnCredits());
 
-        vb.setStyle( "-fx-background-color: DAE6F3;" + "-fx-font-size: 15pt;" );
+        this.setStyle( "-fx-background-color: DAE6F3;" + "-fx-font-size: 15pt;" );
         vb.setAlignment( Pos.CENTER );
-        this.setCenter( vb );
+        
+        VBox vbIm= new VBox();
+        vbIm.getChildren().add(getIm1());
+        vbIm.setPadding(new Insets(95,20,20,700));
+        
+        StackPane fp= new StackPane();
+        fp.getChildren().addAll(vbIm, vb);
+        
+        this.setCenter( fp );
     }
 
     public ImageView getIm1()
@@ -49,8 +76,7 @@ public class MenuPrincipalBP extends BorderPane
         if ( im1 == null )
         {
             im1 = new ImageView( "be/helha/ttmc/assets/images/paw.png" );
-            im1.setFitHeight( larg );
-            im1.setFitWidth( lon );
+            
         }
         return im1;
     }
@@ -72,6 +98,14 @@ public class MenuPrincipalBP extends BorderPane
         {
             btnJouer = new Button( GUIConstant.BUTTON_PLAY );
             btnJouer.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
+            btnJouer.setMaxWidth(s.getWidth()-55.);
+            btnJouer.setMinHeight(s.getHeight()/6.25);
+            btnJouer.setEffect(new DropShadow(25, 13, 13, Color.DARKSLATEGREY));
+            btnJouer.setTextFill(gradiant);
+            btnJouer.setStyle("-fx-background-color: plum;");
+            btnJouer.setFont(txt);
+        //    btnJouer.setMaxWidth(s.getWidth()-55.);
+       //     btnJouer.setMinHeight(s.getHeight()/4);
             btnJouer.setOnAction( new EventHandler< ActionEvent >()
             {
 
@@ -101,6 +135,12 @@ public class MenuPrincipalBP extends BorderPane
         {
             btnCredits = new Button( GUIConstant.BUTTON_CREDITS );
             btnCredits.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
+            btnCredits.setMaxWidth(s.getWidth()-55.);
+            btnCredits.setMinHeight(s.getHeight()/6.25);
+            btnCredits.setEffect(new DropShadow(25, 13, 13, Color.DARKSLATEGREY));
+            btnCredits.setTextFill(gradiant);
+            btnCredits.setStyle("-fx-background-color: plum;");
+            btnCredits.setFont(txt);
             btnCredits.setOnAction( new EventHandler< ActionEvent >()
             {
                 @Override
@@ -120,6 +160,12 @@ public class MenuPrincipalBP extends BorderPane
         {
             btnParametres = new Button( GUIConstant.BUTTON_SETTINGS );
             btnParametres.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
+            btnParametres.setMaxWidth(s.getWidth()-55.);
+            btnParametres.setMinHeight(s.getHeight()/6.25);
+            btnParametres.setEffect(new DropShadow(25, 13, 13, Color.DARKSLATEGREY));
+            btnParametres.setTextFill(gradiant);
+            btnParametres.setStyle("-fx-background-color: plum;");
+            btnParametres.setFont(txt);
             btnParametres.setOnAction( new EventHandler< ActionEvent >()
             {
                 @Override
@@ -139,6 +185,13 @@ public class MenuPrincipalBP extends BorderPane
         {
             btnQuitter = new Button( GUIConstant.BUTTON_LEAVE_GAME );
             btnQuitter.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
+            
+            btnQuitter.setMaxWidth(s.getWidth()-55.);
+            btnQuitter.setMinHeight(s.getHeight()/6.25);
+            btnQuitter.setEffect(new DropShadow(25, 13, 13, Color.DARKSLATEGREY));
+            btnQuitter.setTextFill(gradiant);
+            btnQuitter.setStyle("-fx-background-color: plum;");
+            btnQuitter.setFont(txt);
             btnQuitter.setOnAction( new EventHandler< ActionEvent >()
             {
                 @Override
@@ -162,6 +215,12 @@ public class MenuPrincipalBP extends BorderPane
         {
             btnGerer = new Button( GUIConstant.BUTTON_ADMIN_PANEL );
             btnGerer.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
+            btnGerer.setMaxWidth(s.getWidth()-55.);
+            btnGerer.setMinHeight(s.getHeight()/6);
+            btnGerer.setEffect(new DropShadow(25, 13, 13, Color.DARKSLATEGREY));
+            btnGerer.setTextFill(gradiant);
+            btnGerer.setStyle("-fx-background-color: plum;");
+            btnGerer.setFont(txt);
             btnGerer.setOnAction( new EventHandler< ActionEvent >()
             {
 

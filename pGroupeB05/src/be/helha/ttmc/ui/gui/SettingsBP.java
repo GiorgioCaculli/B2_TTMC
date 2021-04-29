@@ -30,6 +30,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -57,11 +58,8 @@ public class SettingsBP extends BorderPane
     {
         this.settings = s;
         this.musicGestion = musicGestion;
-        FlowPane fp = new FlowPane();
-        fp.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
-        fp.setPrefSize( s.getWidth(), s.getHeight() );
-        fp.setVgap( 8 );
-        fp.setHgap( 4 );
+        
+  
 
         HBox volumeBox = new HBox();
         volumeBox.getChildren().add( getSlider() );
@@ -91,11 +89,12 @@ public class SettingsBP extends BorderPane
         settingsBox.getChildren().add( windowSizeBox );
         settingsBox.getChildren().add( maximizeWindowBox );
 
-        fp.getChildren().add( settingsBox );
+        settingsBox.setSpacing(25.);
+        settingsBox.setAlignment(Pos.TOP_CENTER);
 
-        fp.setPadding( new Insets( 5 ) );
-        fp.setAlignment( Pos.CENTER );
-        setCenter( fp );
+        settingsBox.setPadding( new Insets( 5 ) );
+      
+        setCenter( settingsBox );
         setBottom( getBackButton() );
 
         setOnKeyPressed( new EventHandler< KeyEvent >()
