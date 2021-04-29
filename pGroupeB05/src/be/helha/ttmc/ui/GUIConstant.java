@@ -9,6 +9,9 @@ public class GUIConstant
             settings.getLocale() );
     public static final String TITLE = rb.getString( "title" );
     
+    // BUTTONS GENERIC
+    public static final String BUTTON_RETURN = rb.getString( "button_return" );
+    
     // BUTTONS MAIN MENU
     public static final String BUTTON_PLAY = rb.getString( "button_play" );
     public static final String BUTTON_SETTINGS = rb.getString( "button_settings" );
@@ -20,9 +23,6 @@ public class GUIConstant
     public static final String BUTTON_RESUME = rb.getString( "button_resume" );
     public static final String BUTTON_BACK_TO_MAIN_MENU = rb.getString( "button_back_to_main_menu" );
     public static final String BUTTON_BACK_TO_LOBBY = rb.getString( "button_back_to_lobby" );
-    
-    // BUTTONS GENERIC
-    public static final String BUTTON_RETURN = rb.getString( "button_return" );
     
     // DIALOG exit
     public static final String DIALOG_EXIT_CONTENT = rb.getString( "dialog_exit_content" );
