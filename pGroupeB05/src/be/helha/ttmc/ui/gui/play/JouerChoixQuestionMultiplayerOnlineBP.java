@@ -52,10 +52,10 @@ public class JouerChoixQuestionMultiplayerOnlineBP extends BorderPane
     private PlateauBP pla;
     private MusicGestion m;
 
-    public JouerChoixQuestionMultiplayerOnlineBP( Deck d, List< Player > players, Settings settings ,MusicGestion m)
+    public JouerChoixQuestionMultiplayerOnlineBP( Deck d, List< Player > players, Settings settings, MusicGestion m )
     {
         this.d = d;
-        this.m= m;
+        this.m = m;
         this.settings = settings;
         this.maxPlayers = players.size();
         joueurs = new ArrayList<>();
@@ -161,7 +161,7 @@ public class JouerChoixQuestionMultiplayerOnlineBP extends BorderPane
     {
         if ( mpfp == null )
         {
-            mpfp = new MenuPauseBP(settings,m);
+            mpfp = new MenuPauseBP( settings, m );
         }
         return mpfp;
     }
@@ -369,6 +369,9 @@ public class JouerChoixQuestionMultiplayerOnlineBP extends BorderPane
                 }
             }
 
+            VBox vbQuestion = new VBox();
+            HBox hbQuestion = new HBox();
+            hbQuestion.setSpacing( 10 );
             for ( int j = 0; j < maxBtn; j++ )
             {
                 JeuReponseBP jeuRep = new JeuReponseBP( bcPlayer, j );
@@ -392,7 +395,7 @@ public class JouerChoixQuestionMultiplayerOnlineBP extends BorderPane
                 Button b = new Button( String.format( "%d", idQ + 1 ) );
                 b.setStyle( "-fx-font-size:80" );
                 b.setTextAlignment( TextAlignment.CENTER );
-                b.setMinSize( settings.getWidth() / 3, settings.getHeight() / 3 );
+                b.setMinSize( settings.getWidth() / 5, settings.getHeight() / 5 );
                 b.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
                 b.setOnAction( new EventHandler< ActionEvent >()
                 {
@@ -414,8 +417,17 @@ public class JouerChoixQuestionMultiplayerOnlineBP extends BorderPane
                         }
                     }
                 } );
-                fpPlayer.getChildren().add( b );
+                if ( j % 2 == 0 )
+                {
+                    vbQuestion.getChildren().add( hbQuestion );
+                    hbQuestion = new HBox();
+                    hbQuestion.setSpacing( 10 );
+                }
+                hbQuestion.getChildren().add( b );
             }
+            vbQuestion.getChildren().add( hbQuestion );
+            vbQuestion.setSpacing( 10 );
+            fpPlayer.getChildren().add( vbQuestion );
 
             HBox scoreBox = new HBox();
             PionCircle playerPion = getPla().getPion( id ).clone();
