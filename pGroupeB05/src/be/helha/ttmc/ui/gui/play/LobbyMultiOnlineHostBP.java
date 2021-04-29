@@ -22,22 +22,32 @@ import be.helha.ttmc.ui.gui.play.MenuMultiplayerOnlineBP.MenuMultiplayerOnlineMa
 import be.helha.ttmc.ui.gui.util.MusicGestion;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 
 public class LobbyMultiOnlineHostBP extends BorderPane
 {
     private StackPane lobbyMultiOnlineHostSP = new StackPane();
 
-    private Button newGameButton = new Button( "New Game" );
-    private Button returnButton = new Button( "Return" );
+    private Button newGameButton;
+    private Button returnButton;
     private ChatBP chatBox = new ChatBP();
     private Server server;
     private List< ServerThread > serverThreads = new ArrayList<>();
@@ -48,8 +58,45 @@ public class LobbyMultiOnlineHostBP extends BorderPane
     private CountDownLatch countDownLatch = null;
     private List< Player > players = null;
     private MusicGestion m;
+    private Stop[] etapes = { new Stop(0, Color.BLUEVIOLET),
+    		new Stop(0.3, Color.ROYALBLUE),new Stop(0.7,Color.LIGHTSTEELBLUE)};
+	private LinearGradient gradiant= new LinearGradient(0, 1, 0, 0, true, CycleMethod.NO_CYCLE,
+			etapes
+			
+			);
+    
 
-    public LobbyMultiOnlineHostBP( Deck d, Settings settings, MusicGestion m ) throws IOException
+    public Button getNewGameButton() {
+    	if(newGameButton==null) {
+    		newGameButton = new Button( "New Game" );
+    		Font txt= Font.font("Times New Roman", FontWeight.BOLD, FontPosture.ITALIC, 100);	
+    		
+    		newGameButton.setEffect(new DropShadow(25, 13, 13, Color.DARKSLATEGREY));
+	    	newGameButton.setTextFill(gradiant);
+	    	newGameButton.setStyle("-fx-background-color: plum;");
+    		newGameButton.setFont(txt);
+    		newGameButton.setMaxWidth(settings.getWidth());
+    		newGameButton.setMinHeight(settings.getHeight()/4);
+    	}
+		return newGameButton;
+	}
+
+	public Button getReturnButton() {
+		if(returnButton== null) {
+			returnButton = new Button( "Return" );
+			Font txt= Font.font("Times New Roman", FontWeight.BOLD, FontPosture.ITALIC, 100);	
+			    		
+			returnButton.setEffect(new DropShadow(25, 13, 13, Color.DARKSLATEGREY));
+			returnButton.setTextFill(gradiant);
+			returnButton.setStyle("-fx-background-color: plum;");
+			returnButton.setFont(txt);
+			returnButton.setMaxWidth(settings.getWidth());
+			returnButton.setMinHeight(settings.getHeight()/4);
+		}
+		return returnButton;
+	}
+
+	public LobbyMultiOnlineHostBP( Deck d, Settings settings, MusicGestion m ) throws IOException
     {
         server = new Server();
         countDownLatch = new CountDownLatch( 1 );
@@ -190,7 +237,7 @@ public class LobbyMultiOnlineHostBP extends BorderPane
             }
         } );
 
-        newGameButton.setOnAction( new EventHandler< ActionEvent >()
+        getNewGameButton().setOnAction( new EventHandler< ActionEvent >()
         {
             @Override
             public void handle( ActionEvent arg0 )
@@ -220,7 +267,7 @@ public class LobbyMultiOnlineHostBP extends BorderPane
             }
         } );
 
-        returnButton.setOnAction( new EventHandler< ActionEvent >()
+        getReturnButton().setOnAction( new EventHandler< ActionEvent >()
         {
             @Override
             public void handle( ActionEvent arg0 )
@@ -269,9 +316,16 @@ public class LobbyMultiOnlineHostBP extends BorderPane
         public LobbyMultiOnlineMainBP()
         {
             VBox choiceBox = new VBox();
-            choiceBox.getChildren().addAll( newGameButton, returnButton );
-
+            double taille=choiceBox.getWidth()-25.;
+      //      getNewGameButton().setPrefWidth(taille);
+      //      getNewGameButton().setMaxWidth(taille);
+            
+            choiceBox.getChildren().addAll( getNewGameButton(), getReturnButton() );
+            choiceBox.setAlignment(Pos.CENTER);
+            choiceBox.setPadding(new Insets(25.));
+            choiceBox.setSpacing(25.);
             setCenter( choiceBox );
+            
         }
     }
 

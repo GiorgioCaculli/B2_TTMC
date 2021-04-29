@@ -14,23 +14,70 @@ import be.helha.ttmc.ui.gui.play.MenuMultiplayerBP.MenuMultiplayerMainVB;
 import be.helha.ttmc.ui.gui.util.MusicGestion;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 
 public class LobbyMultiLocalBP extends BorderPane
 {
     private StackPane lobbyMultiLocalSP = new StackPane();
 
-    private Button newGameButton = new Button( "New Game" );
-    private Button returnButton = new Button( "Return" );
+    private Button newGameButton;
+    private Button returnButton;
     private Settings s;
     private MusicGestion m;
 
-    public LobbyMultiLocalBP( Deck d, Settings s, MusicGestion m )
+    private Stop[] etapes = { new Stop(0, Color.BLUEVIOLET),
+    		new Stop(0.3, Color.ROYALBLUE),new Stop(0.7,Color.LIGHTSTEELBLUE)};
+	private LinearGradient gradiant= new LinearGradient(0, 1, 0, 0, true, CycleMethod.NO_CYCLE,
+			etapes
+			
+			);
+    
+    
+
+	public Button getNewGameButton() {
+		if(newGameButton==null) {
+			newGameButton = new Button( "New Game" );
+			Font txt= Font.font("Times New Roman", FontWeight.BOLD, FontPosture.ITALIC, 100);
+			newGameButton.setFont(txt);
+			newGameButton.setEffect(new DropShadow(25, 13, 13, Color.DARKSLATEGREY));
+			newGameButton.setStyle("-fx-background-color: plum;");
+			newGameButton.setTextFill(gradiant);
+			newGameButton.setMaxWidth(s.getWidth()-55.);
+			newGameButton.setMinHeight(s.getHeight()/4);
+			
+		}
+		return newGameButton;
+	}
+
+	public Button getReturnButton() {
+		if(returnButton==null) {
+			returnButton = new Button( "Return" );
+			Font txt= Font.font("Times New Roman", FontWeight.BOLD, FontPosture.ITALIC, 100);
+			returnButton.setFont(txt);
+			returnButton.setEffect(new DropShadow(25, 13, 13, Color.DARKSLATEGREY));
+			returnButton.setStyle("-fx-background-color: plum;");
+			returnButton.setTextFill(gradiant);
+			returnButton.setMaxWidth(s.getWidth()-55.);
+			returnButton.setMinHeight(s.getHeight()/4);
+		}
+		return returnButton;
+	}
+
+	public LobbyMultiLocalBP( Deck d, Settings s, MusicGestion m )
     {
         this.s = s;
         this.m= m;
@@ -91,7 +138,7 @@ public class LobbyMultiLocalBP extends BorderPane
             players.add( player );
         }
         
-        newGameButton.setOnAction( new EventHandler< ActionEvent >()
+        getNewGameButton().setOnAction( new EventHandler< ActionEvent >()
         {
             @Override
             public void handle( ActionEvent arg0 )
@@ -115,7 +162,7 @@ public class LobbyMultiLocalBP extends BorderPane
             }
         } );
 
-        returnButton.setOnAction( new EventHandler< ActionEvent >()
+        getReturnButton().setOnAction( new EventHandler< ActionEvent >()
         {
             @Override
             public void handle( ActionEvent arg0 )
@@ -149,8 +196,9 @@ public class LobbyMultiLocalBP extends BorderPane
         public LobbyMultiLocalMainBP()
         {
             VBox choiceBox = new VBox();
-            choiceBox.getChildren().addAll( newGameButton, returnButton );
-
+            choiceBox.getChildren().addAll( getNewGameButton(), getReturnButton() );
+            choiceBox.setAlignment(Pos.CENTER);
+            choiceBox.setSpacing(25.);
             setCenter( choiceBox );
         }
     }
