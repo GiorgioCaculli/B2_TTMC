@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -71,19 +72,19 @@ public class Serialization
             }
             else
             {
-                d = gson.fromJson( new FileReader( path ), Deck.class );
+                d = gson.fromJson( new FileReader( path, Charset.forName( "UTF-8" ) ), Deck.class );
             }
         }
-        catch ( JsonSyntaxException | JsonIOException | FileNotFoundException | UnsupportedEncodingException e )
+        catch ( JsonSyntaxException | JsonIOException | IOException e )
         {
             InputStream in = Main.class.getResourceAsStream( String.format( "assets/decks/%s", s.getDeckName() ) );
             try
             {
                 d = gson.fromJson( new BufferedReader( new InputStreamReader( in, "UTF-8" ) ), Deck.class );
                 saveGame( d );
-                d = gson.fromJson( new FileReader( path ), Deck.class );
+                d = gson.fromJson( new FileReader( path, Charset.forName( "UTF-8" ) ), Deck.class );
             }
-            catch ( JsonSyntaxException | JsonIOException | UnsupportedEncodingException | FileNotFoundException e2 )
+            catch ( JsonSyntaxException | JsonIOException | IOException e2 )
             {
                 e2.printStackTrace();
             }
