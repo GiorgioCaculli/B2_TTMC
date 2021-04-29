@@ -53,17 +53,20 @@ public class MenuPrincipalBP extends BorderPane
         this.d = d;
         this.s=s;
         VBox vb = new VBox();
-        vb.setPadding( new Insets( 20.,420.,920.,20. ) );
-        vb.setSpacing( 25 );
+        
+        vb.setPadding( new Insets( 0.,s.getWidth()/3.,0.,20. ) );
+        vb.setSpacing( 20. );
         vb.getChildren().addAll( /*getIm2(), */getBtnJouer(), getBtnParametres(), getBtnQuitter(), getBtnGerer(),
                 getBtnCredits());
 
-        this.setStyle( "-fx-background-color: DAE6F3;" + "-fx-font-size: 15pt;" );
+        this.setStyle( "-fx-background-color: mediumslateblue;" + "-fx-font-size: 15pt;" );
         vb.setAlignment( Pos.CENTER );
         
         VBox vbIm= new VBox();
+        getIm1().setFitHeight(s.getHeight()/1.25);
+        getIm1().setFitWidth(s.getHeight()/1.25);
         vbIm.getChildren().add(getIm1());
-        vbIm.setPadding(new Insets(95,20,20,700));
+        vbIm.setPadding(new Insets(95,20,20,s.getWidth()*(1.45/3.)));
         
         StackPane fp= new StackPane();
         fp.getChildren().addAll(vbIm, vb);
@@ -76,6 +79,7 @@ public class MenuPrincipalBP extends BorderPane
         if ( im1 == null )
         {
             im1 = new ImageView( "be/helha/ttmc/assets/images/paw.png" );
+            im1.setOpacity(0.80);
             
         }
         return im1;
@@ -97,15 +101,15 @@ public class MenuPrincipalBP extends BorderPane
         if ( btnJouer == null )
         {
             btnJouer = new Button( GUIConstant.BUTTON_PLAY );
-            btnJouer.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
+            btnJouer.setMaxSize( Double.MAX_VALUE, s.getHeight()/6.25);
             btnJouer.setMaxWidth(s.getWidth()-55.);
             btnJouer.setMinHeight(s.getHeight()/6.25);
             btnJouer.setEffect(new DropShadow(25, 13, 13, Color.DARKSLATEGREY));
             btnJouer.setTextFill(gradiant);
-            btnJouer.setStyle("-fx-background-color: plum;");
+            btnJouer.setStyle("-fx-background-color: plum;"+ "-fx-border-radius: 40 40 40 40;"
+            		+ "-fx-background-radius: 40 40 40 40;");
             btnJouer.setFont(txt);
-        //    btnJouer.setMaxWidth(s.getWidth()-55.);
-       //     btnJouer.setMinHeight(s.getHeight()/4);
+      
             btnJouer.setOnAction( new EventHandler< ActionEvent >()
             {
 
@@ -134,12 +138,13 @@ public class MenuPrincipalBP extends BorderPane
         if ( btnCredits == null )
         {
             btnCredits = new Button( GUIConstant.BUTTON_CREDITS );
-            btnCredits.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
+            btnCredits.setMaxSize( Double.MAX_VALUE, s.getHeight()/6.25);
             btnCredits.setMaxWidth(s.getWidth()-55.);
             btnCredits.setMinHeight(s.getHeight()/6.25);
             btnCredits.setEffect(new DropShadow(25, 13, 13, Color.DARKSLATEGREY));
             btnCredits.setTextFill(gradiant);
-            btnCredits.setStyle("-fx-background-color: plum;");
+            btnCredits.setStyle("-fx-background-color: plum;"+ "-fx-border-radius: 40 40 40 40;"
+            		+ "-fx-background-radius: 40 40 40 40;");
             btnCredits.setFont(txt);
             btnCredits.setOnAction( new EventHandler< ActionEvent >()
             {
@@ -159,12 +164,14 @@ public class MenuPrincipalBP extends BorderPane
         if ( btnParametres == null )
         {
             btnParametres = new Button( GUIConstant.BUTTON_SETTINGS );
-            btnParametres.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
+            btnParametres.setMaxSize( Double.MAX_VALUE, s.getHeight()/6.25 );
             btnParametres.setMaxWidth(s.getWidth()-55.);
             btnParametres.setMinHeight(s.getHeight()/6.25);
             btnParametres.setEffect(new DropShadow(25, 13, 13, Color.DARKSLATEGREY));
             btnParametres.setTextFill(gradiant);
-            btnParametres.setStyle("-fx-background-color: plum;");
+            btnParametres.setStyle("-fx-background-color: plum;"
+            		+ "-fx-border-radius: 40 40 40 40;"
+            		+ "-fx-background-radius: 40 40 40 40;");
             btnParametres.setFont(txt);
             btnParametres.setOnAction( new EventHandler< ActionEvent >()
             {
@@ -184,13 +191,14 @@ public class MenuPrincipalBP extends BorderPane
         if ( btnQuitter == null )
         {
             btnQuitter = new Button( GUIConstant.BUTTON_LEAVE_GAME );
-            btnQuitter.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
+            btnQuitter.setMaxSize( Double.MAX_VALUE, s.getHeight()/6.25 );
             
             btnQuitter.setMaxWidth(s.getWidth()-55.);
             btnQuitter.setMinHeight(s.getHeight()/6.25);
             btnQuitter.setEffect(new DropShadow(25, 13, 13, Color.DARKSLATEGREY));
             btnQuitter.setTextFill(gradiant);
-            btnQuitter.setStyle("-fx-background-color: plum;");
+            btnQuitter.setStyle("-fx-background-color: plum;"+ "-fx-border-radius: 40 40 40 40;"
+            		+ "-fx-background-radius: 40 40 40 40;");
             btnQuitter.setFont(txt);
             btnQuitter.setOnAction( new EventHandler< ActionEvent >()
             {
@@ -214,12 +222,13 @@ public class MenuPrincipalBP extends BorderPane
         if ( btnGerer == null )
         {
             btnGerer = new Button( GUIConstant.BUTTON_ADMIN_PANEL );
-            btnGerer.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
+            btnGerer.setMaxSize( Double.MAX_VALUE, s.getHeight()/6.25 );
             btnGerer.setMaxWidth(s.getWidth()-55.);
-            btnGerer.setMinHeight(s.getHeight()/6);
+            btnGerer.setMinHeight(s.getHeight()/6.25);
             btnGerer.setEffect(new DropShadow(25, 13, 13, Color.DARKSLATEGREY));
             btnGerer.setTextFill(gradiant);
-            btnGerer.setStyle("-fx-background-color: plum;");
+            btnGerer.setStyle("-fx-background-color: plum;"+ "-fx-border-radius: 40 40 40 40;"
+            		+ "-fx-background-radius: 40 40 40 40;");
             btnGerer.setFont(txt);
             btnGerer.setOnAction( new EventHandler< ActionEvent >()
             {

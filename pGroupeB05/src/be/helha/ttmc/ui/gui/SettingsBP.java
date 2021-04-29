@@ -90,7 +90,7 @@ public class SettingsBP extends BorderPane
         settingsBox.getChildren().add( maximizeWindowBox );
 
         settingsBox.setSpacing(25.);
-        settingsBox.setAlignment(Pos.TOP_CENTER);
+        settingsBox.setAlignment(Pos.CENTER);
 
         settingsBox.setPadding( new Insets( 5 ) );
       
