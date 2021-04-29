@@ -8,7 +8,7 @@
         {
           "author": "Guillaume Lambert",
           "subject": "Coffee",
-          "challenge": "What is coffee made of (two words)?",
+          "challenge": "What is coffee made from (two words)?",
           "answer": "coffee bean",
           "theme": "IMPROBABLE"
         },
@@ -64,7 +64,7 @@
         {
           "author": "Guillaume Lambert",
           "subject": "Drugs",
-          "challenge": "What kind of drugs are composed by salicilic acid?",
+          "challenge": "What kind of drugs is salicilic acid used for?",
           "answer": "Painkillers",
           "theme": "IMPROBABLE"
         }
@@ -78,7 +78,7 @@
         {
           "author": "Guillaume Lambert",
           "subject": "General School Knowledge",
-          "challenge": "At what age is it compulsary to go to school full time in Belgium?",
+          "challenge": "Up until what age is it compulsary to go to school full time in Belgium?",
           "answer": "15",
           "theme": "SCHOOL"
         },
@@ -92,7 +92,7 @@
         {
           "author": "Guillaume Lambert",
           "subject": "General School Knowledge",
-          "challenge": "What is the name of the organization that provides a studying abroad program?",
+          "challenge": "What is the name of the organization that allows studying abroad?",
           "answer": "Erasmus",
           "theme": "SCHOOL"
         },
@@ -113,7 +113,7 @@
         {
           "author": "Guillaume Lambert",
           "subject": "School History",
-          "challenge": "According to popular tradition, who invented School?",
+          "challenge": "According to popular tradition, who invented the school?",
           "answer": "Charlemagne",
           "theme": "SCHOOL"
         },
@@ -121,7 +121,7 @@
           "author": "Guillaume Lambert",
           "subject": "School History",
           "challenge": "Who took over the role of teacher in the earlier ages?",
-          "answer": "The Church",
+          "answer": "Church",
           "theme": "SCHOOL"
         },
         {
@@ -135,7 +135,7 @@
           "author": "Guillaume Lambert",
           "subject": "School History",
           "challenge": "Who made school compulsory in France?",
-          "answer": "Jules Ferry",
+          "answer": "Jule Ferry",
           "theme": "SCHOOL"
         }
       ]
@@ -232,7 +232,7 @@
         {
           "author": "Guillaume Lambert",
           "subject": "POO",
-          "challenge": "What sentence makes a class a main class in Java?",
+          "challenge": "What sentence makes a main class a main class in java?",
           "answer": "public static void main(String args[])",
           "theme": "INFORMATICS"
         },
@@ -289,7 +289,7 @@
           "author": "Tanguy Taminiau",
           "subject": "Culinary Inventions",
           "challenge": "Where was the hamburger invented?",
-          "answer": "Hamburg",
+          "answer": "Hamburg, Germany",
           "theme": "IMPROBABLE"
         },
         {
@@ -415,7 +415,7 @@
           "author": "Tanguy Taminiau",
           "subject": "Video Games",
           "challenge": "Which year was the Sega Saturn released in Europe?",
-          "answer": "1995",
+          "answer": "July 1995",
           "theme": "PLEASURE"
         }
       ]
@@ -506,21 +506,21 @@
           "author": "Tanguy Taminiau",
           "subject": "School Path",
           "challenge": "At what age can we legally stop attending school?",
-          "answer": "18",
+          "answer": "18 years",
           "theme": "SCHOOL"
         },
         {
           "author": "Tanguy Taminiau",
           "subject": "School Path",
           "challenge": "How many years does it take to obtain a degree in Nursing?",
-          "answer": "3",
+          "answer": "3 years",
           "theme": "SCHOOL"
         },
         {
           "author": "Tanguy Taminiau",
           "subject": "School Path",
           "challenge": "How many years does it take on average to complete a doctorate?",
-          "answer": "8",
+          "answer": "8 years",
           "theme": "SCHOOL"
         }
       ]
@@ -624,7 +624,7 @@
         {
           "author": "Giorgio Caculli",
           "subject": "Unexpected Facts",
-          "challenge": "What is the name of the illicit activity that Mark Zuckerberg did in order to create Facemash before creating Facebook (two words)?",
+          "challenge": "What is the name of the illicit activity that Mark Zuckerberg did in order to create Facemash before creating Facebook?",
           "answer": "Privacy violation",
           "theme": "IMPROBABLE"
         }
@@ -764,8 +764,8 @@
         {
           "author": "Giorgio Caculli",
           "subject": "Languages",
-          "challenge": "A E I O U is the order of vowels in European languages, what is the order like in the Japanese language (separate with spaces)?",
-          "answer": "A I U E O",
+          "challenge": "A, E, I, O, U is the order of vowels in European languages, what is the order like in the Japanese language?",
+          "answer": "A, I, U, E, O",
           "theme": "PLEASURE"
         }
       ]
@@ -785,7 +785,7 @@
         {
           "author": "Giorgio Caculli",
           "subject": "Education System",
-          "challenge": "What is the grading system like in the United States (separate with spaces)?",
+          "challenge": "What is the grading system like in the United States?",
           "answer": "A B C D F",
           "theme": "SCHOOL"
         },
@@ -799,8 +799,8 @@
         {
           "author": "Giorgio Caculli",
           "subject": "Education System",
-          "challenge": "Which is the oldest University in the world (University of ...)?",
-          "answer": "Bologna",
+          "challenge": "Which is the oldest University in the world?",
+          "answer": "University of Bologna",
           "theme": "SCHOOL"
         }
       ]

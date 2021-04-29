@@ -3,11 +3,15 @@ package be.helha.ttmc.serialization;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.io.Writer;
+import java.nio.charset.Charset;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -40,7 +44,9 @@ public class Serialization
             e.printStackTrace();
         }
 
-        try ( Writer w = new FileWriter( json ) )
+        try ( /*Writer w = new FileWriter( json )*/
+                OutputStreamWriter w = new OutputStreamWriter( new FileOutputStream( json ),
+                        Charset.forName( "UTF-8" ).newEncoder() ) )
         {
             gb.setPrettyPrinting();
             gson = gb.create();
@@ -58,28 +64,28 @@ public class Serialization
         gson = gb.create();
         try
         {
-            if( path.contains( "assets/decks" ) )
+            if ( path.contains( "assets/decks" ) )
             {
                 InputStream in = Main.class.getResourceAsStream( path );
-                d = gson.fromJson( new BufferedReader( new InputStreamReader( in ) ), Deck.class );
+                d = gson.fromJson( new BufferedReader( new InputStreamReader( in, "UTF-8" ) ), Deck.class );
             }
             else
             {
                 d = gson.fromJson( new FileReader( path ), Deck.class );
             }
         }
-        catch ( JsonSyntaxException | JsonIOException | FileNotFoundException e )
+        catch ( JsonSyntaxException | JsonIOException | FileNotFoundException | UnsupportedEncodingException e )
         {
             InputStream in = Main.class.getResourceAsStream( String.format( "assets/decks/%s", s.getDeckName() ) );
-            d = gson.fromJson( new BufferedReader( new InputStreamReader( in ) ), Deck.class );
-            saveGame( d );
             try
             {
+                d = gson.fromJson( new BufferedReader( new InputStreamReader( in, "UTF-8" ) ), Deck.class );
+                saveGame( d );
                 d = gson.fromJson( new FileReader( path ), Deck.class );
             }
-            catch ( JsonSyntaxException | JsonIOException | FileNotFoundException e1 )
+            catch ( JsonSyntaxException | JsonIOException | UnsupportedEncodingException | FileNotFoundException e2 )
             {
-                e1.printStackTrace();
+                e2.printStackTrace();
             }
         }
         return d;
