@@ -24,13 +24,14 @@ public class MenuPlayBP extends BorderPane
     private Settings s;
     private MusicGestion m;
 
-    public MenuPlayBP( Deck d, Settings s ,MusicGestion m)
+    public MenuPlayBP( Deck d, Settings s, MusicGestion m )
     {
         this.d = d;
         this.s = s;
-        this.m=m;
+        this.m = m;
         getChoicePane().getChildren().add( new MenuPlayMainVB() );
-        setVisibleNode( MenuPlayMainVB.class.getSimpleName() );
+        getChoicePane().getChildren().add( new RulesBP() );
+        setVisibleNode( RulesBP.class.getSimpleName() );
 
         setCenter( choicePane );
 
@@ -94,7 +95,7 @@ public class MenuPlayBP extends BorderPane
                             getChoicePane().getChildren().remove( i );
                         }
                     }
-                    getChoicePane().getChildren().add( new LobbySoloBP( d, s ,m) );
+                    getChoicePane().getChildren().add( new LobbySoloBP( d, s, m ) );
                     setVisibleNode( LobbySoloBP.class.getSimpleName() );
                 }
             } );
@@ -122,7 +123,7 @@ public class MenuPlayBP extends BorderPane
                             getChoicePane().getChildren().remove( i );
                         }
                     }
-                    getChoicePane().getChildren().add( new MenuMultiplayerBP( d, s ,m) );
+                    getChoicePane().getChildren().add( new MenuMultiplayerBP( d, s, m ) );
                     setVisibleNode( MenuMultiplayerBP.class.getSimpleName() );
                 }
             } );

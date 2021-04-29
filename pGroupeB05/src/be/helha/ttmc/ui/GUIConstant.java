@@ -27,7 +27,8 @@ public class GUIConstant
     // BUTTONS PLAY MENU
     public static final String BUTTON_SINGLE_PLAYER = rb.getString( "button_single_player" );
     public static final String BUTTON_MULTIPLAYER = rb.getString( "button_multiplayer" );
-    
+    public static final String BUTTON_RULES_ACCEPT = rb.getString( "button_rules_accept" );
+
     // DIALOG play
     public static final String DIALOG_PLAY_TITLE = rb.getString( "dialog_play_title" );
     public static final String DIALOG_PLAY_CONTENT = rb.getString( "dialog_play_content" );
