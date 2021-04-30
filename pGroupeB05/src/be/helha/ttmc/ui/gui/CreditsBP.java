@@ -3,6 +3,10 @@ package be.helha.ttmc.ui.gui;
 import be.helha.ttmc.Main;
 import be.helha.ttmc.ui.GUIConstant;
 import be.helha.ttmc.ui.Settings;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -17,6 +21,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 public class CreditsBP extends BorderPane
 {
@@ -76,16 +81,16 @@ public class CreditsBP extends BorderPane
         tanguyBox.getChildren().add( new Label( s.getNames().get( 2 ) ) );
         tanguyBox.getChildren().add( tanguyImage );
         tanguyBox.setAlignment( Pos.CENTER );
-        
+
         VBox translatorsBox = new VBox();
-        
+
         VBox englishTranslationBox = new VBox();
         englishTranslationBox.getChildren().add( new Label( s.getLanguages().get( 0 ) ) );
         englishTranslationBox.getChildren().add( new Label( s.getNames().get( 0 ) ) );
         englishTranslationBox.getChildren().add( new Label( s.getNames().get( 1 ) ) );
         englishTranslationBox.getChildren().add( new Label( s.getNames().get( 2 ) ) );
         englishTranslationBox.setAlignment( Pos.CENTER );
-        
+
         VBox frenchTranslationBox = new VBox();
         frenchTranslationBox.getChildren().add( new Label( s.getLanguages().get( 1 ) ) );
         frenchTranslationBox.getChildren().add( new Label( s.getNames().get( 0 ) ) );
@@ -93,18 +98,18 @@ public class CreditsBP extends BorderPane
         frenchTranslationBox.getChildren().add( new Label( s.getNames().get( 2 ) ) );
         frenchTranslationBox.getChildren().add( new Label( s.getNames().get( 3 ) ) );
         frenchTranslationBox.setAlignment( Pos.CENTER );
-        
+
         VBox italianTranslationBox = new VBox();
         italianTranslationBox.getChildren().add( new Label( s.getLanguages().get( 2 ) ) );
         italianTranslationBox.getChildren().add( new Label( s.getNames().get( 0 ) ) );
         italianTranslationBox.setAlignment( Pos.CENTER );
-        
+
         VBox japaneseTranslationBox = new VBox();
         japaneseTranslationBox.getChildren().add( new Label( s.getLanguages().get( 3 ) ) );
         japaneseTranslationBox.getChildren().add( new Label( s.getNames().get( 0 ) ) );
         japaneseTranslationBox.getChildren().add( new Label( s.getNames().get( 4 ) ) );
         japaneseTranslationBox.setAlignment( Pos.CENTER );
-        
+
         translatorsBox.getChildren().add( englishTranslationBox );
         translatorsBox.getChildren().add( frenchTranslationBox );
         translatorsBox.getChildren().add( italianTranslationBox );
@@ -133,10 +138,26 @@ public class CreditsBP extends BorderPane
         creditsPane.setVbarPolicy( ScrollBarPolicy.NEVER );
         creditsPane.setFitToWidth( true );
         creditsPane.setFitToHeight( true );
+        if ( isVisible() )
+        {
+            slowScrollToBottom( creditsPane );
+        }
+        else
+        {
+            creditsPane.setVvalue( 0 );
+        }
 
         setCenter( creditsPane );
         setBottom( getBackButton() );
         setStyle( GUIConstant.WINDOW_STYLE );
+    }
+
+    private void slowScrollToBottom( ScrollPane scrollPane )
+    {
+        Animation animation = new Timeline(
+                new KeyFrame( Duration.seconds( 60 ), new KeyValue( scrollPane.vvalueProperty(), 1 ) ) );
+        animation.setCycleCount( Timeline.INDEFINITE );
+        animation.play();
     }
 
     private Button getBackButton()
