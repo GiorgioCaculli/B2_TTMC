@@ -33,6 +33,7 @@ public class Settings
     private Locale locale;
     private Properties props;
     private List< String > languages;
+    private List< String > names;
 
     public Settings( String configFileName )
     {
@@ -64,11 +65,46 @@ public class Settings
         {
             e.printStackTrace();
         }
+        try
+        {
+            initProperties();
+        }
+        catch( Exception e )
+        {
+            File configFile = new File( configFileName );
+            if( configFile.exists() )
+            {
+                configFile.delete();
+            }
+            props = new Properties();
+            in = Main.class.getResourceAsStream( "res/application.properties" );
+            try
+            {
+                Files.copy( in, Paths.get( configFileName ), StandardCopyOption.REPLACE_EXISTING );
+                in = new FileInputStream( new File( configFileName ) );
+                props.load( new InputStreamReader( in, Charset.forName( "UTF-8" ) ) );
+            }
+            catch ( IOException e1 )
+            {
+                e1.printStackTrace();
+            }
+            initProperties();
+        }
+    }
+    
+    private void initProperties()
+    {
         languages = new ArrayList<>();
         languages.add( props.getProperty( "language_english" ) );
         languages.add( props.getProperty( "language_french" ) );
         languages.add( props.getProperty( "language_italian" ) );
         languages.add( props.getProperty( "language_japanese" ) );
+        names = new ArrayList<>();
+        names.add( props.getProperty( "name_giorgio_caculli" ) );
+        names.add( props.getProperty( "name_guillaume_lambert" ) );
+        names.add( props.getProperty( "name_tanguy_taminiau" ) );
+        names.add( props.getProperty( "name_loic_massy" ) );
+        names.add( props.getProperty( "name_yutaka_kawaguchi" ) );
         setWidth( Integer.parseInt( props.getProperty( "width" ) ) );
         setHeight( Integer.parseInt( props.getProperty( "height" ) ) );
         setDeckName( props.getProperty( "deck" ) );
@@ -88,6 +124,7 @@ public class Settings
         setCountry( props.getProperty( "country" ) );
         setLocale( new Locale( getLanguage(), getCountry() ) );
         setLanguages( languages );
+        setNames( names );
     }
 
     public Properties getProperties()
@@ -206,5 +243,15 @@ public class Settings
     public List< String > getLanguages()
     {
         return languages;
+    }
+
+    public void setNames( List< String > names )
+    {
+        this.names = names;
+    }
+    
+    public List< String > getNames()
+    {
+        return names;
     }
 }
