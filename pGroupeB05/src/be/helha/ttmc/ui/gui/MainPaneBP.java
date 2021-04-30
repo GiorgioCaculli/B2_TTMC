@@ -20,7 +20,7 @@ public class MainPaneBP extends BorderPane
         getStackPane().getChildren().add( new MenuPlayBP( d, s, musics ) );
         getStackPane().getChildren().add( new SettingsBP( s, musics ) );
         getStackPane().getChildren().add( new MenuAdminBP( d, s ) );
-        getStackPane().getChildren().add( new CreditsBP() );
+        getStackPane().getChildren().add( new CreditsBP( s ) );
 
         setVisibleNode( MenuPrincipalBP.class.getSimpleName() );
         setCenter( getStackPane() );

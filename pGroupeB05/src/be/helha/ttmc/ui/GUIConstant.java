@@ -65,4 +65,7 @@ public class GUIConstant
     public static final String DIALOG_LOGIN_ACCESS_GRANTED = rb.getString( "dialog_login_access_granted" );
     public static final String DIALOG_LOGIN_ACCESS_DENIED = rb.getString( "dialog_login_access_denied" );
     public static final String DIALOG_LOGIN_BUTTON = rb.getString( "dialog_login_button" );
+    
+    // CREDITS strings
+    public static final String CREDITS_TEAM = rb.getString( "credits_team" );
 }
