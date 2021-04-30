@@ -27,6 +27,7 @@ public class CreditsBP extends BorderPane
 {
     private Button backButton;
     private Settings s;
+    private Animation animation;
 
     public CreditsBP( Settings s )
     {
@@ -138,26 +139,14 @@ public class CreditsBP extends BorderPane
         creditsPane.setVbarPolicy( ScrollBarPolicy.NEVER );
         creditsPane.setFitToWidth( true );
         creditsPane.setFitToHeight( true );
-        if ( isVisible() )
-        {
-            slowScrollToBottom( creditsPane );
-        }
-        else
-        {
-            creditsPane.setVvalue( 0 );
-        }
+        animation = new Timeline(
+                new KeyFrame( Duration.seconds( 60 ), new KeyValue( creditsPane.vvalueProperty(), 1 ) ) );
+        animation.setCycleCount( Timeline.INDEFINITE );
+        animation.play();
 
         setCenter( creditsPane );
         setBottom( getBackButton() );
         setStyle( GUIConstant.WINDOW_STYLE );
-    }
-
-    private void slowScrollToBottom( ScrollPane scrollPane )
-    {
-        Animation animation = new Timeline(
-                new KeyFrame( Duration.seconds( 60 ), new KeyValue( scrollPane.vvalueProperty(), 1 ) ) );
-        animation.setCycleCount( Timeline.INDEFINITE );
-        animation.play();
     }
 
     private Button getBackButton()
