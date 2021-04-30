@@ -2,16 +2,12 @@ package be.helha.ttmc.serialization;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
-import java.io.Writer;
 import java.nio.charset.Charset;
 
 import com.google.gson.Gson;
@@ -30,10 +26,10 @@ public class Serialization
     private static Gson gson;
     private static Settings s = new Settings( "application.properties" );
 
-    public static void saveGame( Deck d )
+    public static void saveGame( Deck d, String fileName )
     {
         gb.setPrettyPrinting();
-        String path = s.getDeckName();
+        String path = fileName;
         File json = null;
         try
         {
@@ -57,6 +53,11 @@ public class Serialization
         {
             e.printStackTrace();
         }
+    }
+
+    public static void saveGame( Deck d )
+    {
+        saveGame( d, s.getDeckName() );
     }
 
     public static Deck loadDeck( String path )

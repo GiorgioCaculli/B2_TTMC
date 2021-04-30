@@ -1,9 +1,11 @@
 package be.helha.ttmc.ui.gui.play;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import be.helha.ttmc.model.BasicCard;
 import be.helha.ttmc.model.Deck;
 import be.helha.ttmc.serialization.Serialization;
 import be.helha.ttmc.ui.GUIConstant;
@@ -20,10 +22,13 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.FileChooser.ExtensionFilter;
 
 public class LobbySoloBP extends BorderPane
 {
-    private StackPane lobbyPaneSP = new StackPane();
+    private StackPane lobbyPaneSP;
 
     private Button newGameButton;
     private Button loadGameButton;
@@ -40,12 +45,12 @@ public class LobbySoloBP extends BorderPane
         this.d = d;
         this.s = s;
         this.m = m;
-        for ( int i = 0; i < lobbyPaneSP.getChildren().size(); i++ )
+        for ( int i = 0; i < getLobbyPaneSP().getChildren().size(); i++ )
         {
-            if ( lobbyPaneSP.getChildren().get( i ).getClass().getSimpleName()
+            if ( getLobbyPaneSP().getChildren().get( i ).getClass().getSimpleName()
                     .equals( JouerChoixQuestionBP.class.getSimpleName() ) )
             {
-                lobbyPaneSP.getChildren().remove( i );
+                getLobbyPaneSP().getChildren().remove( i );
             }
         }
         TextInputDialog userNameDialog = new TextInputDialog();
@@ -69,14 +74,23 @@ public class LobbySoloBP extends BorderPane
             nickName = "User-1";
         }
 
-        lobbyPaneSP.getChildren().addAll( new LobbySoloMainBP() );
+        getLobbyPaneSP().getChildren().addAll( new LobbySoloMainBP() );
 
-        setCenter( lobbyPaneSP );
+        setCenter( getLobbyPaneSP() );
+    }
+    
+    public StackPane getLobbyPaneSP()
+    {
+        if( lobbyPaneSP == null )
+        {
+            lobbyPaneSP = new StackPane();
+        }
+        return lobbyPaneSP;
     }
 
     public void setVisibleNode( String nodeName )
     {
-        for ( Node n : lobbyPaneSP.getChildren() )
+        for ( Node n : getLobbyPaneSP().getChildren() )
         {
             if ( n.getClass().getSimpleName().equals( nodeName ) )
             {
@@ -128,18 +142,18 @@ public class LobbySoloBP extends BorderPane
         if ( newGameButton == null )
         {
 
-            newGameButton = new Button( "New Game" );
+            newGameButton = new Button( GUIConstant.BUTTON_NEW_GAME );
             newGameButton.setOnAction( new EventHandler< ActionEvent >()
             {
                 @Override
                 public void handle( ActionEvent arg0 )
                 {
-                    for ( int i = 0; i < lobbyPaneSP.getChildren().size(); i++ )
+                    for ( int i = 0; i < getLobbyPaneSP().getChildren().size(); i++ )
                     {
-                        if ( lobbyPaneSP.getChildren().get( i ).getClass().getSimpleName()
+                        if ( getLobbyPaneSP().getChildren().get( i ).getClass().getSimpleName()
                                 .equals( JouerChoixQuestionBP.class.getSimpleName() ) )
                         {
-                            lobbyPaneSP.getChildren().remove( i );
+                            getLobbyPaneSP().getChildren().remove( i );
                         }
                     }
                     Deck deck = d.clone();
@@ -151,7 +165,7 @@ public class LobbySoloBP extends BorderPane
                     jcq.setScore( 0 );
                     jcq.setNickName( String.format( "%s", nickName ) );
                     jcq.getLblScore().setText( String.format( "User: %s - Score: ", jcq.getNickName() ) );
-                    lobbyPaneSP.getChildren().add( jcq );
+                    getLobbyPaneSP().getChildren().add( jcq );
                     setVisibleNode( jcq.getClass().getSimpleName() );
                 }
             } );
@@ -163,7 +177,38 @@ public class LobbySoloBP extends BorderPane
     {
         if ( loadGameButton == null )
         {
-            loadGameButton = new Button( "Load Game" );
+            loadGameButton = new Button( GUIConstant.BUTTON_LOAD_GAME );
+            loadGameButton.setOnAction( new EventHandler< ActionEvent >()
+            {
+                @Override
+                public void handle( ActionEvent arg0 )
+                {
+                    FileChooser fc = new FileChooser();
+                    fc.setTitle( GUIConstant.BUTTON_IMPORT_DECK );
+                    fc.getExtensionFilters().add( new ExtensionFilter( "JSON File", "*.json" ) );
+                    Stage stage = ( Stage ) getScene().getWindow();
+                    File f = fc.showOpenDialog( stage );
+                    if ( f == null )
+                    {
+                        return;
+                    }
+                    for ( int i = 0; i < getLobbyPaneSP().getChildren().size(); i++ )
+                    {
+                        if ( getLobbyPaneSP().getChildren().get( i ).getClass().getSimpleName()
+                                .equals( JouerChoixQuestionBP.class.getSimpleName() ) )
+                        {
+                            getLobbyPaneSP().getChildren().remove( i );
+                        }
+                    }
+                    Deck deck = Serialization.loadDeck( f.getAbsolutePath() );
+                    JouerChoixQuestionBP jcq = new JouerChoixQuestionBP( deck, s, m );
+                    jcq.setScore( 0 );
+                    jcq.setNickName( String.format( "%s", nickName ) );
+                    jcq.getLblScore().setText( String.format( "User: %s - Score: ", jcq.getNickName() ) );
+                    getLobbyPaneSP().getChildren().add( jcq );
+                    setVisibleNode( jcq.getClass().getSimpleName() );
+                }
+            } );
         }
         return loadGameButton;
     }

@@ -1,9 +1,12 @@
 package be.helha.ttmc.ui.gui.admin;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import be.helha.ttmc.model.BasicCard;
 import be.helha.ttmc.model.Deck;
+import be.helha.ttmc.serialization.Serialization;
 import be.helha.ttmc.ui.GUIConstant;
 import be.helha.ttmc.ui.Settings;
 import be.helha.ttmc.ui.gui.MainPaneBP;
@@ -13,14 +16,18 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Control;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.FileChooser.ExtensionFilter;
 
 public class MenuAdminBP extends BorderPane
 {
 
-    private Button btnAjout, btnListe, btnRetour;
+    private Button btnAjout, btnListe, btnImport, btnExport, btnRetour;
     private Deck d;
     private StackPane adminChoicePane;
     private Settings s;
@@ -71,11 +78,13 @@ public class MenuAdminBP extends BorderPane
         {
             buttons = new ArrayList<>();
             // this.setOrientation(Orientation.VERTICAL);
-            setPadding( new Insets( 20 ) );
-            setSpacing( 50 );
-            
+            setPadding( new Insets( 20. ) );
+            setSpacing( 20. );
+
             buttons.add( getBtnAjout() );
             buttons.add( getBtnListe() );
+            buttons.add( getBtnImport() );
+            buttons.add( getBtnExport() );
             buttons.add( getBtnRetour() );
 
             for ( Button b : buttons )
@@ -99,7 +108,7 @@ public class MenuAdminBP extends BorderPane
     {
         if ( btnAjout == null )
         {
-            btnAjout = new Button( "Add a card" );
+            btnAjout = new Button( GUIConstant.BUTTON_ADD_CARD );
             btnAjout.setOnAction( new EventHandler< ActionEvent >()
             {
 
@@ -117,7 +126,7 @@ public class MenuAdminBP extends BorderPane
     {
         if ( btnListe == null )
         {
-            btnListe = new Button( "Show the list of cards" );
+            btnListe = new Button( GUIConstant.BUTTON_LIST_CARD );
             btnListe.setOnAction( new EventHandler< ActionEvent >()
             {
 
@@ -157,5 +166,63 @@ public class MenuAdminBP extends BorderPane
             } );
         }
         return btnRetour;
+    }
+
+    public Button getBtnImport()
+    {
+        if ( btnImport == null )
+        {
+            btnImport = new Button( GUIConstant.BUTTON_IMPORT_DECK );
+            btnImport.setOnAction( new EventHandler< ActionEvent >()
+            {
+                @Override
+                public void handle( ActionEvent arg0 )
+                {
+                    FileChooser fc = new FileChooser();
+                    fc.setTitle( GUIConstant.BUTTON_IMPORT_DECK );
+                    fc.getExtensionFilters().add( new ExtensionFilter( "JSON File", "*.json" ) );
+                    Stage stage = ( Stage ) getScene().getWindow();
+                    File f = fc.showOpenDialog( stage );
+                    if ( f == null )
+                    {
+                        return;
+                    }
+                    Deck tmp = Serialization.loadDeck( f.getAbsolutePath() );
+                    for ( BasicCard bc : tmp.getCards() )
+                    {
+                        d.add( bc );
+                    }
+                }
+            } );
+        }
+        return btnImport;
+    }
+
+    public Button getBtnExport()
+    {
+        if ( btnExport == null )
+        {
+            btnExport = new Button( GUIConstant.BUTTON_EXPORT_DECK );
+            btnExport.setOnAction( new EventHandler< ActionEvent >()
+            {
+                @Override
+                public void handle( ActionEvent arg0 )
+                {
+                    FileChooser fc = new FileChooser();
+                    Stage stage = ( Stage ) getScene().getWindow();
+                    File f = fc.showSaveDialog( stage );
+                    if ( f == null )
+                    {
+                        return;
+                    }
+                    if ( !f.getName().contains( "." ) )
+                    {
+                        f = new File( f.getAbsoluteFile() + ".json" );
+                    }
+                    Serialization.saveGame( d, f.getAbsolutePath() );
+                }
+            } );
+        }
+        return btnExport;
     }
 }
