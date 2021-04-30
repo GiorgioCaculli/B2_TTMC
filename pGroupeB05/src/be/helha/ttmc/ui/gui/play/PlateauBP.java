@@ -6,6 +6,7 @@ import java.util.Random;
 
 import be.helha.ttmc.Main;
 import be.helha.ttmc.model.Deck;
+import be.helha.ttmc.ui.GUIConstant;
 import be.helha.ttmc.ui.Settings;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -90,6 +91,7 @@ public class PlateauBP extends BorderPane
             anch.getChildren().add( pions[ i ] );
         }
         setCenter( anch );
+        //setStyle( GUIConstant.WINDOW_STYLE );
     }
 
     public double getHEIGHT_RECT()

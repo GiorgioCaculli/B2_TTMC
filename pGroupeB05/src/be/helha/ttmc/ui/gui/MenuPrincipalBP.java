@@ -19,20 +19,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.LinearGradient;
-import javafx.scene.paint.Stop;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 public class MenuPrincipalBP extends BorderPane
@@ -44,14 +35,6 @@ public class MenuPrincipalBP extends BorderPane
     private int larg = 175, lon = 175;
     private Deck d;
     private Settings s;
-
-    private Stop[] etapes =
-    { new Stop( 0, Color.BLUEVIOLET ), new Stop( 0.3, Color.ROYALBLUE ), new Stop( 0.7, Color.LIGHTSTEELBLUE ) };
-    private LinearGradient gradiant = new LinearGradient( 0, 1, 0, 0, true, CycleMethod.NO_CYCLE, etapes );
-    private Font txt = Font.font( "Times New Roman", FontWeight.BOLD, FontPosture.ITALIC, 75 );
-    private String buttonStyle = "-fx-background-color: plum;" + "-fx-border-radius: 40 40 40 40;"
-            + "-fx-background-radius: 40 40 40 40;";
-    private Effect buttonEffect = new DropShadow( 25, 13, 13, Color.DARKSLATEGREY );
 
     public MenuPrincipalBP( Deck d, Settings s )
     {
@@ -70,17 +53,17 @@ public class MenuPrincipalBP extends BorderPane
             b.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
             b.setMaxWidth( s.getWidth() - 55. );
             b.setMinHeight( s.getHeight() / ( buttons.size() + 1 ) );
-            b.setEffect( buttonEffect );
-            b.setTextFill( gradiant );
-            b.setStyle( buttonStyle );
-            b.setFont( txt );
+            b.setEffect( GUIConstant.BUTTON_EFFECT );
+            b.setTextFill( GUIConstant.BUTTON_GRADIENT );
+            b.setStyle( GUIConstant.BUTTON_STYLE );
+            b.setFont( GUIConstant.BUTTON_TEXT );
         }
 
         vb.setPadding( new Insets( 0., s.getWidth() / 3., 0., 20. ) );
         vb.setSpacing( 20. );
         vb.getChildren().addAll( buttons );
 
-        this.setStyle( "-fx-background-color: mediumslateblue;" + "-fx-font-size: 15pt;" );
+        setStyle( GUIConstant.WINDOW_STYLE );
         vb.setAlignment( Pos.CENTER );
 
         VBox vbIm = new VBox();

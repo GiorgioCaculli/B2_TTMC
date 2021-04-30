@@ -6,18 +6,13 @@ import javafx.scene.layout.BorderPane;
 
 public class ChatBP extends BorderPane
 {
-    private TextField messageField = new TextField();
-    private TextArea conversationArea = new TextArea();
+    private TextField messageField;
+    private TextArea conversationArea;
 
     public ChatBP()
     {
-        conversationArea.setEditable( false );
-        conversationArea.setFocusTraversable( false );
-        conversationArea.setPrefColumnCount( 20 );
-        conversationArea.setWrapText( true );
-        messageField.setFocusTraversable( false );
-        setCenter( conversationArea );
-        setBottom( messageField );
+        setCenter( getConversationArea() );
+        setBottom( getMessageField() );
     }
 
     public TextField getMessageField()
@@ -25,6 +20,7 @@ public class ChatBP extends BorderPane
         if ( messageField == null )
         {
             messageField = new TextField();
+            messageField.setFocusTraversable( false );
         }
         return messageField;
     }
@@ -34,6 +30,10 @@ public class ChatBP extends BorderPane
         if ( conversationArea == null )
         {
             conversationArea = new TextArea();
+            conversationArea.setEditable( false );
+            conversationArea.setFocusTraversable( false );
+            conversationArea.setPrefColumnCount( 20 );
+            conversationArea.setWrapText( true );
         }
         return conversationArea;
     }

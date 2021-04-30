@@ -19,12 +19,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import be.helha.ttmc.model.BasicCard;
 import be.helha.ttmc.model.Deck;
 import be.helha.ttmc.model.Question;
 import be.helha.ttmc.model.Theme;
 import be.helha.ttmc.serialization.Serialization;
+import be.helha.ttmc.ui.GUIConstant;
+import be.helha.ttmc.ui.Settings;
 import be.helha.ttmc.ui.gui.admin.ListeCarteBP.ListeCarteMainBP;
 
 public class FenetreModificationBP extends BorderPane
@@ -40,34 +43,51 @@ public class FenetreModificationBP extends BorderPane
     private int minChallenges = 4;
     private Deck d;
     private BasicCard bc;
+    private Settings s;
 
-    public FenetreModificationBP( Deck d, BasicCard bc )
+    public FenetreModificationBP( Deck d, BasicCard bc, Settings s )
     {
+        this.s = s;
         this.d = d;
         this.bc = bc.clone();
         // creation de la partie superieure de la fenetre
-        AnchorPane anch = new AnchorPane();
+        /*AnchorPane anch = new AnchorPane();
 
-        anch.setTopAnchor( getLblTheme(), 4. );
-        anch.setLeftAnchor( getLblTheme(), 10. );
+        AnchorPane.setTopAnchor( getLblTheme(), 4. );
+        AnchorPane.setLeftAnchor( getLblTheme(), 10. );
 
-        anch.setLeftAnchor( getCb(), 60. );
+        AnchorPane.setLeftAnchor( getCb(), 60. );
 
-        anch.setTopAnchor( getLblAuthor(), 4. );
-        anch.setLeftAnchor( getLblAuthor(), 190. );
+        AnchorPane.setTopAnchor( getLblAuthor(), 4. );
+        AnchorPane.setLeftAnchor( getLblAuthor(), ( double ) s.getWidth() / 3 );
 
-        anch.setLeftAnchor( getTxtAuthor(), 240. );
-        anch.setRightAnchor( getTxtAuthor(), 10. );
+        AnchorPane.setLeftAnchor( getTxtAuthor(), ( double ) s.getWidth() / 2 );
+        AnchorPane.setRightAnchor( getTxtAuthor(), 10. );
 
-        anch.setTopAnchor( getLblSubject(), 39. );
-        anch.setLeftAnchor( getLblSubject(), 7. );
+        AnchorPane.setTopAnchor( getLblSubject(), 39. );
+        AnchorPane.setLeftAnchor( getLblSubject(), 7. );
 
-        anch.setTopAnchor( getTxtSubject(), 35. );
-        anch.setLeftAnchor( getTxtSubject(), 60. );
-        anch.setRightAnchor( getTxtSubject(), 10. );
+        AnchorPane.setTopAnchor( getTxtSubject(), 35. );
+        AnchorPane.setLeftAnchor( getTxtSubject(), 60. );
+        AnchorPane.setRightAnchor( getTxtSubject(), 10. );*/
+        
+        VBox cardAuthorThemeSubjectBox = new VBox();
+        
+        HBox authorThemeBox = new HBox();
+        authorThemeBox.getChildren().add( getLblTheme() );
+        authorThemeBox.getChildren().add( getCb() );
+        authorThemeBox.getChildren().add( getLblAuthor() );
+        authorThemeBox.getChildren().add( getTxtAuthor() );
+        
+        HBox subjectBox = new HBox();
+        subjectBox.getChildren().add( getLblSubject() );
+        subjectBox.getChildren().add( getTxtSubject() );
+        
+        cardAuthorThemeSubjectBox.getChildren().add( authorThemeBox );
+        cardAuthorThemeSubjectBox.getChildren().add( subjectBox );
 
-        anch.getChildren().addAll( getLblTheme(), getCb(), getLblAuthor(), getTxtAuthor(), getLblSubject(),
-                getTxtSubject() );
+        /*anch.getChildren().addAll( getLblTheme(), getCb(), getLblAuthor(), getTxtAuthor(), getLblSubject(),
+                getTxtSubject() );*/
 
         // creation de la partie inferieure de la fenetre
         GridPane grid = new GridPane();
@@ -107,9 +127,10 @@ public class FenetreModificationBP extends BorderPane
 
         // ajout des differents composants dans la borderPane
         VBox vb = new VBox();
-        vb.getChildren().addAll( anch, grid );
+        vb.getChildren().addAll( cardAuthorThemeSubjectBox, grid );
         vb.setAlignment( Pos.CENTER );
-        this.setCenter( vb );
+        setCenter( vb );
+        setStyle( GUIConstant.WINDOW_STYLE );
     }
 
     public List< Label > getLabelsCha()

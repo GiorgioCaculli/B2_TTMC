@@ -27,6 +27,7 @@ public class RulesBP extends BorderPane
         acceptBox.getChildren().add( getAcceptButton() );
         acceptBox.getChildren().add( espaceVideDroite );
         setBottom( acceptBox );
+        setStyle( GUIConstant.WINDOW_STYLE );
     }
 
     public Button getAcceptButton()

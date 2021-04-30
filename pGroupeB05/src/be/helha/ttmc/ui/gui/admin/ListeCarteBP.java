@@ -4,6 +4,8 @@ import be.helha.ttmc.model.BasicCard;
 import be.helha.ttmc.model.Deck;
 import be.helha.ttmc.model.Theme;
 import be.helha.ttmc.serialization.Serialization;
+import be.helha.ttmc.ui.GUIConstant;
+import be.helha.ttmc.ui.Settings;
 import be.helha.ttmc.ui.gui.admin.MenuAdminBP.MenuAdminMainVB;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -30,16 +32,19 @@ public class ListeCarteBP extends BorderPane
     private Deck d;
     private StackPane carteChoicePane;
     private TableView< BasicCard > table;
+    private Settings s;
 
-    public ListeCarteBP( Deck d )
+    public ListeCarteBP( Deck d, Settings s )
     {
         this.d = d;
+        this.s = s;
 
         getCarteChoicePane().getChildren().add( new ListeCarteMainBP() );
 
         setVisibleNode( ListeCarteMainBP.class.getSimpleName() );
 
         setCenter( getCarteChoicePane() );
+        setStyle( GUIConstant.WINDOW_STYLE );
     }
 
     public StackPane getCarteChoicePane()
@@ -128,7 +133,7 @@ public class ListeCarteBP extends BorderPane
                                         getCarteChoicePane().getChildren().remove( i );
                                     }
                                 }
-                                getCarteChoicePane().getChildren().add( new FenetreModificationBP( d, rowCard ) );
+                                getCarteChoicePane().getChildren().add( new FenetreModificationBP( d, rowCard, s ) );
                                 setVisibleNode( FenetreModificationBP.class.getSimpleName() );
                             }
                         }

@@ -105,6 +105,7 @@ public class SettingsBP extends BorderPane
                 }
             }
         } );
+        setStyle( GUIConstant.WINDOW_STYLE );
     }
 
     private void changementSettings()

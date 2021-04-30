@@ -127,13 +127,6 @@ public class LobbyMultiLocalBP extends BorderPane
     protected class LobbyMultiLocalMainBP extends BorderPane
     {
         private List< Button > buttons;
-        private Font txt = Font.font( "Times New Roman", FontWeight.BOLD, FontPosture.ITALIC, 100 );
-        private Effect buttonEffect = new DropShadow( 25, 13, 13, Color.DARKSLATEGREY );
-        private String buttonStyle = "-fx-background-color: plum;";
-
-        private Stop[] etapes =
-        { new Stop( 0, Color.BLUEVIOLET ), new Stop( 0.3, Color.ROYALBLUE ), new Stop( 0.7, Color.LIGHTSTEELBLUE ) };
-        private LinearGradient gradiant = new LinearGradient( 0, 1, 0, 0, true, CycleMethod.NO_CYCLE, etapes );
         
         public LobbyMultiLocalMainBP()
         {
@@ -145,10 +138,10 @@ public class LobbyMultiLocalBP extends BorderPane
             for ( Button b : buttons )
             {
                 b.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
-                b.setEffect( buttonEffect );
-                b.setTextFill( gradiant );
-                b.setStyle( buttonStyle );
-                b.setFont( txt );
+                b.setEffect( GUIConstant.BUTTON_EFFECT );
+                b.setTextFill( GUIConstant.BUTTON_GRADIENT );
+                b.setStyle( GUIConstant.BUTTON_STYLE );
+                b.setFont( GUIConstant.BUTTON_TEXT );
                 b.setMaxWidth( s.getWidth() - 55. );
                 b.setMinHeight( s.getHeight() / ( buttons.size() + 1 ) );
             }
@@ -158,6 +151,7 @@ public class LobbyMultiLocalBP extends BorderPane
             choiceBox.setAlignment( Pos.CENTER );
             choiceBox.setSpacing( 25. );
             setCenter( choiceBox );
+            setStyle( GUIConstant.WINDOW_STYLE );
         }
     }
 

@@ -13,18 +13,9 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.Effect;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.LinearGradient;
-import javafx.scene.paint.Stop;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
 
 public class MenuAdminBP extends BorderPane
 {
@@ -40,7 +31,7 @@ public class MenuAdminBP extends BorderPane
         this.s = s;
 
         getAdminChoicePane().getChildren().add( new MenuAdminMainVB() );
-        getAdminChoicePane().getChildren().add( new FenetreAjoutBP( d ) );
+        getAdminChoicePane().getChildren().add( new FenetreAjoutBP( d, s ) );
 
         setVisibleNode( MenuAdminMainVB.class.getSimpleName() );
 
@@ -75,13 +66,6 @@ public class MenuAdminBP extends BorderPane
     protected class MenuAdminMainVB extends VBox
     {
         private List< Button > buttons;
-        private Font txt = Font.font( "Times New Roman", FontWeight.BOLD, FontPosture.ITALIC, 100 );
-        private Effect buttonEffect = new DropShadow( 25, 13, 13, Color.DARKSLATEGREY );
-        private String buttonStyle = "-fx-background-color: plum;";
-
-        private Stop[] etapes =
-        { new Stop( 0, Color.BLUEVIOLET ), new Stop( 0.3, Color.ROYALBLUE ), new Stop( 0.7, Color.LIGHTSTEELBLUE ) };
-        private LinearGradient gradiant = new LinearGradient( 0, 1, 0, 0, true, CycleMethod.NO_CYCLE, etapes );
 
         public MenuAdminMainVB()
         {
@@ -97,15 +81,15 @@ public class MenuAdminBP extends BorderPane
             for ( Button b : buttons )
             {
                 b.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
-                b.setEffect( buttonEffect );
-                b.setTextFill( gradiant );
-                b.setStyle( buttonStyle );
-                b.setFont( txt );
+                b.setEffect( GUIConstant.BUTTON_EFFECT );
+                b.setTextFill( GUIConstant.BUTTON_GRADIENT );
+                b.setStyle( GUIConstant.BUTTON_STYLE );
+                b.setFont( GUIConstant.BUTTON_TEXT );
                 b.setMaxWidth( s.getWidth() - 55. );
                 b.setMinHeight( s.getHeight() / ( buttons.size() + 1 ) );
             }
 
-            setStyle( "-fx-background-color: DAE6F3;" + "-fx-font-size: 15pt;" );
+            setStyle( GUIConstant.WINDOW_STYLE );
             getChildren().addAll( buttons );
             setAlignment( Pos.CENTER );
         }
@@ -148,7 +132,7 @@ public class MenuAdminBP extends BorderPane
                             getAdminChoicePane().getChildren().remove( i );
                         }
                     }
-                    getAdminChoicePane().getChildren().add( new ListeCarteBP( d ) );
+                    getAdminChoicePane().getChildren().add( new ListeCarteBP( d, s ) );
                     setVisibleNode( ListeCarteBP.class.getSimpleName() );
                 }
             } );

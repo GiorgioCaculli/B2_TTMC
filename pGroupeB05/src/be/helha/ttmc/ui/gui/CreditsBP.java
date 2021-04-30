@@ -17,6 +17,7 @@ public class CreditsBP extends BorderPane
 
         setCenter( fp );
         setBottom( getBackButton() );
+        setStyle( GUIConstant.WINDOW_STYLE );
     }
 
     private Button getBackButton()

@@ -80,13 +80,6 @@ public class MenuMultiplayerOnlineBP extends BorderPane
     protected class MenuMultiplayerOnlineMainVB extends VBox
     {
         private List< Button > buttons;
-        private Font txt = Font.font( "Times New Roman", FontWeight.BOLD, FontPosture.ITALIC, 100 );
-        private Effect buttonEffect = new DropShadow( 25, 13, 13, Color.DARKSLATEGREY );
-        private String buttonStyle = "-fx-background-color: plum;";
-
-        private Stop[] etapes =
-        { new Stop( 0, Color.BLUEVIOLET ), new Stop( 0.3, Color.ROYALBLUE ), new Stop( 0.7, Color.LIGHTSTEELBLUE ) };
-        private LinearGradient gradiant = new LinearGradient( 0, 1, 0, 0, true, CycleMethod.NO_CYCLE, etapes );
 
         public MenuMultiplayerOnlineMainVB()
         {
@@ -102,15 +95,15 @@ public class MenuMultiplayerOnlineBP extends BorderPane
             for ( Button b : buttons )
             {
                 b.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
-                b.setEffect( buttonEffect );
-                b.setTextFill( gradiant );
-                b.setStyle( buttonStyle );
-                b.setFont( txt );
+                b.setEffect( GUIConstant.BUTTON_EFFECT );
+                b.setTextFill( GUIConstant.BUTTON_GRADIENT );
+                b.setStyle( GUIConstant.BUTTON_STYLE );
+                b.setFont( GUIConstant.BUTTON_TEXT );
                 b.setMaxWidth( s.getWidth() - 55. );
                 b.setMinHeight( s.getHeight() / ( buttons.size() + 1 ) );
             }
 
-            setStyle( "-fx-background-color: DAE6F3;" + "-fx-font-size: 15pt;" );
+            setStyle( GUIConstant.WINDOW_STYLE );
             getChildren().addAll( buttons );
             setAlignment( Pos.CENTER );
         }
@@ -173,7 +166,7 @@ public class MenuMultiplayerOnlineBP extends BorderPane
                     {
                         AlerteJoin aj = new AlerteJoin();
                         Client c = new Client( aj.getUsername(), aj.getIPAddress() );
-                        getChoicePane().getChildren().add( new LobbyMultiOnlineJoinBP( c ) );
+                        getChoicePane().getChildren().add( new LobbyMultiOnlineJoinBP( c, s ) );
                         setVisibleNode( LobbyMultiOnlineJoinBP.class.getSimpleName() );
                     }
                     catch ( UnknownHostException e )

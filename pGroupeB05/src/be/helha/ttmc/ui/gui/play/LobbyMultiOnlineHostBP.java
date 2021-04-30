@@ -29,90 +29,47 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.LinearGradient;
-import javafx.scene.paint.Stop;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
 
-public class LobbyMultiOnlineHostBP extends BorderPane
+class LobbyMultiOnlineHostBP extends BorderPane
 {
-    private StackPane lobbyMultiOnlineHostSP = new StackPane();
+    private StackPane lobbyMultiOnlineHostSP;
 
     private Button newGameButton;
     private Button returnButton;
     private ChatBP chatBox = new ChatBP();
     private Server server;
-    private List< ServerThread > serverThreads = new ArrayList<>();
+    private List< ServerThread > serverThreads;
     private OutputStream toServer;
     private Thread callThread = null;
     private Player hostPlayer = null;
     private Settings settings;
     private CountDownLatch countDownLatch = null;
     private List< Player > players = null;
+    private Thread clientIsUpThread;
     private MusicGestion m;
-    private Stop[] etapes =
-    { new Stop( 0, Color.BLUEVIOLET ), new Stop( 0.3, Color.ROYALBLUE ), new Stop( 0.7, Color.LIGHTSTEELBLUE ) };
-    private LinearGradient gradiant = new LinearGradient( 0, 1, 0, 0, true, CycleMethod.NO_CYCLE, etapes
-
-    );
-
-    public Button getNewGameButton()
-    {
-        if ( newGameButton == null )
-        {
-            newGameButton = new Button( "New Game" );
-            Font txt = Font.font( "Times New Roman", FontWeight.BOLD, FontPosture.ITALIC, 100 );
-
-            newGameButton.setEffect( new DropShadow( 25, 13, 13, Color.DARKSLATEGREY ) );
-            newGameButton.setTextFill( gradiant );
-            newGameButton.setStyle( "-fx-background-color: plum;" );
-            newGameButton.setFont( txt );
-            newGameButton.setMaxWidth( settings.getWidth() );
-            newGameButton.setMinHeight( settings.getHeight() / 4 );
-        }
-        return newGameButton;
-    }
-
-    public Button getReturnButton()
-    {
-        if ( returnButton == null )
-        {
-            returnButton = new Button( GUIConstant.BUTTON_RETURN );
-            Font txt = Font.font( "Times New Roman", FontWeight.BOLD, FontPosture.ITALIC, 100 );
-
-            returnButton.setEffect( new DropShadow( 25, 13, 13, Color.DARKSLATEGREY ) );
-            returnButton.setTextFill( gradiant );
-            returnButton.setStyle( "-fx-background-color: plum;" );
-            returnButton.setFont( txt );
-            returnButton.setMaxWidth( settings.getWidth() );
-            returnButton.setMinHeight( settings.getHeight() / 4 );
-        }
-        return returnButton;
-    }
+    private Deck d;
 
     public LobbyMultiOnlineHostBP( Deck d, Settings settings, MusicGestion m ) throws IOException
     {
+        serverThreads = new ArrayList<>();
         server = new Server();
         countDownLatch = new CountDownLatch( 1 );
         this.settings = settings;
         this.m = m;
+        this.d = d;
         setTop( new Label( String.format( "%s:%d", server.getServerSocket().getInetAddress().toString(),
                 server.getPortNumber() ) ) );
-        for ( int i = 0; i < lobbyMultiOnlineHostSP.getChildren().size(); i++ )
+        for ( int i = 0; i < getLobbyMultiOnlineSP().getChildren().size(); i++ )
         {
-            if ( lobbyMultiOnlineHostSP.getChildren().get( i ).getClass().getSimpleName()
+            if ( getLobbyMultiOnlineSP().getChildren().get( i ).getClass().getSimpleName()
                     .equals( JouerChoixQuestionMultiplayerOnlineBP.class.getSimpleName() ) )
             {
-                lobbyMultiOnlineHostSP.getChildren().remove( i );
+                getLobbyMultiOnlineSP().getChildren().remove( i );
             }
         }
         TextInputDialog nbPlayersDialog = new TextInputDialog();
@@ -192,7 +149,7 @@ public class LobbyMultiOnlineHostBP extends BorderPane
             }
         } );
 
-        Thread clientIsUpThread = new Thread( new Runnable()
+        clientIsUpThread = new Thread( new Runnable()
         {
             @Override
             public void run()
@@ -239,64 +196,23 @@ public class LobbyMultiOnlineHostBP extends BorderPane
                 }
             }
         } );
-
-        getNewGameButton().setOnAction( new EventHandler< ActionEvent >()
-        {
-            @Override
-            public void handle( ActionEvent arg0 )
-            {
-                for ( int i = 0; i < lobbyMultiOnlineHostSP.getChildren().size(); i++ )
-                {
-                    if ( lobbyMultiOnlineHostSP.getChildren().get( i ).getClass().getSimpleName()
-                            .equals( JouerChoixQuestionMultiplayerOnlineBP.class.getSimpleName() ) )
-                    {
-                        lobbyMultiOnlineHostSP.getChildren().remove( i );
-                    }
-                }
-                for ( int i = 0; i < serverThreads.size(); i++ )
-                {
-                    players.add( serverThreads.get( i ).getPlayer() );
-                }
-                for ( Player p : players )
-                {
-                    System.out.println( p );
-                    List< BasicCard > cards = d.getCards();
-                    Collections.shuffle( cards );
-                    p.setCards( cards );
-                }
-                lobbyMultiOnlineHostSP.getChildren()
-                        .add( new JouerChoixQuestionMultiplayerOnlineBP( d, players, settings, m ) );
-                setVisibleNode( JouerChoixQuestionMultiplayerOnlineBP.class.getSimpleName() );
-            }
-        } );
-
-        getReturnButton().setOnAction( new EventHandler< ActionEvent >()
-        {
-            @Override
-            public void handle( ActionEvent arg0 )
-            {
-                try
-                {
-                    callThread.interrupt();
-                    clientIsUpThread.interrupt();
-                    server.getServerSocket().close();
-                }
-                catch ( IOException e )
-                {
-                    e.printStackTrace();
-                }
-                MenuMultiplayerOnlineBP mmbp = ( ( MenuMultiplayerOnlineBP ) getParent().getParent() );
-                mmbp.setVisibleNode( MenuMultiplayerOnlineMainVB.class.getSimpleName() );
-            }
-        } );
-        lobbyMultiOnlineHostSP.getChildren().add( new LobbyMultiOnlineMainBP() );
+        getLobbyMultiOnlineSP().getChildren().add( new LobbyMultiOnlineMainBP() );
 
         setRight( chatBox );
-        setCenter( lobbyMultiOnlineHostSP );
+        setCenter( getLobbyMultiOnlineSP() );
 
         callThread.start();
 
         clientIsUpThread.start();
+    }
+    
+    public StackPane getLobbyMultiOnlineSP()
+    {
+        if( lobbyMultiOnlineHostSP == null )
+        {
+            lobbyMultiOnlineHostSP = new StackPane();
+        }
+        return lobbyMultiOnlineHostSP;
     }
 
     public void setVisibleNode( String nodeName )
@@ -316,20 +232,100 @@ public class LobbyMultiOnlineHostBP extends BorderPane
 
     protected class LobbyMultiOnlineMainBP extends BorderPane
     {
+        private List< Button > buttons;
+
         public LobbyMultiOnlineMainBP()
         {
+            buttons = new ArrayList<>();
             VBox choiceBox = new VBox();
-            double taille = choiceBox.getWidth() - 25.;
-            //      getNewGameButton().setPrefWidth(taille);
-            //      getNewGameButton().setMaxWidth(taille);
 
-            choiceBox.getChildren().addAll( getNewGameButton(), getReturnButton() );
+            buttons.add( getNewGameButton() );
+            buttons.add( getReturnButton() );
+
+            for ( Button b : buttons )
+            {
+                b.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
+                b.setEffect( GUIConstant.BUTTON_EFFECT );
+                b.setTextFill( GUIConstant.BUTTON_GRADIENT );
+                b.setStyle( GUIConstant.BUTTON_STYLE );
+                b.setFont( GUIConstant.BUTTON_TEXT );
+                b.setMaxWidth( settings.getWidth() - 55. );
+                b.setMinHeight( settings.getHeight() / ( buttons.size() + 1 ) );
+            }
+
+            choiceBox.getChildren().addAll( buttons );
             choiceBox.setAlignment( Pos.CENTER );
             choiceBox.setPadding( new Insets( 25. ) );
             choiceBox.setSpacing( 25. );
             setCenter( choiceBox );
-
+            setStyle( GUIConstant.WINDOW_STYLE );
         }
+    }
+
+    public Button getNewGameButton()
+    {
+        if ( newGameButton == null )
+        {
+            newGameButton = new Button( "New Game" );
+            newGameButton.setOnAction( new EventHandler< ActionEvent >()
+            {
+                @Override
+                public void handle( ActionEvent arg0 )
+                {
+                    for ( int i = 0; i < getLobbyMultiOnlineSP().getChildren().size(); i++ )
+                    {
+                        if ( getLobbyMultiOnlineSP().getChildren().get( i ).getClass().getSimpleName()
+                                .equals( JouerChoixQuestionMultiplayerOnlineBP.class.getSimpleName() ) )
+                        {
+                            getLobbyMultiOnlineSP().getChildren().remove( i );
+                        }
+                    }
+                    for ( int i = 0; i < serverThreads.size(); i++ )
+                    {
+                        players.add( serverThreads.get( i ).getPlayer() );
+                    }
+                    for ( Player p : players )
+                    {
+                        System.out.println( p );
+                        List< BasicCard > cards = d.getCards();
+                        Collections.shuffle( cards );
+                        p.setCards( cards );
+                    }
+                    getLobbyMultiOnlineSP().getChildren()
+                            .add( new JouerChoixQuestionMultiplayerOnlineBP( d, players, settings, m ) );
+                    setVisibleNode( JouerChoixQuestionMultiplayerOnlineBP.class.getSimpleName() );
+                }
+            } );
+        }
+        return newGameButton;
+    }
+
+    public Button getReturnButton()
+    {
+        if ( returnButton == null )
+        {
+            returnButton = new Button( GUIConstant.BUTTON_RETURN );
+            returnButton.setOnAction( new EventHandler< ActionEvent >()
+            {
+                @Override
+                public void handle( ActionEvent arg0 )
+                {
+                    try
+                    {
+                        callThread.interrupt();
+                        clientIsUpThread.interrupt();
+                        server.getServerSocket().close();
+                    }
+                    catch ( IOException e )
+                    {
+                        e.printStackTrace();
+                    }
+                    MenuMultiplayerOnlineBP mmbp = ( ( MenuMultiplayerOnlineBP ) getParent().getParent() );
+                    mmbp.setVisibleNode( MenuMultiplayerOnlineMainVB.class.getSimpleName() );
+                }
+            } );
+        }
+        return returnButton;
     }
 
     private void sendMessageToAll( String message )
