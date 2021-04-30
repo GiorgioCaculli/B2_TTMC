@@ -30,16 +30,16 @@ public class LobbyMultiOnlineJoinBP extends BorderPane
     public LobbyMultiOnlineJoinBP( Client c )
     {
         this.c = c;
-        
+
         Thread clientThread = new Thread( new ClientThread( c ) );
-        
+
         disconnectButton.setOnAction( new EventHandler< ActionEvent >()
         {
-            
+
             @Override
             public void handle( ActionEvent arg0 )
             {
-                if( c.getSocket() != null )
+                if ( c.getSocket() != null )
                 {
                     clientThread.interrupt();
                     disconnect();
@@ -73,12 +73,12 @@ public class LobbyMultiOnlineJoinBP extends BorderPane
                 }
             }
         } );
-        
+
         LobbyMultiOnlineJoinSP.getChildren().add( new LobbyMultiOnlineMainBP() );
-        
+
         setRight( chatBox );
         setCenter( LobbyMultiOnlineJoinSP );
-        
+
         clientThread.start();
     }
 
@@ -132,7 +132,7 @@ public class LobbyMultiOnlineJoinBP extends BorderPane
                 out.writeUTF( String.format( "%s: %s", c.getUserName(), message ) );
                 out.flush();
             }
-            catch( SocketException se )
+            catch ( SocketException se )
             {
                 se.printStackTrace();
                 MenuMultiplayerOnlineBP mmbp = ( ( MenuMultiplayerOnlineBP ) getParent().getParent() );
@@ -155,7 +155,7 @@ public class LobbyMultiOnlineJoinBP extends BorderPane
         {
             chatBox.getConversationArea().appendText(
                     String.format( "Connected to: %s:%d\n", c.getSocket().getInetAddress(), c.getSocket().getPort() ) );
-            
+
             try
             {
                 fromServer = new DataInputStream( c.getSocket().getInputStream() );
@@ -163,11 +163,11 @@ public class LobbyMultiOnlineJoinBP extends BorderPane
                 try
                 {
                     toServer.writeUTF( c.getUserName() );
-                    while( !c.getSocket().isClosed() && !Thread.currentThread().isInterrupted() )
+                    while ( !c.getSocket().isClosed() && !Thread.currentThread().isInterrupted() )
                     {
                         String serverIn = fromServer.readUTF();
                         System.out.println( serverIn );
-                        if( serverIn == null )
+                        if ( serverIn == null )
                         {
                             disconnect();
                             break;
@@ -175,7 +175,7 @@ public class LobbyMultiOnlineJoinBP extends BorderPane
                         chatBox.getConversationArea().appendText( String.format( "%s\n", serverIn ) );
                     }
                 }
-                catch( EOFException eofe )
+                catch ( EOFException eofe )
                 {
                     eofe.printStackTrace();
                 }

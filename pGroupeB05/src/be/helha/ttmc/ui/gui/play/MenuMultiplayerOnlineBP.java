@@ -3,6 +3,8 @@ package be.helha.ttmc.ui.gui.play;
 import java.io.IOException;
 import java.net.ConnectException;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
 
 import be.helha.ttmc.model.Deck;
 import be.helha.ttmc.ui.Client;
@@ -18,9 +20,18 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.Effect;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 
 public class MenuMultiplayerOnlineBP extends BorderPane
 {
@@ -34,7 +45,7 @@ public class MenuMultiplayerOnlineBP extends BorderPane
     {
         this.d = d;
         this.s = s;
-        this.m= m;
+        this.m = m;
         getChoicePane().getChildren().add( new MenuMultiplayerOnlineMainVB() );
         setVisibleNode( MenuMultiplayerOnlineMainVB.class.getSimpleName() );
 
@@ -68,14 +79,39 @@ public class MenuMultiplayerOnlineBP extends BorderPane
 
     protected class MenuMultiplayerOnlineMainVB extends VBox
     {
+        private List< Button > buttons;
+        private Font txt = Font.font( "Times New Roman", FontWeight.BOLD, FontPosture.ITALIC, 100 );
+        private Effect buttonEffect = new DropShadow( 25, 13, 13, Color.DARKSLATEGREY );
+        private String buttonStyle = "-fx-background-color: plum;";
+
+        private Stop[] etapes =
+        { new Stop( 0, Color.BLUEVIOLET ), new Stop( 0.3, Color.ROYALBLUE ), new Stop( 0.7, Color.LIGHTSTEELBLUE ) };
+        private LinearGradient gradiant = new LinearGradient( 0, 1, 0, 0, true, CycleMethod.NO_CYCLE, etapes );
+
         public MenuMultiplayerOnlineMainVB()
         {
+            buttons = new ArrayList<>();
             // this.setOrientation(Orientation.VERTICAL);
             setPadding( new Insets( 20 ) );
             setSpacing( 50 );
 
+            buttons.add( getBtnHost() );
+            buttons.add( getBtnJoin() );
+            buttons.add( getBtnRetour() );
+
+            for ( Button b : buttons )
+            {
+                b.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
+                b.setEffect( buttonEffect );
+                b.setTextFill( gradiant );
+                b.setStyle( buttonStyle );
+                b.setFont( txt );
+                b.setMaxWidth( s.getWidth() - 55. );
+                b.setMinHeight( s.getHeight() / ( buttons.size() + 1 ) );
+            }
+
             setStyle( "-fx-background-color: DAE6F3;" + "-fx-font-size: 15pt;" );
-            getChildren().addAll( getBtnHost(), getBtnJoin(), getBtnRetour() );
+            getChildren().addAll( buttons );
             setAlignment( Pos.CENTER );
         }
     }
@@ -85,7 +121,6 @@ public class MenuMultiplayerOnlineBP extends BorderPane
         if ( btnHost == null )
         {
             btnHost = new Button( "Host" );
-            btnHost.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
             btnHost.setOnAction( new EventHandler< ActionEvent >()
             {
 
@@ -102,7 +137,7 @@ public class MenuMultiplayerOnlineBP extends BorderPane
                     }
                     try
                     {
-                        getChoicePane().getChildren().add( new LobbyMultiOnlineHostBP( d, s , m) );
+                        getChoicePane().getChildren().add( new LobbyMultiOnlineHostBP( d, s, m ) );
                         setVisibleNode( LobbyMultiOnlineHostBP.class.getSimpleName() );
                     }
                     catch ( IOException e )
@@ -120,7 +155,6 @@ public class MenuMultiplayerOnlineBP extends BorderPane
         if ( btnJoin == null )
         {
             btnJoin = new Button( "Join" );
-            btnJoin.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
             btnJoin.setOnAction( new EventHandler< ActionEvent >()
             {
 
@@ -146,7 +180,7 @@ public class MenuMultiplayerOnlineBP extends BorderPane
                     {
                         e.printStackTrace();
                     }
-                    catch( ConnectException e )
+                    catch ( ConnectException e )
                     {
                         Alert alert = new Alert( AlertType.ERROR );
                         alert.setTitle( "ConnectException" );
@@ -170,7 +204,6 @@ public class MenuMultiplayerOnlineBP extends BorderPane
         if ( btnRetour == null )
         {
             btnRetour = new Button( GUIConstant.BUTTON_RETURN );
-            btnRetour.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
             btnRetour.setOnAction( new EventHandler< ActionEvent >()
             {
 

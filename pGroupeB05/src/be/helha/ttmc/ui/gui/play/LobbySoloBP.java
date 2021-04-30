@@ -1,5 +1,7 @@
 package be.helha.ttmc.ui.gui.play;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import be.helha.ttmc.model.Deck;
@@ -15,7 +17,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.layout.Background;
+import javafx.scene.effect.Effect;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -26,118 +28,26 @@ import javafx.scene.paint.Stop;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 
 public class LobbySoloBP extends BorderPane
 {
     private StackPane lobbyPaneSP = new StackPane();
 
-    private Button newGameButton ;
+    private Button newGameButton;
     private Button loadGameButton;
     private Button returnButton;
 
     private String nickName;
     private Deck d;
-    
+
     private Settings s;
     private MusicGestion m;
-    
-    private Stop[] etapes = { new Stop(0, Color.BLUEVIOLET),
-    		new Stop(0.3, Color.ROYALBLUE),new Stop(0.7,Color.LIGHTSTEELBLUE)};
-	private LinearGradient gradiant= new LinearGradient(0, 1, 0, 0, true, CycleMethod.NO_CYCLE,
-			etapes
-			
-			);
-    
-    
 
-    public Button getNewGameButton() {
-    	if(newGameButton== null) {
-    		
-    		newGameButton= new Button( "New Game" );
-    		Font txt= Font.font("Times New Roman", FontWeight.BOLD, FontPosture.ITALIC, 100);	
-    		
-    		newGameButton.setEffect(new DropShadow(25, 13, 13, Color.DARKSLATEGREY));
-	    	newGameButton.setTextFill(gradiant);
-	    	newGameButton.setStyle("-fx-background-color: plum;");
-    		newGameButton.setFont(txt);
-    		newGameButton.setMaxWidth(s.getWidth()-55.);
-    		newGameButton.setMinHeight(s.getHeight()/4);
-    		newGameButton.setOnAction( new EventHandler< ActionEvent >()
-            {
-                @Override
-                public void handle( ActionEvent arg0 )
-                {
-                    for ( int i = 0; i < lobbyPaneSP.getChildren().size(); i++ )
-                    {
-                        if ( lobbyPaneSP.getChildren().get( i ).getClass().getSimpleName()
-                                .equals( JouerChoixQuestionBP.class.getSimpleName() ) )
-                        {
-                            lobbyPaneSP.getChildren().remove( i );
-                        }
-                    }
-                    Deck deck = d.clone();
-                    if ( nickName.equals( "giorgio" ) || nickName.equals( "guillaume" ) || nickName.equals( "tanguy" ) )
-                    {
-                        deck = Serialization.loadDeck( String.format( "assets/decks/%s.json", nickName ).toString() );
-                    }
-                    JouerChoixQuestionBP jcq = new JouerChoixQuestionBP( deck, s ,m);
-                    jcq.setScore( 0 );
-                    jcq.setNickName( String.format( "%s", nickName ) );
-                    jcq.getLblScore().setText( String.format( "User: %s - Score: ", jcq.getNickName() ) );
-                    lobbyPaneSP.getChildren().add( jcq );
-                    setVisibleNode( jcq.getClass().getSimpleName() );
-                }
-            } );
-    	}
-		return newGameButton;
-	}
-
-	public Button getLoadGameButton() {
-		if(loadGameButton==null) {
-			loadGameButton = new Button( "Load Game" );
-			Font txt= Font.font("Times New Roman", FontWeight.BOLD, FontPosture.ITALIC, 100);
-			loadGameButton.setFont(txt);
-			loadGameButton.setEffect(new DropShadow(25, 13, 13, Color.DARKSLATEGREY));
-			loadGameButton.setStyle("-fx-background-color: plum;");
-			loadGameButton.setTextFill(gradiant);
-			loadGameButton.setMaxWidth(s.getWidth()-55.);
-			loadGameButton.setMinHeight(s.getHeight()/4);
-		}
-		return loadGameButton;
-	}
-
-	public Button getReturnButton() {
-		if(returnButton== null) {
-			
-			
-			returnButton = new Button( GUIConstant.BUTTON_RETURN );
-			returnButton.setTextFill(gradiant);
-			returnButton.setStyle("-fx-background-color: plum;");
-			returnButton.setEffect(new DropShadow(25, 13, 13, Color.DARKSLATEGREY));
-			Font txt= Font.font("Times New Roman", FontWeight.BOLD, FontPosture.ITALIC, 100);
-			returnButton.setFont(txt);
-			returnButton.setMaxWidth(s.getWidth()-55.);
-			returnButton.setMinHeight(s.getHeight()/4);
-			returnButton.setOnAction( new EventHandler< ActionEvent >()
-	        {
-
-	            @Override
-	            public void handle( ActionEvent arg0 )
-	            {
-	                MenuPlayBP mpbp =  ( ( MenuPlayBP ) getParent().getParent() );
-	                mpbp.setVisibleNode( MenuPlayMainVB.class.getSimpleName() );
-	            }
-	        } );
-		}
-		return returnButton;
-	}
-
-	public LobbySoloBP( Deck d, Settings s, MusicGestion m )
+    public LobbySoloBP( Deck d, Settings s, MusicGestion m )
     {
-		this.d= d;
+        this.d = d;
         this.s = s;
-        this.m= m;
+        this.m = m;
         for ( int i = 0; i < lobbyPaneSP.getChildren().size(); i++ )
         {
             if ( lobbyPaneSP.getChildren().get( i ).getClass().getSimpleName()
@@ -166,10 +76,9 @@ public class LobbySoloBP extends BorderPane
         {
             nickName = "User-1";
         }
-        
-        
+
         lobbyPaneSP.getChildren().addAll( new LobbySoloMainBP() );
-     
+
         setCenter( lobbyPaneSP );
     }
 
@@ -190,15 +99,106 @@ public class LobbySoloBP extends BorderPane
 
     protected class LobbySoloMainBP extends BorderPane
     {
+        private List< Button > buttons;
+        private Font txt = Font.font( "Times New Roman", FontWeight.BOLD, FontPosture.ITALIC, 100 );
+        private Effect buttonEffect = new DropShadow( 25, 13, 13, Color.DARKSLATEGREY );
+        private String buttonStyle = "-fx-background-color: plum;";
+
+        private Stop[] etapes =
+        { new Stop( 0, Color.BLUEVIOLET ), new Stop( 0.3, Color.ROYALBLUE ), new Stop( 0.7, Color.LIGHTSTEELBLUE ) };
+        private LinearGradient gradiant = new LinearGradient( 0, 1, 0, 0, true, CycleMethod.NO_CYCLE, etapes );
+
         public LobbySoloMainBP()
         {
+            buttons = new ArrayList<>();
+
+            buttons.add( getNewGameButton() );
+            buttons.add( getLoadGameButton() );
+            buttons.add( getReturnButton() );
+
+            for ( Button b : buttons )
+            {
+                b.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
+                b.setEffect( buttonEffect );
+                b.setTextFill( gradiant );
+                b.setStyle( buttonStyle );
+                b.setFont( txt );
+                b.setMaxWidth( s.getWidth() - 55. );
+                b.setMinHeight( s.getHeight() / ( buttons.size() + 1 ) );
+            }
+
             VBox choiceBox = new VBox();
-            choiceBox.getChildren().addAll( getNewGameButton(), getLoadGameButton(), getReturnButton() );
-            choiceBox.setAlignment(Pos.CENTER);
-            choiceBox.setSpacing(25.);
-            
+            choiceBox.getChildren().addAll( buttons );
+            choiceBox.setAlignment( Pos.CENTER );
+            choiceBox.setSpacing( 25. );
+
             setCenter( choiceBox );
-            this.setStyle("-fx-background-color: mediumslateblue");
+            setStyle( "-fx-background-color: mediumslateblue" );
         }
+    }
+
+    public Button getNewGameButton()
+    {
+        if ( newGameButton == null )
+        {
+
+            newGameButton = new Button( "New Game" );
+            newGameButton.setOnAction( new EventHandler< ActionEvent >()
+            {
+                @Override
+                public void handle( ActionEvent arg0 )
+                {
+                    for ( int i = 0; i < lobbyPaneSP.getChildren().size(); i++ )
+                    {
+                        if ( lobbyPaneSP.getChildren().get( i ).getClass().getSimpleName()
+                                .equals( JouerChoixQuestionBP.class.getSimpleName() ) )
+                        {
+                            lobbyPaneSP.getChildren().remove( i );
+                        }
+                    }
+                    Deck deck = d.clone();
+                    if ( nickName.equals( "giorgio" ) || nickName.equals( "guillaume" ) || nickName.equals( "tanguy" ) )
+                    {
+                        deck = Serialization.loadDeck( String.format( "assets/decks/%s.json", nickName ).toString() );
+                    }
+                    JouerChoixQuestionBP jcq = new JouerChoixQuestionBP( deck, s, m );
+                    jcq.setScore( 0 );
+                    jcq.setNickName( String.format( "%s", nickName ) );
+                    jcq.getLblScore().setText( String.format( "User: %s - Score: ", jcq.getNickName() ) );
+                    lobbyPaneSP.getChildren().add( jcq );
+                    setVisibleNode( jcq.getClass().getSimpleName() );
+                }
+            } );
+        }
+        return newGameButton;
+    }
+
+    public Button getLoadGameButton()
+    {
+        if ( loadGameButton == null )
+        {
+            loadGameButton = new Button( "Load Game" );
+        }
+        return loadGameButton;
+    }
+
+    public Button getReturnButton()
+    {
+        if ( returnButton == null )
+        {
+
+            returnButton = new Button( GUIConstant.BUTTON_RETURN );
+            returnButton.setOnAction( new EventHandler< ActionEvent >()
+            {
+
+                @Override
+                public void handle( ActionEvent arg0 )
+                {
+                    MenuPlayBP mpbp = ( ( MenuPlayBP ) getParent().getParent() );
+                    mpbp.setVisibleNode( MenuPlayMainVB.class.getSimpleName() );
+                }
+            } );
+        }
+        return returnButton;
     }
 }

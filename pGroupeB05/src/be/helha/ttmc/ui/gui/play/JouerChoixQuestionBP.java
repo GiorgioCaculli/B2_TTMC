@@ -73,11 +73,11 @@ public class JouerChoixQuestionBP extends BorderPane
     private int bonneRep = 0;
     private MusicGestion m;
 
-    public JouerChoixQuestionBP( Deck d, Settings s, MusicGestion m)
+    public JouerChoixQuestionBP( Deck d, Settings s, MusicGestion m )
     {
         this.d = d;
         this.s = s;
-        this.m= m;
+        this.m = m;
         cards = this.d.getCards();
         getPla();
         Collections.shuffle( cards );
@@ -151,7 +151,7 @@ public class JouerChoixQuestionBP extends BorderPane
     {
         if ( mpfp == null )
         {
-            mpfp = new MenuPauseBP(s, m);
+            mpfp = new MenuPauseBP( s, m );
         }
         return mpfp;
     }
@@ -221,26 +221,27 @@ public class JouerChoixQuestionBP extends BorderPane
             }
         }
 
-        VBox vbquestion= new VBox();
-        int indice=0;
-        HBox hbquestion= new HBox();
-        hbquestion.setSpacing(10);
+        VBox vbquestion = new VBox();
+        int indice = 0;
+        HBox hbquestion = new HBox();
+        hbquestion.setSpacing( 10 );
         for ( Button b : getChoix() )
         {
-        	
+
             cardChoicePane.getChildren().add( new JeuReponseBP() );
-            if(indice %2 ==0) {
-        		vbquestion.getChildren().add(hbquestion);
-        		hbquestion=new HBox();
-        		hbquestion.setSpacing(10);
-        	}
-        	hbquestion.getChildren().add(b);
-        	indice++;
-            
+            if ( indice % 2 == 0 )
+            {
+                vbquestion.getChildren().add( hbquestion );
+                hbquestion = new HBox();
+                hbquestion.setSpacing( 10 );
+            }
+            hbquestion.getChildren().add( b );
+            indice++;
+
         }
-        vbquestion.getChildren().add(hbquestion);
-        
-        vbquestion.setSpacing(10);
+        vbquestion.getChildren().add( hbquestion );
+
+        vbquestion.setSpacing( 10 );
         fp.getChildren().add( vbquestion );
 
         VBox vb = new VBox();
@@ -298,7 +299,7 @@ public class JouerChoixQuestionBP extends BorderPane
                 b.setStyle( "-fx-font-size:80" );
                 b.setTextAlignment( TextAlignment.CENTER );
                 b.setMinSize( s.getWidth() / 5, s.getHeight() / 5 ); // 250 x 250
-                b.setMaxSize( Double.MAX_VALUE/2, Double.MAX_VALUE/2 );
+                b.setMaxSize( Double.MAX_VALUE / 2, Double.MAX_VALUE / 2 );
                 int idQ = i;
                 b.setOnAction( new EventHandler< ActionEvent >()
                 {

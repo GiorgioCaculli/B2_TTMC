@@ -1,6 +1,11 @@
 package be.helha.ttmc.ui.gui.admin;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import be.helha.ttmc.model.Deck;
+import be.helha.ttmc.ui.GUIConstant;
+import be.helha.ttmc.ui.Settings;
 import be.helha.ttmc.ui.gui.MainPaneBP;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -8,9 +13,18 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.Effect;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 
 public class MenuAdminBP extends BorderPane
 {
@@ -18,10 +32,12 @@ public class MenuAdminBP extends BorderPane
     private Button btnAjout, btnListe, btnRetour;
     private Deck d;
     private StackPane adminChoicePane;
+    private Settings s;
 
-    public MenuAdminBP( Deck d )
+    public MenuAdminBP( Deck d, Settings s )
     {
         this.d = d;
+        this.s = s;
 
         getAdminChoicePane().getChildren().add( new MenuAdminMainVB() );
         getAdminChoicePane().getChildren().add( new FenetreAjoutBP( d ) );
@@ -58,14 +74,39 @@ public class MenuAdminBP extends BorderPane
 
     protected class MenuAdminMainVB extends VBox
     {
+        private List< Button > buttons;
+        private Font txt = Font.font( "Times New Roman", FontWeight.BOLD, FontPosture.ITALIC, 100 );
+        private Effect buttonEffect = new DropShadow( 25, 13, 13, Color.DARKSLATEGREY );
+        private String buttonStyle = "-fx-background-color: plum;";
+
+        private Stop[] etapes =
+        { new Stop( 0, Color.BLUEVIOLET ), new Stop( 0.3, Color.ROYALBLUE ), new Stop( 0.7, Color.LIGHTSTEELBLUE ) };
+        private LinearGradient gradiant = new LinearGradient( 0, 1, 0, 0, true, CycleMethod.NO_CYCLE, etapes );
+
         public MenuAdminMainVB()
         {
+            buttons = new ArrayList<>();
             // this.setOrientation(Orientation.VERTICAL);
             setPadding( new Insets( 20 ) );
             setSpacing( 50 );
+            
+            buttons.add( getBtnAjout() );
+            buttons.add( getBtnListe() );
+            buttons.add( getBtnRetour() );
+
+            for ( Button b : buttons )
+            {
+                b.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
+                b.setEffect( buttonEffect );
+                b.setTextFill( gradiant );
+                b.setStyle( buttonStyle );
+                b.setFont( txt );
+                b.setMaxWidth( s.getWidth() - 55. );
+                b.setMinHeight( s.getHeight() / ( buttons.size() + 1 ) );
+            }
 
             setStyle( "-fx-background-color: DAE6F3;" + "-fx-font-size: 15pt;" );
-            getChildren().addAll( getBtnAjout(), getBtnListe(), getBtnRetour() );
+            getChildren().addAll( buttons );
             setAlignment( Pos.CENTER );
         }
     }
@@ -75,7 +116,6 @@ public class MenuAdminBP extends BorderPane
         if ( btnAjout == null )
         {
             btnAjout = new Button( "Add a card" );
-            btnAjout.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
             btnAjout.setOnAction( new EventHandler< ActionEvent >()
             {
 
@@ -94,7 +134,6 @@ public class MenuAdminBP extends BorderPane
         if ( btnListe == null )
         {
             btnListe = new Button( "Show the list of cards" );
-            btnListe.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
             btnListe.setOnAction( new EventHandler< ActionEvent >()
             {
 
@@ -121,8 +160,7 @@ public class MenuAdminBP extends BorderPane
     {
         if ( btnRetour == null )
         {
-            btnRetour = new Button( "Return" );
-            btnRetour.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
+            btnRetour = new Button( GUIConstant.BUTTON_RETURN );
             btnRetour.setOnAction( new EventHandler< ActionEvent >()
             {
 

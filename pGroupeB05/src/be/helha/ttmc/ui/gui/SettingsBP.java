@@ -28,9 +28,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -58,8 +56,6 @@ public class SettingsBP extends BorderPane
     {
         this.settings = s;
         this.musicGestion = musicGestion;
-        
-  
 
         HBox volumeBox = new HBox();
         volumeBox.getChildren().add( getSlider() );
@@ -89,11 +85,11 @@ public class SettingsBP extends BorderPane
         settingsBox.getChildren().add( windowSizeBox );
         settingsBox.getChildren().add( maximizeWindowBox );
 
-        settingsBox.setSpacing(25.);
-        settingsBox.setAlignment(Pos.CENTER);
+        settingsBox.setSpacing( 25. );
+        settingsBox.setAlignment( Pos.CENTER );
 
         settingsBox.setPadding( new Insets( 5 ) );
-      
+
         setCenter( settingsBox );
         setBottom( getBackButton() );
 
@@ -111,8 +107,9 @@ public class SettingsBP extends BorderPane
         } );
     }
 
-    private void changementSettings() {
-    	if ( languageChanged || windowSizeChanged )
+    private void changementSettings()
+    {
+        if ( languageChanged || windowSizeChanged )
         {
             musicGestion.stopMusic();
             Stage stage = ( Stage ) getScene().getWindow();
@@ -132,7 +129,7 @@ public class SettingsBP extends BorderPane
             mpbp.setVisibleNode( MenuPrincipalBP.class.getSimpleName() );
         }
     }
-    
+
     public Button getBackButton()
     {
         if ( backButton == null )
@@ -331,7 +328,7 @@ public class SettingsBP extends BorderPane
                         default:
                             break;
                     }
-                    if( !newValue.equalsIgnoreCase( currentLanguage ) )
+                    if ( !newValue.equalsIgnoreCase( currentLanguage ) )
                     {
                         settings.setLocale( new Locale( settings.getLanguage(), settings.getCountry() ) );
                         languageChanged = true;
@@ -373,12 +370,12 @@ public class SettingsBP extends BorderPane
             {
                 case "1440x900":
                     windowSizeComboBox.setValue( getWindowSizes().get( 0 ) );
-                    getMaximizeWindowCheckBox().setSelected(false);
+                    getMaximizeWindowCheckBox().setSelected( false );
                     getMaximizeWindowCheckBox().disarm();
                     break;
                 case "1280x800":
                     windowSizeComboBox.setValue( getWindowSizes().get( 1 ) );
-                    getMaximizeWindowCheckBox().setSelected(false);
+                    getMaximizeWindowCheckBox().setSelected( false );
                     getMaximizeWindowCheckBox().disarm();
                     break;
                 default:
@@ -449,8 +446,8 @@ public class SettingsBP extends BorderPane
                     if ( newValue )
                     {
                         stage.setFullScreen( true );
-                        settings.setWidth((int) stage.getWidth());
-                        settings.setHeight((int)stage.getHeight());
+                        settings.setWidth( ( int ) stage.getWidth() );
+                        settings.setHeight( ( int ) stage.getHeight() );
                         stage.setWidth( settings.getWidth() );
                         stage.setHeight( settings.getHeight() );
                     }

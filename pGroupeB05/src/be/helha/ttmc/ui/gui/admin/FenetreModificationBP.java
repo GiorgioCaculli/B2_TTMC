@@ -236,7 +236,8 @@ public class FenetreModificationBP extends BorderPane
 
                     } // affichage d'une fenetre d'information quand les champs ne sont pas complets
 
-                    Alert alert = new Alert( AlertType.WARNING, "At least one of the fields is empty! Please, fill it!" );
+                    Alert alert = new Alert( AlertType.WARNING,
+                            "At least one of the fields is empty! Please, fill it!" );
                     alert.showAndWait();
 
                 }

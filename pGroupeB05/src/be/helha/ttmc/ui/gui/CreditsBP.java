@@ -10,17 +10,18 @@ import javafx.scene.layout.FlowPane;
 public class CreditsBP extends BorderPane
 {
     private Button backButton;
+
     public CreditsBP()
     {
         FlowPane fp = new FlowPane();
-        
+
         setCenter( fp );
         setBottom( getBackButton() );
     }
-    
+
     private Button getBackButton()
     {
-        if( backButton == null )
+        if ( backButton == null )
         {
             backButton = new Button( GUIConstant.BUTTON_RETURN );
             backButton.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );

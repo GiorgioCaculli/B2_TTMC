@@ -49,7 +49,7 @@ public class AlerteLogin extends Alert
         grid.setHgap( 10 );
         grid.setVgap( 10 );
         grid.setPadding( new Insets( 20, 150, 10, 10 ) );
-        
+
         username.setPromptText( GUIConstant.DIALOG_LOGIN_USERNAME );
         PasswordField password = new PasswordField();
         password.setPromptText( GUIConstant.DIALOG_LOGIN_PASSWORD );
@@ -92,12 +92,13 @@ public class AlerteLogin extends Alert
         Optional< Pair< String, String > > credentials = result;
         if ( credentials != null )
             return ( credentials.get().getKey().equals( "admin" ) || credentials.get().getKey().equals( "user" )
-                    || credentials.get().getKey().equals( "giorgio" ) || credentials.get().getKey().equals( "guillaume" )
-                    || credentials.get().getKey().equals( "tanguy" ) || credentials.get().getKey().equals( "altares" ) )
+                    || credentials.get().getKey().equals( "giorgio" )
+                    || credentials.get().getKey().equals( "guillaume" ) || credentials.get().getKey().equals( "tanguy" )
+                    || credentials.get().getKey().equals( "altares" ) )
                     && credentials.get().getValue().equals( "helha" );
         return false;
     }
-    
+
     public String getUsername()
     {
         return username.getText();

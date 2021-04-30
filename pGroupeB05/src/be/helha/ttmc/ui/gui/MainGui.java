@@ -22,11 +22,11 @@ public class MainGui extends Application
     private static final Logger logger = Logger.getLogger( "MainGui Class Logger" );
     private Settings s;
     private MusicGestion musics;
-    
+
     public void cleanup()
     {
     }
-    
+
     public void startGame( Stage stage )
     {
         s = new Settings( "application.properties" );
@@ -47,7 +47,7 @@ public class MainGui extends Application
         stage.show();
         stage.setTitle( GUIConstant.TITLE );
     }
-    
+
     public void restart( Stage stage )
     {
         cleanup();
@@ -79,6 +79,5 @@ public class MainGui extends Application
         Platform.exit();
         System.exit( 0 );
     }
-    
-    
+
 }
