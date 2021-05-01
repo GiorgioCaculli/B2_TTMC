@@ -22,7 +22,11 @@ public class RulesBP extends BorderPane
     public RulesBP( Settings s )
     {
         this.s = s;
-        Label rulesLabel = new Label( s.getLanguage().getString( "label_rules" ) );
+        String rules = s.getLanguage().getString( "rules_line_1" ) + "\n"
+                + s.getLanguage().getString( "rules_line_2" ) + "\n" + s.getLanguage().getString( "rules_line_3" )
+                + "\n" + s.getLanguage().getString( "rules_line_4" ) + "\n"
+                + s.getLanguage().getString( "rules_line_5" ) + "\n" + s.getLanguage().getString( "rules_line_6" );
+        Label rulesLabel = new Label( rules );
         rulesLabel.setWrapText( true );
 
         HBox hbRule = new HBox();
@@ -47,11 +51,7 @@ public class RulesBP extends BorderPane
     {
         if ( lblRules == null )
         {
-            String rules = s.getLanguage().getString( "rules_line_1" ) + "\n"
-                    + s.getLanguage().getString( "rules_line_2" ) + "\n" + s.getLanguage().getString( "rules_line_3" )
-                    + "\n" + s.getLanguage().getString( "rules_line_4" ) + "\n"
-                    + s.getLanguage().getString( "rules_line_5" ) + "\n" + s.getLanguage().getString( "rules_line_6" );
-            lblRules = new Label( rules );
+            lblRules = new Label( s.getLanguage().getString( "label_rules" )  );
             lblRules.setFont( GUIConstant.BUTTON_TEXT );
             lblRules.setStyle( "-fx-underline: true" );
             lblRules.setAlignment( Pos.CENTER );
