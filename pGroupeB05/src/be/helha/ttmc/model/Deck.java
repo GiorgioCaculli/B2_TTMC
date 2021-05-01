@@ -124,11 +124,13 @@ public class Deck implements Serializable
             cards.set( cards.indexOf( oldCard ), newCard );
             return true;
         }
-        catch (NullPointerException npe) {
+        catch ( NullPointerException npe )
+        {
             npe.printStackTrace();
             return false;
         }
-        catch (BasicCardNotFoundException bcnfe) {
+        catch ( BasicCardNotFoundException bcnfe )
+        {
             bcnfe.printStackTrace();
             return false;
         }
