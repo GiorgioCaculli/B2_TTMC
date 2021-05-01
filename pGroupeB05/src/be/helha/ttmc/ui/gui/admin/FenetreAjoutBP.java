@@ -49,40 +49,23 @@ public class FenetreAjoutBP extends BorderPane
         this.d = d;
         this.s = s;
         // creation de la partie superieure de la fenetre
-        /*AnchorPane anch = new AnchorPane();
-
-        AnchorPane.setTopAnchor( getLblTheme(), 4. );
-        AnchorPane.setLeftAnchor( getLblTheme(), 10. );
-
-        AnchorPane.setLeftAnchor( getCb(), 60. );
-
-        AnchorPane.setTopAnchor( getLblAuthor(), 4. );
-        AnchorPane.setLeftAnchor( getLblAuthor(), ( double ) s.getWidth() / 3 );
-
-        AnchorPane.setLeftAnchor( getTxtAuthor(), ( double ) s.getWidth() / 2 );
-        AnchorPane.setRightAnchor( getTxtAuthor(), 10. );
-
-        AnchorPane.setTopAnchor( getLblSubject(), 39. );
-        AnchorPane.setLeftAnchor( getLblSubject(), 7. );
-
-        AnchorPane.setTopAnchor( getTxtSubject(), 35. );
-        AnchorPane.setLeftAnchor( getTxtSubject(), 60. );
-        AnchorPane.setRightAnchor( getTxtSubject(), 10. );*/
+        
         
         VBox cardAuthorThemeSubjectBox = new VBox();
         
         HBox authorThemeBox = new HBox();
-        authorThemeBox.getChildren().add( getLblTheme() );
-        authorThemeBox.getChildren().add( getCb() );
-        authorThemeBox.getChildren().add( getLblAuthor() );
-        authorThemeBox.getChildren().add( getTxtAuthor() );
+        authorThemeBox.getChildren().addAll( getLblTheme(), getCb() ,getLblAuthor(),getTxtAuthor()  );
+        authorThemeBox.setSpacing(10.);
+        
         
         HBox subjectBox = new HBox();
-        subjectBox.getChildren().add( getLblSubject() );
-        subjectBox.getChildren().add( getTxtSubject() );
+        subjectBox.getChildren().addAll( getLblSubject(), getTxtSubject() );
+        subjectBox.setSpacing(10.);
+       
         
         cardAuthorThemeSubjectBox.getChildren().add( authorThemeBox );
         cardAuthorThemeSubjectBox.getChildren().add( subjectBox );
+        cardAuthorThemeSubjectBox.setSpacing(10.);
 
         /*anch.getChildren().addAll( getLblTheme(), getCb(), getLblAuthor(), getTxtAuthor(), getLblSubject(),
                 getTxtSubject() );*/
@@ -96,12 +79,12 @@ public class FenetreAjoutBP extends BorderPane
         for ( int i = 0; i < nbcols; i++ )
         {
             ColumnConstraints colConstr = new ColumnConstraints();
-            colConstr.setPercentWidth( 100. / nbcols );
+            colConstr.setPercentWidth( 75. / nbcols );
             grid.getColumnConstraints().add( colConstr );
         }
         // ajout des labels de legendes
-        grid.add( getLblChal(), 0, 1 );
-        grid.add( getLblAns(), 7, 1 );
+        grid.add( getLblChal(), 1, 1,3,1 );
+        grid.add( getLblAns(), 7, 1,3,1 );
 
         for ( int i = 1; i <= minChallenges; i++ )
         {
@@ -112,20 +95,20 @@ public class FenetreAjoutBP extends BorderPane
             grid.add( getTextsfieldCha().get( i - 1 ), 1, i + 1, 6, 1 );
 
             // ajout des champs de textes des reponses
-            grid.add( getTextsfieldAns().get( i - 1 ), 7, i + 1, 5, 1 );
+            grid.add( getTextsfieldAns().get( i - 1 ), 7, i + 1, 7, 1 );
 
         }
 
         // ajout des bouttons
-        grid.add( getButtonReturn(), 8, minChallenges + 3 );
-        grid.add( getButtonCancel(), 9, minChallenges + 3 );
-        grid.add( getButtonsOK(), 10, minChallenges + 3 );
-        GridPane.setHalignment( getButtonCancel(), HPos.CENTER );
-        GridPane.setHalignment( getButtonsOK(), HPos.CENTER );
+        HBox hbButton =new HBox();
+        hbButton.getChildren().addAll(getButtonReturn(), getButtonCancel(), getButtonsOK());
+        hbButton.setAlignment(Pos.CENTER);
+        hbButton.setSpacing(25.);
+        hbButton.setPadding(new Insets(75.));
 
         // ajout des differents composants dans la borderPane
         VBox vb = new VBox();
-        vb.getChildren().addAll( cardAuthorThemeSubjectBox, grid );
+        vb.getChildren().addAll( cardAuthorThemeSubjectBox, grid, hbButton );
         vb.setAlignment( Pos.CENTER );
         setCenter( vb );
         setStyle( GUIConstant.WINDOW_STYLE );
@@ -295,7 +278,7 @@ public class FenetreAjoutBP extends BorderPane
     public Label getLblTheme()
     {
         if ( lblTheme == null )
-            lblTheme = new Label( "Theme :" );
+            lblTheme = new Label( "Theme : " );
         return lblTheme;
     }
 
