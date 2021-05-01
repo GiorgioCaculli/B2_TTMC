@@ -54,6 +54,7 @@ public class GUIConstant
     public static final String BUTTON_RULES_ACCEPT = rb.getString( "button_rules_accept" );
     public static final String BUTTON_NEW_GAME = rb.getString( "button_new_game" );
     public static final String BUTTON_LOAD_GAME = rb.getString( "button_load_game" );
+    public static final String LABEL_RULES = rb.getString( "label_rules" );
 
     // BUTTON ADMIN MENU
     public static final String BUTTON_ADD_CARD = rb.getString( "button_add_card" );
