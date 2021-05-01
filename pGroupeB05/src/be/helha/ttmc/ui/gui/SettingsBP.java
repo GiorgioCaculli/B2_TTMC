@@ -51,6 +51,7 @@ public class SettingsBP extends BorderPane
     private boolean windowSizeChanged = false;
     private Label maximizeWindowLabel;
     private CheckBox maximizeWindowCheckBox;
+    private Label lblSetttings;
 
     public SettingsBP( Settings s, MusicGestion musicGestion )
     {
@@ -58,40 +59,49 @@ public class SettingsBP extends BorderPane
         this.musicGestion = musicGestion;
 
         HBox volumeBox = new HBox();
-        volumeBox.getChildren().add( getSlider() );
-        volumeBox.getChildren().add( getMuteMusicButton() );
-        volumeBox.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
+        volumeBox.getChildren().addAll( getSlider() , getMuteMusicButton());
+        volumeBox.setSpacing(25.);
+        volumeBox.setPadding(new Insets(25.));
 
         HBox timerBox = new HBox();
-        timerBox.getChildren().add( getTimerLabel() );
-        timerBox.getChildren().add( getTimerTextField() );
+        timerBox.getChildren().addAll( getTimerLabel() , getTimerTextField());
+        timerBox.setSpacing(25.);
+        timerBox.setPadding(new Insets(25.));
+       
 
         HBox languageBox = new HBox();
-        languageBox.getChildren().add( getLanguageLabel() );
-        languageBox.getChildren().add( getLanguageComboBox() );
+        languageBox.getChildren().addAll( getLanguageLabel(), getLanguageComboBox() );
+        languageBox.setSpacing(25.);
+        languageBox.setPadding(new Insets(25.));
 
         HBox windowSizeBox = new HBox();
-        windowSizeBox.getChildren().add( getWindowSizeLabel() );
-        windowSizeBox.getChildren().add( getWindowSizeComboBox() );
+        windowSizeBox.getChildren().addAll( getWindowSizeLabel(), getWindowSizeComboBox(),getMaximizeWindowLabel(),getMaximizeWindowCheckBox() );
+        windowSizeBox.setSpacing(25.);
+        windowSizeBox.setPadding(new Insets(25.));
 
-        HBox maximizeWindowBox = new HBox();
-        maximizeWindowBox.getChildren().add( getMaximizeWindowLabel() );
-        maximizeWindowBox.getChildren().add( getMaximizeWindowCheckBox() );
+        
 
         VBox settingsBox = new VBox();
-        settingsBox.getChildren().add( volumeBox );
+        settingsBox.getChildren().addAll(getLblSettings(), volumeBox );
         settingsBox.getChildren().add( timerBox );
         settingsBox.getChildren().add( languageBox );
         settingsBox.getChildren().add( windowSizeBox );
-        settingsBox.getChildren().add( maximizeWindowBox );
+       
 
-        settingsBox.setSpacing( 25. );
+    
         settingsBox.setAlignment( Pos.CENTER );
 
         settingsBox.setPadding( new Insets( 5 ) );
 
         setCenter( settingsBox );
-        setBottom( getBackButton() );
+      
+        HBox hbbot= new HBox();
+        hbbot.getChildren().add(getBackButton());
+        hbbot.setAlignment(Pos.CENTER);
+        hbbot.setPadding(new Insets(25.));
+       
+      
+        setBottom( hbbot );
 
         setOnKeyPressed( new EventHandler< KeyEvent >()
         {
@@ -136,7 +146,8 @@ public class SettingsBP extends BorderPane
         if ( backButton == null )
         {
             backButton = new Button( GUIConstant.BUTTON_RETURN );
-            backButton.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
+            backButton.setMaxSize( settings.getWidth()/3., Double.MAX_VALUE);
+            backButton.setMinWidth(settings.getWidth()/3.);
             backButton.setOnAction( new EventHandler< ActionEvent >()
             {
                 @Override
@@ -160,6 +171,16 @@ public class SettingsBP extends BorderPane
         return backButton;
     }
 
+    public Label getLblSettings() {
+    	if(lblSetttings== null) {
+    		lblSetttings= new Label(GUIConstant.BUTTON_SETTINGS);
+    		lblSetttings.setFont(GUIConstant.BUTTON_TEXT);
+    		lblSetttings.setStyle("-fx-underline: true;");
+    		lblSetttings.setPadding(new Insets(25.));
+    	}
+    	return lblSetttings;
+    }
+    
     public Slider getSlider()
     {
         if ( slider == null )
@@ -179,8 +200,8 @@ public class SettingsBP extends BorderPane
             slider.setShowTickMarks( true );
             slider.setShowTickLabels( true );
             slider.setBlockIncrement( 10 );
-            slider.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
-            slider.setPrefWidth( settings.getWidth() / 1.2 );
+        //    slider.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
+            slider.setPrefWidth( settings.getWidth() / 3 );
         }
         return slider;
     }
