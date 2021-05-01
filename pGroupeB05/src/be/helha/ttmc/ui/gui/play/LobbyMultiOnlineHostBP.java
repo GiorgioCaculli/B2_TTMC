@@ -304,7 +304,7 @@ class LobbyMultiOnlineHostBP extends BorderPane
     {
         if ( returnButton == null )
         {
-            returnButton = new Button( GUIConstant.BUTTON_RETURN );
+            returnButton = new Button( settings.getLanguage().getString( "button_return" ) );
             returnButton.setOnAction( new EventHandler< ActionEvent >()
             {
                 @Override

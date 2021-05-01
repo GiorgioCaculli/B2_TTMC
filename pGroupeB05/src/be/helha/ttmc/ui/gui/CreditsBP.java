@@ -49,7 +49,7 @@ public class CreditsBP extends BorderPane
         teamImage.setFitHeight( image.getHeight() / 2 );
         teamImage.setPreserveRatio( true );
 
-        teamBox.getChildren().add( new Label( GUIConstant.CREDITS_TEAM ) );
+        teamBox.getChildren().add( new Label( s.getLanguage().getString( "credits_team" ) ) );
         teamBox.getChildren().add( teamImage );
         teamBox.setAlignment( Pos.TOP_CENTER );
 
@@ -153,7 +153,7 @@ public class CreditsBP extends BorderPane
     {
         if ( backButton == null )
         {
-            backButton = new Button( GUIConstant.BUTTON_RETURN );
+            backButton = new Button( s.getLanguage().getString( "button_return" ) );
             backButton.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
             backButton.setOnAction( new EventHandler< ActionEvent >()
             {

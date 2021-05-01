@@ -18,6 +18,11 @@ import java.util.Locale;
 import java.util.Properties;
 
 import be.helha.ttmc.Main;
+import be.helha.ttmc.ui.internationalization.English;
+import be.helha.ttmc.ui.internationalization.French;
+import be.helha.ttmc.ui.internationalization.Italian;
+import be.helha.ttmc.ui.internationalization.Japanese;
+import be.helha.ttmc.ui.internationalization.Language;
 
 public class Settings
 {
@@ -69,10 +74,10 @@ public class Settings
         {
             initProperties();
         }
-        catch( Exception e )
+        catch ( Exception e )
         {
             File configFile = new File( configFileName );
-            if( configFile.exists() )
+            if ( configFile.exists() )
             {
                 configFile.delete();
             }
@@ -91,7 +96,7 @@ public class Settings
             initProperties();
         }
     }
-    
+
     private void initProperties()
     {
         languages = new ArrayList<>();
@@ -122,7 +127,7 @@ public class Settings
         setMute( Boolean.parseBoolean( props.getProperty( "mute" ) ) );
         setLanguage( props.getProperty( "language" ) );
         setCountry( props.getProperty( "country" ) );
-        setLocale( new Locale( getLanguage(), getCountry() ) );
+        setLocale( getLanguage().getLocale() );
         setLanguages( languages );
         setNames( names );
     }
@@ -209,9 +214,28 @@ public class Settings
         props.setProperty( "language", language );
     }
 
-    public String getLanguage()
+    public Language getLanguage()
     {
-        return language;
+        if ( language.equalsIgnoreCase( "en" ) )
+        {
+            return new English();
+        }
+        else if ( language.equalsIgnoreCase( "fr" ) )
+        {
+            return new French();
+        }
+        else if ( language.equalsIgnoreCase( "it" ) )
+        {
+            return new Italian();
+        }
+        else if ( language.equalsIgnoreCase( "ja" ) )
+        {
+            return new Japanese();
+        }
+        else
+        {
+            return new English();
+        }
     }
 
     public void setCountry( String country )
@@ -222,7 +246,7 @@ public class Settings
 
     public String getCountry()
     {
-        return country;
+        return getLanguage().getCountry();
     }
 
     public void setLocale( Locale locale )
@@ -232,7 +256,7 @@ public class Settings
 
     public Locale getLocale()
     {
-        return locale;
+        return getLanguage().getLocale();
     }
 
     public void setLanguages( List< String > languages )
@@ -249,7 +273,7 @@ public class Settings
     {
         this.names = names;
     }
-    
+
     public List< String > getNames()
     {
         return names;

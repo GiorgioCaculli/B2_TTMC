@@ -154,7 +154,7 @@ public class MenuMultiplayerBP extends BorderPane
     {
         if ( btnRetour == null )
         {
-            btnRetour = new Button( GUIConstant.BUTTON_RETURN );
+            btnRetour = new Button( s.getLanguage().getString( "button_return" ) );
             btnRetour.setOnAction( new EventHandler< ActionEvent >()
             {
 

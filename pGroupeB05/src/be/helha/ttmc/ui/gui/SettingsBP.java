@@ -140,7 +140,7 @@ public class SettingsBP extends BorderPane
     {
         if ( backButton == null )
         {
-            backButton = new Button( GUIConstant.BUTTON_RETURN );
+            backButton = new Button( settings.getLanguage().getString( "button_return" ) );
             backButton.setMaxSize( settings.getWidth() / 3., Double.MAX_VALUE );
             backButton.setMinWidth( settings.getWidth() / 3. );
             backButton.setOnAction( new EventHandler< ActionEvent >()
@@ -170,7 +170,7 @@ public class SettingsBP extends BorderPane
     {
         if ( lblSetttings == null )
         {
-            lblSetttings = new Label( GUIConstant.BUTTON_SETTINGS );
+            lblSetttings = new Label( settings.getLanguage().getString( "button_settings" ) );
             lblSetttings.setFont( GUIConstant.BUTTON_TEXT );
             lblSetttings.setStyle( "-fx-underline: true;" );
             lblSetttings.setPadding( new Insets( 25. ) );
@@ -303,7 +303,7 @@ public class SettingsBP extends BorderPane
         if ( languageComboBox == null )
         {
             languageComboBox = new ComboBox<>( getLanguages() );
-            switch ( settings.getLanguage() )
+            switch ( settings.getLanguage().getLanguage() )
             {
                 case "en":
                     languageComboBox.setValue( getLanguages().get( 0 ) );
@@ -348,7 +348,7 @@ public class SettingsBP extends BorderPane
                     }
                     if ( !newValue.equalsIgnoreCase( currentLanguage ) )
                     {
-                        settings.setLocale( new Locale( settings.getLanguage(), settings.getCountry() ) );
+                        settings.setLocale( settings.getLanguage().getLocale() );
                         languageChanged = true;
                     }
                     else

@@ -54,9 +54,9 @@ public class LobbySoloBP extends BorderPane
             }
         }
         TextInputDialog userNameDialog = new TextInputDialog();
-        userNameDialog.setTitle( GUIConstant.DIALOG_PLAY_TITLE );
-        userNameDialog.setHeaderText( GUIConstant.DIALOG_PLAY_CONTENT );
-        userNameDialog.setContentText( GUIConstant.DIALOG_PLAY_MESSAGE );
+        userNameDialog.setTitle( s.getLanguage().getString( "dialog_play_title" ) );
+        userNameDialog.setHeaderText( s.getLanguage().getString( "dialog_play_content" ) );
+        userNameDialog.setContentText( s.getLanguage().getString( "dialog_play_message" ) );
         Optional< String > userName = userNameDialog.showAndWait();
         if ( userName.isPresent() )
         {
@@ -142,7 +142,7 @@ public class LobbySoloBP extends BorderPane
         if ( newGameButton == null )
         {
 
-            newGameButton = new Button( GUIConstant.BUTTON_NEW_GAME );
+            newGameButton = new Button( s.getLanguage().getString( "button_new_game" ) );
             newGameButton.setOnAction( new EventHandler< ActionEvent >()
             {
                 @Override
@@ -177,14 +177,14 @@ public class LobbySoloBP extends BorderPane
     {
         if ( loadGameButton == null )
         {
-            loadGameButton = new Button( GUIConstant.BUTTON_LOAD_GAME );
+            loadGameButton = new Button( s.getLanguage().getString( "button_load_game" ) );
             loadGameButton.setOnAction( new EventHandler< ActionEvent >()
             {
                 @Override
                 public void handle( ActionEvent arg0 )
                 {
                     FileChooser fc = new FileChooser();
-                    fc.setTitle( GUIConstant.BUTTON_IMPORT_DECK );
+                    fc.setTitle( s.getLanguage().getString( "button_import_deck" ) );
                     fc.getExtensionFilters().add( new ExtensionFilter( "JSON File", "*.json" ) );
                     Stage stage = ( Stage ) getScene().getWindow();
                     File f = fc.showOpenDialog( stage );
@@ -218,7 +218,7 @@ public class LobbySoloBP extends BorderPane
         if ( returnButton == null )
         {
 
-            returnButton = new Button( GUIConstant.BUTTON_RETURN );
+            returnButton = new Button( s.getLanguage().getString( "button_return" ) );
             returnButton.setOnAction( new EventHandler< ActionEvent >()
             {
 

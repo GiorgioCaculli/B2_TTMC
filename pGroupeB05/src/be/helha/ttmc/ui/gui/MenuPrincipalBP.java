@@ -104,7 +104,7 @@ public class MenuPrincipalBP extends BorderPane
     {
         if ( btnJouer == null )
         {
-            btnJouer = new Button( GUIConstant.BUTTON_PLAY );
+            btnJouer = new Button( s.getLanguage().getString( "button_play" ) );
             btnJouer.setOnAction( new EventHandler< ActionEvent >()
             {
 
@@ -132,7 +132,7 @@ public class MenuPrincipalBP extends BorderPane
     {
         if ( btnCredits == null )
         {
-            btnCredits = new Button( GUIConstant.BUTTON_CREDITS );
+            btnCredits = new Button( s.getLanguage().getString( "button_credits" ) );
             btnCredits.setOnAction( new EventHandler< ActionEvent >()
             {
                 @Override
@@ -150,7 +150,7 @@ public class MenuPrincipalBP extends BorderPane
     {
         if ( btnParametres == null )
         {
-            btnParametres = new Button( GUIConstant.BUTTON_SETTINGS );
+            btnParametres = new Button( s.getLanguage().getString( "button_settings" ) );
             btnParametres.setOnAction( new EventHandler< ActionEvent >()
             {
                 @Override
@@ -168,13 +168,14 @@ public class MenuPrincipalBP extends BorderPane
     {
         if ( btnQuitter == null )
         {
-            btnQuitter = new Button( GUIConstant.BUTTON_LEAVE_GAME );
+            btnQuitter = new Button( s.getLanguage().getString( "button_leave_game" ) );
             btnQuitter.setOnAction( new EventHandler< ActionEvent >()
             {
                 @Override
                 public void handle( ActionEvent arg0 )
                 {
-                    Alert alert = new Alert( AlertType.CONFIRMATION, GUIConstant.DIALOG_EXIT_CONTENT );
+                    Alert alert = new Alert( AlertType.CONFIRMATION,
+                            s.getLanguage().getString( "dialog_exit_content" ) );
                     if ( alert.showAndWait().get() == ButtonType.OK )
                     {
                         Stage stage = ( Stage ) getScene().getWindow();
@@ -190,20 +191,20 @@ public class MenuPrincipalBP extends BorderPane
     {
         if ( btnGerer == null )
         {
-            btnGerer = new Button( GUIConstant.BUTTON_ADMIN_PANEL );
+            btnGerer = new Button( s.getLanguage().getString( "button_admin_panel" ) );
             btnGerer.setOnAction( new EventHandler< ActionEvent >()
             {
 
                 @Override
                 public void handle( ActionEvent arg0 )
                 {
-                    AlerteLogin alert = new AlerteLogin();
+                    AlerteLogin alert = new AlerteLogin( s );
                     if ( alert.getResultat() )
                     {
                         Alert granted = new Alert( AlertType.INFORMATION );
-                        granted.setTitle( GUIConstant.DIALOG_LOGIN_ACCESS_GRANTED );
+                        granted.setTitle( s.getLanguage().getString( "dialog_login_access_granted" ) );
                         String path;
-                        granted.setContentText( GUIConstant.DIALOG_LOGIN_ACCESS_GRANTED );
+                        granted.setContentText( s.getLanguage().getString( "dialog_login_access_granted" ) );
                         path = "/be/helha/ttmc/assets/images/hackerman.gif";
                         Image img = new Image( path );
                         ImageView icon = new ImageView( img );
@@ -223,9 +224,9 @@ public class MenuPrincipalBP extends BorderPane
                     {
 
                         Alert denied = new Alert( AlertType.INFORMATION );
-                        denied.setTitle( GUIConstant.DIALOG_LOGIN_ACCESS_DENIED );
+                        denied.setTitle( s.getLanguage().getString( "dialog_login_access_denied" ) );
                         String path;
-                        denied.setContentText( GUIConstant.DIALOG_LOGIN_ACCESS_DENIED );
+                        denied.setContentText( s.getLanguage().getString( "dialog_login_access_denied" ) );
                         path = "/be/helha/ttmc/assets/images/anonymous.png";
                         Image img = new Image( path );
                         ImageView icon = new ImageView( img );

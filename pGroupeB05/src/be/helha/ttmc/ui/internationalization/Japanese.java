@@ -4,7 +4,7 @@ public class Japanese extends Language
 {
     public Japanese()
     {
-        super( "jp", "JP" );
+        super( "ja", "JP" );
     }
 
     @Override

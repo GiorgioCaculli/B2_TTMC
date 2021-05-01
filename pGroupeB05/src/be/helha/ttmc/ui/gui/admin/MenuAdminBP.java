@@ -108,7 +108,7 @@ public class MenuAdminBP extends BorderPane
     {
         if ( btnAjout == null )
         {
-            btnAjout = new Button( GUIConstant.BUTTON_ADD_CARD );
+            btnAjout = new Button( s.getLanguage().getString( "button_add_card" ) );
             btnAjout.setOnAction( new EventHandler< ActionEvent >()
             {
 
@@ -126,7 +126,7 @@ public class MenuAdminBP extends BorderPane
     {
         if ( btnListe == null )
         {
-            btnListe = new Button( GUIConstant.BUTTON_LIST_CARD );
+            btnListe = new Button( s.getLanguage().getString( "button_list_card" ) );
             btnListe.setOnAction( new EventHandler< ActionEvent >()
             {
 
@@ -153,7 +153,7 @@ public class MenuAdminBP extends BorderPane
     {
         if ( btnRetour == null )
         {
-            btnRetour = new Button( GUIConstant.BUTTON_RETURN );
+            btnRetour = new Button( s.getLanguage().getString( "button_return" ) );
             btnRetour.setOnAction( new EventHandler< ActionEvent >()
             {
 
@@ -172,14 +172,14 @@ public class MenuAdminBP extends BorderPane
     {
         if ( btnImport == null )
         {
-            btnImport = new Button( GUIConstant.BUTTON_IMPORT_DECK );
+            btnImport = new Button( s.getLanguage().getString( "button_import_deck" ) );
             btnImport.setOnAction( new EventHandler< ActionEvent >()
             {
                 @Override
                 public void handle( ActionEvent arg0 )
                 {
                     FileChooser fc = new FileChooser();
-                    fc.setTitle( GUIConstant.BUTTON_IMPORT_DECK );
+                    fc.setTitle( s.getLanguage().getString( "button_import_deck" ) );
                     fc.getExtensionFilters().add( new ExtensionFilter( "JSON File", "*.json" ) );
                     Stage stage = ( Stage ) getScene().getWindow();
                     File f = fc.showOpenDialog( stage );
@@ -202,13 +202,14 @@ public class MenuAdminBP extends BorderPane
     {
         if ( btnExport == null )
         {
-            btnExport = new Button( GUIConstant.BUTTON_EXPORT_DECK );
+            btnExport = new Button( s.getLanguage().getString( "button_export_deck" ) );
             btnExport.setOnAction( new EventHandler< ActionEvent >()
             {
                 @Override
                 public void handle( ActionEvent arg0 )
                 {
                     FileChooser fc = new FileChooser();
+                    fc.setTitle( s.getLanguage().getString( "button_export_deck" ) );
                     Stage stage = ( Stage ) getScene().getWindow();
                     File f = fc.showSaveDialog( stage );
                     if ( f == null )

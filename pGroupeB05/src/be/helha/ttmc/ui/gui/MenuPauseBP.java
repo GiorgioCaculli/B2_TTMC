@@ -79,7 +79,7 @@ public class MenuPauseBP extends BorderPane
     {
         if ( btnBack == null )
         {
-            btnBack = new Button( GUIConstant.BUTTON_BACK_TO_LOBBY );
+            btnBack = new Button( s.getLanguage().getString( "button_back_to_lobby" ) );
             btnBack.setMaxSize( 200, 200 );
         }
         return btnBack;
@@ -89,7 +89,7 @@ public class MenuPauseBP extends BorderPane
     {
         if ( btnResume == null )
         {
-            btnResume = new Button( GUIConstant.BUTTON_RESUME );
+            btnResume = new Button( s.getLanguage().getString( "button_resume" ) );
             btnResume.setMaxSize( 200, 200 );
             btnResume.setOnAction( new EventHandler< ActionEvent >()
             {

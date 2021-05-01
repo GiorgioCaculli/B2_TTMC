@@ -42,7 +42,7 @@ public class MenuPlayBP extends BorderPane
         this.s = s;
         this.m = m;
         getChoicePane().getChildren().add( new MenuPlayMainVB() );
-        getChoicePane().getChildren().add( new RulesBP() );
+        getChoicePane().getChildren().add( new RulesBP( s ) );
         setVisibleNode( RulesBP.class.getSimpleName() );
 
         setCenter( choicePane );
@@ -109,7 +109,7 @@ public class MenuPlayBP extends BorderPane
     {
         if ( btnSolo == null )
         {
-            btnSolo = new Button( GUIConstant.BUTTON_SINGLE_PLAYER );
+            btnSolo = new Button( s.getLanguage().getString( "button_single_player" ) );
             btnSolo.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
             btnSolo.setOnAction( new EventHandler< ActionEvent >()
             {
@@ -137,7 +137,7 @@ public class MenuPlayBP extends BorderPane
     {
         if ( btnMulti == null )
         {
-            btnMulti = new Button( GUIConstant.BUTTON_MULTIPLAYER );
+            btnMulti = new Button( s.getLanguage().getString( "button_multiplayer" ) );
             btnMulti.setOnAction( new EventHandler< ActionEvent >()
             {
                 @Override
@@ -163,7 +163,7 @@ public class MenuPlayBP extends BorderPane
     {
         if ( btnRetour == null )
         {
-            btnRetour = new Button( GUIConstant.BUTTON_RETURN );
+            btnRetour = new Button( s.getLanguage().getString( "button_return" ) );
             btnRetour.setOnAction( new EventHandler< ActionEvent >()
             {
 

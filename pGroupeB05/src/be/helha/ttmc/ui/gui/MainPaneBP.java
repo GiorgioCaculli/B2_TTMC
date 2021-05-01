@@ -15,7 +15,6 @@ public class MainPaneBP extends BorderPane
 
     public MainPaneBP( Deck d, Settings s, MusicGestion musics )
     {
-        //getStackPane();
         getStackPane().getChildren().add( new MenuPrincipalBP( d, s ) );
         getStackPane().getChildren().add( new MenuPlayBP( d, s, musics ) );
         getStackPane().getChildren().add( new SettingsBP( s, musics ) );

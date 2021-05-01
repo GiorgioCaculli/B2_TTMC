@@ -1,6 +1,7 @@
 package be.helha.ttmc.ui.gui.play;
 
 import be.helha.ttmc.ui.GUIConstant;
+import be.helha.ttmc.ui.Settings;
 import be.helha.ttmc.ui.gui.play.MenuPlayBP.MenuPlayMainVB;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -16,23 +17,12 @@ public class RulesBP extends BorderPane
 {
     private Button acceptButton;
     private Label lblRules;
+    private Settings s;
 
-    public Label getLblRules()
+    public RulesBP( Settings s )
     {
-        if ( lblRules == null )
-        {
-            lblRules = new Label( GUIConstant.LABEL_RULES );
-            lblRules.setFont( GUIConstant.BUTTON_TEXT );
-            lblRules.setStyle( "-fx-underline: true" );
-            lblRules.setAlignment( Pos.CENTER );
-        }
-        return lblRules;
-    }
-
-    public RulesBP()
-    {
-
-        Label rulesLabel = new Label( GUIConstant.RULES );
+        this.s = s;
+        Label rulesLabel = new Label( s.getLanguage().getString( "label_rules" ) );
         rulesLabel.setWrapText( true );
 
         HBox hbRule = new HBox();
@@ -53,11 +43,27 @@ public class RulesBP extends BorderPane
         setStyle( GUIConstant.WINDOW_STYLE );
     }
 
+    public Label getLblRules()
+    {
+        if ( lblRules == null )
+        {
+            String rules = s.getLanguage().getString( "rules_line_1" ) + "\n"
+                    + s.getLanguage().getString( "rules_line_2" ) + "\n" + s.getLanguage().getString( "rules_line_3" )
+                    + "\n" + s.getLanguage().getString( "rules_line_4" ) + "\n"
+                    + s.getLanguage().getString( "rules_line_5" ) + "\n" + s.getLanguage().getString( "rules_line_6" );
+            lblRules = new Label( rules );
+            lblRules.setFont( GUIConstant.BUTTON_TEXT );
+            lblRules.setStyle( "-fx-underline: true" );
+            lblRules.setAlignment( Pos.CENTER );
+        }
+        return lblRules;
+    }
+
     public Button getAcceptButton()
     {
         if ( acceptButton == null )
         {
-            acceptButton = new Button( GUIConstant.BUTTON_RULES_ACCEPT );
+            acceptButton = new Button( s.getLanguage().getString( "button_rules_accept" ) );
             acceptButton.setOnAction( new EventHandler< ActionEvent >()
             {
                 @Override

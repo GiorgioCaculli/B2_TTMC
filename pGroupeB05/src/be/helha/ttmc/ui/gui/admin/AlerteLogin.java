@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import be.helha.ttmc.Main;
 import be.helha.ttmc.ui.GUIConstant;
+import be.helha.ttmc.ui.Settings;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -26,12 +27,12 @@ public class AlerteLogin extends Alert
 
     TextField username = new TextField();
 
-    public AlerteLogin()
+    public AlerteLogin( Settings s )
     {
         super( AlertType.INFORMATION );
         Dialog< Pair< String, String > > dialog = new Dialog<>();
-        dialog.setTitle( GUIConstant.DIALOG_LOGIN_TITLE );
-        dialog.setHeaderText( GUIConstant.DIALOG_LOGIN_CONTENT );
+        dialog.setTitle( s.getLanguage().getString( "dialog_login_title" ) );
+        dialog.setHeaderText( s.getLanguage().getString( "dialog_login_content" ) );
 
         ImageView im = new ImageView( Main.class.getResource( "assets/images/cadenas.png" ).toString() );
         im.setFitWidth( 50 );
@@ -42,7 +43,8 @@ public class AlerteLogin extends Alert
 
         dialog.setGraphic( im );
 
-        ButtonType loginButtonType = new ButtonType( GUIConstant.DIALOG_LOGIN_BUTTON, ButtonData.OK_DONE );
+        ButtonType loginButtonType = new ButtonType( s.getLanguage().getString( "dialog_login_button" ),
+                ButtonData.OK_DONE );
         dialog.getDialogPane().getButtonTypes().addAll( loginButtonType, ButtonType.CANCEL );
 
         GridPane grid = new GridPane();
@@ -50,13 +52,13 @@ public class AlerteLogin extends Alert
         grid.setVgap( 10 );
         grid.setPadding( new Insets( 20, 150, 10, 10 ) );
 
-        username.setPromptText( GUIConstant.DIALOG_LOGIN_USERNAME );
+        username.setPromptText( s.getLanguage().getString( "dialog_login_username" ) );
         PasswordField password = new PasswordField();
-        password.setPromptText( GUIConstant.DIALOG_LOGIN_PASSWORD );
+        password.setPromptText( s.getLanguage().getString( "dialog_login_password" ) );
 
-        grid.add( new Label( GUIConstant.DIALOG_LOGIN_USERNAME + ":" ), 0, 0 );
+        grid.add( new Label( s.getLanguage().getString( "dialog_login_username" ) + ":" ), 0, 0 );
         grid.add( username, 1, 0 );
-        grid.add( new Label( GUIConstant.DIALOG_LOGIN_PASSWORD + ":" ), 0, 1 );
+        grid.add( new Label( s.getLanguage().getString( "dialog_login_password" ) + ":" ), 0, 1 );
         grid.add( password, 1, 1 );
 
         Node loginButton = dialog.getDialogPane().lookupButton( loginButtonType );

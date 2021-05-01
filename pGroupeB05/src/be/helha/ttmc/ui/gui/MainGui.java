@@ -53,7 +53,7 @@ public class MainGui extends Application
         stage.setScene( scene );
         stage.getIcons().add( new Image( "be/helha/ttmc/assets/images/paw.png" ) );
         stage.show();
-        stage.setTitle( GUIConstant.TITLE );
+        stage.setTitle( s.getLanguage().getString( "title" ) );
     }
 
     public void restart( Stage stage )
