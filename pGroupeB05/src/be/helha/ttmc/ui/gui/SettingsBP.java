@@ -59,48 +59,43 @@ public class SettingsBP extends BorderPane
         this.musicGestion = musicGestion;
 
         HBox volumeBox = new HBox();
-        volumeBox.getChildren().addAll( getSlider() , getMuteMusicButton());
-        volumeBox.setSpacing(25.);
-        volumeBox.setPadding(new Insets(25.));
+        volumeBox.getChildren().addAll( getSlider(), getMuteMusicButton() );
+        volumeBox.setSpacing( 25. );
+        volumeBox.setPadding( new Insets( 25. ) );
 
         HBox timerBox = new HBox();
-        timerBox.getChildren().addAll( getTimerLabel() , getTimerTextField());
-        timerBox.setSpacing(25.);
-        timerBox.setPadding(new Insets(25.));
-       
+        timerBox.getChildren().addAll( getTimerLabel(), getTimerTextField() );
+        timerBox.setSpacing( 25. );
+        timerBox.setPadding( new Insets( 25. ) );
 
         HBox languageBox = new HBox();
         languageBox.getChildren().addAll( getLanguageLabel(), getLanguageComboBox() );
-        languageBox.setSpacing(25.);
-        languageBox.setPadding(new Insets(25.));
+        languageBox.setSpacing( 25. );
+        languageBox.setPadding( new Insets( 25. ) );
 
         HBox windowSizeBox = new HBox();
-        windowSizeBox.getChildren().addAll( getWindowSizeLabel(), getWindowSizeComboBox(),getMaximizeWindowLabel(),getMaximizeWindowCheckBox() );
-        windowSizeBox.setSpacing(25.);
-        windowSizeBox.setPadding(new Insets(25.));
-
-        
+        windowSizeBox.getChildren().addAll( getWindowSizeLabel(), getWindowSizeComboBox(), getMaximizeWindowLabel(),
+                getMaximizeWindowCheckBox() );
+        windowSizeBox.setSpacing( 25. );
+        windowSizeBox.setPadding( new Insets( 25. ) );
 
         VBox settingsBox = new VBox();
-        settingsBox.getChildren().addAll(getLblSettings(), volumeBox );
+        settingsBox.getChildren().addAll( getLblSettings(), volumeBox );
         settingsBox.getChildren().add( timerBox );
         settingsBox.getChildren().add( languageBox );
         settingsBox.getChildren().add( windowSizeBox );
-       
 
-    
         settingsBox.setAlignment( Pos.CENTER );
 
         settingsBox.setPadding( new Insets( 5 ) );
 
         setCenter( settingsBox );
-      
-        HBox hbbot= new HBox();
-        hbbot.getChildren().add(getBackButton());
-        hbbot.setAlignment(Pos.CENTER);
-        hbbot.setPadding(new Insets(25.));
-       
-      
+
+        HBox hbbot = new HBox();
+        hbbot.getChildren().add( getBackButton() );
+        hbbot.setAlignment( Pos.CENTER );
+        hbbot.setPadding( new Insets( 25. ) );
+
         setBottom( hbbot );
 
         setOnKeyPressed( new EventHandler< KeyEvent >()
@@ -146,8 +141,8 @@ public class SettingsBP extends BorderPane
         if ( backButton == null )
         {
             backButton = new Button( GUIConstant.BUTTON_RETURN );
-            backButton.setMaxSize( settings.getWidth()/3., Double.MAX_VALUE);
-            backButton.setMinWidth(settings.getWidth()/3.);
+            backButton.setMaxSize( settings.getWidth() / 3., Double.MAX_VALUE );
+            backButton.setMinWidth( settings.getWidth() / 3. );
             backButton.setOnAction( new EventHandler< ActionEvent >()
             {
                 @Override
@@ -171,16 +166,18 @@ public class SettingsBP extends BorderPane
         return backButton;
     }
 
-    public Label getLblSettings() {
-    	if(lblSetttings== null) {
-    		lblSetttings= new Label(GUIConstant.BUTTON_SETTINGS);
-    		lblSetttings.setFont(GUIConstant.BUTTON_TEXT);
-    		lblSetttings.setStyle("-fx-underline: true;");
-    		lblSetttings.setPadding(new Insets(25.));
-    	}
-    	return lblSetttings;
+    public Label getLblSettings()
+    {
+        if ( lblSetttings == null )
+        {
+            lblSetttings = new Label( GUIConstant.BUTTON_SETTINGS );
+            lblSetttings.setFont( GUIConstant.BUTTON_TEXT );
+            lblSetttings.setStyle( "-fx-underline: true;" );
+            lblSetttings.setPadding( new Insets( 25. ) );
+        }
+        return lblSetttings;
     }
-    
+
     public Slider getSlider()
     {
         if ( slider == null )
@@ -200,7 +197,7 @@ public class SettingsBP extends BorderPane
             slider.setShowTickMarks( true );
             slider.setShowTickLabels( true );
             slider.setBlockIncrement( 10 );
-        //    slider.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
+            //    slider.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
             slider.setPrefWidth( settings.getWidth() / 3 );
         }
         return slider;
@@ -329,26 +326,25 @@ public class SettingsBP extends BorderPane
                 @Override
                 public void changed( ObservableValue< ? extends String > observable, String oldValue, String newValue )
                 {
-                    switch ( newValue )
+                    if ( newValue.equalsIgnoreCase( getLanguages().get( 0 ) ) )
                     {
-                        case "English":
-                            settings.setLanguage( "en" );
-                            settings.setCountry( "UK" );
-                            break;
-                        case "Français":
-                            settings.setLanguage( "fr" );
-                            settings.setCountry( "BE" );
-                            break;
-                        case "Italiano":
-                            settings.setLanguage( "it" );
-                            settings.setCountry( "IT" );
-                            break;
-                        case "日本語":
-                            settings.setLanguage( "ja" );
-                            settings.setCountry( "JP" );
-                            break;
-                        default:
-                            break;
+                        settings.setLanguage( "en" );
+                        settings.setCountry( "UK" );
+                    }
+                    else if ( newValue.equalsIgnoreCase( getLanguages().get( 1 ) ) )
+                    {
+                        settings.setLanguage( "fr" );
+                        settings.setCountry( "BE" );
+                    }
+                    else if ( newValue.equalsIgnoreCase( getLanguages().get( 2 ) ) )
+                    {
+                        settings.setLanguage( "it" );
+                        settings.setCountry( "IT" );
+                    }
+                    else if ( newValue.equalsIgnoreCase( getLanguages().get( 3 ) ) )
+                    {
+                        settings.setLanguage( "ja" );
+                        settings.setCountry( "JP" );
                     }
                     if ( !newValue.equalsIgnoreCase( currentLanguage ) )
                     {
@@ -363,6 +359,7 @@ public class SettingsBP extends BorderPane
             } );
         }
         return languageComboBox;
+
     }
 
     public Label getWindowSizeLabel()

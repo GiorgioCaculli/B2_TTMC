@@ -25,11 +25,19 @@ public class MainGui extends Application
 
     public void cleanup()
     {
+        s = new Settings( "application.properties" );
+        try
+        {
+            s.getProperties().store( new FileOutputStream( new File( s.getConfigFileName() ) ), "" );
+        }
+        catch ( IOException e )
+        {
+            e.printStackTrace();
+        }
     }
 
     public void startGame( Stage stage )
     {
-        s = new Settings( "application.properties" );
         int WIDTH = s.getWidth();
         int HEIGHT = s.getHeight() + 20;
         logger.log( Level.INFO, "Reading Deck" );
@@ -57,7 +65,7 @@ public class MainGui extends Application
     @Override
     public void start( Stage primaryStage )
     {
-        startGame( primaryStage );
+        restart( primaryStage );
     }
 
     public MainGui()
@@ -68,14 +76,6 @@ public class MainGui extends Application
     public void stop() throws Exception
     {
         super.stop();
-        try
-        {
-            s.getProperties().store( new FileOutputStream( new File( s.getConfigFileName() ) ), "" );
-        }
-        catch ( IOException e )
-        {
-            e.printStackTrace();
-        }
         Platform.exit();
         System.exit( 0 );
     }
