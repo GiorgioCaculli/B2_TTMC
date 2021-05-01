@@ -4,29 +4,29 @@ import java.util.List;
 
 public class IteratorMusic
 {
-    private List< String > listM;
+    private List< String > listMusic;
     private int index;
 
     public IteratorMusic( List< String > le )
     {
         super();
-        this.listM = le;
+        this.listMusic = le;
         index = 0;
     }
 
     public int listeSize()
     {
-        return listM.size();
+        return listMusic.size();
     }
 
     public String item()
     {
-        if ( index == listM.size() )
+        if ( index == listMusic.size() )
         {
             reset();
         }
 
-        return listM.get( index );
+        return listMusic.get( index );
     }
 
     public void next()
