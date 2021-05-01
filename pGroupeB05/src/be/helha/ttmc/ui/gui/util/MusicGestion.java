@@ -17,9 +17,9 @@ public class MusicGestion
     private static final Logger logger = Logger.getLogger( "MainGui Class Logger" );
     private MediaView mv;
     private Media m;
-    private int id = 0;
     private double vol;
     private Settings s;
+    private IteratorMusic itm;
 
     public MusicGestion( Settings s )
     {
@@ -29,11 +29,12 @@ public class MusicGestion
         path.add( "assets/musics/CreativeDestruction.wav" );
         path.add( "assets/musics/Intouch_IntoTheWild.wav" );
         Collections.shuffle( path );
+        itm= new IteratorMusic(path);
         logger.log( Level.INFO,
-                String.format( "Reading music file: %s", Main.class.getResource( path.get( id ) ).toString() ) );
+                String.format( "Reading music file: %s", Main.class.getResource( itm.item() ).toString() ) );
         setVol( s.getVolume() );
 
-        gererMusic( path );
+        gererMusic(  );
 
         startMusic();
 
@@ -45,7 +46,7 @@ public class MusicGestion
             {
                 try
                 {
-                    gererThread( path ).run();
+                    gererThread(  ).run();
                 }
                 catch ( Exception e )
                 {
@@ -89,9 +90,9 @@ public class MusicGestion
         mv.getMediaPlayer().setVolume( getVol() );
     }
 
-    public void gererMusic( List< String > path )
+    public void gererMusic(  )
     {
-        m = new Media( Main.class.getResource( path.get( id ) ).toString() );
+        m = new Media( Main.class.getResource( itm.item() ).toString() );
         MediaPlayer mp = new MediaPlayer( m );
         if( s.isMute() )
         {
@@ -105,7 +106,7 @@ public class MusicGestion
         mv.getMediaPlayer().stop();
     }
 
-    public Thread gererThread( List< String > path )
+    public Thread gererThread(  )
     {
         Thread tmp = new Thread( new Runnable()
         {
@@ -122,17 +123,12 @@ public class MusicGestion
                         @Override
                         public void run()
                         {
-                            if ( id < path.size() - 1 )
-                            {
-                                id++;
-                            }
-                            else
-                            {
-                                id = 0;
-                            }
-                            gererMusic( path );
+                           
+                               itm.next();
+                            
+                            gererMusic(  );
                             logger.log( Level.INFO, String.format( "Reading music file: %s",
-                                    Main.class.getResource( path.get( id ) ).toString() ) );
+                                    Main.class.getResource( itm.item() ).toString() ) );
                             startMusic();
 
                         }
