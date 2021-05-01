@@ -10,16 +10,40 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 public class RulesBP extends BorderPane
 {
     private Button acceptButton;
+    private Label lblRules;
+    
+    public Label getLblRules() {
+    	if(lblRules== null) {
+    		lblRules= new Label(GUIConstant.BUTTON_SETTINGS);
+    		lblRules.setFont(GUIConstant.BUTTON_TEXT);
+    		lblRules.setStyle("-fx-underline: true");
+    		lblRules.setAlignment(Pos.CENTER);
+    	}
+    	return lblRules;
+    }
 
     public RulesBP()
     {
+    	
         Label rulesLabel = new Label( GUIConstant.RULES );
         rulesLabel.setWrapText( true );
-        setCenter( rulesLabel );
+        
+        HBox hbRule= new HBox();
+        hbRule.getChildren().add(getLblRules());
+        hbRule.setAlignment(Pos.CENTER);
+        
+        VBox vbRules= new VBox();
+    	vbRules.getChildren().addAll(hbRule, rulesLabel);
+    	vbRules.setSpacing(50.);
+    	vbRules.setPadding(new Insets(50.));
+    	
+    	
+        setCenter( vbRules );
         HBox acceptBox = new HBox();
         acceptBox.getChildren().add( getAcceptButton() );
         acceptBox.setAlignment(Pos.CENTER);
