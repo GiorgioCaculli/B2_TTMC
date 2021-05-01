@@ -1,0 +1,16 @@
+package be.helha.ttmc.ui.internationalization;
+
+public class Japanese extends Language
+{
+    public Japanese()
+    {
+        super( "jp", "JP" );
+    }
+
+    @Override
+    public String getString( String id )
+    {
+        return getResourceBundle().getString( id );
+    }
+
+}

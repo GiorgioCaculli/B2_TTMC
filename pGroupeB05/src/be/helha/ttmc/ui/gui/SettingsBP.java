@@ -465,10 +465,6 @@ public class SettingsBP extends BorderPane
                     if ( newValue )
                     {
                         stage.setFullScreen( true );
-                        settings.setWidth( ( int ) stage.getWidth() );
-                        settings.setHeight( ( int ) stage.getHeight() );
-                        stage.setWidth( settings.getWidth() );
-                        stage.setHeight( settings.getHeight() );
                     }
                     else
                     {
