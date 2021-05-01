@@ -2,6 +2,14 @@ package be.helha.ttmc.model;
 
 import java.io.Serializable;
 
+/**
+ * Class meant represent a question that will contained in a card.
+ * @author Giorgio CACULLI LA196672, Guillaume LAMBERT LA198116, Tanguy TAMINIAU
+ *         LA199566
+ * @version 1.0
+ * @see BasicCard
+ * @see Theme
+ */
 public class Question implements Serializable
 {
     private static final long serialVersionUID = -5695162803564015663L;

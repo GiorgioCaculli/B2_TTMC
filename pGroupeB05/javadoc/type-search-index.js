@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"be.helha.ttmc.model","l":"BasicCard"}]
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"be.helha.ttmc.model","l":"BasicCard"},{"p":"be.helha.ttmc.model","l":"Deck"},{"p":"be.helha.ttmc.model","l":"Question"},{"p":"be.helha.ttmc.model","l":"Theme"}]

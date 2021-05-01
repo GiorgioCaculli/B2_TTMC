@@ -29,12 +29,12 @@ public class MusicGestion
         path.add( "assets/musics/CreativeDestruction.wav" );
         path.add( "assets/musics/Intouch_IntoTheWild.wav" );
         Collections.shuffle( path );
-        itm= new IteratorMusic(path);
+        itm = new IteratorMusic( path );
         logger.log( Level.INFO,
                 String.format( "Reading music file: %s", Main.class.getResource( itm.item() ).toString() ) );
         setVol( s.getVolume() );
 
-        gererMusic(  );
+        gererMusic();
 
         startMusic();
 
@@ -46,7 +46,7 @@ public class MusicGestion
             {
                 try
                 {
-                    gererThread(  ).run();
+                    gererThread().run();
                 }
                 catch ( Exception e )
                 {
@@ -56,12 +56,12 @@ public class MusicGestion
             }
         } ).start();
     }
-    
+
     public double getVol()
     {
         return vol;
     }
-    
+
     public void setVol( double vol )
     {
         this.vol = vol;
@@ -90,11 +90,11 @@ public class MusicGestion
         mv.getMediaPlayer().setVolume( getVol() );
     }
 
-    public void gererMusic(  )
+    public void gererMusic()
     {
         m = new Media( Main.class.getResource( itm.item() ).toString() );
         MediaPlayer mp = new MediaPlayer( m );
-        if( s.isMute() )
+        if ( s.isMute() )
         {
             mp.setMute( true );
         }
@@ -106,7 +106,7 @@ public class MusicGestion
         mv.getMediaPlayer().stop();
     }
 
-    public Thread gererThread(  )
+    public Thread gererThread()
     {
         Thread tmp = new Thread( new Runnable()
         {
@@ -123,10 +123,10 @@ public class MusicGestion
                         @Override
                         public void run()
                         {
-                           
-                               itm.next();
-                            
-                            gererMusic(  );
+
+                            itm.next();
+
+                            gererMusic();
                             logger.log( Level.INFO, String.format( "Reading music file: %s",
                                     Main.class.getResource( itm.item() ).toString() ) );
                             startMusic();

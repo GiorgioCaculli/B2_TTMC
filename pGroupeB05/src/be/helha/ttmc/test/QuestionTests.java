@@ -22,10 +22,16 @@ import be.helha.ttmc.model.*;
 
 public class QuestionTests
 {
+    private static Question q1, q2, q3;
 
     @BeforeAll
     static void initAll()
     {
+        q1 = new Question( "Giorgio Caculli", Theme.INFORMATICS, "Acronyms", "What does RAM stand for?",
+                "Random Access Memory" );
+        q2 = q1.clone();
+        q3 = new Question( "Giorgio Caculli", Theme.INFORMATICS, "Acronyms", "What does RAM stand for?",
+                "Random Access Memory" );
     }
 
     @BeforeEach
@@ -34,12 +40,52 @@ public class QuestionTests
     }
 
     @Test
-    public void testAssertEquals()
+    public void testSameQuestion()
     {
-        Question q1 = new Question( "Giorgio Caculli", Theme.INFORMATICS, "Acronyms", "What does RAM stand for?",
-                "Random Access Memory" );
-        Question q2 = q1.clone();
         assertEquals( q1, q2, "failure - strings are not equal" );
+        assertEquals( q1, q3, "failure - strings are not equal" );
+    }
+
+    @Test
+    public void testSameAuthor()
+    {
+        assertEquals( q1.getAuthor(), q2.getAuthor(), "failure - the authors are not the same" );
+        assertEquals( q1.getAuthor(), q3.getAuthor(), "failure - the authors are not the same" );
+    }
+
+    @Test
+    public void testSameTheme()
+    {
+        assertEquals( q1.getTheme(), q2.getTheme(), "failure - the authors are not the same" );
+        assertEquals( q1.getTheme(), q3.getTheme(), "failure - the authors are not the same" );
+    }
+
+    @Test
+    public void testSameSubject()
+    {
+        assertEquals( q1.getSubject(), q2.getSubject(), "failure - the authors are not the same" );
+        assertEquals( q1.getSubject(), q3.getSubject(), "failure - the authors are not the same" );
+    }
+
+    @Test
+    public void testSameChallenge()
+    {
+        assertEquals( q1.getChallenge(), q2.getChallenge(), "failure - the authors are not the same" );
+        assertEquals( q1.getChallenge(), q3.getChallenge(), "failure - the authors are not the same" );
+    }
+
+    @Test
+    public void testSameAnswer()
+    {
+        assertEquals( q1.getAnswer(), q2.getAnswer(), "failure - the authors are not the same" );
+        assertEquals( q1.getAnswer(), q3.getAnswer(), "failure - the authors are not the same" );
+    }
+
+    @Test
+    public void testSameToString()
+    {
+        assertEquals( q1.toString(), q2.toString(), "failure - the authors are not the same" );
+        assertEquals( q1.toString(), q3.toString(), "failure - the authors are not the same" );
     }
 
     @AfterEach
@@ -50,5 +96,8 @@ public class QuestionTests
     @AfterAll
     static void tearDownAll()
     {
+        q1 = null;
+        q2 = null;
+        q3 = null;
     }
 }
