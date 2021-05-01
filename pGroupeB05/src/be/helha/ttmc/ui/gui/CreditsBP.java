@@ -54,7 +54,7 @@ public class CreditsBP extends BorderPane
         teamBox.setAlignment( Pos.TOP_CENTER );
 
         HBox giorgioBox = new HBox();
-        Image imageGio = new Image( Main.class.getResourceAsStream( "assets/images/team.png" ) );
+        Image imageGio = new Image( Main.class.getResourceAsStream( "assets/images/giorgio.png" ) );
         ImageView giorgioImage = new ImageView( imageGio );
         giorgioImage.setFitWidth( imageGio.getWidth() / 2 );
         giorgioImage.setFitHeight( imageGio.getHeight() / 2 );
@@ -64,7 +64,7 @@ public class CreditsBP extends BorderPane
         giorgioBox.setAlignment( Pos.CENTER );
 
         HBox guillaumeBox = new HBox();
-        Image imageGui = new Image( Main.class.getResourceAsStream( "assets/images/team.png" ) );
+        Image imageGui = new Image( Main.class.getResourceAsStream( "assets/images/guillaume.png" ) );
         ImageView guillaumeImage = new ImageView( imageGui );
         guillaumeImage.setFitWidth( imageGui.getWidth() / 2 );
         guillaumeImage.setFitHeight( imageGui.getHeight() / 2 );
@@ -74,7 +74,7 @@ public class CreditsBP extends BorderPane
         guillaumeBox.setAlignment( Pos.CENTER );
 
         HBox tanguyBox = new HBox();
-        Image imageTan = new Image( Main.class.getResourceAsStream( "assets/images/team.png" ) );
+        Image imageTan = new Image( Main.class.getResourceAsStream( "assets/images/tanguy.png" ) );
         ImageView tanguyImage = new ImageView( imageTan );
         tanguyImage.setFitWidth( imageTan.getWidth() / 2 );
         tanguyImage.setFitHeight( imageTan.getHeight() / 2 );
@@ -82,6 +82,14 @@ public class CreditsBP extends BorderPane
         tanguyBox.getChildren().add( new Label( s.getNames().get( 2 ) ) );
         tanguyBox.getChildren().add( tanguyImage );
         tanguyBox.setAlignment( Pos.CENTER );
+
+        leadDevelopersBox.getChildren().add( teamBox );
+
+        leadDevelopersBox.getChildren().add( new Label( "Lead Developers" ) );
+        leadDevelopersBox.getChildren().add( giorgioBox );
+        leadDevelopersBox.getChildren().add( guillaumeBox );
+        leadDevelopersBox.getChildren().add( tanguyBox );
+        leadDevelopersBox.setAlignment( Pos.TOP_CENTER );
 
         VBox translatorsBox = new VBox();
 
@@ -117,20 +125,68 @@ public class CreditsBP extends BorderPane
         translatorsBox.getChildren().add( japaneseTranslationBox );
         translatorsBox.setAlignment( Pos.TOP_CENTER );
         translatorsBox.setSpacing( 10. );
-
-        leadDevelopersBox.getChildren().add( teamBox );
-
-        leadDevelopersBox.getChildren().add( new Label( "Lead Developers" ) );
-        leadDevelopersBox.getChildren().add( giorgioBox );
-        leadDevelopersBox.getChildren().add( guillaumeBox );
-        leadDevelopersBox.getChildren().add( tanguyBox );
-        leadDevelopersBox.getChildren().add( new Label( "Beta Testers" ) );
-        leadDevelopersBox.getChildren().add( new Label( s.getNames().get( 3 ) ) );
-        leadDevelopersBox.getChildren().add( new Label( "Translators" ) );
-        leadDevelopersBox.getChildren().add( translatorsBox );
-        leadDevelopersBox.setAlignment( Pos.TOP_CENTER );
+        
+        VBox musicBox = new VBox();
+        
+        VBox intouchBox = new VBox();
+        intouchBox.getChildren().add( new Label( s.getSongArtists().get( 1 ) ) );
+        intouchBox.getChildren().add( new Label( "https://soundcloud.com/intouch​" ) );
+        intouchBox.getChildren().add( new Label( "Promoted by Royalty Free Planet: https://royaltyfreeplanet.xn--com-7m0a/" ) );
+        intouchBox.getChildren().add( new Label( "Creative Commons Attribution 3.0​" ) );
+        intouchBox.getChildren().add( new Label( "http://bit.ly/RFP_CClicense" ) );
+        intouchBox.setAlignment( Pos.TOP_CENTER );
+        
+        VBox evaBox = new VBox();
+        evaBox.getChildren().add( new Label( s.getSongArtists().get( 0 ) ) );
+        evaBox.getChildren().add( new Label( "https://joshlis.bandcamp.xn--com-7m0a/" ) );
+        evaBox.getChildren().add( new Label( "Promoted by Royalty Free Planet: https://royaltyfreeplanet.xn--com-7m0a/" ) );
+        evaBox.getChildren().add( new Label( "Creative Commons Attribution 3.0​" ) );
+        evaBox.getChildren().add( new Label( "http://bit.ly/RFP_CClicense" ) );
+        evaBox.setAlignment( Pos.TOP_CENTER );
+        
+        VBox nihiloreBox = new VBox();
+        nihiloreBox.getChildren().add( new Label( s.getSongArtists().get( 2 ) ) );
+        nihiloreBox.getChildren().add( new Label( "http://www.nihilore.xn--com-7m0a/" ) );
+        nihiloreBox.getChildren().add( new Label( "Promoted by Royalty Free Planet: https://royaltyfreeplanet.xn--com-7m0a/" ) );
+        nihiloreBox.getChildren().add( new Label( "Creative Commons Attribution 3.0​" ) );
+        nihiloreBox.getChildren().add( new Label( "http://bit.ly/RFP_CClicense" ) );
+        nihiloreBox.setAlignment( Pos.TOP_CENTER );
+        
+        musicBox.getChildren().add( intouchBox );
+        musicBox.getChildren().add( evaBox );
+        musicBox.getChildren().add( nihiloreBox );
+        musicBox.setAlignment( Pos.TOP_CENTER );
+        musicBox.setSpacing( 10. );
+        
+        VBox extraImages = new VBox();
+        
+        Image kebabGio = new Image( Main.class.getResourceAsStream( "assets/images/kebabgio.png" ) );
+        ImageView kebabGioImage = new ImageView( kebabGio );
+        kebabGioImage.setFitWidth( kebabGio.getWidth() / 2 );
+        kebabGioImage.setFitHeight( kebabGio.getHeight() / 2 );
+        kebabGioImage.setPreserveRatio( true );
+        
+        Image guixtan = new Image( Main.class.getResourceAsStream( "assets/images/guillaumextanguy.png" ) );
+        ImageView guixtanImage = new ImageView( guixtan );
+        guixtanImage.setFitWidth( guixtan.getWidth() / 2 );
+        guixtanImage.setFitHeight( guixtan.getHeight() / 2 );
+        guixtanImage.setPreserveRatio( true );
+        
+        extraImages.getChildren().add( kebabGioImage );
+        extraImages.getChildren().add( guixtanImage );
+        extraImages.setAlignment( Pos.TOP_CENTER );
+        extraImages.setSpacing( 10. );
 
         creditsBox.getChildren().add( leadDevelopersBox );
+        creditsBox.getChildren().add( new Label( "Beta Testers" ) );
+        creditsBox.getChildren().add( new Label( s.getNames().get( 3 ) ) );
+        creditsBox.getChildren().add( new Label( "Translators" ) );
+        creditsBox.getChildren().add( translatorsBox );
+        creditsBox.getChildren().add( new Label( "Music" ) );
+        creditsBox.getChildren().add( musicBox );
+        creditsBox.getChildren().add( new Label( "Extras" ) );
+        creditsBox.getChildren().add( extraImages );
+        creditsBox.setAlignment( Pos.TOP_CENTER );
 
         ScrollPane creditsPane = new ScrollPane();
         creditsPane.setContent( creditsBox );

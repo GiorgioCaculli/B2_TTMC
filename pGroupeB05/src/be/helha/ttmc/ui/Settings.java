@@ -39,6 +39,7 @@ public class Settings
     private Properties props;
     private List< String > languages;
     private List< String > names;
+    private List< String > songArtists;
 
     public Settings( String configFileName )
     {
@@ -93,23 +94,55 @@ public class Settings
             {
                 e1.printStackTrace();
             }
-            initProperties();
+            try
+            {
+                initProperties();
+            }
+            catch ( Exception e1 )
+            {
+                e1.printStackTrace();
+            }
         }
     }
 
-    private void initProperties()
+    private void initProperties() throws Exception
     {
         languages = new ArrayList<>();
         languages.add( props.getProperty( "language_english" ) );
         languages.add( props.getProperty( "language_french" ) );
         languages.add( props.getProperty( "language_italian" ) );
         languages.add( props.getProperty( "language_japanese" ) );
+        for ( String l : languages )
+        {
+            if ( l == null )
+            {
+                throw new Exception();
+            }
+        }
         names = new ArrayList<>();
         names.add( props.getProperty( "name_giorgio_caculli" ) );
         names.add( props.getProperty( "name_guillaume_lambert" ) );
         names.add( props.getProperty( "name_tanguy_taminiau" ) );
         names.add( props.getProperty( "name_loic_massy" ) );
         names.add( props.getProperty( "name_yutaka_kawaguchi" ) );
+        for ( String n : names )
+        {
+            if ( n == null )
+            {
+                throw new Exception( "Name is null" );
+            }
+        }
+        songArtists = new ArrayList<>();
+        songArtists.add( props.getProperty( "credits_music_eva" ) );
+        songArtists.add( props.getProperty( "credits_music_intouch" ) );
+        songArtists.add( props.getProperty( "credits_music_nihilore" ) );
+        for ( String s : songArtists )
+        {
+            if ( s == null )
+            {
+                throw new Exception( "Artist is null" );
+            }
+        }
         setWidth( Integer.parseInt( props.getProperty( "width" ) ) );
         setHeight( Integer.parseInt( props.getProperty( "height" ) ) );
         setDeckName( props.getProperty( "deck" ) );
@@ -125,11 +158,20 @@ public class Settings
         }
         setTimerSeconds( Integer.parseInt( props.getProperty( "timer" ) ) );
         setMute( Boolean.parseBoolean( props.getProperty( "mute" ) ) );
+        if ( props.getProperty( "language" ) == null )
+        {
+            throw new Exception( "Language not found" );
+        }
         setLanguage( props.getProperty( "language" ) );
+        if ( props.getProperty( "country" ) == null )
+        {
+            throw new Exception( "Country not found" );
+        }
         setCountry( props.getProperty( "country" ) );
         setLocale( getLanguage().getLocale() );
         setLanguages( languages );
         setNames( names );
+        setSongArtists( songArtists );
     }
 
     public Properties getProperties()
@@ -277,5 +319,15 @@ public class Settings
     public List< String > getNames()
     {
         return names;
+    }
+
+    public void setSongArtists( List< String > songArtists )
+    {
+        this.songArtists = songArtists;
+    }
+
+    public List< String > getSongArtists()
+    {
+        return songArtists;
     }
 }
