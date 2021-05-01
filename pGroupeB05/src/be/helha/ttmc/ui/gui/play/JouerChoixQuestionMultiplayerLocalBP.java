@@ -551,7 +551,7 @@ public class JouerChoixQuestionMultiplayerLocalBP extends BorderPane
             alert.setTitle( "Results" );
             String path;
             //if ( joueurs.get( playerID ).getCardNb() >= joueurs.get( playerID ).getCards().size() )
-            if ( joueurs.get( playerID ).getBonnesRep() >= 24
+            if ( joueurs.get( playerID ).getBonnesRep() >= getPla().getCases().size() - 1
                     || joueurs.get( playerID ).getCardNb() >= joueurs.get( playerID ).getCards().size() )
             {
                 alert.setContentText(

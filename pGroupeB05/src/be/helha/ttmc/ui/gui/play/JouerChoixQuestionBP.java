@@ -531,7 +531,7 @@ public class JouerChoixQuestionBP extends BorderPane
         Alert alert = new Alert( AlertType.INFORMATION );
         alert.setTitle( "Results" );
         String path;
-        if ( cardNb >= cards.size() )
+        if ( bonneRep == getPla().getCases().size() - 1 || cardNb >= cards.size() )
         {
             alert.setContentText( String.format(
                     "All questions have been answered, you scored %d points. Thank you for playing!", newScore ) );

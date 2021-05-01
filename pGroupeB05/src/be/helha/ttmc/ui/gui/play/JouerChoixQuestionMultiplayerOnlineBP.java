@@ -516,7 +516,8 @@ public class JouerChoixQuestionMultiplayerOnlineBP extends BorderPane
             Alert alert = new Alert( AlertType.INFORMATION );
             alert.setTitle( "Results" );
             String path;
-            if ( joueurs.get( playerID ).getCardNb() >= joueurs.get( playerID ).getCards().size() )
+            if ( joueurs.get( playerID ).getBonnesRep() >= getPla().getCases().size() - 1
+                    || joueurs.get( playerID ).getCardNb() >= joueurs.get( playerID ).getCards().size() )
             {
                 alert.setContentText(
                         String.format( "All questions have been answered, you scored %d points. Thank you for playing!",
