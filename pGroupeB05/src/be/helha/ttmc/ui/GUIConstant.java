@@ -18,6 +18,7 @@ public class GUIConstant
     private static final ResourceBundle rb = ResourceBundle.getBundle( "be.helha.ttmc.res.strings",
             settings.getLocale() );
     public static final String TITLE = rb.getString( "title" );
+    public static final String RULES = rb.getString( "rules" );
 
     // GRAPHICAL VALUES
     public static final String WINDOW_STYLE = "-fx-background-color: mediumslateblue;" + "-fx-font-size: 15pt;";

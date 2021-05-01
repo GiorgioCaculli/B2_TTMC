@@ -17,7 +17,9 @@ public class RulesBP extends BorderPane
 
     public RulesBP()
     {
-        setCenter( new Label( "Rules" ) );
+        Label rulesLabel = new Label( GUIConstant.RULES );
+        rulesLabel.setWrapText( true );
+        setCenter( rulesLabel );
         HBox acceptBox = new HBox();
         acceptBox.getChildren().add( getAcceptButton() );
         acceptBox.setAlignment(Pos.CENTER);
