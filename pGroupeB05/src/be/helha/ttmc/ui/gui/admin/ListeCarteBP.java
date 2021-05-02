@@ -67,7 +67,7 @@ public class ListeCarteBP extends BorderPane
             HBox.setHgrow( espaceVideReturnReload, Priority.ALWAYS );
             Region espaceVideReloadDelete = new Region();
             HBox.setHgrow( espaceVideReloadDelete, Priority.ALWAYS );
-            buttonBox.getChildren().addAll( getBtnReturn(), espaceVideReturnReload, getBtnReload(),
+            buttonBox.getChildren().addAll( getBtnReturn(), espaceVideReturnReload,
                     espaceVideReloadDelete, getBtnDelete() );
 
             setBottom( buttonBox );
@@ -189,7 +189,7 @@ public class ListeCarteBP extends BorderPane
         return btnDelete;
     }
 
-    private Button getBtnReload()
+    protected Button getBtnReload()
     {
         if ( btnReload == null )
         {
@@ -200,7 +200,9 @@ public class ListeCarteBP extends BorderPane
                 @Override
                 public void handle( ActionEvent arg0 )
                 {
-                    table.setItems( FXCollections.observableArrayList( d.getCards() ) );
+                	getTable().getItems().clear();
+                    getTable().setItems( FXCollections.observableArrayList( d.getCards() ) );
+                		
                 }
             } );
         }

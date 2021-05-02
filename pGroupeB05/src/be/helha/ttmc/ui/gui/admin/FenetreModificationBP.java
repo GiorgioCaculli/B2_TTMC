@@ -51,25 +51,7 @@ public class FenetreModificationBP extends BorderPane
         this.d = d;
         this.bc = bc.clone();
         // creation de la partie superieure de la fenetre
-        /*AnchorPane anch = new AnchorPane();
-
-        AnchorPane.setTopAnchor( getLblTheme(), 4. );
-        AnchorPane.setLeftAnchor( getLblTheme(), 10. );
-
-        AnchorPane.setLeftAnchor( getCb(), 60. );
-
-        AnchorPane.setTopAnchor( getLblAuthor(), 4. );
-        AnchorPane.setLeftAnchor( getLblAuthor(), ( double ) s.getWidth() / 3 );
-
-        AnchorPane.setLeftAnchor( getTxtAuthor(), ( double ) s.getWidth() / 2 );
-        AnchorPane.setRightAnchor( getTxtAuthor(), 10. );
-
-        AnchorPane.setTopAnchor( getLblSubject(), 39. );
-        AnchorPane.setLeftAnchor( getLblSubject(), 7. );
-
-        AnchorPane.setTopAnchor( getTxtSubject(), 35. );
-        AnchorPane.setLeftAnchor( getTxtSubject(), 60. );
-        AnchorPane.setRightAnchor( getTxtSubject(), 10. );*/
+        
         
         VBox cardAuthorThemeSubjectBox = new VBox();
         
@@ -86,9 +68,7 @@ public class FenetreModificationBP extends BorderPane
         cardAuthorThemeSubjectBox.getChildren().add( authorThemeBox );
         cardAuthorThemeSubjectBox.getChildren().add( subjectBox );
 
-        /*anch.getChildren().addAll( getLblTheme(), getCb(), getLblAuthor(), getTxtAuthor(), getLblSubject(),
-                getTxtSubject() );*/
-
+       
         // creation de la partie inferieure de la fenetre
         GridPane grid = new GridPane();
         grid.setPadding( new Insets( 10., 10., 10., 10. ) );
@@ -246,12 +226,13 @@ public class FenetreModificationBP extends BorderPane
                             Alert alert = new Alert( AlertType.INFORMATION, "The card has been modified!" );
                             alert.showAndWait();
                             Alert reloadAlert = new Alert( AlertType.INFORMATION );
-                            reloadAlert.setTitle( "Please, update the list!" );
-                            reloadAlert.setContentText( "Please, click on the Reload button to update the list!" );
+                            reloadAlert.setTitle( "List updated" );
+                            reloadAlert.setContentText( "The list has been reloaded!" );
                             reloadAlert.setHeaderText( null );
                             reloadAlert.show();
                             ListeCarteBP lcbp = ( ListeCarteBP ) getParent().getParent();
                             lcbp.setVisibleNode( ListeCarteMainBP.class.getSimpleName() );
+                            lcbp.getBtnReload().fire();
                             return;
                         }
 
