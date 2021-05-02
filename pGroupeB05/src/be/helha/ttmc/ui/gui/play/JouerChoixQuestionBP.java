@@ -7,6 +7,7 @@ import java.util.List;
 import be.helha.ttmc.model.BasicCard;
 import be.helha.ttmc.model.Deck;
 import be.helha.ttmc.model.Theme;
+import be.helha.ttmc.ui.GUIConstant;
 import be.helha.ttmc.ui.Settings;
 import be.helha.ttmc.ui.gui.MenuPauseBP;
 import be.helha.ttmc.ui.gui.play.LobbySoloBP.LobbySoloMainBP;
@@ -458,6 +459,10 @@ public class JouerChoixQuestionBP extends BorderPane
         if ( btnVal == null )
         {
             btnVal = new Button( "Confirm!" );
+            btnVal.setEffect( GUIConstant.BUTTON_EFFECT );
+            //btnVal.setTextFill( GUIConstant.BUTTON_GRADIENT );
+            btnVal.setStyle( GUIConstant.BUTTON_STYLE );
+            //btnVal.setFont( GUIConstant.BUTTON_TEXT );
             btnVal.setOnAction( new EventHandler< ActionEvent >()
             {
 

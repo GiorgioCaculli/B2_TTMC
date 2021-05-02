@@ -26,6 +26,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -465,6 +466,7 @@ public class SettingsBP extends BorderPane
                     if ( newValue )
                     {
                         stage.setFullScreen( true );
+                        stage.setFullScreenExitKeyCombination( KeyCombination.NO_MATCH );
                     }
                     else
                     {
