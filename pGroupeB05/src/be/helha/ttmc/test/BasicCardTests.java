@@ -24,7 +24,7 @@ import be.helha.ttmc.exception.*;
 public class BasicCardTests
 {
     private static BasicCard c1, c2;
-    private static Question q1, q2, q3, q4, q5, q6, q7, q8, q9;
+    private static Question q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, q11, q12;
 
     @BeforeAll
     static void initAll()
@@ -48,6 +48,12 @@ public class BasicCardTests
         q8 = new Question( "Giorgio Caculli", Theme.INFORMATICS, "Acronym", "What does IT stand for?",
                 "Information Technology" );
         q9 = q5.clone();
+        q10 = new Question( "Giorgio Caculli", Theme.INFORMATICS, "Acronyms", "What does JDK stand for?",
+                "Java Development Kit" );
+        q11 = new Question( "Giorgio Caculli", Theme.INFORMATICS, "Acronyms", "What does OOP stand for?",
+                "Object Oriented Programming" );
+        q12 = new Question( "Giorgio Caculli", Theme.INFORMATICS, "Acronyms", "What does OS stand for?",
+                "Operating System" );
     }
 
     @BeforeEach
@@ -61,6 +67,7 @@ public class BasicCardTests
         assertTrue( () -> c1.add( q1 ), "failure - the question was not added" );
         assertTrue( () -> c1.add( q2 ), "failure - the question was not added" );
         assertTrue( () -> c1.add( q3 ), "failure - the question was not added" );
+        assertTrue( () -> c1.add( q4 ), "failure - the question was not added" );
     }
 
     @Test
@@ -70,28 +77,34 @@ public class BasicCardTests
     }
 
     @Test
-    public void testAddMoreThanFour()
+    public void testAddMoreThanFourQuestions()
     {
-        assertTrue( () -> c1.add( q4 ), "failure - the question was not added" );
-        assertFalse( () -> c1.add( q5 ), "failure - the question was added" );
+        assertTrue( () -> c1.add( q11 ), "failure - the question was not added" );
+        assertFalse( () -> c1.add( q12 ), "failure - the question was added" );
     }
 
     @Test
-    public void testAddCardWithDifferentAuthor()
+    public void testAddQuestionWithDifferentAuthor()
     {
         assertFalse( () -> c1.add( q6 ), "failure - the question was added" );
     }
 
     @Test
-    public void testAddCardWithDifferentTheme()
+    public void testAddQuestionWithDifferentTheme()
     {
         assertFalse( () -> c1.add( q7 ), "failure - the question was added" );
     }
 
     @Test
-    public void testAddCardWithDifferentSubject()
+    public void testAddQuestionWithDifferentSubject()
     {
         assertFalse( () -> c1.add( q8 ), "failure - the question was added" );
+    }
+
+    @Test
+    public void testAddNullQuestion()
+    {
+        assertFalse( () -> c1.add( null ), "failure - the question was added" );
     }
 
     @Test
@@ -117,32 +130,32 @@ public class BasicCardTests
     {
         assertFalse( () -> c1.remove( 4 ), "failure - the card was not removed" );
     }
-    
+
     @Test
     public void testSameCards()
     {
         assertEquals( c1, c2, "failure - the cards are not equal" );
     }
-    
+
     @Test
     public void testToString()
     {
         assertEquals( c1.toString(), c2.toString(), "failure - toString is not the same" );
     }
-    
+
     @Test
     public void testQuestionModify()
     {
         assertTrue( () -> c1.modify( q3, q5 ), "failure - the card was not modified" );
         assertEquals( c1.getQuestions().get( 0 ), q5, "failure - the card was not modified" );
     }
-    
+
     @Test
     public void testNullQuestionModify()
     {
         assertFalse( () -> c1.modify( q5, null ), "failure - the card was modified" );
     }
-    
+
     @Test
     public void testSameQuestionModify()
     {
