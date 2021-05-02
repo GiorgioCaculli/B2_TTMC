@@ -71,7 +71,7 @@ public class BasicCard implements Serializable
             {
                 throw new BasicCardOverMaxQuestionsException();
             }
-            questions.add( q.clone() );
+            return questions.add( q.clone() );
         }
         catch ( NullPointerException npe )
         {
@@ -93,7 +93,6 @@ public class BasicCard implements Serializable
             bcomqe.printStackTrace();
             return false;
         }
-        return true;
     }
 
     /**
