@@ -60,13 +60,16 @@ public class FenetreModificationBP extends BorderPane
         authorThemeBox.getChildren().add( getCb() );
         authorThemeBox.getChildren().add( getLblAuthor() );
         authorThemeBox.getChildren().add( getTxtAuthor() );
+        authorThemeBox.setSpacing(10.);
         
         HBox subjectBox = new HBox();
         subjectBox.getChildren().add( getLblSubject() );
         subjectBox.getChildren().add( getTxtSubject() );
+        subjectBox.setSpacing(10.);
         
         cardAuthorThemeSubjectBox.getChildren().add( authorThemeBox );
         cardAuthorThemeSubjectBox.getChildren().add( subjectBox );
+        cardAuthorThemeSubjectBox.setSpacing(10.);
 
        
         // creation de la partie inferieure de la fenetre
@@ -78,12 +81,12 @@ public class FenetreModificationBP extends BorderPane
         for ( int i = 0; i < nbcols; i++ )
         {
             ColumnConstraints colConstr = new ColumnConstraints();
-            colConstr.setPercentWidth( 100. / nbcols );
+            colConstr.setPercentWidth( 95. / nbcols );
             grid.getColumnConstraints().add( colConstr );
         }
         // ajout des labels de legendes
-        grid.add( getLblChal(), 0, 1 );
-        grid.add( getLblAns(), 7, 1 );
+        grid.add( getLblChal(), 1, 1,3,1 );
+        grid.add( getLblAns(), 7, 1,3,1 );
 
         for ( int i = 1; i <= minChallenges; i++ )
         {
@@ -94,20 +97,20 @@ public class FenetreModificationBP extends BorderPane
             grid.add( getTextsfieldCha().get( i - 1 ), 1, i + 1, 6, 1 );
 
             // ajout des champs de textes des reponses
-            grid.add( getTextsfieldAns().get( i - 1 ), 7, i + 1, 5, 1 );
+            grid.add( getTextsfieldAns().get( i - 1 ), 7, i + 1, 7, 1 );
 
         }
 
         // ajout des bouttons
-        grid.add( getButtonReturn(), 8, minChallenges + 3 );
-        grid.add( getButtonCancel(), 9, minChallenges + 3 );
-        grid.add( getButtonsOK(), 10, minChallenges + 3 );
-        GridPane.setHalignment( getButtonCancel(), HPos.CENTER );
-        GridPane.setHalignment( getButtonsOK(), HPos.CENTER );
+        HBox hbButton =new HBox();
+        hbButton.getChildren().addAll(getButtonReturn(), getButtonCancel(), getButtonsOK());
+        hbButton.setAlignment(Pos.CENTER);
+        hbButton.setSpacing(25.);
+        hbButton.setPadding(new Insets(75.));
 
         // ajout des differents composants dans la borderPane
         VBox vb = new VBox();
-        vb.getChildren().addAll( cardAuthorThemeSubjectBox, grid );
+        vb.getChildren().addAll( cardAuthorThemeSubjectBox, grid, hbButton );
         vb.setAlignment( Pos.CENTER );
         setCenter( vb );
         setStyle( GUIConstant.WINDOW_STYLE );

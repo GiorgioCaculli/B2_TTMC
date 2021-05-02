@@ -11,6 +11,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.SelectionMode;
@@ -67,8 +69,8 @@ public class ListeCarteBP extends BorderPane
             HBox.setHgrow( espaceVideReturnReload, Priority.ALWAYS );
             Region espaceVideReloadDelete = new Region();
             HBox.setHgrow( espaceVideReloadDelete, Priority.ALWAYS );
-            buttonBox.getChildren().addAll( getBtnReturn(), espaceVideReturnReload,
-                    espaceVideReloadDelete, getBtnDelete() );
+            buttonBox.setAlignment(Pos.CENTER);buttonBox.setSpacing(75.);buttonBox.setPadding(new Insets(15.));
+            buttonBox.getChildren().addAll( getBtnReturn(), getBtnDelete() );
 
             setBottom( buttonBox );
         }

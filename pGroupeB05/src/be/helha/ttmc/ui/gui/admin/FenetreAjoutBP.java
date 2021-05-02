@@ -79,7 +79,7 @@ public class FenetreAjoutBP extends BorderPane
         for ( int i = 0; i < nbcols; i++ )
         {
             ColumnConstraints colConstr = new ColumnConstraints();
-            colConstr.setPercentWidth( 75. / nbcols );
+            colConstr.setPercentWidth( 95. / nbcols );
             grid.getColumnConstraints().add( colConstr );
         }
         // ajout des labels de legendes

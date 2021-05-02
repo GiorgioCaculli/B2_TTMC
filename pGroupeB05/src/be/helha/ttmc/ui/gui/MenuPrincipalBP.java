@@ -51,8 +51,8 @@ public class MenuPrincipalBP extends BorderPane
         for ( Button b : buttons )
         {
             b.setMaxSize( Double.MAX_VALUE, Double.MAX_VALUE );
-            b.setMaxWidth( s.getWidth() - 55. );
-            b.setMinHeight( s.getHeight() / ( buttons.size() + 1 ) );
+         //   b.setMaxWidth( s.getWidth() - 55. );
+         //   b.setMinHeight( s.getHeight() / ( buttons.size() + 1 ) );
             b.setEffect( GUIConstant.BUTTON_EFFECT );
             b.setTextFill( GUIConstant.BUTTON_GRADIENT );
             b.setStyle( GUIConstant.BUTTON_STYLE );
