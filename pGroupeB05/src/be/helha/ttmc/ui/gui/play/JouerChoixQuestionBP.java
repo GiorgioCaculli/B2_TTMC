@@ -333,14 +333,20 @@ public class JouerChoixQuestionBP extends BorderPane
     public Label getLblScore()
     {
         if ( lblScore == null )
+        {
             lblScore = new Label( "Score : " );
+            lblScore.setStyle( GUIConstant.GAME_LABEL_STYLE );
+        }
         return lblScore;
     }
 
     public Label getScore()
     {
         if ( score == null )
+        {
             score = new Label( String.format( "%d", newScore ) );
+            score.setStyle( GUIConstant.GAME_LABEL_STYLE );
+        }
         return score;
     }
 
@@ -356,7 +362,7 @@ public class JouerChoixQuestionBP extends BorderPane
             lblTheme = new Label( "Theme" );
             lblTheme.setMaxWidth( Double.MAX_VALUE );
             lblTheme.setAlignment( Pos.CENTER );
-            ;
+            lblTheme.setStyle( GUIConstant.GAME_LABEL_STYLE );
         }
         return lblTheme;
     }
@@ -368,7 +374,7 @@ public class JouerChoixQuestionBP extends BorderPane
             lblSujet = new Label( "Subject" );
             lblSujet.setMaxWidth( Double.MAX_VALUE );
             lblSujet.setAlignment( Pos.CENTER );
-            ;
+            lblSujet.setStyle( GUIConstant.GAME_LABEL_STYLE );
         }
         return lblSujet;
     }
@@ -450,6 +456,7 @@ public class JouerChoixQuestionBP extends BorderPane
         if ( lblTime == null )
         {
             lblTime = new Label( String.format( "%d", getTime() ) );
+            lblTime.setStyle( GUIConstant.GAME_LABEL_STYLE );
         }
         return lblTime;
     }
@@ -483,6 +490,7 @@ public class JouerChoixQuestionBP extends BorderPane
             lblQuestion = new Label( "test" );
             lblQuestion.setTextAlignment( TextAlignment.CENTER );
             lblQuestion.setWrapText( true );
+            lblQuestion.setStyle( GUIConstant.GAME_LABEL_STYLE );
         }
         return lblQuestion;
     }

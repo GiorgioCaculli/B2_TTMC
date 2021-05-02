@@ -71,6 +71,7 @@ public class MenuPauseBP extends BorderPane
             lblPause = new Label( "Pause" );
             Font lbl = Font.font( "Times New Roman", FontWeight.BOLD, FontPosture.ITALIC, 30 );
             lblPause.setFont( lbl );
+            lblPause.setStyle( GUIConstant.GAME_LABEL_STYLE );
         }
         return lblPause;
     }
@@ -130,7 +131,10 @@ public class MenuPauseBP extends BorderPane
     public Label getLblVolume()
     {
         if ( lblVolume == null )
+        {
             lblVolume = new Label( "Volume :" );
+            lblVolume.setStyle( GUIConstant.GAME_LABEL_STYLE );
+        }
         return lblVolume;
     }
 

@@ -13,7 +13,7 @@ import javafx.scene.text.FontWeight;
 public class GUIConstant
 {
     // GRAPHICAL VALUES
-    public static final String WINDOW_STYLE = "-fx-background-color: mediumslateblue;" + "-fx-font-size: 15pt;";
+    public static final String WINDOW_STYLE = "-fx-background-color: mediumslateblue;" + "-fx-font-size: 20pt;";
     public static final String BUTTON_STYLE = "-fx-background-color: transparent;" + "-fx-border-radius: 150;"
     //+ "-fx-border-width : 2;"+"-fx-border-color: black;"
             + "-fx-background-radius: 150;";
@@ -23,4 +23,5 @@ public class GUIConstant
             BUTTON_ETAPES );
     public static final Font BUTTON_TEXT = Font.font( "Times New Roman", FontWeight.BOLD, FontPosture.ITALIC, 62 );
     public static final Effect BUTTON_EFFECT = new DropShadow( 17.5, 10, 10, Color.DARKSLATEGREY );
+    public static final String GAME_LABEL_STYLE = "-fx-text-fill: black;";
 }

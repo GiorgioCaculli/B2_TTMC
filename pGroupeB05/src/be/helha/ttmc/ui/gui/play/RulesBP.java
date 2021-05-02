@@ -28,6 +28,7 @@ public class RulesBP extends BorderPane
                 + s.getLanguage().getString( "rules_line_5" ) + "\n" + s.getLanguage().getString( "rules_line_6" );
         Label rulesLabel = new Label( rules );
         rulesLabel.setWrapText( true );
+        rulesLabel.setStyle( GUIConstant.WINDOW_STYLE );
 
         HBox hbRule = new HBox();
         hbRule.getChildren().add( getLblRules() );
@@ -53,7 +54,7 @@ public class RulesBP extends BorderPane
         {
             lblRules = new Label( s.getLanguage().getString( "label_rules" )  );
             lblRules.setFont( GUIConstant.BUTTON_TEXT );
-            lblRules.setStyle( "-fx-underline: true" );
+            lblRules.setStyle( "-fx-underline: true; -fx-text-fill: white;" );
             lblRules.setAlignment( Pos.CENTER );
         }
         return lblRules;

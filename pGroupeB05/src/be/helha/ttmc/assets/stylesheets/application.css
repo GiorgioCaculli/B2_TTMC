@@ -1,0 +1,16 @@
+.slider .axis .axis-tick-mark, .slider .axis .axis-minor-tick-mark {
+    -fx-fill: null;
+    -fx-stroke: white;
+}
+
+Button:hover {
+	-fx-underline: true;
+}
+
+.label {
+	-fx-text-fill: white;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: black;
+}

@@ -148,14 +148,14 @@ public class JouerChoixQuestionMultiplayerLocalBP extends BorderPane
             VBox scoreBox = new VBox();
             HBox scoreBoxInfoBox = new HBox();
             Label scoreBoxInfoLabel = new Label( "Scores:" );
-            scoreBoxInfoLabel.setStyle( "-fx-font-size: 40px" );
+            scoreBoxInfoLabel.setStyle( "-fx-font-size: 40px;" + GUIConstant.GAME_LABEL_STYLE );
             scoreBoxInfoBox.getChildren().add( scoreBoxInfoLabel );
             scoreBox.getChildren().add( scoreBoxInfoBox );
             for ( int i = 0; i < joueurs.size(); i++ )
             {
                 HBox playerScoreBox = new HBox();
                 Label scoreLabel = new Label( String.format( "%2d", joueurs.get( i ).getScorePlayer() ) );
-                scoreLabel.setStyle( "-fx-font-size: 40pt;" );
+                scoreLabel.setStyle( "-fx-font-size: 40pt;" + GUIConstant.GAME_LABEL_STYLE );
                 PionCircle playerPion = getPla().getPion( i ).clone();
                 scoreLabels.add( scoreLabel );
                 playerScoreBox.getChildren().add( playerPion );
@@ -276,6 +276,7 @@ public class JouerChoixQuestionMultiplayerLocalBP extends BorderPane
             if ( lblTimePlayer == null )
             {
                 lblTimePlayer = new Label( String.format( "%d", getTimePlayer() ) );
+                lblTimePlayer.setStyle( GUIConstant.GAME_LABEL_STYLE );
             }
             return lblTimePlayer;
         }
@@ -331,6 +332,7 @@ public class JouerChoixQuestionMultiplayerLocalBP extends BorderPane
                 lblQuestionPlayer = new Label( "Question: Test" );
                 lblQuestionPlayer.setTextAlignment( TextAlignment.CENTER );
                 lblQuestionPlayer.setWrapText( true );
+                lblQuestionPlayer.setStyle( GUIConstant.GAME_LABEL_STYLE );
             }
             return lblQuestionPlayer;
         }
@@ -470,7 +472,7 @@ public class JouerChoixQuestionMultiplayerLocalBP extends BorderPane
             Region espaceVideNicknameScore = new Region();
             HBox.setHgrow( espaceVideNicknameScore, Priority.ALWAYS );
             Label playerNickNameLabel = new Label( String.format( "%s", joueurs.get( id ).getNickNamePlayer() ) );
-            playerNickNameLabel.setStyle( "-fx-font-size: 40px;" );
+            playerNickNameLabel.setStyle( "-fx-font-size: 40px;" + GUIConstant.GAME_LABEL_STYLE );
             scoreBox.getChildren().addAll( playerPion, playerNickNameLabel, espaceVideNicknameScore, getLblScore() );
 
             VBox vbPlayer = new VBox();
@@ -521,7 +523,7 @@ public class JouerChoixQuestionMultiplayerLocalBP extends BorderPane
             if ( lblScore == null )
             {
                 lblScore = new Label( String.format( "Score: %2d", joueurs.get( id ).getScorePlayer() ) );
-                lblScore.setStyle( "-fx-font-size: 40px;" );
+                lblScore.setStyle( "-fx-font-size: 40px;" + GUIConstant.GAME_LABEL_STYLE );
             }
             return lblScore;
         }
@@ -533,6 +535,7 @@ public class JouerChoixQuestionMultiplayerLocalBP extends BorderPane
                 lblThemePlayer = new Label( "Theme" );
                 lblThemePlayer.setMaxWidth( Double.MAX_VALUE );
                 lblThemePlayer.setAlignment( Pos.CENTER );
+                lblThemePlayer.setStyle( GUIConstant.GAME_LABEL_STYLE );
             }
             return lblThemePlayer;
         }
@@ -544,6 +547,7 @@ public class JouerChoixQuestionMultiplayerLocalBP extends BorderPane
                 lblSujetPlayer = new Label( "Subject" );
                 lblSujetPlayer.setMaxWidth( Double.MAX_VALUE );
                 lblSujetPlayer.setAlignment( Pos.CENTER );
+                lblSujetPlayer.setStyle( GUIConstant.GAME_LABEL_STYLE );
             }
             return lblSujetPlayer;
         }

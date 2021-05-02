@@ -235,7 +235,8 @@ public class SettingsBP extends BorderPane
     {
         if ( timerLabel == null )
         {
-            timerLabel = new Label( "Timer duration: " );
+            timerLabel = new Label( "Timer duration:" );
+            timerLabel.setStyle( "-fx-text-fill: white;" );
         }
         return timerLabel;
     }
@@ -285,7 +286,7 @@ public class SettingsBP extends BorderPane
     {
         if ( languageLabel == null )
         {
-            languageLabel = new Label( "Language: " );
+            languageLabel = new Label( "Language:" );
         }
         return languageLabel;
     }
@@ -367,7 +368,7 @@ public class SettingsBP extends BorderPane
     {
         if ( windowSizeLabel == null )
         {
-            windowSizeLabel = new Label( "Window size: " );
+            windowSizeLabel = new Label( "Window size:" );
         }
         return windowSizeLabel;
     }
@@ -445,7 +446,7 @@ public class SettingsBP extends BorderPane
     {
         if ( maximizeWindowLabel == null )
         {
-            maximizeWindowLabel = new Label( "Maximize window: " );
+            maximizeWindowLabel = new Label( "Maximize window:" );
         }
         return maximizeWindowLabel;
     }

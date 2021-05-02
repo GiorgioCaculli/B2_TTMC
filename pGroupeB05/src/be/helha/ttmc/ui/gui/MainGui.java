@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import be.helha.ttmc.Main;
 import be.helha.ttmc.model.Deck;
 import be.helha.ttmc.serialization.Serialization;
 import be.helha.ttmc.ui.GUIConstant;
@@ -47,6 +48,7 @@ public class MainGui extends Application
         MainPaneBP mp = new MainPaneBP( d, s, musics );
         mp.getChildren().get( 0 ).setVisible( true );
         Scene scene = new Scene( mp );
+        scene.getStylesheets().add( Main.class.getResource( "assets/stylesheets/application.css" ).toExternalForm() );
         stage.setResizable( false );
         stage.setHeight( HEIGHT );
         stage.setWidth( WIDTH );
