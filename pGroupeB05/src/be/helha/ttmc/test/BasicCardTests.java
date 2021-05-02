@@ -24,7 +24,7 @@ import be.helha.ttmc.exception.*;
 public class BasicCardTests
 {
     private static BasicCard c1, c2;
-    private static Question q1, q2, q3, q4, q5;
+    private static Question q1, q2, q3, q4, q5, q6, q7, q8, q9;
 
     @BeforeAll
     static void initAll()
@@ -41,19 +41,18 @@ public class BasicCardTests
                 "Central Processing Unit" );
         q5 = new Question( "Giorgio Caculli", Theme.INFORMATICS, "Acronyms", "What does GPU stand for?",
                 "Graphics Processing Unit" );
+        q6 = new Question( "Giorgio Lambert", Theme.INFORMATICS, "Acronyms", "What does IT stand for?",
+                "Information Technology" );
+        q7 = new Question( "Giorgio Caculli", Theme.IMPROBABLE, "Acronyms", "What does IT stand for?",
+                "Information Technology" );
+        q8 = new Question( "Giorgio Caculli", Theme.INFORMATICS, "Acronym", "What does IT stand for?",
+                "Information Technology" );
+        q9 = q5.clone();
     }
 
     @BeforeEach
     void init()
     {
-    }
-
-    @Test
-    public void testBasicCardEquals()
-    {
-        BasicCard bc1 = new BasicCard( "Giorgio Caculli", Theme.INFORMATICS, "Acronyms" );
-        BasicCard bc2 = bc1.clone();
-        assertEquals( bc1, bc2, "failure - byte arrays not same" );
     }
 
     @Test
@@ -80,24 +79,18 @@ public class BasicCardTests
     @Test
     public void testAddCardWithDifferentAuthor()
     {
-        Question q6 = new Question( "Giorgio Lambert", Theme.INFORMATICS, "Acronyms", "What does IT stand for?",
-                "Information Technology" );
         assertFalse( () -> c1.add( q6 ), "failure - the question was added" );
     }
 
     @Test
     public void testAddCardWithDifferentTheme()
     {
-        Question q7 = new Question( "Giorgio Caculli", Theme.IMPROBABLE, "Acronyms", "What does IT stand for?",
-                "Information Technology" );
         assertFalse( () -> c1.add( q7 ), "failure - the question was added" );
     }
 
     @Test
     public void testAddCardWithDifferentSubject()
     {
-        Question q8 = new Question( "Giorgio Caculli", Theme.INFORMATICS, "Acronym", "What does IT stand for?",
-                "Information Technology" );
         assertFalse( () -> c1.add( q8 ), "failure - the question was added" );
     }
 
@@ -116,19 +109,44 @@ public class BasicCardTests
     @Test
     public void testRemoveNonExistantCard()
     {
-        assertFalse( () -> c1.remove( q5 ), "failure - the card was not removed" );
+        assertFalse( () -> c1.remove( q8 ), "failure - the card was not removed" );
     }
 
     @Test
     public void testRemoveNonExistantCardInt()
     {
-        assertFalse( () -> c1.remove( 3 ), "failure - the card was not removed" );
+        assertFalse( () -> c1.remove( 4 ), "failure - the card was not removed" );
     }
     
     @Test
     public void testSameCards()
     {
         assertEquals( c1, c2, "failure - the cards are not equal" );
+    }
+    
+    @Test
+    public void testToString()
+    {
+        assertEquals( c1.toString(), c2.toString(), "failure - toString is not the same" );
+    }
+    
+    @Test
+    public void testQuestionModify()
+    {
+        assertTrue( () -> c1.modify( q3, q5 ), "failure - the card was not modified" );
+        assertEquals( c1.getQuestions().get( 0 ), q5, "failure - the card was not modified" );
+    }
+    
+    @Test
+    public void testNullQuestionModify()
+    {
+        assertFalse( () -> c1.modify( q5, null ), "failure - the card was modified" );
+    }
+    
+    @Test
+    public void testSameQuestionModify()
+    {
+        assertFalse( () -> c1.modify( q9, q5 ), "failure - the card was modified" );
     }
 
     @AfterEach
@@ -145,5 +163,8 @@ public class BasicCardTests
         q3 = null;
         q4 = null;
         q5 = null;
+        q6 = null;
+        q7 = null;
+        q8 = null;
     }
 }
